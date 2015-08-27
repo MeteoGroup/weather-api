@@ -99,10 +99,7 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                             "windDirection": 274
                             "dewPoint":15.8,
                             "totalCloudCover":3,   // octa???
-                            "presentWeather": {
-                                "code": 00, // fm-12 (wmo) code
-                                "value": "CLEAR_SKIES" // do we need this?
-                            },
+                            "presentWeather": [<PresentWeather>][],
                             "weatherSymbol": 1199999 // clarify: do we need this. makes only sense with the symbol
                             "airPressure":1012.9 // hpa??
                         },
@@ -119,11 +116,17 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
 
 # Data Structures
 
-## Present Weathers Types
+## PresentWeather (object)
 
 The hourly weather code (WMO akronym 'ww') is an enumeration of certain types.
 These types are based on WMO's SYNOP Format (FM-12) specification.
 
++ code (number)
+    + Sample
+        + 00
++ value (string)
+    + Sample
+        + CLEAR_SKIES
 
 ```
 Code | Enumeration literal
