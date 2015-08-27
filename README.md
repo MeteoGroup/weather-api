@@ -40,14 +40,14 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                     },
                     "observedAt": "2015-08-25T13:00:00Z" // or prefer to use unix time stamp format
                     "airTemperature": 29,
-                    "airPressure": 1012.9 // hpa??
+                    "airPressureInHpa": 1012.9,
                     "windSpeed": 7.48  // mean, last 10 minutes
                     "windGust" : 21.6,
-                    "windDirection": 274
+                    "windDirectionInDegree": 274
                     "dewPointTemperature": 15.8,
-                    "precipitationLastHour": 0, // mm
-                    "relativeHumidity": 0.63, // percent??
-                    "totalCloudCover": 3,
+                    "precipitationLastHour": 0,
+                    "relativeHumidityInPercent100based": 63,
+                    "totalCloudCoverInOcta": 3,
                     "presentWeather": {
                         "code": 28, // wmo code
                         "literal": "FOG" // do we need this?
@@ -69,15 +69,15 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                         {
                             "validUntil": "2015-08-25T14:00:00Z", // or prefer to use unix time stamp format
                             "airTemperature": 29,
-                            "airPressure": 1012.9 // hpa??
-                            "sunshineDurationMinutes": 23,
+                            "airPressureInHpa": 1012.9,
+                            "sunshineDurationInMinutes": 23,
                             "precipitation": 0, // mm
-                            "precipitationPropability": 0, // percent
+                            "precipitationPropabilityInPercent100based": 0, // percent
                             "windSpeed": 7.48,  // mean
                             "windGust" : 21.6,
-                            "windDirection": 274
+                            "windDirectionInDegree": 274
                             "dewPointTemperature": 15.8,
-                            "totalCloudCover": 3,
+                            "totalCloudCoverInOcta": 3,
                             "presentWeather": {
                                 "code": 00, // wmo code
                                 "literal": "CLEAR_SKY" // do we need this?
@@ -93,19 +93,19 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                             "validUntil": "2015-08-25T23:59:59Z", // or prefer to use unix time stamp format
                             "minAirTemperature": 25,
                             "maxAirTemperature": 31,
-                            "sunshineDurationHours":7,
+                            "sunshineDurationInHours":7,
                             "precipitation": 0, // mm
-                            "precipitationPropability":0, // percent
+                            "precipitationPropabilityInPercent100based":0, // percent
                             "windSpeed": 7.48,   // mean
                             "windGust" : 21.6,
-                            "windDirection": 274
+                            "windDirectionInDegree": 274
                             "ultraVioletIndex": {
                                 "clearSky": 4,     // clarify: (1) name (2) WMO compliant
                                 "cloudy": 1         // clarify: (1) name (2) WMO compliant
                             },
                             "sunrise": "2015-08-25T05:13:00Z",
                             "sunset": "2015-08-25T18:28:00Z",
-                            "totalCloudCover":3,   // octa???
+                            "totalCloudCoverInOcta": 3,   // octa???
                             "presentWeather": {      // clarify (1) Day or Night
                                 "code": 21, // wmo code
                                 "literal": "RAIN" // do we need this?
@@ -121,6 +121,20 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
 
 
 # Data Structures
+
+## Units
+
+    Parameter | unit
+    ---------------|-----
+    minAirTemperature       | Degree or Fahrenheit
+    maxAirTemperature       | Degree or Fahrenheit
+    airTemperature          | Degree or Fahrenheit
+    dewPointTemperature     | Degree or Fahrenheit
+    precipitation           | mm or inch            // !! clarify!
+    precipitationLastHour   | mm or inch            // !! clarify!
+    windSpeed               | m/s or km/h or m/h or BFT
+    windGust                | in Knots or m/h or km/h
+
 
 ## PresentWeather (object)
 
@@ -247,7 +261,7 @@ Source/details of FM-12 can be found at http://weather.unisys.com/wxp/Appendices
 This symbolic letter shall embrace the total fraction of the celestial dome covered by clouds irrespective of their genus.
 (WMO akronym 'N')
 
-    Value | meaning
+    Value | Meaning
     ------|---------
     0 | 0
     1 | 1 okta or less, but not zero
