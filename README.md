@@ -50,7 +50,7 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                     "totalCloudCover": 3,
                     "presentWeather": {
                         "code": 28, // wmo code
-                        "text": "FOG" // do we need this?
+                        "literal": "FOG" // do we need this?
                     },
                     "weatherSymbol": 1199999 // clarify: do we need this. makes only sense with the symbol
                 },
@@ -80,7 +80,7 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                             "totalCloudCover": 3,
                             "presentWeather": {
                                 "code": 00, // wmo code
-                                "text": "CLEAR_SKY" // do we need this?
+                                "literal": "CLEAR_SKY" // do we need this?
                             },
                             "weatherSymbol": 1199999 // clarify: do we need this. makes only sense with the symbol
                         },
@@ -108,7 +108,7 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                             "totalCloudCover":3,   // octa???
                             "presentWeather": {      // clarify (1) Day or Night
                                 "code": 21, // wmo code
-                                "text": "RAIN" // do we need this?
+                                "literal": "RAIN" // do we need this?
                             },
                             "weatherSymbol": 1199999 // clarify: (1) do we need this. (2) Day or Night
                         },
