@@ -20,7 +20,7 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
 
     + Headers
 
-            X-Request-Number: 4711
+            X-Request-Calls: 4711
 
     + Body
 
@@ -38,7 +38,7 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                         "wmoId": 1231, // if known
                         "sourceType" : "DWD" // do we know this?
                     },
-                    "observedAt": "2015-08-25T13:00:00Z" // or prefer to use ISO 8601 time stamp format
+                    "observedAt": "2015-08-25T13:00:00Z" // or prefer to use unix time stamp format
                     "airTemperature": 29,
                     "airPressure": 1012.9 // hpa??
                     "windSpeed": 7.48  // mean, last 10 minutes
@@ -67,7 +67,7 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                     "interval_12h":[],    // is this useful?
                     "hourly": [
                         {
-                            "validUntil": "2015-08-25T14:00:00Z", // or prefer to use ISO 8601 time stamp format
+                            "validUntil": "2015-08-25T14:00:00Z", // or prefer to use unix time stamp format
                             "airTemperature": 29,
                             "airPressure": 1012.9 // hpa??
                             "sunshineDurationMinutes": 23,
@@ -90,7 +90,7 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                     ],
                     "daily" : [          // what is meant by daily?
                         {
-                            "validUntil": "2015-08-25T23:59:59Z", // or prefer to use ISO 8601 time stamp format
+                            "validUntil": "2015-08-25T23:59:59Z", // or prefer to use unix time stamp format
                             "minAirTemperature": 25,
                             "maxAirTemperature": 31,
                             "sunshineDurationHours":7,
