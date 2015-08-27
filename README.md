@@ -124,7 +124,7 @@ These types are based on WMO's SYNOP Format (FM-12) specification.
 + code (number)
     + Sample
         + 00
-+ value (string)
++ literal (string)
     + Sample
         + CLEAR_SKIES
 
