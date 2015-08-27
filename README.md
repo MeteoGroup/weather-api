@@ -7,8 +7,8 @@
 Retrieve weather observation and forecast by a given *latitude* and *longitude*.
 
 + Parameters
-    + latitude: `52.14` (number) - latitude
-    + longitude: `13.20` (number) - longitude
+    + latitude: `52.13` (number, required) - latitude
+    + longitude: `13.2` (number, required) - longitude
 
 + Request
 
@@ -31,84 +31,90 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                     "timezone": "+02:00"
                 },
                 "observation": {
-                    "relevantStation" : {
-                        // clarify: relevant?
+                    "sourceStation" : {
                         "latitude":123,
-                        "longitude":456
+                        "longitude":-56,
+                        "id": 4711, // MG station id
+                        "wmoId": 1231, // if known
+                        "sourceType" : "DWD" // do we know this?
                     },
-                    "utcTimestamp": 1440594000 // or prefer to use ISO 8601 time stamp format
-                    "temperature": 29,
+                    "observedAt": "2015-08-25T13:00:00Z" // or prefer to use ISO 8601 time stamp format
+                    "airTemperature": 29,
+                    "airPressure": 1012.9 // hpa??
                     "windSpeed": 7.48  // mean, last 10 minutes
                     "windGust" : 21.6,
                     "windDirection": 274
-                    "dewPoint":15.8,
-                    "precipitationLastHour":0, // mm
-                    "relativeHumidity":0.63, // percent??
-                    "totalCloudCover":3,   // octa???
-                    "currentWeather": {
-                        "code": 99, // wmo code
-                        "text": "cloudy" // do we need this?
+                    "dewPointTemperature": 15.8,
+                    "precipitationLastHour": 0, // mm
+                    "relativeHumidity": 0.63, // percent??
+                    "totalCloudCover": 3,
+                    "presentWeather": {
+                        "code": 28, // wmo code
+                        "text": "FOG" // do we need this?
                     },
                     "weatherSymbol": 1199999 // clarify: do we need this. makes only sense with the symbol
-                    "airPressure":1012.9 // hpa??
                 },
                 "forecast": {
                     "relevantStation" : {
-                        // clarify: relevant?
                         "latitude":123,
-                        "longitude":456
+                        "longitude":-56,
+                        "id": 0815, // MG station id
+                        "sourceType" : "MOS_VIRTUAL"  // MOS or MOS_VIRTUAL to distinguish real stations to virtual ones
                     },
                     "interval_1h":[],     // do we need this?? vs. pricing?
                     "interval_3h":[],     // do we need this?? vs. pricing?
                     "interval_6h":[],     // do we need this?? vs. pricing?
                     "interval_12h":[],    // is this useful?
+                    "hourly": [
+                        {
+                            "validUntil": "2015-08-25T14:00:00Z", // or prefer to use ISO 8601 time stamp format
+                            "airTemperature": 29,
+                            "airPressure": 1012.9 // hpa??
+                            "sunshineDurationMinutes": 23,
+                            "precipitation": 0, // mm
+                            "precipitationPropability": 0, // percent
+                            "windSpeed": 7.48,  // mean
+                            "windGust" : 21.6,
+                            "windDirection": 274
+                            "dewPointTemperature": 15.8,
+                            "totalCloudCover": 3,
+                            "presentWeather": {
+                                "code": 00, // wmo code
+                                "text": "CLEAR_SKY" // do we need this?
+                            },
+                            "weatherSymbol": 1199999 // clarify: do we need this. makes only sense with the symbol
+                        },
+                        {
+                            // ...
+                        }
+                    ],
                     "daily" : [          // what is meant by daily?
                         {
-                            "utcTimestamp": 1440594000, // or prefer to use ISO 8601 time stamp format
-                            "minTemperature": 25,
-                            "maxTemperature": 31,
+                            "validUntil": "2015-08-25T23:59:59Z", // or prefer to use ISO 8601 time stamp format
+                            "minAirTemperature": 25,
+                            "maxAirTemperature": 31,
                             "sunshineDurationHours":7,
-                            "precipitation":0, // mm
+                            "precipitation": 0, // mm
                             "precipitationPropability":0, // percent
                             "windSpeed": 7.48,   // mean
                             "windGust" : 21.6,
                             "windDirection": 274
                             "ultraVioletIndex": {
                                 "clearSky": 4,     // clarify: (1) name (2) WMO compliant
-                                "cloudy":1         // clarify: (1) name (2) WMO compliant
+                                "cloudy": 1         // clarify: (1) name (2) WMO compliant
                             },
-                            "sunrise": 1440598000,
-                            "sunset": 1440641200,
+                            "sunrise": "2015-08-25T05:13:00Z",
+                            "sunset": "2015-08-25T18:28:00Z",
                             "totalCloudCover":3,   // octa???
-                            "currentWeather": {      // clarify (1) Day or Night
-                                "code": 99, // wmo code
-                                "text": "cloudy" // do we need this?
+                            "presentWeather": {      // clarify (1) Day or Night
+                                "code": 21, // wmo code
+                                "text": "RAIN" // do we need this?
                             },
                             "weatherSymbol": 1199999 // clarify: (1) do we need this. (2) Day or Night
+                        },
+                        {
+                            // ...
                         }
-                    ],
-                    "hourly": [
-                        {
-                            "utcTimestamp": 1440594000, // or prefer to use ISO 8601 time stamp format
-                            "temperature": 29,
-                            "sunshineDurationMinutes":23,
-                            "precipitation":0, // mm
-                            "precipitationPropability":0, // percent
-                            "windSpeed": 7.48,  // mean
-                            "windGust" : 21.6,
-                            "windDirection": 274
-                            "dewPoint":15.8,
-                            "totalCloudCover":3,   // octa???
-                            "presentWeather": [<PresentWeather>][],
-                            "weatherSymbol": 1199999 // clarify: do we need this. makes only sense with the symbol
-                            "airPressure":1012.9 // hpa??
-                        },
-                        {
-                            "utcTimestamp": 1440594000, // or prefer to use ISO 8601 time stamp format
-                            "temperature": 27,
-                            "windSpeed": 4.9,
-                            "windDirection": 263
-                        },
                     ]
                 }
             }
@@ -234,3 +240,23 @@ Code | Enumeration literal
 ```
 
 Source/details of FM-12 can be found at http://weather.unisys.com/wxp/Appendices/Formats/SYNOP.html
+
+
+## Total Cloud Cover (number)
+
+This symbolic letter shall embrace the total fraction of the celestial dome covered by clouds irrespective of their genus.
+(WMO akronym 'N')
+
+    Value | meaning
+    ------|---------
+    0 | 0
+    1 | 1 okta or less, but not zero
+    2 | 2 oktas
+    3 | 3 oktas
+    4 | 4 oktas
+    5 | 5 oktas
+    6 | 6 oktas
+    7 | 7 oktas
+    8 | 8 oktas
+    9 | Sky obscured by fog and/or other meteorological phenomena
+
