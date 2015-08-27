@@ -1,9 +1,10 @@
 # weather-api
-MeteoGroup's public weather API documentation - Work in Progress
 
-# Weather observation and forecast [/weather]
+**Work in Progress** - MeteoGroup's public weather API documentation
 
-## Retrieve weather [GET]
+# GET /weather?location={latitude,longitude}
+
+Retrieve weather observation and forecast by a given *latitude* and *longitude*.
 
 + Request
 
