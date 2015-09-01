@@ -2,25 +2,28 @@
 
 **Work in Progress** - MeteoGroup's public weather API documentation
 
-# GET /weather?location={latitude,longitude}
+# Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}]
 
-Retrieve weather observation and forecast by a given *latitude* and *longitude*.
+## Observed weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
-    + latitude: `52.13` (number, required) - latitude
-    + longitude: `13.2` (number, required) - longitude
+    + latitude: `52.13` (number, required) - latitude in degree
+    + longitude: `13.2` (number, required) - longitude in degree
 
 + Request
 
     + Headers
 
             X-Authentication: <API-Key>
+            X-TraceId: <Trace-Id>
 
 + Response 200 (application/json)
 
     + Headers
 
-            X-Request-Calls: 4711
+            X-Request-Calls-Per-Interval: 4711
+            E-Tag: "x234dff"
+            Cache-Control: max-age=3628800
 
     + Body
 
@@ -30,93 +33,104 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
                     "longitude": 13.2
                     "timezone": "+02:00"
                 },
-                "observation": {
-                    "sourceStation" : {
-                        "latitude":123,
-                        "longitude":-56,
-                        "id": 4711, // MG station id
-                        "wmoId": 1231, // if known
-                        "sourceType" : "DWD" // do we know this?
-                    },
-                    "observedAt": "2015-08-25T13:00:00Z" // or prefer to use unix time stamp format
-                    "airTemperature": 29,
-                    "airPressureInHpa": 1012.9,
-                    "windSpeed": 7.48  // mean, last 10 minutes
-                    "windGust" : 21.6,
-                    "windDirectionInDegree": 274
-                    "dewPointTemperature": 15.8,
-                    "precipitationLastHour": 0,
-                    "relativeHumidityInPercent100based": 63,
-                    "totalCloudCoverInOcta": 3,
-                    "presentWeather": {
-                        "code": 28, // wmo code
-                        "literal": "FOG" // do we need this?
-                    },
-                    "weatherSymbol": 1199999 // clarify: do we need this. makes only sense with the symbol
+                "sourceStation" : {
+                    "latitude":123,
+                    "longitude":-56,
+                    "id": 4711, // MG station id
+                    "wmoId": 1231, // if known
+                    "sourceType" : "DWD" // do we know this?
                 },
-                "forecast": {
-                    "relevantStation" : {
-                        "latitude":123,
-                        "longitude":-56,
-                        "id": 0815, // MG station id
-                        "sourceType" : "MOS_VIRTUAL"  // MOS or MOS_VIRTUAL to distinguish real stations to virtual ones
+                "observedAt": "2015-08-25T13:00:00Z" // or prefer to use unix time stamp format
+                "airTemperature": 29,
+                "airPressureInHpa": 1012.9,
+                "windSpeed": 7.48  // mean, last 10 minutes
+                "windGust" : 21.6,
+                "windDirectionInDegree": 274
+                "dewPointTemperature": 15.8,
+                "precipitationLastHour": 0,
+                "relativeHumidityInPercent100based": 63,
+                "totalCloudCoverInOcta": 3,
+                "presentWeather": {
+                    "code": 28, // wmo code
+                    "literal": "FOG" // do we need this?
+                },
+                "weatherSymbol": 1199999
+            }
+
+
+# Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&forecastPeriod}{&forecastFor}{&includeParameters}{&validityIntervalInHours}{&speedUnit}{&temperatureUnit}]
+
+## Forecasted weather for a given *latitude* and *longitude* [GET]
+
++ Parameters
+    + latitude: `52.13` (number, required)                                  - latitude in degree
+    + longitude: `13.2` (number, required)                                  - longitude in degree
+    + forecastPeriod: `48,240` (string, optional)                           - e.g. from forecast hour 48 to hour 240 (equals forecast 2 to 10 days in the future)
+    + forecastFor: `2015-08-25T13:00:00Z` (timestamp, optional)             - forecast for a given timestamp
+    + includeParameters: `airTemperature,presentWeather` (list, optional)   - comma separated list of parameters, which the response shall include
+    + validityIntervalInHours: `3` (number, optional)                       - select one forecast interval in hours, valid intervals: 1, 3, 6, 12
+    + speedUnit: `meters_per_second` (string, optional)                     - select which unit for windSpeed, windGust, etc.; valid values: meters_per_second, miles_per_hour, kilometers_per_hour, beaufort
+    + temperatureUnit: `degree` (string, optional)                          - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
+    + precipitationUnit: `millimeter` (string, optional)                    - select which unit for precipitation, etc.; valid values: millimeter, inch
+
++ Request
+
+    + Headers
+
+            X-Authentication: <API-Key>
+            X-TraceId: <Trace-Id>
+
++ Response 200 (application/json)
+
+    + Headers
+
+            X-Request-Calls-Per-Interval: 4712
+            E-Tag: "a987dff"
+            Cache-Control: max-age=600
+
+    + Body
+
+            {
+                "relevantStation" : {
+                    "latitude":123,
+                    "longitude":-56,
+                    "id": 0815,                                 // MG station id
+                    "sourceType" : "MOS_VIRTUAL"                // MOS or MOS_VIRTUAL to distinguish real stations to virtual ones
+                },
+                "forecasts": [
+                    {
+                        "validFrom": "2015-08-25T13:00:00Z",    // or prefer to use unix time stamp format
+                        "validUntil": "2015-08-25T14:00:00Z",   // or prefer to use unix time stamp format
+                        "validityPeriodInHours": 1
+                        "airTemperature": 29,
+                        "airPressureInHpa": 1012.9,
+                        "sunshineDurationInMinutes": 23,
+                        "precipitation": 0,
+                        "precipitationPropabilityInPercent100based": 0,
+                        "windSpeed": 7.48,
+                        "windGust" : 21.6,
+                        "windDirectionInDegree": 274
+                        "dewPointTemperature": 15.8,
+                        "totalCloudCoverInOcta": 3,
+                        "presentWeather": {
+                            "code": 00,                    // wmo code
+                            "literal": "CLEAR_SKY"         // do we need this?
+                        },
+                        "weatherSymbol": 1199999,          // clarify: do we need this. makes only sense with the symbol
+                        "sunshineDurationInHours":7,       // only for daily forecasts
+                        "sunrise": "2015-08-25T05:13:00Z", // only for daily forecasts
+                        "sunset": "2015-08-25T18:28:00Z",  // only for daily forecasts
+                        "minAirTemperature": 25,           // only for daily forecasts
+                        "maxAirTemperature": 31,           // only for daily forecasts
+                        "ultraVioletIndex": {              // only for daily forecasts
+                            "clearSky": 4,                 // clarify: (1) name (2) WMO compliant
+                            "cloudy": 1                    // clarify: (1) name (2) WMO compliant
+                        },
                     },
-                    "interval_1h":[],     // do we need this?? vs. pricing?
-                    "interval_3h":[],     // do we need this?? vs. pricing?
-                    "interval_6h":[],     // do we need this?? vs. pricing?
-                    "interval_12h":[],    // is this useful?
-                    "hourly": [
-                        {
-                            "validUntil": "2015-08-25T14:00:00Z", // or prefer to use unix time stamp format
-                            "airTemperature": 29,
-                            "airPressureInHpa": 1012.9,
-                            "sunshineDurationInMinutes": 23,
-                            "precipitation": 0, // mm
-                            "precipitationPropabilityInPercent100based": 0, // percent
-                            "windSpeed": 7.48,  // mean
-                            "windGust" : 21.6,
-                            "windDirectionInDegree": 274
-                            "dewPointTemperature": 15.8,
-                            "totalCloudCoverInOcta": 3,
-                            "presentWeather": {
-                                "code": 00, // wmo code
-                                "literal": "CLEAR_SKY" // do we need this?
-                            },
-                            "weatherSymbol": 1199999 // clarify: do we need this. makes only sense with the symbol
-                        },
-                        {
-                            // ...
-                        }
-                    ],
-                    "daily" : [          // what is meant by daily?
-                        {
-                            "validUntil": "2015-08-25T23:59:59Z", // or prefer to use unix time stamp format
-                            "minAirTemperature": 25,
-                            "maxAirTemperature": 31,
-                            "sunshineDurationInHours":7,
-                            "precipitation": 0, // mm
-                            "precipitationPropabilityInPercent100based":0, // percent
-                            "windSpeed": 7.48,   // mean
-                            "windGust" : 21.6,
-                            "windDirectionInDegree": 274
-                            "ultraVioletIndex": {
-                                "clearSky": 4,     // clarify: (1) name (2) WMO compliant
-                                "cloudy": 1         // clarify: (1) name (2) WMO compliant
-                            },
-                            "sunrise": "2015-08-25T05:13:00Z",
-                            "sunset": "2015-08-25T18:28:00Z",
-                            "totalCloudCoverInOcta": 3,   // octa???
-                            "presentWeather": {      // clarify (1) Day or Night
-                                "code": 21, // wmo code
-                                "literal": "RAIN" // do we need this?
-                            },
-                            "weatherSymbol": 1199999 // clarify: (1) do we need this. (2) Day or Night
-                        },
-                        {
-                            // ...
-                        }
-                    ]
-                }
+                    {
+                        // ...
+                    }
+                ]
             }
 
 
@@ -124,16 +138,16 @@ Retrieve weather observation and forecast by a given *latitude* and *longitude*.
 
 ## Units
 
-    Parameter | unit
-    ---------------|-----
-    minAirTemperature       | Degree or Fahrenheit
-    maxAirTemperature       | Degree or Fahrenheit
-    airTemperature          | Degree or Fahrenheit
-    dewPointTemperature     | Degree or Fahrenheit
-    precipitation           | mm or inch            // !! clarify!
-    precipitationLastHour   | mm or inch            // !! clarify!
-    windSpeed               | m/s or km/h or m/h or BFT
-    windGust                | in Knots or m/h or km/h
+Parameter | unit
+---------------|-----
+minAirTemperature       | Degree or Fahrenheit
+maxAirTemperature       | Degree or Fahrenheit
+airTemperature          | Degree or Fahrenheit
+dewPointTemperature     | Degree or Fahrenheit
+precipitation           | mm or inch            // !! clarify!
+precipitationLastHour   | mm or inch            // !! clarify!
+windSpeed               | m/s or km/h or m/h or BFT
+windGust                | in Knots or m/h or km/h
 
 
 ## PresentWeather (object)
