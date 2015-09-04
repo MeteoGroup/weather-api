@@ -2,13 +2,16 @@
 
 **Work in Progress** - MeteoGroup's public weather API documentation
 
-# Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}]
+# Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
 ## Observed weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
-    + latitude: `52.13` (number, required) - latitude in degree
-    + longitude: `13.2` (number, required) - longitude in degree
+    + latitude: `52.13` (number, required)                - latitude in degree
+    + longitude: `13.2` (number, required)                - longitude in degree
+    + speedUnit: `meters_per_second` (string, optional)   - select which unit for windSpeed, windGust, etc.; valid values: meters_per_second, miles_per_hour, kilometers_per_hour, beaufort
+    + temperatureUnit: `degree` (string, optional)        - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
+    + precipitationUnit: `millimeter` (string, optional)  - select which unit for precipitation, etc.; valid values: millimeter, inch
 
 + Request
 
@@ -31,34 +34,33 @@
                 "location" {
                     "latitude": 53.12,
                     "longitude": 13.2
-                    "timezone": "+02:00"
                 },
                 "sourceStation" : {
                     "latitude":123,
                     "longitude":-56,
-                    "id": 4711, // MG station id
-                    "wmoId": 1231, // if known
-                    "sourceType" : "DWD" // do we know this?
+                    "id": 4711,                         // MG station id
+                    "wmoId": 1231,                      // if known
+                    "sourceType" : "DWD"                // do we know this?
                 },
-                "observedAt": "2015-08-25T13:00:00Z" // or prefer to use unix time stamp format
+                "observedAt": "2015-08-25T13:00:00Z"    // or prefer to use unix time stamp format
                 "airTemperature": 29,
                 "airPressureInHpa": 1012.9,
-                "windSpeed": 7.48  // mean, last 10 minutes
+                "windSpeed": 7.48                       // mean, last 10 minutes
                 "windGust" : 21.6,
-                "windDirectionInDegree": 274
+                "windDirectionInDegree": 274,
                 "dewPointTemperature": 15.8,
                 "precipitationLastHour": 0,
                 "relativeHumidityInPercent100based": 63,
                 "totalCloudCoverInOcta": 3,
                 "presentWeather": {
-                    "code": 28, // wmo code
-                    "literal": "FOG" // do we need this?
+                    "code": 28,                         // wmo code
+                    "literal": "FOG"                    // do we need this?
                 },
                 "weatherSymbol": 1199999
             }
 
 
-# Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&forecastPeriod}{&forecastFor}{&includeParameters}{&validityIntervalInHours}{&speedUnit}{&temperatureUnit}]
+# Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&forecastPeriod}{&forecastFor}{&includeParameters}{&validityIntervalInHours}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
 ## Forecasted weather for a given *latitude* and *longitude* [GET]
 
@@ -268,6 +270,8 @@ Code | Enumeration literal
 ```
 
 Source/details of FM-12 can be found at http://weather.unisys.com/wxp/Appendices/Formats/SYNOP.html
+code table 4677 ... // WMO !!!!
+ww Present weather reported from a manned weather station
 
 
 ## Total Cloud Cover (number)
