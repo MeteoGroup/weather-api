@@ -42,14 +42,29 @@
                     "wmoId": 1231,                      // if known
                     "sourceType" : "DWD"                // do we know this?
                 },
-                "observedAt": "2015-08-25T13:00:00Z"    // or prefer to use unix time stamp format
-                "airTemperature": 29,
+                "observedAt": "2015-08-25T13:00:00Z"
+                "airTemperature": {
+                    "value" : 29,
+                    "unit" : "DEGREE"
+                },
                 "airPressureInHpa": 1012.9,
-                "windSpeed": 7.48                       // mean, last 10 minutes
-                "windGust" : 21.6,
+                "windSpeed": {                          // mean, last 10 minutes
+                    "value" : 7.48,
+                    "unit" : "METER_PER_SECOND"
+                },
+                "windGust" : {
+                    "value" : 21.6,
+                    "unit" : "METER_PER_SECOND"
+                },
                 "windDirectionInDegree": 274,
-                "dewPointTemperature": 15.8,
-                "precipitationLastHour": 0,
+                "dewPointTemperature": {
+                    "value" : 15.8,
+                    "unit" : "DEGREE"
+                },
+                "precipitationLastHour": {
+                    "value" : 0,
+                    "unit" : "MILLIMETER"
+                },
                 "relativeHumidityInPercent100based": 63,
                 "totalCloudCoverInOcta": 3,
                 "presentWeather": {
@@ -104,26 +119,47 @@
                         "validFrom": "2015-08-25T13:00:00Z",    // or prefer to use unix time stamp format
                         "validUntil": "2015-08-25T14:00:00Z",   // or prefer to use unix time stamp format
                         "validityPeriodInHours": 1
-                        "airTemperature": 29,
+                        "airTemperature": {
+                            "value" : 29,
+                            "unit" : "DEGREE"
+                        },
                         "airPressureInHpa": 1012.9,
                         "sunshineDurationInMinutes": 23,
-                        "precipitation": 0,
+                        "precipitation": {
+                            "value" : 0,
+                            "unit" : "MILLIMETER"
+                        },
                         "precipitationPropabilityInPercent100based": 0,
-                        "windSpeed": 7.48,
-                        "windGust" : 21.6,
+                        "windSpeed": {
+                            "value" : 7.48,
+                            "unit" : "METER_PER_SECOND"
+                        },
+                        "windGust" : {
+                            "value" : 21.6,
+                            "unit" : "METER_PER_SECOND"
+                        },
                         "windDirectionInDegree": 274
-                        "dewPointTemperature": 15.8,
+                        "dewPointTemperature": {
+                            "value" : 15.8,
+                            "unit" : "DEGREE"
+                        },
                         "totalCloudCoverInOcta": 3,
                         "presentWeather": {
                             "code": 00,                    // wmo code
                             "literal": "CLEAR_SKY"         // do we need this?
                         },
                         "weatherSymbol": 1199999,          // clarify: do we need this. makes only sense with the symbol
-                        "sunshineDurationInHours":7,       // only for daily forecasts
+                        "sunshineDurationInHours": 7,       // only for daily forecasts
                         "sunrise": "2015-08-25T05:13:00Z", // only for daily forecasts
                         "sunset": "2015-08-25T18:28:00Z",  // only for daily forecasts
-                        "minAirTemperature": 25,           // only for daily forecasts
-                        "maxAirTemperature": 31,           // only for daily forecasts
+                        "minAirTemperature": {              // only for daily forecasts
+                            "value" : 22,
+                            "unit" : "DEGREE"
+                        },
+                        "maxAirTemperature": {             // only for daily forecasts
+                            "value" : 31,
+                            "unit" : "DEGREE"
+                        },
                         "ultraVioletIndex": {              // only for daily forecasts
                             "clearSky": 4,                 // clarify: (1) name (2) WMO compliant
                             "cloudy": 1                    // clarify: (1) name (2) WMO compliant
