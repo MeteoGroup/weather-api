@@ -32,8 +32,10 @@
 
             {
                 "location" {
-                    "latitude": 53.12,
-                    "longitude": 13.2
+                    "latitude": 52.5337,
+                    "longitude": 13.37788,
+                    "timeZone" : "Europe/Berlin",
+                    "timeShift" : "+02:00"
                 },
                 "sourceStation" : {
                     "latitude":123,
@@ -42,7 +44,7 @@
                     "wmoId": 1231,                      // if known
                     "sourceType" : "DWD"                // do we know this?
                 },
-                "observedAt": "2015-08-25T13:00:00Z"
+                "observedAt": "2015-08-25T13:00:00+02:00"
                 "airTemperature": {
                     "value" : 29,
                     "unit" : "DEGREE"
@@ -75,17 +77,13 @@
             }
 
 
-# Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&forecastPeriod}{&forecastFor}{&includeParameters}{&validityIntervalInHours}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
+# Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
 ## Forecasted weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
     + latitude: `52.13` (number, required)                                  - latitude in degree
     + longitude: `13.2` (number, required)                                  - longitude in degree
-    + forecastPeriod: `48,240` (string, optional)                           - e.g. from forecast hour 48 to hour 240 (equals forecast 2 to 10 days in the future)
-    + forecastFor: `2015-08-25T13:00:00Z` (timestamp, optional)             - forecast for a given timestamp
-    + includeParameters: `airTemperature,presentWeather` (list, optional)   - comma separated list of parameters, which the response shall include
-    + validityIntervalInHours: `3` (number, optional)                       - select one forecast interval in hours, valid intervals: 1, 3, 6, 12
     + speedUnit: `meters_per_second` (string, optional)                     - select which unit for windSpeed, windGust, etc.; valid values: meters_per_second, miles_per_hour, kilometers_per_hour, beaufort
     + temperatureUnit: `degree` (string, optional)                          - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
     + precipitationUnit: `millimeter` (string, optional)                    - select which unit for precipitation, etc.; valid values: millimeter, inch
@@ -109,70 +107,173 @@
 
             {
                 "relevantStation" : {
-                    "latitude":123,
-                    "longitude":-56,
+                    "latitude": 52.5337
+                    "longitude": 13.37788,
                     "id": 0815,                                 // MG station id
-                    "sourceType" : "MOS_VIRTUAL"                // MOS or MOS_VIRTUAL to distinguish real stations to virtual ones
+                    "sourceType" : "MOS_VIRTUAL",               // MOS or MOS_VIRTUAL to distinguish real stations to virtual ones
+                    "timeZone" : "Europe/Berlin",
+                    "timeOffset" : "+02:00"
                 },
-                "forecasts": [
-                    {
-                        "validFrom": "2015-08-25T13:00:00Z",    // or prefer to use unix time stamp format
-                        "validUntil": "2015-08-25T14:00:00Z",   // or prefer to use unix time stamp format
-                        "validityPeriodInHours": 1
-                        "airTemperature": {
-                            "value" : 29,
-                            "unit" : "DEGREE"
-                        },
-                        "airPressureInHpa": 1012.9,
-                        "sunshineDurationInMinutes": 23,
-                        "precipitation": {
-                            "value" : 0,
-                            "unit" : "MILLIMETER"
-                        },
-                        "precipitationPropabilityInPercent100based": 0,
-                        "windSpeed": {
-                            "value" : 7.48,
-                            "unit" : "METER_PER_SECOND"
-                        },
-                        "windGust" : {
-                            "value" : 21.6,
-                            "unit" : "METER_PER_SECOND"
-                        },
-                        "windDirectionInDegree": 274
-                        "dewPointTemperature": {
-                            "value" : 15.8,
-                            "unit" : "DEGREE"
-                        },
-                        "totalCloudCoverInOcta": 3,
-                        "presentWeather": {
-                            "code": 00,                    // wmo code
-                            "literal": "CLEAR_SKY"         // do we need this?
-                        },
-                        "weatherSymbol": 1199999,          // clarify: do we need this. makes only sense with the symbol
-                        "sunshineDurationInHours": 7,       // only for daily forecasts
-                        "sunrise": "2015-08-25T05:13:00Z", // only for daily forecasts
-                        "sunset": "2015-08-25T18:28:00Z",  // only for daily forecasts
-                        "minAirTemperature": {              // only for daily forecasts
-                            "value" : 22,
-                            "unit" : "DEGREE"
-                        },
-                        "maxAirTemperature": {             // only for daily forecasts
-                            "value" : 31,
-                            "unit" : "DEGREE"
-                        },
-                        "ultraVioletIndex": {              // only for daily forecasts
-                            "clearSky": 4,                 // clarify: (1) name (2) WMO compliant
-                            "cloudy": 1                    // clarify: (1) name (2) WMO compliant
-                        },
-                    },
-                    {
-                        // ...
-                    }
-                ]
+                "forecasts": {
+                    "hourly" : [
+                        {
+                            "validFrom": "2015-08-25T13:00:00+02:00",
+                            "validUntil": "2015-08-25T13:59:59+02:00",
+                            "validityPeriodInHours": 1
+                            "airTemperature": {
+                                "value" : 29,
+                                "unit" : "DEGREE"
+                            },
+                            "dewPointTemperature": {
+                                "value" : 15.8,
+                                "unit" : "DEGREE"
+                            },
+                            "airPressureInHpa": 1012.9,
+                            "sunshineDurationInMinutes": 23,
+                            "precipitation": {
+                                "value" : 0,
+                                "unit" : "MILLIMETER"
+                            },
+                            "precipitationPropabilityInPercent100based": 0,
+                            "windSpeed": {
+                                "value" : 7.48,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "windGust" : {
+                                "value" : 21.6,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "windDirectionInDegree": 274
+                            "totalCloudCoverInOcta": 3,
+                            "presentWeather": {
+                                "code": 00,                    // wmo code
+                                "literal": "CLEAR_SKY"         // do we need this?
+                            },
+                            "weatherSymbol": 1199999           // clarify: do we need this. makes only sense with the symbol
+                        }
+                    ],
+                    "interval6hours" : [
+                        {
+                            "validFrom": "2015-08-25T12:00:00+02:00",
+                            "validUntil": "2015-08-25T17:59:59+02:00",
+                            "validityPeriodInHours": 6,
+                            "dewPointTemperature": {
+                                "value" : 15.8,
+                                "unit" : "DEGREE"
+                            },
+                            "airPressureInHpa": 1012.9,
+                            "sunshineDurationInHours": 23,
+                            "precipitation": {
+                                "value" : 0,
+                                "unit" : "MILLIMETER"
+                            },
+                            "precipitationPropabilityInPercent100based": 0,
+                            "windSpeed": {
+                                "value" : 7.48,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "windGust" : {
+                                "value" : 21.6,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "windDirectionInDegree": 274
+                            "totalCloudCoverInOcta": 3,
+                            "presentWeather": {
+                                "code": 00,                    // wmo code
+                                "literal": "CLEAR_SKY"         // do we need this?
+                            },
+                            "weatherSymbol": 1199999,          // clarify: do we need this. makes only sense with the symbol
+                        }
+                    ],
+                    "halfDaily" : [
+                        {
+                            "validFrom": "2015-08-25T06:00:00+02:00",
+                            "validUntil": "2015-08-25T17:59:59+02:00",
+                            "validityPeriodInHours": 12,
+                            "minimumAirTemperature": {
+                                "value" : 21,
+                                "unit" : "DEGREE"
+                            },
+                            "maximumAirTemperature": {
+                                "value" : 29,
+                                "unit" : "DEGREE"
+                            },
+                            "dewPointTemperature": {
+                                "value" : 15.8,
+                                "unit" : "DEGREE"
+                            },
+                            "airPressureInHpa": 1012.9,
+                            "sunshineDurationInHours": 23,
+                            "precipitation": {
+                                "value" : 0,
+                                "unit" : "MILLIMETER"
+                            },
+                            "precipitationPropabilityInPercent100based": 0,
+                            "windSpeed": {
+                                "value" : 7.48,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "windGust" : {
+                                "value" : 21.6,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "totalCloudCoverInOcta": 3,
+                            "presentWeather": {
+                                "code": 00,                    // wmo code
+                                "literal": "CLEAR_SKY"         // do we need this?
+                            },
+                            "weatherSymbol": 1199999           // clarify: do we need this. makes only sense with the symbol
+                        }
+                    ],
+                    "daily" : [
+                        {
+                            "validFrom": "2015-08-25T00:00:00+02:00",
+                            "validUntil": "2015-08-25T23:59:59+02:00",
+                            "validityPeriodInHours": 24,
+                            "sunshineDurationInHours": 9,
+                            "presentWeather": {
+                                "code": 00,                    // wmo code
+                                "literal": "CLEAR_SKY"         // do we need this?
+                            },
+                            "weatherSymbol": 1199999,          // clarify: do we need this. makes only sense with the symbol
+                            "sunshineDurationInHours": 7,
+                            "sunrise" : "2015-08-25T06:23:00+02:00",
+                            "sunset"  : "2015-08-25T19:34:00+02:00",
+                            "precipitation": {
+                                "value" : 0,
+                                "unit" : "MILLIMETER"
+                            },
+                            "windSpeed": {                     // does this makes sense for a 24h period?
+                                "value" : 7.48,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "windGust" : {
+                                "value" : 21.6,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "ultraVioletIndex": {
+                                "clearSky": 4,                 // clarify: (1) name (2) WMO compliant
+                                "cloudy": 1                    // clarify: (1) name (2) WMO compliant
+                            }
+                        }
+                    ]
+                }
             }
 
 
 # Data Structures
+
+## Forecast Intervals
+
+The response contains different time intervals which contain forecast in for different time spans.
+
+Interval name  | Time interval  | Time span
+---------------|----------------|--------------------------------
+hourly         | 1 hour         | using time zone from requested location, today from 00:00 until 24:00, plus 1 day ahead, means 48 hours in total
+interval6hours | 6 hours        | using time zone from requested location, today from 00:00 until 24:00, plus 6 days ahead, means 28 intervals in total
+halfDaily      | 12 hours       | using time zone from requested location, today from 00:00 until 24:00, plus 6 days ahead, means 14 intervals in total
+daily          | 24 hours       | using time zone from requested location, today from 00:00 until 24:00, plus 6 days ahead, means 7 days in total
+
 
 ## Units
 
@@ -186,6 +287,7 @@ precipitation           | mm or inch            // !! clarify!
 precipitationLastHour   | mm or inch            // !! clarify!
 windSpeed               | m/s or km/h or m/h or BFT
 windGust                | in Knots or m/h or km/h
+date, time, time offset | timestamps including date, time and a zime offset are encoded in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).
 
 
 ## PresentWeather (object)
