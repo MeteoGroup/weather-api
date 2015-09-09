@@ -7,9 +7,9 @@ FORMAT: 1A
 
 # Group Oservation
 
-# Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
+## Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
-## Observed weather for a given *latitude* and *longitude* [GET]
+### Observed weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
     + latitude: `52.13` (number, required)                - latitude in degree
@@ -84,9 +84,9 @@ FORMAT: 1A
 
 # Group Forecast
 
-# Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
+## Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
-## Forecasted weather for a given *latitude* and *longitude* [GET]
+### Forecasted weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
     + latitude: `52.13` (number, required)                                  - latitude in degree
