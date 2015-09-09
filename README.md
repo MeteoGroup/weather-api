@@ -1,6 +1,11 @@
-# weather-api
+FORMAT: 1A
+
+(WiP) Weather API
+=============================
 
 **Work in Progress** - MeteoGroup's public weather API documentation
+
+# Group Oservation
 
 # Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
@@ -31,7 +36,7 @@
     + Body
 
             {
-                "location" {
+                "location" : {
                     "latitude": 52.5337,
                     "longitude": 13.37788,
                     "timeZone" : "Europe/Berlin",
@@ -77,6 +82,8 @@
             }
 
 
+# Group Forecast
+
 # Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
 ## Forecasted weather for a given *latitude* and *longitude* [GET]
@@ -107,7 +114,7 @@
 
             {
                 "relevantStation" : {
-                    "latitude": 52.5337
+                    "latitude": 52.5337,
                     "longitude": 13.37788,
                     "id": 0815,                                 // MG station id
                     "sourceType" : "MOS_VIRTUAL",               // MOS or MOS_VIRTUAL to distinguish real stations to virtual ones
@@ -119,7 +126,7 @@
                         {
                             "validFrom": "2015-08-25T13:00:00+02:00",
                             "validUntil": "2015-08-25T13:59:59+02:00",
-                            "validityPeriodInHours": 1
+                            "validityPeriodInHours": 1,
                             "airTemperature": {
                                 "value" : 29,
                                 "unit" : "DEGREE"
@@ -429,4 +436,3 @@ This symbolic letter shall embrace the total fraction of the celestial dome cove
     7 | 7 oktas
     8 | 8 oktas
     9 | Sky obscured by fog and/or other meteorological phenomena
-
