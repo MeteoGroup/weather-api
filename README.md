@@ -39,8 +39,7 @@ FORMAT: 1A
                 "location" : {
                     "latitude": 52.5337,
                     "longitude": 13.37788,
-                    "timeZone" : "Europe/Berlin",
-                    "timeShift" : "+02:00"
+                    "timeZoneName" : "Europe/Berlin"
                 },
                 "sourceStation" : {
                     "latitude":123,
@@ -52,7 +51,7 @@ FORMAT: 1A
                 "observedAt": "2015-08-25T13:00:00+02:00"
                 "airTemperature": {
                     "value" : 29,
-                    "unit" : "DEGREE"
+                    "unit" : "DEGREE_CELSIUS"
                 },
                 "airPressureInHpa": 1012.9,
                 "windSpeed": {                          // mean, last 10 minutes
@@ -66,7 +65,7 @@ FORMAT: 1A
                 "windDirectionInDegree": 274,
                 "dewPointTemperature": {
                     "value" : 15.8,
-                    "unit" : "DEGREE"
+                    "unit" : "DEGREE_CELSIUS"
                 },
                 "precipitationLastHour": {
                     "value" : 0,
@@ -118,8 +117,7 @@ FORMAT: 1A
                     "longitude": 13.37788,
                     "id": 0815,                                 // MG station id
                     "sourceType" : "MOS_VIRTUAL",               // MOS or MOS_VIRTUAL to distinguish real stations to virtual ones
-                    "timeZone" : "Europe/Berlin",
-                    "timeOffset" : "+02:00"
+                    "timeZoneName" : "Europe/Berlin"
                 },
                 "forecasts": {
                     "hourly" : [
@@ -129,11 +127,15 @@ FORMAT: 1A
                             "validityPeriodInHours": 1,
                             "airTemperature": {
                                 "value" : 29,
-                                "unit" : "DEGREE"
+                                "unit" : "DEGREE_CELSIUS"
+                            },
+                            "apparentTemperature" : {                     // clarify: dow we need it?
+                                "value" : 30,
+                                "unit" : "DEGREE_CELSIUS"
                             },
                             "dewPointTemperature": {
                                 "value" : 15.8,
-                                "unit" : "DEGREE"
+                                "unit" : "DEGREE_CELSIUS"
                             },
                             "airPressureInHpa": 1012.9,
                             "sunshineDurationInMinutes": 23,
@@ -149,6 +151,10 @@ FORMAT: 1A
                             "windGust" : {
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND"
+                            },
+                            "windChill" : {                     // clarify: dow we need it? ATTENTION: different equations depending on location!
+                                "value" : 3.6,
+                                "unit" : "DEGREE_CELSIUS"
                             },
                             "windDirectionInDegree": 274
                             "totalCloudCoverInOcta": 3,
@@ -166,7 +172,7 @@ FORMAT: 1A
                             "validityPeriodInHours": 6,
                             "dewPointTemperature": {
                                 "value" : 15.8,
-                                "unit" : "DEGREE"
+                                "unit" : "DEGREE_CELSIUS"
                             },
                             "airPressureInHpa": 1012.9,
                             "sunshineDurationInHours": 23,
@@ -199,15 +205,15 @@ FORMAT: 1A
                             "validityPeriodInHours": 12,
                             "minimumAirTemperature": {
                                 "value" : 21,
-                                "unit" : "DEGREE"
+                                "unit" : "DEGREE_CELSIUS"
                             },
                             "maximumAirTemperature": {
                                 "value" : 29,
-                                "unit" : "DEGREE"
+                                "unit" : "DEGREE_CELSIUS"
                             },
                             "dewPointTemperature": {
                                 "value" : 15.8,
-                                "unit" : "DEGREE"
+                                "unit" : "DEGREE_CELSIUS"
                             },
                             "airPressureInHpa": 1012.9,
                             "sunshineDurationInHours": 23,
