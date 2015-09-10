@@ -5,7 +5,7 @@ FORMAT: 1A
 
 **Work in Progress** - MeteoGroup's public weather API documentation
 
-# Group Oservation
+# Group Observation
 
 ## Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
