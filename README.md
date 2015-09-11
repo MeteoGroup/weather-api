@@ -212,16 +212,16 @@ FORMAT: 1A
                         {
                             "validFrom": "2015-08-25T06:00:00+02:00",
                             "validUntil": "2015-08-25T17:59:59+02:00",
+                            "dewPointTemperature": {                // defined for 12h-period?
+                                "value" : 15.8,
+                                "unit" : "DEGREE_CELSIUS"
+                            },
                             "minimumAirTemperature": {
                                 "value" : 21,
                                 "unit" : "DEGREE_CELSIUS"
                             },
                             "maximumAirTemperature": {
                                 "value" : 29,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "dewPointTemperature": {
-                                "value" : 15.8,
                                 "unit" : "DEGREE_CELSIUS"
                             },
                             "airPressureInHpa": 1012.9,
