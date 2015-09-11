@@ -159,7 +159,7 @@ FORMAT: 1A
                                 "value" : 3.6,
                                 "unit" : "DEGREE_CELSIUS"
                             },
-                            "windDirectionInDegree": 274
+                            "windDirectionInDegree": 274,
                             "effectiveCloudCoverInOcta": 3,
                             "presentWeather": {
                                 "code": 00,                    // wmo code
@@ -185,7 +185,7 @@ FORMAT: 1A
                                 "unit" : "DEGREE_CELSIUS"
                             },
                             "airPressureInHpa": 1012.9,
-                            "sunshineDurationInHours": 23,
+                            "sunshineDurationInMinutes": 120,
                             "precipitation": {
                                 "value" : 0,
                                 "unit" : "MILLIMETER"
@@ -199,7 +199,7 @@ FORMAT: 1A
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND"
                             },
-                            "windDirectionInDegree": 274
+                            "windDirectionInDegree": 274,
                             "effectiveCloudCoverInOcta": 3,
                             "presentWeather": {
                                 "code": 00,                    // wmo code
@@ -225,7 +225,7 @@ FORMAT: 1A
                                 "unit" : "DEGREE_CELSIUS"
                             },
                             "airPressureInHpa": 1012.9,
-                            "sunshineDurationInHours": 23,
+                            "sunshineDurationInMinutes": 240,
                             "precipitation": {
                                 "value" : 0,
                                 "unit" : "MILLIMETER"
@@ -251,7 +251,8 @@ FORMAT: 1A
                         {
                             "validFrom": "2015-08-25T00:00:00+02:00",
                             "validUntil": "2015-08-25T23:59:59+02:00",
-                            "sunshineDurationInHours": 9,
+                            "sunshineDurationInMinutes": 510,
+                            "effectiveCloudCoverInOcta": 3,
                             "presentWeather": {
                                 "code": 00,                    // wmo code
                                 "literal": "CLEAR_SKY"         // do we need this?
@@ -260,10 +261,19 @@ FORMAT: 1A
                             "sunshineDurationInHours": 7,
                             "sunrise" : "2015-08-25T06:23:00+02:00",
                             "sunset"  : "2015-08-25T19:34:00+02:00",
+                            "minimumAirTemperature": {
+                                "value" : 21,
+                                "unit" : "DEGREE_CELSIUS"
+                            },
+                            "maximumAirTemperature": {
+                                "value" : 29,
+                                "unit" : "DEGREE_CELSIUS"
+                            },
                             "precipitation": {
                                 "value" : 0,
                                 "unit" : "MILLIMETER"
                             },
+                            "windDirectionInDegree": 274,
                             "windSpeed": {                     // does this makes sense for a 24h period?
                                 "value" : 7.48,
                                 "unit" : "METER_PER_SECOND"
