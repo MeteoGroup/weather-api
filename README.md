@@ -127,8 +127,7 @@ FORMAT: 1A
                     "hourly" : [
                         {
                             "validFrom": "2015-08-25T13:00:00+02:00",
-                            "validUntil": "2015-08-25T13:59:59+02:00",
-                            "validityPeriodInHours": 1,
+                            "validUntil": "2015-08-25T13:59:59+02:00",      // clarify: 14:00 vs. 13:59
                             "airTemperature": {
                                 "value" : 29,
                                 "unit" : "DEGREE_CELSIUS"
@@ -173,9 +172,16 @@ FORMAT: 1A
                         {
                             "validFrom": "2015-08-25T12:00:00+02:00",
                             "validUntil": "2015-08-25T17:59:59+02:00",
-                            "validityPeriodInHours": 6,
-                            "dewPointTemperature": {
+                            "dewPointTemperature": {                    // defined for 6h-period?
                                 "value" : 15.8,
+                                "unit" : "DEGREE_CELSIUS"
+                            },
+                            "minimumAirTemperature": {
+                                "value" : 21,
+                                "unit" : "DEGREE_CELSIUS"
+                            },
+                            "maximumAirTemperature": {
+                                "value" : 29,
                                 "unit" : "DEGREE_CELSIUS"
                             },
                             "airPressureInHpa": 1012.9,
@@ -202,11 +208,10 @@ FORMAT: 1A
                             "weatherSymbol": 1199999,          // clarify: do we need this. makes only sense with the symbol
                         }
                     ],
-                    "halfDaily" : [
+                    "interval12hours" : [
                         {
                             "validFrom": "2015-08-25T06:00:00+02:00",
                             "validUntil": "2015-08-25T17:59:59+02:00",
-                            "validityPeriodInHours": 12,
                             "minimumAirTemperature": {
                                 "value" : 21,
                                 "unit" : "DEGREE_CELSIUS"
@@ -246,7 +251,6 @@ FORMAT: 1A
                         {
                             "validFrom": "2015-08-25T00:00:00+02:00",
                             "validUntil": "2015-08-25T23:59:59+02:00",
-                            "validityPeriodInHours": 24,
                             "sunshineDurationInHours": 9,
                             "presentWeather": {
                                 "code": 00,                    // wmo code
