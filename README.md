@@ -282,7 +282,7 @@ FORMAT: 1A
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND"
                             },
-                            "ultraVioletIndex": {
+                            "ultraVioletIndex": {              // clarify!!!
                                 "clearSky": 4,                 // clarify: (1) name (2) WMO compliant
                                 "cloudy": 1                    // clarify: (1) name (2) WMO compliant
                             }
