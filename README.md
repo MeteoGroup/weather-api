@@ -58,9 +58,13 @@ FORMAT: 1A
                     "value" : 7.48,
                     "unit" : "METER_PER_SECOND"
                 },
-                "windGust" : {
+                "windGustLastHour" : {
                     "value" : 21.6,
                     "unit" : "METER_PER_SECOND"
+                },
+                "windChill" : {                     // clarify: dow we need it? ATTENTION: different equations depending on location!
+                    "value" : 3.6,
+                    "unit" : "DEGREE_CELSIUS"
                 },
                 "windDirectionInDegree": 274,
                 "dewPointTemperature": {
@@ -72,7 +76,7 @@ FORMAT: 1A
                     "unit" : "MILLIMETER"
                 },
                 "relativeHumidityInPercent100based": 63,
-                "totalCloudCoverInOcta": 3,
+                "effectiveCloudCoverInOcta": 3,
                 "presentWeather": {
                     "code": 28,                         // wmo code
                     "literal": "FOG"                    // do we need this?
@@ -157,7 +161,7 @@ FORMAT: 1A
                                 "unit" : "DEGREE_CELSIUS"
                             },
                             "windDirectionInDegree": 274
-                            "totalCloudCoverInOcta": 3,
+                            "effectiveCloudCoverInOcta": 3,
                             "presentWeather": {
                                 "code": 00,                    // wmo code
                                 "literal": "CLEAR_SKY"         // do we need this?
@@ -190,7 +194,7 @@ FORMAT: 1A
                                 "unit" : "METER_PER_SECOND"
                             },
                             "windDirectionInDegree": 274
-                            "totalCloudCoverInOcta": 3,
+                            "effectiveCloudCoverInOcta": 3,
                             "presentWeather": {
                                 "code": 00,                    // wmo code
                                 "literal": "CLEAR_SKY"         // do we need this?
@@ -230,7 +234,7 @@ FORMAT: 1A
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND"
                             },
-                            "totalCloudCoverInOcta": 3,
+                            "effectiveCloudCoverInOcta": 3,
                             "presentWeather": {
                                 "code": 00,                    // wmo code
                                 "literal": "CLEAR_SKY"         // do we need this?
