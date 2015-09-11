@@ -274,6 +274,7 @@ FORMAT: 1A
                                 "unit" : "MILLIMETER"
                             },
                             "windDirectionInDegree": 274,
+                            "precipitationPropabilityInPercent100based": 0,
                             "windSpeed": {                     // does this makes sense for a 24h period?
                                 "value" : 7.48,
                                 "unit" : "METER_PER_SECOND"
