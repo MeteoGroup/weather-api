@@ -12,8 +12,8 @@ FORMAT: 1A
 ### Observed weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
-    + latitude: `52.13` (number, required)                - latitude in degree
-    + longitude: `13.2` (number, required)                - longitude in degree
+    + latitude: `52.13` (number, required)                - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
+    + longitude: `13.2` (number, required)                - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
     + speedUnit: `meters_per_second` (string, optional)   - select which unit for windSpeed, windGust, etc.; valid values: meters_per_second, miles_per_hour, kilometers_per_hour, beaufort
     + temperatureUnit: `degree` (string, optional)        - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
     + precipitationUnit: `millimeter` (string, optional)  - select which unit for precipitation, etc.; valid values: millimeter, inch
@@ -41,44 +41,72 @@ FORMAT: 1A
                     "longitude": 13.37788,
                     "timeZoneName" : "Europe/Berlin"
                 },
-                "sourceStation" : {
-                    "latitude":123,
-                    "longitude":-56,
-                    "id": 4711,                         // MG station id
-                    "wmoId": 1231,                      // if known
-                    "sourceType" : "DWD"                // do we know this?
-                },
+                "stations" : [
+                    {
+                        "latitude": 123.43,
+                        "longitude": -56.23,
+                        "heightInMeters": -12.43,
+                        "sourceStation": true,              // observation data comming from this station
+                        "id": 4711,                         // MG station id
+                        "wmoId": 1231,                      // if known
+                        "sourceType" : "DWD"                // do we know this?
+                    },
+                    {
+                        "latitude": 112.65,
+                        "longitude": -55.4,
+                        "heightInMeters": 12.43,
+                        "sourceStation": false,             // this station is closer to requested location but not relevant for source data
+                        "id": 4712,                         // MG station id
+                        "wmoId": 1232,                      // if known
+                        "sourceType" : "DWD"                // do we know this?
+                    },
+                    {
+                        "latitude": 115.6,
+                        "longitude": -58.7,
+                        "heightInMeters": 2.43,
+                        "sourceStation": false,             // this station is closer to requested location but not relevant for source data
+                        "id": 4713,                         // MG station id
+                        "wmoId": 1233,                      // if known
+                        "sourceType" : "DWD"                // do we know this?
+                    }
+                ],
                 "observedAt": "2015-08-25T13:00:00+02:00"
                 "airTemperature": {
-                    "value" : 29,
+                    "value" : 29.3,                     // accuracy: 1 decimal place
                     "unit" : "DEGREE_CELSIUS"
                 },
-                "airPressureInHpa": 1012.9,
+                "airPressureInHpa": 1012.9,             // accuracy: 1 decimal place
                 "windSpeed": {                          // mean, last 10 minutes
-                    "value" : 7.48,
+                    "value" : 7.4,                      // accuracy: 1 decimal place
                     "unit" : "METER_PER_SECOND"
+                    "timeIntervalInMinutes" : -60        // could be -60 for last hour, -10 for last 10 minutes, -180 for last 3 hours, ...
                 },
-                "windGustLastHour" : {
-                    "value" : 21.6,
+                "windGust" : {
+                    "value" : 21.6,                     // accuracy: 1 decimal place
                     "unit" : "METER_PER_SECOND"
+                    "timeIntervalInMinutes" : -60        // could be -60 for last hour, -10 for last 10 minutes, -180 for last 3 hours, ...
                 },
-                "windChill" : {                     // clarify: dow we need it? ATTENTION: different equations depending on location!
-                    "value" : 3.6,
+                "windChill" : {                         // derived/computed value
+                    "value" : 3.6,                      // accuracy: 1 decimal precision
                     "unit" : "DEGREE_CELSIUS"
                 },
-                "windDirectionInDegree": 274,
+                "windDirectionInDegree": 274,           // accuracy: 0 decimal place
                 "dewPointTemperature": {
-                    "value" : 15.8,
+                    "value" : 15.8,                     // accuracy: 1 decimal place
                     "unit" : "DEGREE_CELSIUS"
                 },
-                "precipitationLastHour": {
-                    "value" : 0,
-                    "unit" : "MILLIMETER"
+                "precipitation": {
+                    "value" : 0.2,                      // accuracy: 1 decimal place
+                    "unit" : "MILLIMETER",
+                    "timeIntervalInMinutes" : -60        // could be -60 for last hour, -10 for last 10 minutes, -180 for last 3 hours, ...
                 },
-                "relativeHumidityInPercent100based": 63,
-                "effectiveCloudCoverInOcta": 3,
+                "relativeHumidityInPercent100based": 63,    // derived/computed value
+                "effectiveCloudCoverInOcta": 3,             // derived/computed value
+                "visibility": {
+                    "value" : 0.2,                      // accuracy: 1 decimal place
+                    "unit" : "KILOMETER"                // Do we need time interval? i.e. is it possible that visibility is measured in last hour, last 3 hours, ...
+                },
                 "presentWeather": {
-                    "code": 28,                         // wmo code
                     "literal": "FOG"                    // do we need this?
                 },
                 "weatherSymbol": 1199999
