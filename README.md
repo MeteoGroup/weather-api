@@ -11,13 +11,16 @@ FORMAT: 1A
 
 ### Observed weather for a given *latitude* and *longitude* [GET]
 
+This resource provides data from existing weather observation stations. These are the latest values/parameters they provide.
+For any requested location a relevant station is computed.
+For the relevance the stations distance, height difference and available parameters are taken into concern. 
+
 + Parameters
     + latitudeInDegree: `52.13` (number, required)        - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
     + longitudeInDegree: `13.2` (number, required)        - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
     + speedUnit: `meters_per_second` (string, optional)   - select which unit for windSpeed, windGust, etc.; valid values: meters_per_second, miles_per_hour, kilometers_per_hour, beaufort
     + temperatureUnit: `degree` (string, optional)        - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
     + precipitationUnit: `millimeter` (string, optional)  - select which unit for precipitation, etc.; valid values: millimeter, inch
-    + stationId: (optional)                               - select a well known station by ID.
 
 + Request
 
@@ -67,10 +70,6 @@ FORMAT: 1A
                     "unit" : "METER_PER_SECOND"
                     "timeIntervalInMinutes" : -60
                 },
-                "windChill" : {
-                    "value" : 3.6,
-                    "unit" : "DEGREE_CELSIUS"
-                },
                 "windDirectionInDegree": 274,
                 "dewPointTemperature": {
                     "value" : 15.8,
@@ -86,11 +85,7 @@ FORMAT: 1A
                 "visibility": {
                     "value" : 0.2,
                     "unit" : "KILOMETER"
-                },
-                "presentWeather": {
-                    "literal": "FOG"
-                },
-                "weatherSymbol": 1199999
+                }
             }
 
 
@@ -99,6 +94,8 @@ FORMAT: 1A
 ## Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
+
+Weather forecast for the next 7 days.
 
 + Parameters
     + latitudeInDegree: `52.13` (number, required)                - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
@@ -129,7 +126,7 @@ FORMAT: 1A
                     "hourly" : [
                         {
                             "validAt": "2015-08-25T14:00:00+02:00",
-                            "airTemperature": {                             // make explicit that is one moment in time - no time span
+                            "airTemperature": {                        
                                 "value" : 29,
                                 "unit" : "DEGREE_CELSIUS"
                             },
@@ -143,35 +140,25 @@ FORMAT: 1A
                                 "value" : 0,
                                 "unit" : "MILLIMETER"
                             },
-                            "precipitationPropabilityPastIntervalInPercent100based": 0,  //clarify with PO: LastInterval vs. at certain location and moment
-                            "windSpeed": {
+                            "precipitationProbabilityInPercent100based": 0,
+                            "averageWindSpeed": {
                                 "value" : 7.48,
-                                "unit" : "METER_PER_SECOND"
-                                "timeIntervalInMinutes" : -60    // technical discussion
+                                "unit" : "METER_PER_SECOND",
+                                "timeIntervalInMinutes" : -60  
                             },
-                            "windGust" : {                      //clarify with PO: LastInterval vs. at certain location and moment
+                            "windGust" : {                     
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND",
-                                "timeIntervalInMinutes" : -60    // technical discussion
+                                "timeIntervalInMinutes" : -60    
                             },
                             "windDirectionInDegree": 274,
-                            "effectiveCloudCoverInOcta": 3,
-                            "presentWeather": {                 // hint: also LastInterval vs. at certain location and moment
-                                "code": 00,                    // wmo code
-                                "literal": "CLEAR_SKY"         // do we need this?
-                            },
-                            "weatherSymbol": 1199999           // clarify: do we need this. makes only sense with the symbol
+                            "effectiveCloudCoverInOcta": 3
                         }
                     ],
                     "interval6hours" : [
                         {
                             "validFrom": "2015-08-25T12:00:00+02:00",
                             "validUntil": "2015-08-25T18:00:00+02:00",
-                            // airTemperature: also LastInterval vs. at certain location and moment,  -- Clarifiy with PO
-                            "dewPointTemperature": {                    // clarify with PO: a) mostly used by experts (e.g. Agri Culture) and b) provide min. of last Period vs. DewPoint _at_ the moment vs. avg. DewPoit (min and max DewPoint hard to produce)
-                                "value" : 1.8,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
                             "minimumAirTemperature": {
                                 "value" : 21,
                                 "unit" : "DEGREE_CELSIUS"
@@ -180,38 +167,29 @@ FORMAT: 1A
                                 "value" : 29,
                                 "unit" : "DEGREE_CELSIUS"
                             },
-                            "airPressureInHpa": 1012.9,                     // also average vs. at certain location and moment,  -- Clarifiy with PO
+                            "airPressureInHpa": 1012.9,
                             "sunshineDurationInMinutes": 120,
                             "precipitation": {
                                 "value" : 0,
                                 "unit" : "MILLIMETER"
                             },
-                            "precipitationPropabilityInPercent100based": 0,   // also interval vs. at certain location and moment,  -- Clarifiy with PO
-                            "windSpeed": {                                      // also average vs. at certain location and moment,  -- Clarifiy with PO
+                            "precipitationProbabilityInPercent100based": 0,
+                            "averageWindSpeed": {                                      
                                 "value" : 7.48,
                                 "unit" : "METER_PER_SECOND"
                             },
-                            "windGust" : {                                      // also Maximum vs. at certain location and moment,  -- Clarifiy with PO
+                            "windGust" : {                                     
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND"
                             },
-                            "windDirectionInDegree": 274,                       // also dominant vs. at certain location and moment,  -- Clarifiy with PO
-                            "effectiveCloudCoverInOcta": 3,                     // also average vs. at certain location and moment,  -- Clarifiy with PO
-                            "presentWeather": {                                 // also dominant vs. extreme vs. at certain location and moment,  -- Clarifiy with PO
-                                "code": 00,
-                                "literal": "CLEAR_SKY"
-                            },
-                            "weatherSymbol": 1199999,
+                            "dominantWindDirectionInDegree": 274,   
+                            "effectiveCloudCoverInOcta": 3           
                         }
                     ],
-                    "interval12hours" : [                           // same remarks as in interval6hours, but already less importance for moment values
+                    "interval12hours" : [                           
                         {
                             "validFrom": "2015-08-25T06:00:00+02:00",
-                            "validUntil": "2015-08-25T18:00:00+02:00",
-                            "dewPointTemperature": {                // defined for 12h-period?
-                                "value" : 15.8,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
+                            "validUntil": "2015-08-25T18:00:00+02:00"
                             "minimumAirTemperature": {
                                 "value" : 21,
                                 "unit" : "DEGREE_CELSIUS"
@@ -226,8 +204,8 @@ FORMAT: 1A
                                 "value" : 0,
                                 "unit" : "MILLIMETER"
                             },
-                            "precipitationPropabilityInPercent100based": 0,
-                            "windSpeed": {
+                            "precipitationProbabilityInPercent100based": 0,
+                            "averageWindSpeed": {
                                 "value" : 7.48,
                                 "unit" : "METER_PER_SECOND"
                             },
@@ -236,23 +214,14 @@ FORMAT: 1A
                                 "unit" : "METER_PER_SECOND"
                             },
                             "effectiveCloudCoverInOcta": 3,
-                            "presentWeather": {
-                                "code": 00,                    // wmo code
-                                "literal": "CLEAR_SKY"         // do we need this?
-                            },
-                            "basicWeatherSymbol": 1199999
+                            "dominantWindDirectionInDegree": 274
                         }
                     ],
-                    "daily" : [  // no moments anymore
+                    "daily" : [
                         {
                             "validFrom": "2015-08-25T00:00:00+02:00",
                             "validUntil": "2015-08-25T24:00:00+02:00",
-                            "effectiveCloudCoverInOcta": 3,    // hint : average
-                            "presentWeather": {                // also dominant vs. extreme vs. at certain location and moment,  -- Clarifiy with PO
-                                "code": 00,                    // wmo code
-                                "literal": "CLEAR_SKY"         // do we need this?
-                            },
-                            "weatherSymbol": 1199999,          // clarify: do we need this. makes only sense with the symbol
+                            "effectiveCloudCoverInOcta": 3,    
                             "sunshineDurationInHours": 7,
                             "sunrise" : "2015-08-25T06:23:00+02:00",
                             "sunset"  : "2015-08-25T19:34:00+02:00",
@@ -260,7 +229,7 @@ FORMAT: 1A
                                 "value" : 21,
                                 "unit" : "DEGREE_CELSIUS"
                             },
-                            "maximumAirTemperature": {              // hint: MOS only offers 6h max values this will make problems when computing
+                            "maximumAirTemperature": {              
                                 "value" : 29,
                                 "unit" : "DEGREE_CELSIUS"
                             },
@@ -268,18 +237,18 @@ FORMAT: 1A
                                 "value" : 0,
                                 "unit" : "MILLIMETER"
                             },
-                            "windDirectionInDegree": 274,
-                            "precipitationPropabilityInPercent100based": 0,  // hint: its related to amount, not moment
-                            "windSpeed": {                     // does this makes sense for a 24h period? -- alternatives: e.g. windSpeedAvrgAtDayTime OR max/min per daytime OR simple avg. per 24h // recommendation: when avg. then also max steady (10min) winspeed
+                            "dominantWindDirectionInDegree": 274,
+                            "precipitationProbabilityInPercent100based": 0,
+                            "averageWindSpeed": { 
                                 "value" : 7.48,
                                 "unit" : "METER_PER_SECOND"
                             },
-                            "windGust" : {                      // hint: max. per day
+                            "windGust" : {                      
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND"
                             },
-                            "ultraVioletIndex": {              // hint: max. per day
-                                "clearSky": 4                 // clarify: (1) WMO compliant,  by definition max at noon // CLA
+                            "ultraVioletIndex": {              
+                                "clearSky": 4              
                             }
                         }
                     ]
@@ -311,15 +280,16 @@ daily          | 24 hours       | using time zone from requested location, today
 
 Parameter | unit
 ---------------|-----
-minAirTemperature       | Degree or Fahrenheit
-maxAirTemperature       | Degree or Fahrenheit
-airTemperature          | Degree or Fahrenheit
-dewPointTemperature     | Degree or Fahrenheit
-precipitation           | mm or inch            // !! clarify!
-precipitationLastHour   | mm or inch            // !! clarify!
-windSpeed               | m/s or km/h or m/h or BFT
-windGust                | in Knots or m/h or km/h
-date, time, time offset | timestamps including date, time and a zime offset are encoded in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).
+minAirTemperature                         | Degree or Fahrenheit
+maxAirTemperature                         | Degree or Fahrenheit
+airTemperature                            | Degree or Fahrenheit
+dewPointTemperature                       | Degree or Fahrenheit
+precipitation                             | mm or inch
+precipitationLastHour                     | mm or inch
+windSpeed                                 | m/s or km/h or m/h or BFT
+windGust                                  | in Knots or m/h or km/h
+date, time, time offset                   | timestamps including date, time and a zime offset are encoded in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).
+precipitationProbabilityInPercent100based | a percentage which refers to the amount of precipitation probability
 
 
 ## PresentWeather (object)
