@@ -5,6 +5,8 @@ FORMAT: 1A
 
 **Work in Progress** - MeteoGroup's public weather API documentation
 
+Do you want to send [https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951](feedback)?
+
 # Group Observation
 
 ## Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
