@@ -48,7 +48,7 @@ For the relevance the stations distance, height difference and available paramet
                     "timeZoneName" : "Europe/Berlin"
                 },
                 relevantStation : {
-                    "latitude": 123.43,
+                    "latitude": 23.43,
                     "longitude": -56.23,
                     "heightInMeters": -12.43,
                     "id": 4711,
