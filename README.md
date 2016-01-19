@@ -222,7 +222,7 @@ Weather forecast for the next 7 days.
                     "daily" : [
                         {
                             "validFrom": "2015-08-25T00:00:00+02:00",
-                            "validUntil": "2015-08-25T24:00:00+02:00",
+                            "validUntil": "2015-08-26T00:00:00+02:00",
                             "effectiveCloudCoverInOcta": 3,    
                             "sunshineDurationInHours": 7,
                             "sunrise" : "2015-08-25T06:23:00+02:00",
@@ -272,10 +272,10 @@ The response contains different time intervals which contain forecast in for dif
 
 Interval name  | Time interval  | Time span
 ---------------|----------------|--------------------------------
-hourly         | 1 hour         | using time zone from requested location, today from 00:00 until 24:00, plus 1 day ahead, means 48 hours in total
-interval6hours | 6 hours        | using time zone from requested location, today from 00:00 until 24:00, plus 6 days ahead, means 28 intervals in total
-halfDaily      | 12 hours       | using time zone from requested location, today from 00:00 until 24:00, plus 6 days ahead, means 14 intervals in total
-daily          | 24 hours       | using time zone from requested location, today from 00:00 until 24:00, plus 6 days ahead, means 7 days in total
+hourly         | 1 hour         | using time zone from requested location, today from 00:00 until 00:00 next day, plus 1 day ahead, means 48 hours in total
+interval6hours | 6 hours        | using time zone from requested location, today from 00:00 until 00:00 next day, plus 6 days ahead, means 28 intervals in total
+halfDaily      | 12 hours       | using time zone from requested location, today from 00:00 until 00:00 next day, plus 6 days ahead, means 14 intervals in total
+daily          | 24 hours       | using time zone from requested location, today from 00:00 until 00:00 next day, plus 6 days ahead, means 7 days in total
 
 
 ## Units
