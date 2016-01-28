@@ -124,6 +124,11 @@ Weather forecast for the next 7 days.
     + Body
 
             {
+                "location" : {
+                    "latitude": 52.5337,
+                    "longitude": 13.37788,
+                    "timeZoneName" : "Europe/Berlin"
+                },
                 "forecasts": {
                     "hourly" : [
                         {
