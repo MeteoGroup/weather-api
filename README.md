@@ -7,9 +7,16 @@ FORMAT: 1A
 
 Do you want to send [feedback](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951)?
 
+# General information
+
+All endpoints are secured and data are transmitted over HTTPS protocol.
+
 # Group Observation
 
 ## Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
+
+### Example
+`https://api.weather.mg/observation?location=53,13`
 
 ### Observed weather for a given *latitude* and *longitude* [GET]
 
@@ -94,6 +101,9 @@ For the relevance the stations distance, height difference and available paramet
 # Group Forecast
 
 ## Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
+
+### Example
+`https://api.weather.mg/forecast?location=53,13`
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
