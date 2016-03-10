@@ -54,16 +54,16 @@ For the relevance the stations distance, height difference and available paramet
                     "longitude": 13.37788,
                     "timeZoneName" : "Europe/Berlin"
                 },
-                relevantStation : {
+                "relevantStation" : {
                     "latitude": 23.43,
                     "longitude": -56.23,
                     "heightInMeters": -12.43,
                     "id": 4711,
                     "wmoId": 1231,
-                    "sourceType" : "DWD"
+                    "sourceType" : "DWD",
                     "name" : "Berlin Tegel"
                 },
-                "observedAt": "2015-08-25T13:00:00+02:00"
+                "observedAt": "2015-08-25T13:00:00+02:00",
                 "airTemperature": {
                     "value" : 29.3,
                     "unit" : "DEGREE_CELSIUS"
@@ -71,12 +71,12 @@ For the relevance the stations distance, height difference and available paramet
                 "airPressureInHpa": 1012.9,
                 "windSpeed": {
                     "value" : 7.4,
-                    "unit" : "METER_PER_SECOND"
+                    "unit" : "METER_PER_SECOND",
                     "timeIntervalInMinutes" : -60
                 },
                 "windGust" : {
                     "value" : 21.6,
-                    "unit" : "METER_PER_SECOND"
+                    "unit" : "METER_PER_SECOND",
                     "timeIntervalInMinutes" : -60
                 },
                 "windDirectionInDegree": 274,
@@ -206,7 +206,7 @@ Weather forecast for the next 7 days.
                     "interval12hours" : [                           
                         {
                             "validFrom": "2015-08-25T06:00:00+02:00",
-                            "validUntil": "2015-08-25T18:00:00+02:00"
+                            "validUntil": "2015-08-25T18:00:00+02:00",
                             "minimumAirTemperature": {
                                 "value" : 21,
                                 "unit" : "DEGREE_CELSIUS"
