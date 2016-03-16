@@ -24,6 +24,8 @@ This resource provides data from existing weather observation stations. These ar
 For any requested location a relevant station is computed.
 For the relevance the stations distance, height difference and available parameters are taken into concern. 
 
+**This endpoint returns dummy data for now.**
+
 + Parameters
     + latitudeInDegree: `52.13` (number, required)        - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
     + longitudeInDegree: `13.2` (number, required)        - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
@@ -170,103 +172,6 @@ Weather forecast for the next 7 days.
                             },
                             "windDirectionInDegree": 274,
                             "effectiveCloudCoverInOcta": 3
-                        }
-                    ],
-                    "interval6hours" : [
-                        {
-                            "validFrom": "2015-08-25T12:00:00+02:00",
-                            "validUntil": "2015-08-25T18:00:00+02:00",
-                            "minimumAirTemperature": {
-                                "value" : 21,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "maximumAirTemperature": {
-                                "value" : 29,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "airPressureInHpa": 1012.9,
-                            "sunshineDurationInMinutes": 120,
-                            "precipitation": {
-                                "value" : 0,
-                                "unit" : "MILLIMETER"
-                            },
-                            "precipitationProbabilityInPercent100based": 0,
-                            "averageWindSpeed": {                                      
-                                "value" : 7.48,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "windGust" : {                                     
-                                "value" : 21.6,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "dominantWindDirectionInDegree": 274,   
-                            "effectiveCloudCoverInOcta": 3           
-                        }
-                    ],
-                    "interval12hours" : [                           
-                        {
-                            "validFrom": "2015-08-25T06:00:00+02:00",
-                            "validUntil": "2015-08-25T18:00:00+02:00",
-                            "minimumAirTemperature": {
-                                "value" : 21,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "maximumAirTemperature": {
-                                "value" : 29,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "airPressureInHpa": 1012.9,
-                            "sunshineDurationInMinutes": 240,
-                            "precipitation": {
-                                "value" : 0,
-                                "unit" : "MILLIMETER"
-                            },
-                            "precipitationProbabilityInPercent100based": 0,
-                            "averageWindSpeed": {
-                                "value" : 7.48,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "windGust" : {
-                                "value" : 21.6,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "effectiveCloudCoverInOcta": 3,
-                            "dominantWindDirectionInDegree": 274
-                        }
-                    ],
-                    "daily" : [
-                        {
-                            "validFrom": "2015-08-25T00:00:00+02:00",
-                            "validUntil": "2015-08-26T00:00:00+02:00",
-                            "effectiveCloudCoverInOcta": 3,    
-                            "sunshineDurationInHours": 7,
-                            "sunrise" : "2015-08-25T06:23:00+02:00",
-                            "sunset"  : "2015-08-25T19:34:00+02:00",
-                            "minimumAirTemperature": {
-                                "value" : 21,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "maximumAirTemperature": {              
-                                "value" : 29,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "precipitation": {
-                                "value" : 0,
-                                "unit" : "MILLIMETER"
-                            },
-                            "dominantWindDirectionInDegree": 274,
-                            "precipitationProbabilityInPercent100based": 0,
-                            "averageWindSpeed": { 
-                                "value" : 7.48,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "windGust" : {                      
-                                "value" : 21.6,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "ultraVioletIndex": {              
-                                "clearSky": 4              
-                            }
                         }
                     ]
                 }
