@@ -7,6 +7,8 @@ FORMAT: 1A
 
 Do you want to send [feedback](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951)?
 
+[Roadmap for Weather API](https://github.com/MeteoGroup/weather-api/tree/roadmap)
+
 # General information
 
 All endpoints are secured and data are transmitted over HTTPS protocol.
