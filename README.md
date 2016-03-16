@@ -35,13 +35,6 @@ For the relevance the stations distance, height difference and available paramet
     + temperatureUnit: `degree` (string, optional)        - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
     + precipitationUnit: `millimeter` (string, optional)  - select which unit for precipitation, etc.; valid values: millimeter, inch
 
-+ Request
-
-    + Headers
-
-            X-Authentication: <API-Key>
-            X-TraceId: <Trace-Id>
-
 + Response 200 (application/json)
 
     + Headers
@@ -119,13 +112,6 @@ Weather forecast for the next 7 days.
     + speedUnit: `meters_per_second` (string, optional)           - select which unit for windSpeed, windGust, etc.; valid values: meters_per_second, miles_per_hour, kilometers_per_hour, beaufort
     + temperatureUnit: `degree` (string, optional)                - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
     + precipitationUnit: `millimeter` (string, optional)          - select which unit for precipitation, etc.; valid values: millimeter, inch
-
-+ Request
-
-    + Headers
-
-            X-Authentication: <API-Key>
-            X-TraceId: <Trace-Id>
 
 + Response 200 (application/json)
 
