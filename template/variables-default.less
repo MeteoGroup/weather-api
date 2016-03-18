@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');
+
+/* Page-wide variables */
+@padding: 12px;
+@border-radius: 6px;
+@font-size: 14px;
+@nav-width: 220px;
+@nav-triple-width: 16.5%;
+@right-panel-width: 48.5%;
+@right-panel-background-width: 48.6%;
+
+@base-font: 400 14px ~"/" 1.42 'Roboto', Helvetica, sans-serif;
+@title-font: 200 36px 'Raleway', Helvetica, sans-serif;
+@code-font: 'Inconsolata', monospace;
+
+/* Basic page-wide colors */
+@background-color: white;
+@text-color: black;
+
+@link-color: #428bca;
+@right-link-color: @link-color;
+
+@heading-text-color: @text-color;
+
+@table-row-background-color: darken(@background-color, 2%);
+@table-border-color: darken(@background-color, 10%);
+
+/* Nav and right panel */
+@nav-hover-border-color: @text-color;
+@nav-hover-background-color: bad-color;
+@nav-hover-text-decoration: none;
+@nav-background-color: #fbfbfb;
+@nav-border-color: #f0f0f0;
+@right-background-color: #333;
+@right-text-color: @background-color;
+@badge-margin: -2px 0;
+
+/* Tabs */
+@tabs-background-color: #eee;
+@tabs-active-background-color: darken(@tabs-background-color, 10%);
+@tabs-border-color: #ddd;
+@right-tabs-background-color: #444;
+@right-tabs-active-background-color: lighten(@right-tabs-background-color, 10%);
+@right-tabs-border-color: #666;
+
+/* Notes and warnings */
+@note-text-color: @text-color;
+@note-title-text-color: @link-color;
+@note-background-color: mix(@link-color, @background-color, 8%);
+@note-border-color: @note-title-text-color;
+
+@warning-text-color: @text-color;
+@warning-title-text-color: darken(#d9534f, 10%);
+@warning-background-color: mix(@warning-title-text-color, @background-color, 7%);
+@warning-border-color: @warning-title-text-color;
+
+/* Resource groups */
+@group-padding: @padding;
+@group-header-margin: -@padding -@padding @padding -@padding;
+@group-background-color: @background-color;
+@group-title-background-color: contrast(@background-color,
+                                        darken(@background-color, 5%),
+                                        lighten(@background-color, 5%));
+@group-border-color: contrast(@background-color,
+                              darken(@background-color, 15%),
+                              lighten(@background-color, 15%));
+@group-text-color: contrast(@group-background-color);
+
+/* HTTP method-specific colors */
+
+/* HTTP GET */
+@get-color: darken(@link-color, 6.5%);
+@get-background-color: #d9edf7;
+@get-text-color: contrast(@get-background-color);
+@get-badge-text-color: darken(@get-background-color, 25%);
+@get-border-color: darken(spin(@get-background-color, -10), 7%);
+
+/* HTTP HEAD */
+@head-color: @get-color;
+@head-background-color: @get-background-color;
+@head-text-color: @get-text-color;
+@head-badge-text-color: @get-badge-text-color;
+@head-border-color: @get-border-color;
+
+/* HTTP OPTIONS */
+@options-color: @get-color;
+@options-background-color: @get-background-color;
+@options-text-color: @get-text-color;
+@options-badge-text-color: @get-badge-text-color;
+@options-border-color: @get-border-color;
+
+/* HTTP PUT */
+@put-color: darken(#f0ad4e, 8%);
+@put-background-color: #fcf8e3;
+@put-text-color: contrast(@put-background-color);
+@put-badge-text-color: darken(@put-background-color, 25%);
+@put-border-color: darken(spin(@put-background-color, -10), 5%);
+
+/* HTTP PATCH */
+@patch-color: @put-color;
+@patch-background-color: @put-background-color;
+@patch-text-color: @put-text-color;
+@patch-badge-text-color: @put-badge-text-color;
+@patch-border-color: @put-border-color;
+
+/* HTTP POST */
+@post-color: #5cb85c;
+@post-background-color: #dff0d8;
+@post-text-color: contrast(@post-background-color);
+@post-badge-text-color: darken(@post-background-color, 25%);
+@post-border-color: darken(spin(@post-background-color, -10), 5%);
+
+/* HTTP DELETE */
+@delete-color: #d9534f;
+@delete-background-color: #f2dede;
+@delete-text-color: contrast(@delete-background-color);
+@delete-badge-text-color: darken(@delete-background-color, 25%);
+@delete-border-color: darken(spin(@delete-background-color, -10), 5%);
+
+/* Code colors */
+@inline-code-background-color: #f5f5f5;
+@inline-code-text-color: #444;
+
+@code-block-text-color: @text-color;
+@code-block-background-color: #f5f5f5;
+@code-block-border-color: contrast(@code-block-background-color,
+                                   darken(@code-block-background-color, 15%),
+                                   lighten(@code-block-background-color, 15%));
+
+@right-code-block-text-color: #c5c8c6;
+@right-code-block-background-color: #1d1f21;
+@right-code-block-border-color: @right-code-block-background-color;
+
+@title-code-background-color: @inline-code-background-color;
+@title-code-text-color: @inline-code-text-color;
+@title-code-border-color: @code-block-border-color;
+
+@quote-border-color: contrast(@code-block-background-color,
+                              darken(@code-block-background-color, 5%),
+                              lighten(@code-block-background-color, 5%));
+
+/* Highlight.js Theme Tomorrow */
+.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}
+
+/* Highlight.js Theme Tomorrow Night */
+.right {
+  .hljs-comment{color:#969896}.css .hljs-class,.css .hljs-id,.css .hljs-pseudo,.hljs-attribute,.hljs-regexp,.hljs-tag,.hljs-variable,.html .hljs-doctype,.ruby .hljs-constant,.xml .hljs-doctype,.xml .hljs-pi,.xml .hljs-tag .hljs-title{color:#c66}.hljs-built_in,.hljs-constant,.hljs-literal,.hljs-number,.hljs-params,.hljs-pragma,.hljs-preprocessor{color:#de935f}.css .hljs-rule .hljs-attribute,.ruby .hljs-class .hljs-title{color:#f0c674}.hljs-header,.hljs-inheritance,.hljs-name,.hljs-string,.hljs-value,.ruby .hljs-symbol,.xml .hljs-cdata{color:#b5bd68}.css .hljs-hexcolor,.hljs-title{color:#8abeb7}.coffeescript .hljs-title,.hljs-function,.javascript .hljs-title,.perl .hljs-sub,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword{color:#81a2be}.hljs-keyword,.javascript .hljs-function{color:#b294bb}.hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .css,.xml .hljs-cdata,.xml .javascript,.xml .vbscript{opacity:.5}
+}
