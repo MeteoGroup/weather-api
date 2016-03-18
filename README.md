@@ -11,4 +11,4 @@ You can find our documentation at:
 
 * [Github pages](http://meteogroup.github.io/weather-api/)
 * [API Bluepring](https://github.com/MeteoGroup/weather-api/blob/master/WEATHER-API-BLUEPRINT.md)
-
+* [Weather API](https://api.weather.mg/)
