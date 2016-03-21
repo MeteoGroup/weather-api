@@ -1,7 +1,7 @@
 FORMAT: 1A
 
 (WiP) Weather API
-=============================
+==============================
 
 **Work in Progress** - MeteoGroup's public weather API documentation
 
