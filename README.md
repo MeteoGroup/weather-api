@@ -5,7 +5,7 @@ The Weather API is a service, which is able to deliver weather forecast data for
 There will be also observation data available.
 
 This repository contains source files for the technical documentation, which describes the Weather API.
-From these source files a technical documentation is generated and 
+From these source files a read–optimized web site is generated and 
 available at [http://meteogroup.github.io/weather-api](http://meteogroup.github.io/weather-api)
 
 A more general description of the service and its usage you find at [https://api.weather.mg](https://api.weather.mg).
