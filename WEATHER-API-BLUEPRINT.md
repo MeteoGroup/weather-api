@@ -15,7 +15,7 @@ This technical document was created for developers who are creating applications
 
 
 The Weather API resolves weather data based on location specified by latitude and longitude coordinates.
-For weather parameters prediction API offer ["forecast" endpoint](#forecastGroup) and for weather history parameters API offer ["observation" endpoint](#observationGroup).
+For weather parameters prediction API offer ["forecast" endpoint](#forecast) and for weather history parameters API offer ["observation" endpoint](#observation).
 
 
 This document is using [API blueprint format](https://apiblueprint.org/documentation/).
