@@ -1,6 +1,6 @@
 FORMAT: 1A
 
-(WiP) Weather API
+Weather API
 =============================
 
 **Work in Progress** - MeteoGroup's public weather API documentation
@@ -11,9 +11,20 @@ Do you want to send [feedback](https://meteogroup.zendesk.com/hc/en-gb/requests/
 
 # General information
 
-All endpoints are secured and data are transmitted over HTTPS protocol.
+This technical document was created for developers who are creating applications based on weather data provided by this API.
 
-# Group Observation
+
+The Weather API resolves weather data based on location specified by latitude and longitude coordinates.
+For weather parameters prediction API offer ["forecast" endpoint](#forecastGroup) and for weather history parameters API offer ["observation" endpoint](#observationGroup).
+
+
+This document is using [API blueprint format](https://apiblueprint.org/documentation/).
+
+
+All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
+If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+
+# <a name="observationGroup"></a>Group Observation
 
 ## Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
@@ -95,7 +106,7 @@ For the relevance the stations distance, height difference and available paramet
             }
 
 
-# Group Forecast
+# <a name="forecastGroup"></a>Group Forecast
 
 ## Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
