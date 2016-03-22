@@ -24,7 +24,7 @@ This document is using [API blueprint format](https://apiblueprint.org/documenta
 All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
 If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
 
-# <a name="observationGroup"></a>Group Observation
+# Group Observation
 
 ## Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
@@ -106,7 +106,7 @@ For the relevance the stations distance, height difference and available paramet
             }
 
 
-# <a name="forecastGroup"></a>Group Forecast
+# Group Forecast
 
 ## Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
 
