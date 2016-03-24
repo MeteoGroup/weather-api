@@ -1,16 +1,19 @@
 Weather API
 =============================
 
-**Work in Progress** - This Application Programming Interface and its description are both work in progress and can change over time.
+The Weather API is a service, which is able to deliver weather forecast data for any given location on earth.
+There will be also observation data available.
 
-The Weather API resolves any location of the world to weather data. 
-If you want to get access to the Weather API or have any questions you can contact us via [Zendesk](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+This repository contains source files for the technical documentation, which describes the Weather API.
+From these source files a read–optimized and nice looking web site is generated and 
+available at [http://meteogroup.github.io/weather-api](http://meteogroup.github.io/weather-api)
 
-You can find more information about the Weather API on it's landing page [https://api.weather.mg](https://api.weather.mg).
+A more general description of the service and its usage you find at [https://api.weather.mg](https://api.weather.mg).
 
-For more technical details we provide a documentation on our [GitHub Page](http://meteogroup.github.io/weather-api).
+This API documentation is written in [API Blueprint](https://apiblueprint.org) format.
+Using this format eases automated testing, describing response types or request parameters.
+There are many tools available, which may support you in using Weather API's blueprint description.
+We're using this API Blueprint sources ourself, for running automated integration tests.
+Doing so we can guarantee, that the Weather API service always conform to this documentation.
 
-The base of that documentation is an [API Blueprint](https://apiblueprint.org/documentation/) document, which you can get [here](https://github.com/MeteoGroup/weather-api/blob/master/WEATHER-API-BLUEPRINT.md).
-You can use that to test your application against the Weather API. 
-
-*We are using that Blueprint in our own automated integration tests and keep it up to date.*
+The Weather API is in "Beta Phase", which means this API or its description may change over time.
