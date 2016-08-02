@@ -84,12 +84,12 @@ For the relevance the stations distance, height difference and available paramet
                 "windSpeed": {
                     "value" : 7.4,
                     "unit" : "METER_PER_SECOND",
-                    "timeIntervalInMinutes" : -60
+                    "timeIntervalInMinutes" : 10
                 },
                 "windGust" : {
                     "value" : 21.6,
                     "unit" : "METER_PER_SECOND",
-                    "timeIntervalInMinutes" : -60
+                    "timeIntervalInMinutes" : 60
                 },
                 "windDirectionInDegree": 274,
                 "dewPointTemperature": {
@@ -99,7 +99,7 @@ For the relevance the stations distance, height difference and available paramet
                 "precipitation": {
                     "value" : 0.2,
                     "unit" : "MILLIMETER",
-                    "timeIntervalInMinutes" : -60
+                    "timeIntervalInMinutes" : 60
                 },
                 "relativeHumidityInPercent100based": 63,
                 "effectiveCloudCoverInOcta": 3,
@@ -108,7 +108,7 @@ For the relevance the stations distance, height difference and available paramet
                     "unit" : "KILOMETER"
                 },
                 "pressureTendencyCodeForPastHour" : "RISING",
-                "relativeHumidityInPercent" : 75,
+                "relativeHumidityInInPercent100based" : 75,
                 "presentWeather" : {
                     "description" : "hail showers",
                     "code" : 27
@@ -172,25 +172,63 @@ Weather forecast for the next 7 days.
                             "precipitationProbabilityInPercent100based": 0,
                             "averageWindSpeed": {
                                 "value" : 7.48,
-                                "unit" : "METER_PER_SECOND",
-                                "timeIntervalInMinutes" : -60
+                                "unit" : "METER_PER_SECOND"
                             },
                             "windGust" : {
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND",
-                                "timeIntervalInMinutes" : -60
                             },
                             "windDirectionInDegree": 274,
                             "effectiveCloudCoverInOcta": 3
                         }
                     ],
-                    "3hourly" : [
+                    "12hourly" : [
                         {
-                            "validAt": "2016-08-25T14:00:00+02:00",
+                            "validAt": "2016-08-25T06:00:00+02:00",
+                            "averageWindSpeed": {
+                                "value" : 7.48,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "airTemperatureMax" : {
+                                "value" : 22,
+                                "unit" : "DEGREE_CELSIUS"
+                            },
+                            "airTemperatureMin" : {
+                                "value" : 18,
+                                "unit" : "DEGREE_CELSIUS"
+                            }
+                        },
+                        {
+                            "validAt": "2016-08-25T18:00:00+02:00",
+                            "averageWindSpeed": {
+                                "value" : 7.48,
+                                "unit" : "METER_PER_SECOND"
+                            },
+                            "airTemperatureMax" : {
+                                "value" : 12,
+                                "unit" : "DEGREE_CELSIUS"
+                            },
+                            "airTemperatureMin" : {
+                                "value" : 9,
+                                "unit" : "DEGREE_CELSIUS"
+                            }
+                        }
+                    ],
+                    "daily" : [
+                        {
+                            "validAt": "2016-08-25T06:00:00+02:00",
                             "airTemperature": {
                                 "value" : 29,
                                 "unit" : "DEGREE_CELSIUS"
                             },
+                            "airTemperatureMax" : {
+                                "value" : 22,
+                                "unit" : "DEGREE_CELSIUS"
+                            },
+                            "airTemperatureMin" : {
+                                "value" : 9,
+                                "unit" : "DEGREE_CELSIUS"
+                            }
                             "dewPointTemperature": {
                                 "value" : 15.8,
                                 "unit" : "DEGREE_CELSIUS"
@@ -204,13 +242,11 @@ Weather forecast for the next 7 days.
                             "precipitationProbabilityInPercent100based": 0,
                             "averageWindSpeed": {
                                 "value" : 7.48,
-                                "unit" : "METER_PER_SECOND",
-                                "timeIntervalInMinutes" : -60
+                                "unit" : "METER_PER_SECOND"
                             },
                             "windGust" : {
                                 "value" : 21.6,
-                                "unit" : "METER_PER_SECOND",
-                                "timeIntervalInMinutes" : -60
+                                "unit" : "METER_PER_SECOND"
                             },
                             "windDirectionInDegree": 274,
                             "effectiveCloudCoverInOcta": 3
