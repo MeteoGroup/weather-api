@@ -40,8 +40,8 @@ For the relevance the stations distance, height difference and available paramet
 **This endpoint returns dummy data for now.**
 
 + Parameters
-    + latitudeInDegree: `52.13` (number, required)        - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
-    + longitudeInDegree: `13.2` (number, required)        - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
+    + latitudeInDegree: `47.4593` (number, required)        - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
+    + longitudeInDegree: `-2.2323` (number, required)        - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
     + speedUnit: `meters_per_second` (string, optional)   - select which unit for windSpeed, windGust, etc.; valid values: meters_per_second, miles_per_hour, kilometers_per_hour, beaufort
     + temperatureUnit: `degree` (string, optional)        - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
     + precipitationUnit: `millimeter` (string, optional)  - select which unit for precipitation, etc.; valid values: millimeter, inch
@@ -58,63 +58,40 @@ For the relevance the stations distance, height difference and available paramet
     + Body
 
             {
-                "location" : {
-                    "latitude": 52.5337,
-                    "longitude": 13.37788,
-                    "timeZoneName" : "Europe/Berlin"
-                },
-                "relevantStation" : {
-                    "latitude": 23.43,
-                    "longitude": -56.23,
-                    "heightInMeters": -12.43,
-                    "id": 4711,
-                    "wmoId": 1231,
-                    "sourceType" : "DWD",
-                    "name" : "Berlin Tegel"
-                },
-                "observedAt": "2016-08-25T13:00:00+02:00",
-                "airTemperature": {
-                    "value" : 29.3,
-                    "unit" : "DEGREE_CELSIUS"
-                },
-                "feelsLikeTemperature": {
-                    "value" : 29.3,
-                    "unit" : "DEGREE_CELSIUS"
-                },
-                "airPressureInHpa": 1012.9,
-                "windSpeed": {
-                    "value" : 7.4,
-                    "unit" : "METER_PER_SECOND",
-                    "timeIntervalInMinutes" : 10
-                },
-                "windGust" : {
-                    "value" : 21.6,
-                    "unit" : "METER_PER_SECOND",
-                    "timeIntervalInMinutes" : 60
-                },
-                "windDirectionInDegree": 274,
-                "dewPointTemperature": {
-                    "value" : 15.8,
-                    "unit" : "DEGREE_CELSIUS"
-                },
-                "precipitation": {
-                    "value" : 0.2,
-                    "unit" : "MILLIMETER",
-                    "timeIntervalInMinutes" : 60
-                },
-                "relativeHumidityInPercent100based": 63,
-                "effectiveCloudCoverInOcta": 3,
-                "visibility": {
-                    "value" : 0.2,
-                    "unit" : "KILOMETER"
-                },
-                "pressureTendencyCodeForPastHour" : "RISING",
-                "relativeHumidityInInPercent100based" : 75,
-                "presentWeather" : {
-                    "description" : "hail showers",
-                    "code" : 27
-                },
-                "sunshineDurationInHoursForPast24Hours" : 5.5
+              "precipitation": {
+                "timeIntervalInMinutes": 60,
+                "unit": "MILLIMETER",
+                "value": 0
+              },
+              "windDirectionInDegree": 210,
+              "airTemperature": {
+                "unit": "DEGREE_CELSIUS",
+                "value": 19.7
+              },
+              "windGust": {
+                "timeIntervalInMinutes": 60,
+                "unit": "METER_PER_SECOND",
+                "value": 4.8872223
+              },
+              "observedAt": "2016-10-04T12:24:19Z",
+              "relativeHumidityInPercent100based": 89,
+              "location": {
+                "latitude": 47.4593,
+                "longitude": -2.2323
+              },
+              "windSpeed": {
+                "timeIntervalInMinutes": 10,
+                "unit": "METER_PER_SECOND",
+                "value": 4.7
+              },
+              "feelsLikeTemperature": {
+                "unit": "DEGREE_CELSIUS",
+                "value": 23.5
+              },
+              "dewPointTemperature": {
+                "unit": "DEGREE_CELSIUS",
+                "value": 17.8
+              }
             }
 
 
