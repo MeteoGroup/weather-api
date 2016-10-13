@@ -94,6 +94,109 @@ For the relevance the stations distance, height difference and available paramet
               }
             }
 
+# Group Observation/Locations
+
+## Retrieve weather observation [/observation/locations?location={compressedLocations}{&temperatureUnit}{&windSpeedUnit}{&visibilityUnit}{&precipitationUnit}]
+
+#### Example
+`https://api.weather.mg/observation/locations=joionluqqFvwqmo629nC`
+
+### Observed weather for a given *locations* [GET]
+
+This resource provides data from existing weather observation stations. These are the latest values/parameters they provide.
+For any requested location a relevant station is computed.
+For the relevance the stations distance, height difference and available parameters are taken into concern.
+
+**This endpoint returns dummy data for now.**
+
++ Parameters
+    + locations: `joionluqqFvwqmo629nC` (string, required) - compressed list of station locations
+    + speedUnit: `meters_per_second` (string, optional)   - select which unit for windSpeed, windGust, etc.; valid values: meters_per_second, miles_per_hour, kilometers_per_hour, beaufort
+    + temperatureUnit: `degree` (string, optional)        - select which unit for airTemperature, etc.; valid values: degree, fahrenheit
+    + precipitationUnit: `millimeter` (string, optional)  - select which unit for precipitation, etc.; valid values: millimeter, inch
+    + visibilityUnit: `meter` (string, optional)          - select which unit for visiblity, etc.; valid values: meter, kilometer, nautical_miles, statute_miles
+
++ Response 200 (application/json)
+
+    + Headers
+
+            X-Request-Calls-Per-Interval: 4711
+            E-Tag: "x234dff"
+            Cache-Control: max-age=3628800
+
+    + Body
+
+            [
+              {
+                "location": {
+                  "latitude": 18.666666,
+                  "longitude": 78.1
+                },
+                "observedAt": "2016-10-13T11:28:42Z",
+                "airTemperature": {
+                  "value": 29.6,
+                  "unit": "DEGREE_CELSIUS"
+                },
+                "feelsLikeTemperature": {
+                  "value": 40,
+                  "unit": "DEGREE_CELSIUS"
+                },
+                "airPressureInHpa": 1005.5,
+                "windSpeed": {
+                  "value": 0,
+                  "unit": "METER_PER_SECOND",
+                  "timeIntervalInMinutes": 10
+                },
+                "windDirectionInDegree": 0,
+                "dewPointTemperature": {
+                  "value": 23.5,
+                  "unit": "DEGREE_CELSIUS"
+                },
+                "visibility": {
+                  "value": 10000,
+                  "unit": "METER"
+                },
+                "presentWeather": {
+                  "description": "STATE OF SKY ON THE WHOLE UNCHANGED",
+                  "code": 2
+                }
+              },
+              {
+                "location": {
+                  "latitude": 37.5,
+                  "longitude": 34.05
+                },
+                "observedAt": "2016-10-13T11:28:42Z",
+                "airTemperature": {
+                  "value": 24.8,
+                  "unit": "DEGREE_CELSIUS"
+                },
+                "feelsLikeTemperature": {
+                  "value": 23.8,
+                  "unit": "DEGREE_CELSIUS"
+                },
+                "airPressureInHpa": 1508,
+                "windSpeed": {
+                  "value": 2.6,
+                  "unit": "METER_PER_SECOND",
+                  "timeIntervalInMinutes": 10
+                },
+                "windDirectionInDegree": 260,
+                "dewPointTemperature": {
+                  "value": 2.3,
+                  "unit": "DEGREE_CELSIUS"
+                },
+                "visibility": {
+                  "value": 20000,
+                  "unit": "METER"
+                },
+                "pressureTendencyCodeForPastHour": 7,
+                "presentWeather": {
+                  "description": "STATE OF SKY ON THE WHOLE UNCHANGED",
+                  "code": 2
+                }
+              }
+            ]
 
 # Group Forecast
 
