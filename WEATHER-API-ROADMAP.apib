@@ -3,8 +3,6 @@ FORMAT: 1A
 Weather API
 =============================
 
-**Work in Progress** - MeteoGroup's public weather API documentation
-
 Do you want to send [feedback](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951)?
 
 [Roadmap for Weather API](https://github.com/MeteoGroup/weather-api/tree/roadmap)
@@ -20,32 +18,32 @@ For weather parameters prediction API offer ["forecast" endpoint](#forecast) and
 
 This document is using [API blueprint format](https://apiblueprint.org/documentation/).
 
-
 All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
 If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
 
 # Group Observation
 
-## Retrieve weather observation [/observation?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
+## Retrieve weather observation [/observation?locatedAt={locatedAt}&fields={fields}&]
 
 #### Example
 `https://api.weather.mg/observation?location=53,13`
 
 ### Observed weather for a given *latitude* and *longitude* [GET]
 
-This resource provides data from existing weather observation stations. These are the latest values/parameters they provide.
+This resource provides data from existing weather observation stations.
+These are the latest values/parameters they provide.
 For any requested location a relevant station is computed.
-For the relevance the stations distance, height difference and available parameters are taken into concern.
-
-**This endpoint returns dummy data for now.**
+To the relevant station, the distance and available parameters are taken into concern.
 
 + Parameters
-    + latitudeInDegree: `47.4593` (number, required)       - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
-    + longitudeInDegree: `-2.2323` (number, required)      - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
-    + speedUnit: `METER_PER_SECOND` (string, optional)     - select which unit for windSpeed, windGust, etc.; valid values: METER_PER_SECOND, MILES_PER_HOUR, KILOMETER_PER_HOUR, BEAUFORT, KNOT
-    + temperatureUnit: `DEGREE_CELSIUS` (string, optional) - select which unit for airTemperature, etc.; valid values: DEGREE_CELSIUS, DEGREE_FAHRENHEIT
-    + precipitationUnit: `MILLIMETER` (string, optional)   - select which unit for precipitation, etc.; valid values: MILLIMETER, INCH
-    + visibilityUnit: `METER` (string, optional)           - select which unit for visiblity, etc.; valid values: METER, KILOMETER, NAUTICAL_MILE, STATUTE_MILE
+    + locatedAt: `13.37788,52.5337` (string, required) - longitude,latitude; can occur multiple times for multiple stations
+    + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations
+    + fields: `sunshineDurationInMinutes,airTemperatureInCelsius` (string, required) - comma separated list of parameters to be contained inside response
+    + observedFromUtc: `2016-10-13T11:00:00Z` (string, optional)
+    + observedUntilUtc: `2016-10-13T15:00:00Z` (string, optional)
+    + observedFromLocalTime: `2016-10-13T11:00:00Z` (string, optional)
+    + observedUntilLocalTime: `2016-10-13T15:00:00Z` (string, optional)
+    + observedPeriod: `PT0S,PT1H,PT12H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
 
 + Response 200 (application/json)
 
@@ -55,211 +53,64 @@ For the relevance the stations distance, height difference and available paramet
             E-Tag: "x234dff"
             Cache-Control: max-age=3628800
 
-    + Body
+                "items" : [
+                    {
+                        "location" : {
+                            "latitude": 52.5337,
+                            "longitude": 13.37788,
+                        },
+                        "relevantStation" : {
+                            "meteoGroupStationId" : "abcd1234ef5678",
+                            "stationName" : "Berlin Dahlem",
+                            "longitude" : 13.12156,
+                            "latitude" : 52.57113
+                            "timeZoneName" : "Europe/Berlin"
+                        },
+                        "observation" : [
+                            {
+                                "observedFromUtc": "2016-10-13T11:00:00Z",
+                                "observedUntilUtc": "2016-10-13T12:00:00Z",
+                                "observedPeriod" : "PT1H",
+                                "sunshineDurationInMinutes": 15,
+                                "windGustInKnots" : 20,
+                            },
+                            {
+                                "observedFromUtc": "2016-10-13T06:00:00Z",
+                                "observedUntilUtc": "2016-10-13T18:00:00Z",
+                                "observedPeriod" : "PT12H",
+                                "sunshineDurationInMinutes": 123,
+                                "windGustInKnots" : 20,
+                            },
+                            {
+                                "observedFromUtc": "2016-10-13T12:00:00Z",
+                                "observedUntilUtc": "2016-10-13T12:00:00Z",
+                                "observedPeriod" : "PT0S",
+                                "airTemperatureInCelsius": 29.6,
+                                "windSpeedInKnots" : 14
+                            }
 
-            {
-              "location": {
-                "latitude": 47.4593,
-                "longitude": -2.2323,
-                "stationId": "3007237"
-              },
-              "observedAt": "2016-10-04T12:24:19Z",
-              "airTemperature": {
-                "value": 19.7,
-                "unit": "DEGREE_CELSIUS"
-              },
-              "feelsLikeTemperature": {
-                "value": 23.5,
-                "unit": "DEGREE_CELSIUS"
-              },
-              "airPressureInHpa": 1012.9,
-              "windSpeed": {
-                "value": 4.7,
-                "unit": "METER_PER_SECOND",
-                "timeIntervalInMinutes": 10
-              },
-              "windGust": {
-                "value": 4.8872223,
-                "unit": "METER_PER_SECOND",
-                "timeIntervalInMinutes": 60
-              },
-              "windDirectionInDegree": 210,
-              "dewPointTemperature": {
-                "value": 17.8,
-                "unit": "DEGREE_CELSIUS"
-              },
-              "precipitation": {
-                "value": 0.2,
-                "unit": "MILLIMETER",
-                "timeIntervalInMinutes": 60
-              },
-              "relativeHumidityInPercent100based": 89,
-              "effectiveCloudCoverInOcta": 5,
-              "visibility": {
-                "value": 2000.0,
-                "unit": "METER"
-              },
-              "pressureTendencyCodeForPastHour": 6,
-              "presentWeather" : {
-                "description" : "SHOWER(S) OF HAIL, OR OF RAIN AND HAIL; DURING THE PRECEDING HOUR BUT NOT AT THE TIME OF OBSERVATION",
-                "code" : 27
-              },
-              "sunshineDurationInHoursForPast24Hours": 5.5,
-              "weatherSymbol": 120010
+                        ]
+                    }
+                ]
             }
-
-# Group Observation/Locations
-
-## Retrieve weather observation [/observation?locations={compressedLocations}{&temperatureUnit}{&windSpeedUnit}{&visibilityUnit}{&precipitationUnit}]
-
-#### Example
-`https://api.weather.mg/observation?locations=joionluqqFvwqmo629nC`
-
-### Observed weather for a given *locations* [GET]
-
-This resource provides data from existing weather observation stations. These are the latest values/parameters they provide.
-For any requested location a relevant station is computed.
-For the relevance the stations distance, height difference and available parameters are taken into concern.
-
-**This endpoint returns dummy data for now.**
-
-+ Parameters
-    + locations: `joionluqqFvwqmo629nC` (string, required) - compressed list of station locations
-    + speedUnit: `METER_PER_SECOND` (string, optional)     - select which unit for windSpeed, windGust, etc.; valid values: METER_PER_SECOND, MILES_PER_HOUR, KILOMETER_PER_HOUR, BEAUFORT, KNOT
-    + temperatureUnit: `DEGREE_CELSIUS` (string, optional) - select which unit for airTemperature, etc.; valid values: DEGREE_CELSIUS, DEGREE_FAHRENHEIT
-    + precipitationUnit: `MILLIMETER` (string, optional)  - select which unit for precipitation, etc.; valid values: MILLIMETER, INCH
-    + visibilityUnit: `METER` (string, optional)          - select which unit for visiblity, etc.; valid values: METER, KILOMETER, NAUTICAL_MILE, STATUTE_MILE
-
-+ Response 200 (application/json)
-
-    + Headers
-
-            X-Request-Calls-Per-Interval: 4711
-            E-Tag: "x234dff"
-            Cache-Control: max-age=3628800
-
-    + Body
-
-            [
-              {
-                "location": {
-                  "latitude": 18.666666,
-                  "longitude": 78.1,
-                  "stationId": "43081"
-                },
-                "observedAt": "2016-10-13T11:28:42Z",
-                "airTemperature": {
-                  "value": 29.6,
-                  "unit": "DEGREE_CELSIUS"
-                },
-                "feelsLikeTemperature": {
-                  "value": 40,
-                  "unit": "DEGREE_CELSIUS"
-                },
-                "airPressureInHpa": 1005.5,
-                "windSpeed": {
-                  "value": 0,
-                  "unit": "METER_PER_SECOND",
-                  "timeIntervalInMinutes": 10
-                },
-                "windGust": {
-                  "value": 0.1,
-                  "unit": "METER_PER_SECOND",
-                  "timeIntervalInMinutes": 60
-                },
-                "windDirectionInDegree": 0,
-                "dewPointTemperature": {
-                  "value": 23.5,
-                  "unit": "DEGREE_CELSIUS"
-                },
-                "precipitation": {
-                  "value": 0,
-                  "unit": "MILLIMETER",
-                  "timeIntervalInMinutes": 60
-                },
-                "relativeHumidityInPercent100based": 89,
-                "effectiveCloudCoverInOcta": 1,
-                "visibility": {
-                  "value": 10000,
-                  "unit": "METER"
-                },
-                "pressureTendencyCodeForPastHour": 2,
-                "presentWeather": {
-                  "description": "STATE OF SKY ON THE WHOLE UNCHANGED",
-                  "code": 2
-                },
-                "sunshineDurationInHoursForPast24Hours": 15.5,
-                "weatherSymbol": 121000
-              },
-              {
-                "location": {
-                  "latitude": 37.5,
-                  "longitude": 34.05,
-                  "stationId": "17248"
-                },
-                "observedAt": "2016-10-13T11:28:42Z",
-                "airTemperature": {
-                  "value": 24.8,
-                  "unit": "DEGREE_CELSIUS"
-                },
-                "feelsLikeTemperature": {
-                  "value": 23.8,
-                  "unit": "DEGREE_CELSIUS"
-                },
-                "airPressureInHpa": 1508,
-                "windSpeed": {
-                  "value": 2.6,
-                  "unit": "METER_PER_SECOND",
-                  "timeIntervalInMinutes": 10
-                },
-                "windGust": {
-                  "value": 0,
-                  "unit": "METER_PER_SECOND",
-                  "timeIntervalInMinutes": 60
-                },
-                "windDirectionInDegree": 260,
-                "dewPointTemperature": {
-                  "value": 2.3,
-                  "unit": "DEGREE_CELSIUS"
-                },
-                "precipitation": {
-                  "value": 0.1,
-                  "unit": "MILLIMETER",
-                  "timeIntervalInMinutes": 60
-                },
-                "relativeHumidityInPercent100based": 71,
-                "effectiveCloudCoverInOcta": 8,
-                "visibility": {
-                  "value": 20000,
-                  "unit": "METER"
-                },
-                "pressureTendencyCodeForPastHour": 7,
-                "presentWeather": {
-                  "description": "STATE OF SKY ON THE WHOLE UNCHANGED",
-                  "code": 2
-                },
-                "sunshineDurationInHoursForPast24Hours": 12,
-                "weatherSymbol": 100000
-              }
-            ]
 
 # Group Forecast
 
-## Retrieve weather forecast [/forecast?location={latitudeInDegree,longitudeInDegree}{&speedUnit}{&temperatureUnit}{&precipitationUnit}]
-
-#### Example
-`https://api.weather.mg/forecast?location=53,13`
+## Retrieve weather forecast [/forecast?locatedAt={locatedAt}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
 Weather forecast for the next 7 days.
 
 + Parameters
-    + latitudeInDegree: `52.13` (number, required)               - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
-    + longitudeInDegree: `13.2` (number, required)               - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
-    + speedUnit: `METER_PER_SECOND` (string, optional)           - select which unit for windSpeed, windGust, etc.; valid values: METER_PER_SECOND, MILES_PER_HOUR, KILOMETER_PER_HOUR, BEAUFORT, KNOT
-    + temperatureUnit: `DEGREE_CELSIUS` (string, optional)       - select which unit for airTemperature, etc.; valid values: DEGREE_CELSIUS, DEGREE_FAHRENHEIT
-    + precipitationUnit: `MILLIMETER` (string, optional)         - select which unit for precipitation, etc.; valid values: MILLIMETER, INCH
+    + locatedAt: `13.37788,52.5337` (string, required) - longitude,latitude; can occur multiple times for multiple locations
+    + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations
+    + fields: `airTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin` (string, required) - comma separated list of parameters to be contained inside response
+    + validFromUtc: `2016-10-13T11:00:00Z` (string, optional)
+    + validUntilUtc: `2016-10-13T15:00:00Z` (string, optional)
+    + validFromLocalTime: `2016-10-13T11:00:00Z` (string, optional)
+    + validUntilLocalTime: `2016-10-13T15:00:00Z` (string, optional)
+    + validPeriod: `PT0S,PT1H,PT6H` - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods. PT6H applies three hours aggregation.
 
 + Response 200 (application/json)
 
@@ -272,110 +123,51 @@ Weather forecast for the next 7 days.
     + Body
 
             {
-                "location" : {
-                    "latitude": 52.5337,
-                    "longitude": 13.37788,
-                    "timeZoneName" : "Europe/Berlin"
-                },
-                "forecasts": {
-                    "hourly" : [
+                "items" : [
+                {
+                    "location" : {
+                        "latitude": 52.5337,
+                        "longitude": 13.37788,
+                        "timeZoneName" : "Europe/Berlin"
+                    },
+                    "relevantStation" : {
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "stationName" : "Berlin Dahlem",
+                        "longitude" : 13.12156,
+                        "latitude" : 52.57113
+                    },
+                    "forecast": [
                         {
-                            "validAt": "2016-08-25T14:00:00+02:00",
-                            "airTemperature": {
-                                "value" : 29,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "dewPointTemperature": {
-                                "value" : 15.8,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
+                            "validFromUtc": "2016-08-25T14:00:00Z",
+                            "validUntilUtc": "2016-08-25T14:00:00Z",
+                            "validPeriod": "PT0S"
+                            "airTemperatureInCelsius": 15.8,
+                            "dewPointTemperatureInFahrenheit": 15.8,
+                            "dewPointTemperatureInKelvin": 15.8,
                             "airPressureInHpa": 1012.9,
-                            "sunshineDurationPastIntervalInMinutes": 23,
-                            "precipitationPastInterval": {
-                                "value" : 0,
-                                "unit" : "MILLIMETER"
-                            },
-                            "precipitationProbabilityInPercent100based": 0,
-                            "averageWindSpeed": {
-                                "value" : 7.48,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "windGust" : {
-                                "value" : 21.6,
-                                "unit" : "METER_PER_SECOND",
-                            },
-                            "windDirectionInDegree": 274,
                             "effectiveCloudCoverInOcta": 3
-                        }
-                    ],
-                    "12hourly" : [
-                        {
-                            "validAt": "2016-08-25T06:00:00+02:00",
-                            "averageWindSpeed": {
-                                "value" : 7.48,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "airTemperatureMax" : {
-                                "value" : 22,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "airTemperatureMin" : {
-                                "value" : 18,
-                                "unit" : "DEGREE_CELSIUS"
-                            }
+                            "precipitationIntensityInMillimeterPerHour": 0,
+                            "windSpeedInKnots":3,
                         },
                         {
-                            "validAt": "2016-08-25T18:00:00+02:00",
-                            "averageWindSpeed": {
-                                "value" : 7.48,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "airTemperatureMax" : {
-                                "value" : 12,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "airTemperatureMin" : {
-                                "value" : 9,
-                                "unit" : "DEGREE_CELSIUS"
-                            }
-                        }
-                    ],
-                    "daily" : [
+                            "validFromUtc": "2016-08-25T14:00:00Z",
+                            "validUntilUtc": "2016-08-25T15:00:00Z",
+                            "validPeriod": "PT1H"
+                            "minAirTemperatureInCelsius": 15.8,
+                            "maxAirTemperatureInCelsius": 15.8,
+                            "sunshineDurationInMinutes": 23,
+                            "precipitationAmountInMillimeter": 0,
+                            "windGustInKnots": 5,
+                        },
                         {
-                            "validAt": "2016-08-25T06:00:00+02:00",
-                            "airTemperature": {
-                                "value" : 29,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "airTemperatureMax" : {
-                                "value" : 22,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "airTemperatureMin" : {
-                                "value" : 9,
-                                "unit" : "DEGREE_CELSIUS"
-                            }
-                            "dewPointTemperature": {
-                                "value" : 15.8,
-                                "unit" : "DEGREE_CELSIUS"
-                            },
-                            "airPressureInHpa": 1012.9,
-                            "sunshineDurationPastIntervalInMinutes": 23,
-                            "precipitationPastInterval": {
-                                "value" : 0,
-                                "unit" : "MILLIMETER"
-                            },
-                            "precipitationProbabilityInPercent100based": 0,
-                            "averageWindSpeed": {
-                                "value" : 7.48,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "windGust" : {
-                                "value" : 21.6,
-                                "unit" : "METER_PER_SECOND"
-                            },
-                            "windDirectionInDegree": 274,
-                            "effectiveCloudCoverInOcta": 3
+                            "validFromUtc": "2016-08-25T14:00:00Z",
+                            "validUntilUtc": "2016-08-25T20:00:00Z",
+                            "validPeriod": "PT6H"
+                            "minAirTemperatureInCelsius": 15.8,
+                            "maxAirTemperatureInCelsius": 18.1,
+                            "sunshineDurationInMinutes": 385,
+                            "precipitationAmountInMillimeter": 0,
+                            "windGustInKnots": 6,
                         }
                     ]
                 }
