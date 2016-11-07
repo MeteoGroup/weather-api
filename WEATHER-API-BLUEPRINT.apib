@@ -26,7 +26,7 @@ If you want to get access please use [request form](https://meteogroup.zendesk.c
 ## Retrieve weather observation [/observation?locatedAt={locatedAt}&fields={fields}&]
 
 #### Example
-`https://api.weather.mg/observation?location=53,13`
+`https://api.weather.mg/observation?location=53,13`  to be fixed ...
 
 ### Observed weather for a given *latitude* and *longitude* [GET]
 
@@ -35,14 +35,17 @@ These are the latest values/parameters they provide.
 For any requested location a relevant station is computed.
 To the relevant station, the distance and available parameters are taken into concern.
 
+HINT:
+* all timestamps are meant to be UTC, or in a request provide correct offset (so that server can convert to UTC.)
+* in response, timestamps are also returned as UTC
+   * if we foresee in future returning e.g. 'observedFrom' in local time zone, than I propose "observedFromInLocalTime" to be more explicit.
+
 + Parameters
     + locatedAt: `13.37788,52.5337` (string, required) - longitude,latitude; can occur multiple times for multiple stations
     + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations
     + fields: `sunshineDurationInMinutes,airTemperatureInCelsius` (string, required) - comma separated list of parameters to be contained inside response
-    + observedFromUtc: `2016-10-13T11:00:00Z` (string, optional)
-    + observedUntilUtc: `2016-10-13T15:00:00Z` (string, optional)
-    + observedFromLocalTime: `2016-10-13T11:00:00Z` (string, optional)
-    + observedUntilLocalTime: `2016-10-13T15:00:00Z` (string, optional)
+    + observedFrom: `2016-10-13T11:00:00Z` (string, optional)
+    + observedUntil: `2016-10-13T15:00:00Z` (string, optional)
     + observedPeriod: `PT0S,PT1H,PT12H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
 
 + Response 200 (application/json)
@@ -55,35 +58,31 @@ To the relevant station, the distance and available parameters are taken into co
 
                 "items" : [
                     {
-                        "location" : {
-                            "latitude": 52.5337,
-                            "longitude": 13.37788,
-                        },
+                        "location" : [13.37788, 52.5337],
                         "relevantStation" : {
                             "meteoGroupStationId" : "abcd1234ef5678",
                             "stationName" : "Berlin Dahlem",
-                            "longitude" : 13.12156,
-                            "latitude" : 52.57113
+                            "location" : [13.36612, 52.1234],
                             "timeZoneName" : "Europe/Berlin"
                         },
                         "observation" : [
                             {
-                                "observedFromUtc": "2016-10-13T11:00:00Z",
-                                "observedUntilUtc": "2016-10-13T12:00:00Z",
+                                "observedFrom": "2016-10-13T11:00:00Z",
+                                "observedUntil": "2016-10-13T12:00:00Z",
                                 "observedPeriod" : "PT1H",
                                 "sunshineDurationInMinutes": 15,
                                 "windGustInKnots" : 20,
                             },
                             {
-                                "observedFromUtc": "2016-10-13T06:00:00Z",
-                                "observedUntilUtc": "2016-10-13T18:00:00Z",
+                                "observedFrom": "2016-10-13T06:00:00Z",
+                                "observedUntil": "2016-10-13T18:00:00Z",
                                 "observedPeriod" : "PT12H",
                                 "sunshineDurationInMinutes": 123,
                                 "windGustInKnots" : 20,
                             },
                             {
-                                "observedFromUtc": "2016-10-13T12:00:00Z",
-                                "observedUntilUtc": "2016-10-13T12:00:00Z",
+                                "observedFrom": "2016-10-13T12:00:00Z",
+                                "observedUntil": "2016-10-13T12:00:00Z",
                                 "observedPeriod" : "PT0S",
                                 "airTemperatureInCelsius": 29.6,
                                 "windSpeedInKnots" : 14
@@ -93,6 +92,56 @@ To the relevant station, the distance and available parameters are taken into co
                     }
                 ]
             }
+
+--------
+
+Alternative
+* completly flat structure.
+* no prior aggregation leaves room for transposition tables approach
+* again, every field must be requested in fields request parameter
+
+                "items" : [
+                    {
+                        "location" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "stationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin"
+                        "observedFromUtc": "2016-10-13T11:00:00Z",
+                        "observedUntilUtc": "2016-10-13T12:00:00Z",
+                        "observedPeriod" : "PT1H",
+                        "sunshineDurationInMinutes": 15,
+                        "windGustInKnots" : 20,
+                    },
+                    {
+                        "location" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "stationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin"
+                        "observedFromUtc": "2016-10-13T06:00:00Z",
+                        "observedUntilUtc": "2016-10-13T18:00:00Z",
+                        "observedPeriod" : "PT12H",
+                        "sunshineDurationInMinutes": 123,
+                        "windGustInKnots" : 20,
+                    },
+                    {
+                        "location" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "stationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin"
+                        "observedFromUtc": "2016-10-13T12:00:00Z",
+                        "observedUntilUtc": "2016-10-13T12:00:00Z",
+                        "observedPeriod" : "PT0S",
+                        "airTemperatureInCelsius": 29.6,
+                        "windSpeedInKnots" : 14
+                    }
+
+
+-----------------------------------
+
+
 
 # Group Forecast
 
