@@ -160,9 +160,9 @@ The observations in the response are ordered ascending by field 'validFrom'.
     + locatedAt: `13.37788,52.5337` (string, required) - longitude,latitude; can occur multiple times for multiple locations
     + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations   to be FIXED ...
     + fields: `airTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin` (string, required) - comma separated list of parameters to be contained inside response    to be FIXED ...
-    + validFrom: `2016-10-13T11:00:00Z` (string, optional)
-    + validUntil: `2016-10-13T15:00:00Z` (string, optional)
-    + validPeriod: `PT0S,PT1H` - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods. PT6H applies three hours aggregation.
+    + validFrom: `2016-10-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2016-10-13T15:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT0S,PT1H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
 
 + Response 200 (application/json)
 
