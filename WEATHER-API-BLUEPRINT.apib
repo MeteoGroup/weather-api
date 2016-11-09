@@ -3,50 +3,62 @@ FORMAT: 1A
 Weather API
 =============================
 
-Do you want to send [feedback](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951)?
-
-[Roadmap for Weather API](https://github.com/MeteoGroup/weather-api/tree/roadmap)
 
 # General information
 
 This technical document was created for developers who are creating applications based on weather data provided by this API.
-
-
-The Weather API resolves weather data based on location specified by latitude and longitude coordinates.
-For weather parameters prediction API offer ["forecast" endpoint](#forecast) and for weather history parameters API offer ["observation" endpoint](#observation).
-
-
 This document is using [API blueprint format](https://apiblueprint.org/documentation/).
+
+### Authentication
 
 All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
 If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
 
+### Backward compatibility
+
+Every endpoint may add one or more response parameters in the future.
+Clients should irgnore unknown parameters, to avoid technical issues.
+
+
 # Group Observation
 
-## Retrieve weather observation [/observation?locatedAt={locatedAt}&fields={fields}&]
+## Retrieve weather observation [/search?locatedAt={locatedAt}&fields={fields}&]    to be FIXED ...
 
 #### Example
-`https://api.weather.mg/observation?location=53,13`  to be fixed ...
+`https://point-observation.weather.mg/search?locatedAt=53,13`  to be FIXED ...
 
-### Observed weather for a given *latitude* and *longitude* [GET]
+### Search for observation data from weather stations for multiple given locations [GET]
 
-This resource provides data from existing weather observation stations.
-These are the latest values/parameters they provide.
-For any requested location a relevant station is computed.
-To the relevant station, the distance and available parameters are taken into concern.
+For any requested location a relevant station is searched.
+The searching algorithm stops at a maximum distance of 100km (between requested location and station)
+and ensures that at least air temperature parameter is available for a station.
+By default, the latest known weather observation data from a relevant station is returned.
 
-HINT:
-* all timestamps are meant to be UTC, or in a request provide correct offset (so that server can convert to UTC.)
-* in response, timestamps are also returned as UTC
-   * if we foresee in future returning e.g. 'observedFrom' in local time zone, than I propose "observedFromInLocalTime" to be more explicit.
+*Meteorological hints*
+
+There are two basic observation periods, one hour and one moment.
+Each weather parameter refers implicitly to one or another time period of measurement.
+For example air temperature is measured at one moment in time.
+Whereas max air temperature is typically measured inside a weather station and just reported once an hour.
+Hence it refers to an hour of observation period.
+In the response JSON document the weather parameters will be associated with their according period.
+
+*Technical hints*
+
+All timestamps and time periods/durations follow ISO8601 standard notation.
+For example 'PT1H' refers to one hour and 'PT0S' refers to one moment.
+For convinience reasons, a single location can be requested, but the response always returns a collection.
+For multiple locations, its recommended to just use the point compression.
+The observations in the response collection are "flat" to allow easy streaming and filtering on client side.
+The observations in the response are ordered ascending by field 'observedFrom'.
 
 + Parameters
     + locatedAt: `13.37788,52.5337` (string, required) - longitude,latitude; can occur multiple times for multiple stations
-    + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations
-    + fields: `sunshineDurationInMinutes,airTemperatureInCelsius` (string, required) - comma separated list of parameters to be contained inside response
-    + observedFrom: `2016-10-13T11:00:00Z` (string, optional)
-    + observedUntil: `2016-10-13T15:00:00Z` (string, optional)
-    + observedPeriod: `PT0S,PT1H,PT12H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
+    + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations,
+    + fields: `meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,stationTimeZoneName,sunshineDurationInMinutes,airTemperatureInCelsius,windGustInKnots,windSpeedInKnots` (string, required) - comma separated list of parameters to be contained inside response
+    + observedFrom: `2016-10-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + observedUntil: `2016-10-13T15:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + observedPeriod: `PT0S,PT1H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
 
 + Response 200 (application/json)
 
@@ -56,110 +68,101 @@ HINT:
             E-Tag: "x234dff"
             Cache-Control: max-age=3628800
 
-                "items" : [
+            {
+                "observations" : [
                     {
-                        "location" : [13.37788, 52.5337],
-                        "relevantStation" : {
-                            "meteoGroupStationId" : "abcd1234ef5678",
-                            "stationName" : "Berlin Dahlem",
-                            "location" : [13.36612, 52.1234],
-                            "timeZoneName" : "Europe/Berlin"
-                        },
-                        "observation" : [
-                            {
-                                "observedFrom": "2016-10-13T11:00:00Z",
-                                "observedUntil": "2016-10-13T12:00:00Z",
-                                "observedPeriod" : "PT1H",
-                                "sunshineDurationInMinutes": 15,
-                                "windGustInKnots" : 20,
-                            },
-                            {
-                                "observedFrom": "2016-10-13T06:00:00Z",
-                                "observedUntil": "2016-10-13T18:00:00Z",
-                                "observedPeriod" : "PT12H",
-                                "sunshineDurationInMinutes": 123,
-                                "windGustInKnots" : 20,
-                            },
-                            {
-                                "observedFrom": "2016-10-13T12:00:00Z",
-                                "observedUntil": "2016-10-13T12:00:00Z",
-                                "observedPeriod" : "PT0S",
-                                "airTemperatureInCelsius": 29.6,
-                                "windSpeedInKnots" : 14
-                            }
-
-                        ]
-                    }
-                ]
-            }
-
---------
-
-Alternative
-* completly flat structure.
-* no prior aggregation leaves room for transposition tables approach
-* again, every field must be requested in fields request parameter
-
-                "items" : [
-                    {
-                        "location" : [13.37788, 52.5337],
+                        "locatedAt" : [13.37788, 52.5337],
                         "meteoGroupStationId" : "abcd1234ef5678",
-                        "stationName" : "Berlin Dahlem",
+                        "meteoGroupStationName" : "Berlin Dahlem",
                         "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin"
-                        "observedFromUtc": "2016-10-13T11:00:00Z",
-                        "observedUntilUtc": "2016-10-13T12:00:00Z",
-                        "observedPeriod" : "PT1H",
-                        "sunshineDurationInMinutes": 15,
-                        "windGustInKnots" : 20,
-                    },
-                    {
-                        "location" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "stationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin"
-                        "observedFromUtc": "2016-10-13T06:00:00Z",
-                        "observedUntilUtc": "2016-10-13T18:00:00Z",
-                        "observedPeriod" : "PT12H",
-                        "sunshineDurationInMinutes": 123,
-                        "windGustInKnots" : 20,
-                    },
-                    {
-                        "location" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "stationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin"
-                        "observedFromUtc": "2016-10-13T12:00:00Z",
-                        "observedUntilUtc": "2016-10-13T12:00:00Z",
+                        "stationTimeZoneName" : "Europe/Berlin",
+                        "observedFrom": "2016-10-13T12:00:00Z",
+                        "observedUntil": "2016-10-13T12:00:00Z",
                         "observedPeriod" : "PT0S",
                         "airTemperatureInCelsius": 29.6,
                         "windSpeedInKnots" : 14
+                    },
+                    {
+                        "locatedAt" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "meteoGroupStationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin",
+                        "observedFrom": "2016-10-13T11:00:00Z",
+                        "observedUntil": "2016-10-13T12:00:00Z",
+                        "observedPeriod" : "PT1H",
+                        "sunshineDurationInMinutes": 15,
+                        "windGustInKnots" : 20
+                    },
+                    {
+                        "locatedAt" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "meteoGroupStationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin",
+                        "observedFrom": "2016-10-13T13:00:00Z",
+                        "observedUntil": "2016-10-13T13:00:00Z",
+                        "observedPeriod" : "PT0S",
+                        "airTemperatureInCelsius": 27.2,
+                        "windSpeedInKnots" : 12
+                    },
+                    {
+                        "locatedAt" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "meteoGroupStationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin",
+                        "observedFrom": "2016-10-13T12:00:00Z",
+                        "observedUntil": "2016-10-13T13:00:00Z",
+                        "observedPeriod" : "PT1H",
+                        "sunshineDurationInMinutes": 10,
+                        "windGustInKnots" : 16
                     }
-
-
------------------------------------
+                ]
+            }
 
 
 
 # Group Forecast
 
-## Retrieve weather forecast [/forecast?locatedAt={locatedAt}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]
+## Retrieve weather forecast [/search?locatedAt={locatedAt}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]   to be FIXED ...
+
+#### Example
+`https://point-forecast.weather.mg/search?locatedAt=53,13`  to be FIXED ...
+
+### Search for forecast data from weather stations for multiple given locations [GET]
+
+For any requested location a relevant station is searched.
+The searching algorithm stops at a maximum distance of 100km (between requested location and station).
+By default, the latest known weather forecast data from a relevant station is returned.
+
+*Meteorological hints*
+
+The forecasted parameters always have a time period associated, which is typically one hour and one moment.
+Each weather parameter refers implicitly to one or another time period within a forecast.
+For example air temperature is forecasted for one moment in time.
+Whereas max air temperature is typically forecasted for a period of one our.
+There are other forecast periods possible, where parameters than are aggregated among e.g. 12 hours.
+In the response JSON document the weather parameters will be associated with their according period.
+
+*Technical hints*
+
+All timestamps and time periods/durations follow ISO8601 standard notation.
+For example 'PT1H' refers to one hour and 'PT0S' refers to one moment.
+For convinience reasons, a single location can be requested, but the response always returns a collection.
+For multiple locations, its recommended to just use the point compression.
+The observations in the response collection are "flat" to allow easy streaming and filtering on client side.
+The observations in the response are ordered ascending by field 'validFrom'.
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
-Weather forecast for the next 7 days.
-
 + Parameters
     + locatedAt: `13.37788,52.5337` (string, required) - longitude,latitude; can occur multiple times for multiple locations
-    + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations
+    + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations   to be FIXED ...
     + fields: `airTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin` (string, required) - comma separated list of parameters to be contained inside response
-    + validFromUtc: `2016-10-13T11:00:00Z` (string, optional)
-    + validUntilUtc: `2016-10-13T15:00:00Z` (string, optional)
-    + validFromLocalTime: `2016-10-13T11:00:00Z` (string, optional)
-    + validUntilLocalTime: `2016-10-13T15:00:00Z` (string, optional)
-    + validPeriod: `PT0S,PT1H,PT6H` - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods. PT6H applies three hours aggregation.
+    + validFrom: `2016-10-13T11:00:00Z` (string, optional)
+    + validUntil: `2016-10-13T15:00:00Z` (string, optional)
+    + validPeriod: `PT0S,PT1H` - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods. PT6H applies three hours aggregation.
 
 + Response 200 (application/json)
 
@@ -172,54 +175,70 @@ Weather forecast for the next 7 days.
     + Body
 
             {
-                "items" : [
-                {
-                    "location" : {
-                        "latitude": 52.5337,
-                        "longitude": 13.37788,
-                        "timeZoneName" : "Europe/Berlin"
-                    },
-                    "relevantStation" : {
+                "forecasts" : [
+                    {
+                        "locatedAt" : [13.37788, 52.5337],
                         "meteoGroupStationId" : "abcd1234ef5678",
-                        "stationName" : "Berlin Dahlem",
-                        "longitude" : 13.12156,
-                        "latitude" : 52.57113
+                        "meteoGroupStationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin",
+                        "validFrom": "2016-08-25T14:00:00Z",
+                        "validUntil": "2016-08-25T14:00:00Z",
+                        "validPeriod": "PT0S",
+                        "airTemperatureInCelsius": 15.8,
+                        "dewPointTemperatureInCelsius": 15.8,
+                        "airPressureInHpa": 1012.9,
+                        "effectiveCloudCoverInOcta": 3,
+                        "precipitationIntensityInMillimeter": 0,
+                        "windSpeedInKnots": 3
                     },
-                    "forecast": [
-                        {
-                            "validFromUtc": "2016-08-25T14:00:00Z",
-                            "validUntilUtc": "2016-08-25T14:00:00Z",
-                            "validPeriod": "PT0S"
-                            "airTemperatureInCelsius": 15.8,
-                            "dewPointTemperatureInFahrenheit": 15.8,
-                            "dewPointTemperatureInKelvin": 15.8,
-                            "airPressureInHpa": 1012.9,
-                            "effectiveCloudCoverInOcta": 3
-                            "precipitationIntensityInMillimeterPerHour": 0,
-                            "windSpeedInKnots":3,
-                        },
-                        {
-                            "validFromUtc": "2016-08-25T14:00:00Z",
-                            "validUntilUtc": "2016-08-25T15:00:00Z",
-                            "validPeriod": "PT1H"
-                            "minAirTemperatureInCelsius": 15.8,
-                            "maxAirTemperatureInCelsius": 15.8,
-                            "sunshineDurationInMinutes": 23,
-                            "precipitationAmountInMillimeter": 0,
-                            "windGustInKnots": 5,
-                        },
-                        {
-                            "validFromUtc": "2016-08-25T14:00:00Z",
-                            "validUntilUtc": "2016-08-25T20:00:00Z",
-                            "validPeriod": "PT6H"
-                            "minAirTemperatureInCelsius": 15.8,
-                            "maxAirTemperatureInCelsius": 18.1,
-                            "sunshineDurationInMinutes": 385,
-                            "precipitationAmountInMillimeter": 0,
-                            "windGustInKnots": 6,
-                        }
-                    ]
-                }
+                    {
+                        "locatedAt" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "meteoGroupStationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin",
+                        "validFrom": "2016-08-25T14:00:00Z",
+                        "validUntil": "2016-08-25T15:00:00Z",
+                        "validPeriod": "PT1H",
+                        "minAirTemperatureInCelsius": 13,
+                        "maxAirTemperatureInCelsius": 16,
+                        "sunshineDurationInMinutes": 23,
+                        "precipitationAmountInMillimeter": 0,
+                        "windGustInKnots": 5
+                    },
+                    {
+                        "locatedAt" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "meteoGroupStationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin",
+                        "validFrom": "2016-08-25T15:00:00Z",
+                        "validUntil": "2016-08-25T15:00:00Z",
+                        "validPeriod": "PT0S",
+                        "airTemperatureInCelsius": 14.2,
+                        "dewPointTemperatureInCelsius": 14.1,
+                        "airPressureInHpa": 1011,
+                        "effectiveCloudCoverInOcta": 4,
+                        "precipitationIntensityInMillimeter": 0,
+                        "windSpeedInKnots": 2
+                    },
+                    {
+                        "locatedAt" : [13.37788, 52.5337],
+                        "meteoGroupStationId" : "abcd1234ef5678",
+                        "meteoGroupStationName" : "Berlin Dahlem",
+                        "stationLocation" : [13.36612, 52.1234],
+                        "stationTimeZoneName" : "Europe/Berlin",
+                        "validFrom": "2016-08-25T15:00:00Z",
+                        "validUntil": "2016-08-25T16:00:00Z",
+                        "validPeriod": "PT1H",
+                        "minAirTemperatureInCelsius": 14,
+                        "maxAirTemperatureInCelsius": 16,
+                        "sunshineDurationInMinutes": 18,
+                        "precipitationAmountInMillimeter": 0,
+                        "windGustInKnots": 4
+                    }
+                ]
             }
 
 
@@ -272,43 +291,9 @@ THIS IS A DRAFT.
 
 # Data Structures
 
-## Backward compatibility
-
-Weather API may add more parameters in the future.
-Clients should irgnore unknown parameters.
-Only when parameters will fundamently change, a new version might be introduced.
-
-## Forecast Intervals
-
-The response contains different time intervals which contain forecast in for different time spans.
-
-Interval name  | Time interval  | Time span
----------------|----------------|--------------------------------
-hourly         | 1 hour         | using time zone from requested location, today from 00:00 until 00:00 next day, plus 1 day ahead, means 48 hours in total
-interval6hours | 6 hours        | using time zone from requested location, today from 00:00 until 00:00 next day, plus 6 days ahead, means 28 intervals in total
-halfDaily      | 12 hours       | using time zone from requested location, today from 00:00 until 00:00 next day, plus 6 days ahead, means 14 intervals in total
-daily          | 24 hours       | using time zone from requested location, today from 00:00 until 00:00 next day, plus 6 days ahead, means 7 days in total
-
-
-## Units
-
-Parameter | unit
----------------|-----
-minAirTemperature                         | Degree or Fahrenheit
-maxAirTemperature                         | Degree or Fahrenheit
-airTemperature                            | Degree or Fahrenheit
-dewPointTemperature                       | Degree or Fahrenheit
-precipitation                             | mm or inch
-precipitationLastHour                     | mm or inch
-windSpeed                                 | m/s or km/h or m/h or BFT
-windGust                                  | in Knots or m/h or km/h
-date, time, time offset                   | timestamps including date, time and a zime offset are encoded in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601).
-precipitationProbabilityInPercent100based | a percentage which refers to the amount of precipitation probability
-
-
 ## Total Cloud Cover (number)
 
-This symbolic letter shall embrace the total fraction of the celestial dome covered by clouds irrespective of their genus.
+This symbolic digit shall embrace the total fraction of the celestial dome covered by clouds irrespective of their genus.
 (WMO akronym 'N')
 
     Value | Meaning
