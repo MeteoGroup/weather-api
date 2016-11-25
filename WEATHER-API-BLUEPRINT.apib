@@ -53,7 +53,8 @@ The observations in the response collection are "flat" to allow easy streaming a
 The observations in the response are ordered ascending by field 'observedFrom'.
 
 + Parameters
-    + locatedAt: `13.37788,52.5337` (string, required) - longitude,latitude; can occur multiple times for multiple stations
+    + stationId: `91736` (string, optional) - station id
+    + locatedAt: `13.37788,52.5337` (string, optional) - longitude,latitude; can occur multiple times for multiple stations
     + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations,
     + fields: `meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,stationTimeZoneName,sunshineDurationInMinutes,airTemperatureInCelsius,windGustInKnots,windSpeedInKnots` (string, required) - comma separated list of parameters to be contained inside response
     + observedFrom: `2016-10-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
