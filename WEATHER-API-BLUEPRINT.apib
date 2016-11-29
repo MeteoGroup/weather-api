@@ -22,17 +22,20 @@ Clients should irgnore unknown parameters, to avoid technical issues.
 
 # Group Observation
 
-## Retrieve weather observation [/search?locatedAt={locatedAt}&fields={fields}&]    to be FIXED ...
+## Retrieve weather observation [/search?locatedAt={locatedAt}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}]
 
 #### Example
-`https://point-observation.weather.mg/search?locatedAt=53,13`  to be FIXED ...
+`https://point-observation.weather.mg/search?locatedAt=52,13&fields=meteoGroupStationId,airTemperatureInCelsius,windGustInMeterPerSecond&observedPeriod=PT0S,PT1H`
 
-### Search for observation data from weather stations for multiple given locations [GET]
+### Search for observation data from weather stations for multiple given locations or given station ID [GET]
 
 For any requested location a relevant station is searched.
 The searching algorithm stops at a maximum distance of 100km (between requested location and station)
 and ensures that at least air temperature parameter is available for a station.
 By default, the latest known weather observation data from a relevant station is returned.
+If observedFrom and observedUntil are missing then application sets observedFrom as current time minus 3 hours and observedUntil as current time.
+if observedFrom is not missing and observedUntil is missing then application sets  observedUntil as current time plus 3 days.
+There is possible to use station ID parameter instead of location parameter. in order to get observation for concrete station.
 
 *Meteorological hints*
 
@@ -47,19 +50,37 @@ In the response JSON document the weather parameters will be associated with the
 
 All timestamps and time periods/durations follow ISO8601 standard notation.
 For example 'PT1H' refers to one hour and 'PT0S' refers to one moment.
-For convinience reasons, a single location can be requested, but the response always returns a collection.
+For convenience reasons, a single location can be requested, but the response always returns a collection.
 For multiple locations, its recommended to just use the point compression.
 The observations in the response collection are "flat" to allow easy streaming and filtering on client side.
 The observations in the response are ordered ascending by field 'observedFrom'.
+
+*Fields mapping*
+
+Common names of filed which can be included in all periods: meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName
+
+PT0S - airTemperatureInCelsius,airTemperatureInFahrenheit,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,airPressureInHpa,
+windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilePerHour,windSpeedInBeaufort,windSpeedInKnot,windDirectionInDegree,
+dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent100based,effectiveCloudCoverInOcta,visibilityInMeter,
+visibilityInKilometers,visibilityInNauticalMile,visibilityInStatuteMile,presentWeather,weatherSymbol
+
+PT1H - windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilePerHour,windGustInBeaufort,windGustInKnot,precipitationAmountInMillimeter,precipitationAmountInInch
+
+PT3H - pressureTendencyCode,pressureChangeInHectoPascal
+
+PT12H - temperatureMaxInDegreeCelsius,temperatureMaxInFahrenheit,temperatureMinInDegreeCelsius,temperatureMinInFahrenheit
+
+PT24H - precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours
+
 
 + Parameters
     + stationId: `91736` (string, optional) - station id
     + locatedAt: `13.37788,52.5337` (string, optional) - longitude,latitude; can occur multiple times for multiple stations
     + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations,
-    + fields: `meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,stationTimeZoneName,sunshineDurationInMinutes,airTemperatureInCelsius,windGustInKnots,windSpeedInKnots` (string, required) - comma separated list of parameters to be contained inside response
+    + fields: `meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,sunshineDurationInMinutes,airTemperatureInCelsius,windGustInKnots,windSpeedInKnots...` (string, required) - comma separated list of parameters to be contained inside response. All possible names are present in section 'Fields names'
     + observedFrom: `2016-10-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedUntil: `2016-10-13T15:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + observedPeriod: `PT0S,PT1H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
+    + observedPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
 
 + Response 200 (application/json)
 
@@ -80,8 +101,10 @@ The observations in the response are ordered ascending by field 'observedFrom'.
                         "observedFrom": "2016-10-13T12:00:00Z",
                         "observedUntil": "2016-10-13T12:00:00Z",
                         "observedPeriod" : "PT0S",
+
                         "airTemperatureInCelsius": 29.6,
-                        "windSpeedInKnots" : 14
+                        "airTemperatureInFahrenheit" : 85.28,
+
                     },
                     {
                         "locatedAt" : [13.37788, 52.5337],
