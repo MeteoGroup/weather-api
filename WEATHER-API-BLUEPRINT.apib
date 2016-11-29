@@ -58,13 +58,20 @@ The observations in the response are ordered ascending by field 'observedFrom'.
 *Fields mapping*
 
 Common names of filed which can be included in all periods: meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName
+
+Here are relationship between observation period and fields:
+
 PT0S - airTemperatureInCelsius,airTemperatureInFahrenheit,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,airPressureInHpa,
 windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilePerHour,windSpeedInBeaufort,windSpeedInKnot,windDirectionInDegree,
 dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent100based,effectiveCloudCoverInOcta,visibilityInMeter,
 visibilityInKilometers,visibilityInNauticalMile,visibilityInStatuteMile,presentWeather,weatherSymbol
+
 PT1H - windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilePerHour,windGustInBeaufort,windGustInKnot,precipitationAmountInMillimeter,precipitationAmountInInch
+
 PT3H - pressureTendencyCode,pressureChangeInHectoPascal
+
 PT12H - temperatureMaxInDegreeCelsius,temperatureMaxInFahrenheit,temperatureMinInDegreeCelsius,temperatureMinInFahrenheit
+
 PT24H - precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours
 
 + Parameters
@@ -95,7 +102,6 @@ PT24H - precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurati
                         "observedFrom": "2016-10-13T12:00:00Z",
                         "observedUntil": "2016-10-13T12:00:00Z",
                         "observedPeriod" : "PT0S",
-
                         "airTemperatureInCelsius": 29.6,
                         "airTemperatureInFahrenheit" : 85.28,
 
@@ -138,8 +144,6 @@ PT24H - precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurati
                     }
                 ]
             }
-
-
 
 # Group Forecast
 
