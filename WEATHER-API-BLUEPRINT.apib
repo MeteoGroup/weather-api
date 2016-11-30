@@ -57,22 +57,18 @@ The observations in the response are ordered ascending by field 'observedFrom'.
 
 *Fields mapping*
 
-Common names of filed which can be included in all periods: meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName
+Common names of filed which can be included in all periods: meteoGroupStationId, meteoGroupStationName, stationLocation, stationTimeZoneName
 
-Here are relationship between observation period and fields:
+Here are relationship between observation periods and fields appropriately:
 
-PT0S - airTemperatureInCelsius,airTemperatureInFahrenheit,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,airPressureInHpa,
-windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilePerHour,windSpeedInBeaufort,windSpeedInKnot,windDirectionInDegree,
-dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent100based,effectiveCloudCoverInOcta,visibilityInMeter,
-visibilityInKilometers,visibilityInNauticalMile,visibilityInStatuteMile,presentWeather,weatherSymbol
-
-PT1H - windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilePerHour,windGustInBeaufort,windGustInKnot,precipitationAmountInMillimeter,precipitationAmountInInch
-
-PT3H - pressureTendencyCode,pressureChangeInHectoPascal
-
-PT12H - temperatureMaxInDegreeCelsius,temperatureMaxInFahrenheit,temperatureMinInDegreeCelsius,temperatureMinInFahrenheit
-
-PT24H - precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours
+- **PT0S** - airTemperatureInCelsius, airTemperatureInFahrenheit, feelsLikeTemperatureInCelsius, feelsLikeTemperatureInFahrenheit, airPressureInHpa,
+windSpeedInMeterPerSecond, windSpeedInKilometerPerHour, windSpeedInMilePerHour, windSpeedInBeaufort, windSpeedInKnot, windDirectionInDegree,
+dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, relativeHumidityInPercent100based, effectiveCloudCoverInOcta, visibilityInMeter,
+visibilityInKilometers, visibilityInNauticalMile, visibilityInStatuteMile, presentWeather, weatherSymbol
+- **PT1H** - windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilePerHour, windGustInBeaufort, windGustInKnot, precipitationAmountInMillimeter, precipitationAmountInInch
+- **PT3H** - pressureTendencyCode, pressureChangeInHectoPascal
+- **PT12H** - temperatureMaxInDegreeCelsius, temperatureMaxInFahrenheit, temperatureMinInDegreeCelsius, temperatureMinInFahrenheit
+- **PT24H** - precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours
 
 + Parameters
     + stationId: `91736` (string, optional) - station id
