@@ -71,12 +71,12 @@ Here are relationship between observation periods and fields appropriately:
 - **PT24H** - precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours
 
 + Parameters
-    + stationId: `91736` (string, optional) - station id
-    + locatedAt: `13.37788,52.5337` (string, optional) - longitude,latitude; can occur multiple times for multiple stations
+    + stationId: `3007237` (string, optional) - station id
+    + locatedAt: `-2.2323,47.4593` (string, optional) - longitude,latitude; can occur multiple times for multiple stations
     + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations,
     + fields: `meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,sunshineDurationInMinutes,airTemperatureInCelsius,windGustInKnots,windSpeedInKnots...` (string, required) - comma separated list of parameters to be contained inside response. All possible names are present in section 'Fields names'
-    + observedFrom: `2016-10-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + observedUntil: `2016-10-13T15:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + observedFrom: `2016-10-15T08:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + observedUntil: `2016-10-15T09:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
 
 + Response 200 (application/json)
@@ -87,59 +87,234 @@ Here are relationship between observation periods and fields appropriately:
             E-Tag: "x234dff"
             Cache-Control: max-age=3628800
 
-            {
-                "observations" : [
-                    {
-                        "locatedAt" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "meteoGroupStationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin",
-                        "observedFrom": "2016-10-13T12:00:00Z",
-                        "observedUntil": "2016-10-13T12:00:00Z",
-                        "observedPeriod" : "PT0S",
-                        "airTemperatureInCelsius": 29.6,
-                        "airTemperatureInFahrenheit" : 85.28,
-
-                    },
-                    {
-                        "locatedAt" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "meteoGroupStationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin",
-                        "observedFrom": "2016-10-13T11:00:00Z",
-                        "observedUntil": "2016-10-13T12:00:00Z",
-                        "observedPeriod" : "PT1H",
-                        "sunshineDurationInMinutes": 15,
-                        "windGustInKnots" : 20
-                    },
-                    {
-                        "locatedAt" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "meteoGroupStationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin",
-                        "observedFrom": "2016-10-13T13:00:00Z",
-                        "observedUntil": "2016-10-13T13:00:00Z",
-                        "observedPeriod" : "PT0S",
-                        "airTemperatureInCelsius": 27.2,
-                        "windSpeedInKnots" : 12
-                    },
-                    {
-                        "locatedAt" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "meteoGroupStationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin",
-                        "observedFrom": "2016-10-13T12:00:00Z",
-                        "observedUntil": "2016-10-13T13:00:00Z",
-                        "observedPeriod" : "PT1H",
-                        "sunshineDurationInMinutes": 10,
-                        "windGustInKnots" : 16
-                    }
-                ]
-            }
+           {
+             "observations": [
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-15T08:00:00Z",
+                 "observedUntil": "2016-10-15T08:00:00Z",
+                 "observedPeriod": "PT0S",
+                 "airTemperatureInCelsius": 3.4,
+                 "airTemperatureInFahrenheit": 38.12,
+                 "feelsLikeTemperatureInCelsius": 3.9,
+                 "feelsLikeTemperatureInFahrenheit": 39.02,
+                 "airPressureInHpa": 1005.5,
+                 "windSpeedInMeterPerSecond": 0.5144445,
+                 "windSpeedInKilometerPerHour": 1.852,
+                 "windSpeedInMilePerHour": 1.1507794,
+                 "windSpeedInBeaufort": 1,
+                 "windSpeedInKnot": 0.99999976,
+                 "windDirectionInDegree": 210,
+                 "dewPointTemperatureInCelsius": 3,
+                 "dewPointTemperatureInFahrenheit": 37.4,
+                 "relativeHumidityInPercent100based": 97,
+                 "effectiveCloudCoverInOcta": 5,
+                 "visibilityInMeter": 2000,
+                 "visibilityInKilometers": 2,
+                 "visibilityInNauticalMile": 1.0799999,
+                 "visibilityInStatuteMile": 1.2427424,
+                 "presentWeather": "2",
+                 "weatherSymbol": 100000
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-15T07:00:00Z",
+                 "observedUntil": "2016-10-15T08:00:00Z",
+                 "observedPeriod": "PT1H",
+                 "windGustInMeterPerSecond": 0.8231112,
+                 "windGustInKilometerPerHour": 2.9632,
+                 "windGustInMilePerHour": 1.8412471,
+                 "windGustInBeaufort": 1,
+                 "windGustInKnot": 1.5999997,
+                 "precipitationAmountInMillimeter": 0,
+                 "precipitationAmountInInch": 0
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-15T05:00:00Z",
+                 "observedUntil": "2016-10-15T08:00:00Z",
+                 "observedPeriod": "PT3H",
+                 "pressureChangeInHectoPascal": 2,
+                 "pressureTendencyCode": 1
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-14T20:00:00Z",
+                 "observedUntil": "2016-10-15T08:00:00Z",
+                 "observedPeriod": "PT12H",
+                 "temperatureMaxInDegreeCelsius": 3.7,
+                 "temperatureMaxInFahrenheit": 38.66,
+                 "temperatureMinInDegreeCelsius": 3.1,
+                 "temperatureMinInFahrenheit": 37.58
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-14T08:00:00Z",
+                 "observedUntil": "2016-10-15T08:00:00Z",
+                 "observedPeriod": "PT24H",
+                 "precipitationAmountInMillimeter": 0.2,
+                 "precipitationAmountInInch": 0.007874016,
+                 "sunshineDurationInHours": 12
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-15T09:00:00Z",
+                 "observedUntil": "2016-10-15T09:00:00Z",
+                 "observedPeriod": "PT0S",
+                 "airTemperatureInCelsius": 2.6,
+                 "airTemperatureInFahrenheit": 36.68,
+                 "feelsLikeTemperatureInCelsius": 3.1,
+                 "feelsLikeTemperatureInFahrenheit": 37.58,
+                 "airPressureInHpa": 1005.5,
+                 "windSpeedInMeterPerSecond": 0.5144445,
+                 "windSpeedInKilometerPerHour": 1.852,
+                 "windSpeedInMilePerHour": 1.1507794,
+                 "windSpeedInBeaufort": 1,
+                 "windSpeedInKnot": 0.99999976,
+                 "windDirectionInDegree": 230,
+                 "dewPointTemperatureInCelsius": 2.3,
+                 "dewPointTemperatureInFahrenheit": 36.14,
+                 "relativeHumidityInPercent100based": 98,
+                 "effectiveCloudCoverInOcta": 5,
+                 "visibilityInMeter": 2000,
+                 "visibilityInKilometers": 2,
+                 "visibilityInNauticalMile": 1.0799999,
+                 "visibilityInStatuteMile": 1.2427424,
+                 "presentWeather": "2",
+                 "weatherSymbol": 100000
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-15T08:00:00Z",
+                 "observedUntil": "2016-10-15T09:00:00Z",
+                 "observedPeriod": "PT1H",
+                 "windGustInMeterPerSecond": 0.97744447,
+                 "windGustInKilometerPerHour": 3.5188,
+                 "windGustInMilePerHour": 2.1864808,
+                 "windGustInBeaufort": 1,
+                 "windGustInKnot": 1.8999995,
+                 "precipitationAmountInMillimeter": 0,
+                 "precipitationAmountInInch": 0
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-15T06:00:00Z",
+                 "observedUntil": "2016-10-15T09:00:00Z",
+                 "observedPeriod": "PT3H",
+                 "pressureChangeInHectoPascal": 2,
+                 "pressureTendencyCode": 1
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-14T21:00:00Z",
+                 "observedUntil": "2016-10-15T09:00:00Z",
+                 "observedPeriod": "PT12H",
+                 "temperatureMaxInDegreeCelsius": 2.5,
+                 "temperatureMaxInFahrenheit": 36.5,
+                 "temperatureMinInDegreeCelsius": 2.8,
+                 "temperatureMinInFahrenheit": 37.04
+               },
+               {
+                 "locatedAt": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "meteoGroupStationId": "3007237",
+                 "meteoGroupStationName": "Pleucadeuc",
+                 "stationLocation": [
+                   -2.2323,
+                   47.4593
+                 ],
+                 "observedFrom": "2016-10-14T09:00:00Z",
+                 "observedUntil": "2016-10-15T09:00:00Z",
+                 "observedPeriod": "PT24H",
+                 "precipitationAmountInMillimeter": 0.1,
+                 "precipitationAmountInInch": 0.003937008,
+                 "sunshineDurationInHours": 12
+               }
+             ]
+           }
 
 # Group Forecast
 
