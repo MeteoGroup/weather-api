@@ -333,7 +333,7 @@ Here are relationship between observation periods and fields appropriately:
 ## Retrieve weather forecast [/search?locatedAt={locatedAt}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]   to be FIXED ...
 
 #### Example
-`https://point-forecast.weather.mg/search?locatedAt=53,13`  to be FIXED ...
+`https://point-forecast.weather.mg/search?locatedAt=48.2047,11.4513&validPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&validFrom=2016-11-24T11:00:00Z&validTo=2016-11-29T11:00:00Z&fields=dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,`  to be FIXED ...
 
 ### Search for forecast data from weather stations for multiple given locations [GET]
 
@@ -359,15 +359,28 @@ For multiple locations, its recommended to just use the point compression.
 The observations in the response collection are "flat" to allow easy streaming and filtering on client side.
 The observations in the response are ordered ascending by field 'validFrom'.
 
+*Fields mapping*
+
+Common names of filed which can be included in all periods: locatedAt,meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,validFrom,validUntil,validPeriod
+
+Here are relationship between observation periods and fields appropriately:
+
+- **PT0S** - airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin,airPressureAtSeaLevelInHectoPascal,windSpeedInMeterPerSecond,windSpeedInKnots,windSpeedInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windDirectionInDegree,effectiveCloudCoverInOcta,totalCloudCoverInOcta,cloudCoverLowerThan2000MeterInOcta,cloudCoverLowerThan5000MeterInOcta,globalRadiationInJoulePerSquareCentimeter,relativeHumidityInPercent,visibilityInMeter,weatherCode,clearSkyUVIndex,airTemperatureErrorInKelvin,windSpeedErrorInKnots,freezingLevelHeightInMeter,freezingRainProbabilityInPercent,noSnowPossibleBelowHeightInMeter,snowCertainAboveHeightInMeter,precipitationType,saturationDeficitInHectoPascal,visibilityProbabilityLessThan200MeterInPercent,visibilityProbabilityLessThan1000MeterInPercent
+- **PT1H** - windGustInMeterPerSecond,windGustInKnots,windGustInMilesPerHour,sunshineDurationInMinutes,precipitationAmountInMillimeter,precipitationAmountInInch,precipitationProbabilityInPercent,convectivePrecipitationProbabilityInPercent,maxPrecipitationAmountInMillimeter,hailProbabilityInPercent,directRadiationInJoulePerSquareCentimeter,relativeGlobalRadiationInPercent,freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,relativeSunshineDurationInPercent,windGustProbabilityGreaterThan40KnotsInPercent
+- **PT3H** - windGustInMeterPerSecond,windGustInKnots,windGustInMilesPerHour,sunshineDurationInMinutes,precipitationAmountInMillimeter,precipitationAmountInInch,precipitationProbabilityInPercent,convectivePrecipitationProbabilityInPercent,maxPrecipitationAmountInMillimeter,hailProbabilityInPercent,directRadiationInJoulePerSquareCentimeter,relativeGlobalRadiationInPercent,freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,relativeSunshineDurationInPercent,windGustProbabilityGreaterThan40KnotsInPercent
+- **PT6** - maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,precipitationProbabilityMoreThan0_2MillimeterInPercent,precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationDurationInMinutes,freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,effectiveCloudCoverInOcta
+- **PT12H** - maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,convectivePrecipitationProbabilityInPercent,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,precipitationProbabilityMoreThan1_4MillimeterInPercent,precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityMoreThan20MillimeterInPercent,thunderstormProbabilityInPercent,mostSignificantWeatherCode,effectiveCloudCoverInOcta,freezingRainProbabilityInPercent,groundFrostProbabilityInPercent,hailProbabilityInPercent,snowFallProbabilityInPercent
+- **PT24H** - maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,precipitationProbabilityMoreThan4_4MillimeterInPercent,mostSignificantWeatherCode,evaporationMakkinkInMillimeter,evaporationPenmanInMillimeter,mostSignificantPrecipitationType,saturationDeficitInHectoPascal,sunshineDurationInMinutes,relativeSunshineDurationInPercent
+
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
-    + locatedAt: `13.37788,52.5337` (string, required) - longitude,latitude; can occur multiple times for multiple locations
+    + locatedAt: `48.2047,11.4513` (string, required) - longitude,latitude; can occur multiple times for multiple locations
     + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations   to be FIXED ...
-    + fields: `airTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin` (string, required) - comma separated list of parameters to be contained inside response    to be FIXED ...
-    + validFrom: `2016-10-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + validUntil: `2016-10-13T15:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + validPeriod: `PT0S,PT1H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
+    + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
+    + validFrom: `2016-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2016-11-29T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
 
 + Response 200 (application/json)
 
@@ -379,73 +392,217 @@ The observations in the response are ordered ascending by field 'validFrom'.
 
     + Body
 
-            {
-                "forecasts" : [
-                    {
-                        "locatedAt" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "meteoGroupStationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin",
-                        "validFrom": "2016-08-25T14:00:00Z",
-                        "validUntil": "2016-08-25T14:00:00Z",
-                        "validPeriod": "PT0S",
-                        "airTemperatureInCelsius": 15.8,
-                        "dewPointTemperatureInCelsius": 15.8,
-                        "airPressureInHpa": 1012.9,
-                        "effectiveCloudCoverInOcta": 3,
-                        "precipitationIntensityInMillimeter": 0,
-                        "windSpeedInKnots": 3
-                    },
-                    {
-                        "locatedAt" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "meteoGroupStationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin",
-                        "validFrom": "2016-08-25T14:00:00Z",
-                        "validUntil": "2016-08-25T15:00:00Z",
-                        "validPeriod": "PT1H",
-                        "minAirTemperatureInCelsius": 13,
-                        "maxAirTemperatureInCelsius": 16,
-                        "sunshineDurationInMinutes": 23,
-                        "precipitationAmountInMillimeter": 0,
-                        "windGustInKnots": 5
-                    },
-                    {
-                        "locatedAt" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "meteoGroupStationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin",
-                        "validFrom": "2016-08-25T15:00:00Z",
-                        "validUntil": "2016-08-25T15:00:00Z",
-                        "validPeriod": "PT0S",
-                        "airTemperatureInCelsius": 14.2,
-                        "dewPointTemperatureInCelsius": 14.1,
-                        "airPressureInHpa": 1011,
-                        "effectiveCloudCoverInOcta": 4,
-                        "precipitationIntensityInMillimeter": 0,
-                        "windSpeedInKnots": 2
-                    },
-                    {
-                        "locatedAt" : [13.37788, 52.5337],
-                        "meteoGroupStationId" : "abcd1234ef5678",
-                        "meteoGroupStationName" : "Berlin Dahlem",
-                        "stationLocation" : [13.36612, 52.1234],
-                        "stationTimeZoneName" : "Europe/Berlin",
-                        "validFrom": "2016-08-25T15:00:00Z",
-                        "validUntil": "2016-08-25T16:00:00Z",
-                        "validPeriod": "PT1H",
-                        "minAirTemperatureInCelsius": 14,
-                        "maxAirTemperatureInCelsius": 16,
-                        "sunshineDurationInMinutes": 18,
-                        "precipitationAmountInMillimeter": 0,
-                        "windGustInKnots": 4
-                    }
-                ]
-            }
+        {
+          "forecasts" : [ {
+            "dewPointTemperatureInCelsius" : 2.6,
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "visibilityProbabilityLessThan200MeterInPercent" : 0,
+            "weatherCode" : 51,
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T11:00:00.000Z",
+            "saturationDeficitInHectoPascal" : 1.1,
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T11:00:00.000Z",
+            "validPeriod" : "PT0S"
+          }, {
+            "relativeGlobalRadiationInPercent" : 28,
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T11:00:00.000Z",
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T11:00:00.000Z",
+            "validPeriod" : "PT1H"
+          }, {
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T11:00:00.000Z",
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T11:00:00.000Z",
+            "validPeriod" : "PT3H"
+          }, {
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T11:00:00.000Z",
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T11:00:00.000Z",
+            "validPeriod" : "PT12H"
+          }, {
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T11:00:00.000Z",
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T11:00:00.000Z",
+            "validPeriod" : "PT24H"
+          }, {
+            "dewPointTemperatureInCelsius" : 2.6,
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "visibilityProbabilityLessThan200MeterInPercent" : 0,
+            "weatherCode" : 60,
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T12:00:00.000Z",
+            "saturationDeficitInHectoPascal" : 1.1,
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T12:00:00.000Z",
+            "validPeriod" : "PT0S"
+          }, {
+            "relativeGlobalRadiationInPercent" : 23,
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T12:00:00.000Z",
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T12:00:00.000Z",
+            "validPeriod" : "PT1H"
+          }, {
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "weatherCode" : 60,
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T12:00:00.000Z",
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T12:00:00.000Z",
+            "validPeriod" : "PT3H"
+          }, {
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "weatherCode" : 80,
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T12:00:00.000Z",
+            "precipitationProbabilityMoreThan4_4MillimeterInPercent" : 10,
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T12:00:00.000Z",
+            "validPeriod" : "PT12H"
+          }, {
+            "evaporationMakkinkInMillimeter" : 0.2,
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T12:00:00.000Z",
+            "precipitationProbabilityMoreThan4_4MillimeterInPercent" : 12,
+            "saturationDeficitInHectoPascal" : 0.7,
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T12:00:00.000Z",
+            "validPeriod" : "PT24H"
+          } ]
+        }
 
+
+### Forecasted weather for a given *latitude* and *longitude* [GET]
+
++ Parameters
+    + locatedAt: `qx4x68in6Bmpug19Ew902zmk2C` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations  
+    + fields: `ddewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
+    + validFrom: `2015-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2015-11-24T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT0S` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
+
++ Response 200 (application/json)
+
+    + Headers
+
+            X-Request-Calls-Per-Interval: 4712
+            E-Tag: "a987dff"
+            Cache-Control: max-age=600
+
+    + Body
+
+        {
+          "forecasts" : [ {
+            "dewPointTemperatureInCelsius" : 2.5,
+            "stationLocation" : [ 4.7095, 51.8658 ],
+            "visibilityProbabilityLessThan200MeterInPercent" : 0,
+            "weatherCode" : 61,
+            "locatedAt" : [ 4.7095, 51.8658 ],
+            "meteoGroupStationName" : "Oud-Alblas fietspad",
+            "meteoGroupStationId" : "1305025",
+            "validUntil" : "2015-11-24T11:00:00.000Z",
+            "saturationDeficitInHectoPascal" : 0.1,
+            "stationTimeZoneName" : "Europe/Amsterdam",
+            "validFrom" : "2015-11-24T11:00:00.000Z",
+            "validPeriod" : "PT0S"
+          }, {
+            "dewPointTemperatureInCelsius" : 2.8,
+            "stationLocation" : [ 4.7095, 51.8658 ],
+            "visibilityProbabilityLessThan200MeterInPercent" : 0,
+            "weatherCode" : 61,
+            "locatedAt" : [ 4.7095, 51.8658 ],
+            "meteoGroupStationName" : "Oud-Alblas fietspad",
+            "meteoGroupStationId" : "1305025",
+            "validUntil" : "2015-11-24T12:00:00.000Z",
+            "saturationDeficitInHectoPascal" : 0.1,
+            "stationTimeZoneName" : "Europe/Amsterdam",
+            "validFrom" : "2015-11-24T12:00:00.000Z",
+            "validPeriod" : "PT0S"
+          }, {
+            "dewPointTemperatureInCelsius" : 3.4,
+            "stationLocation" : [ 4.4061, 52.0767 ],
+            "visibilityProbabilityLessThan200MeterInPercent" : 0,
+            "weatherCode" : 63,
+            "locatedAt" : [ 4.4061, 52.0767 ],
+            "meteoGroupStationName" : "Leidschendam Kostverlorenweg",
+            "meteoGroupStationId" : "1305027",
+            "validUntil" : "2015-11-24T11:00:00.000Z",
+            "saturationDeficitInHectoPascal" : 0.2,
+            "stationTimeZoneName" : "Europe/Amsterdam",
+            "validFrom" : "2015-11-24T11:00:00.000Z",
+            "validPeriod" : "PT0S"
+          }, {
+            "dewPointTemperatureInCelsius" : 3.7,
+            "stationLocation" : [ 4.4061, 52.0767 ],
+            "visibilityProbabilityLessThan200MeterInPercent" : 0,
+            "weatherCode" : 61,
+            "locatedAt" : [ 4.4061, 52.0767 ],
+            "meteoGroupStationName" : "Leidschendam Kostverlorenweg",
+            "meteoGroupStationId" : "1305027",
+            "validUntil" : "2015-11-24T12:00:00.000Z",
+            "saturationDeficitInHectoPascal" : 0.2,
+            "stationTimeZoneName" : "Europe/Amsterdam",
+            "validFrom" : "2015-11-24T12:00:00.000Z",
+            "validPeriod" : "PT0S"
+          }, {
+            "dewPointTemperatureInCelsius" : 2.6,
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "visibilityProbabilityLessThan200MeterInPercent" : 0,
+            "weatherCode" : 51,
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T11:00:00.000Z",
+            "saturationDeficitInHectoPascal" : 1.1,
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T11:00:00.000Z",
+            "validPeriod" : "PT0S"
+          }, {
+            "dewPointTemperatureInCelsius" : 2.6,
+            "stationLocation" : [ 13.0947, 55.5525 ],
+            "visibilityProbabilityLessThan200MeterInPercent" : 0,
+            "weatherCode" : 60,
+            "locatedAt" : [ 13.0947, 55.5525 ],
+            "meteoGroupStationName" : "TrackIce Oxie",
+            "meteoGroupStationId" : "1302928",
+            "validUntil" : "2015-11-24T12:00:00.000Z",
+            "saturationDeficitInHectoPascal" : 1.1,
+            "stationTimeZoneName" : "Europe/Stockholm",
+            "validFrom" : "2015-11-24T12:00:00.000Z",
+            "validPeriod" : "PT0S"
+          } ]
+        }
 
 # Group Warning
 
