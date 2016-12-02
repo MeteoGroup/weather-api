@@ -20,9 +20,8 @@ For weather parameters prediction API offer ["forecast" endpoint](#forecast) and
 
 This document is using [API blueprint format](https://apiblueprint.org/documentation/).
 
-
-All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
-If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+The endpoints are **secured** with [OAuth2 Two-Legged](http://oauthbible.com/#oauth-2-two-legged) authorization from our authorization server (http://auth.weather.mg/).
+If you want to get access to the Weather API please contact us via this [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
 
 # Group Observation
 
@@ -35,7 +34,7 @@ If you want to get access please use [request form](https://meteogroup.zendesk.c
 
 This resource provides data from existing weather observation stations. These are the latest values/parameters they provide.
 For any requested location a relevant station is computed.
-For the relevance the stations distance, height difference and available parameters are taken into concern. 
+For the relevance the stations distance, height difference and available parameters are taken into concern.
 
 **This endpoint returns dummy data for now.**
 
@@ -144,7 +143,7 @@ Weather forecast for the next 7 days.
                     "hourly" : [
                         {
                             "validAt": "2015-08-25T14:00:00+02:00",
-                            "airTemperature": {                        
+                            "airTemperature": {
                                 "value" : 29,
                                 "unit" : "DEGREE_CELSIUS"
                             },
@@ -162,12 +161,12 @@ Weather forecast for the next 7 days.
                             "averageWindSpeed": {
                                 "value" : 7.48,
                                 "unit" : "METER_PER_SECOND",
-                                "timeIntervalInMinutes" : -60  
+                                "timeIntervalInMinutes" : -60
                             },
-                            "windGust" : {                     
+                            "windGust" : {
                                 "value" : 21.6,
                                 "unit" : "METER_PER_SECOND",
-                                "timeIntervalInMinutes" : -60    
+                                "timeIntervalInMinutes" : -60
                             },
                             "windDirectionInDegree": 274,
                             "effectiveCloudCoverInOcta": 3
