@@ -330,12 +330,14 @@ Here are relationship between observation periods and fields appropriately:
 
 # Group Forecast
 
-## Retrieve weather forecast [/search?locatedAt={locatedAt}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]   
+## Retrieve weather forecast [/search?locatedAt={locatedAt}&stationIds={stationIds}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]   
 
 #### Example
 `https://point-forecast.weather.mg/search?locatedAt=48.2047,11.4513&validPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&validFrom=2016-11-24T11:00:00Z&validTo=2016-11-29T11:00:00Z&fields=dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,`  
 
 ### Search for forecast data from weather stations for multiple given locations [GET]
+
+You can request forecast for locations or for concrete meteostations IDs. There are two request parameters: 'locatedAt' and 'stationIds'. One of these parameters must be included in the request. You can't use both of them in one request.
 
 For any requested location a relevant station is searched.
 The searching algorithm stops at a maximum distance of 100km (between requested location and station).
@@ -375,7 +377,7 @@ Here are relationship between observation periods and fields appropriately:
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
-    + locatedAt: `13.0947,55.5525` (string, required) - longitude,latitude; can occur multiple times for multiple locations
+    + locatedAt: `13.0947,55.5525` (string, required) - longitude, latitude; can occur multiple times for multiple locations
     + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
     + validFrom: `2015-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2015-11-24T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
@@ -630,11 +632,11 @@ Here are relationship between observation periods and fields appropriately:
 ### Forecasted weather for multiple stations [GET]
 
 + Parameters
-    + locatedAt: `qx4x68in6Bmpug19Ew902zmk2C` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations  
-    + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
+    + stationIds: `1305025,1305027` (string, optional) - comma separated list of required meteostaions IDs.
+    + fields: `windGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response 
     + validFrom: `2015-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2015-11-24T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + validPeriod: `PT0S` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
+    + validPeriod: `PT1H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
 
 + Response 200 (application/json)
 
