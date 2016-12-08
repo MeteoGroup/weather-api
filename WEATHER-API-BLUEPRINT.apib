@@ -633,7 +633,7 @@ Here are relationship between observation periods and fields appropriately:
 
 + Parameters
     + stationIds: `1305025,1305027` (string, optional) - comma separated list of required meteostaions IDs.
-    + fields: `windGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response 
+    + fields: `meteoGroupStationId,windGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response 
     + validFrom: `2015-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2015-11-24T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT1H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
@@ -652,49 +652,37 @@ Here are relationship between observation periods and fields appropriately:
       "forecasts":[
         {
           "sunshineDurationInMinutes":0,
-          "stationLocation":[4.7095,51.8658],
-          "meteoGroupStationName":"Oud-Alblas fietspad",
           "meteoGroupStationId":"1305025",
           "precipitationAmountInMillimeter":0.95,
           "validUntil":"2015-11-24T12:00:00Z",
           "windGustInMeterPerSecond":15.742004,
-          "stationTimeZoneName":"Europe/Amsterdam",
           "validFrom":"2015-11-24T11:00:00Z",
           "validPeriod":"PT1H"
         },
         {
           "sunshineDurationInMinutes":0,
-          "stationLocation":[4.7095,51.8658],
-          "meteoGroupStationName":"Oud-Alblas fietspad",
           "meteoGroupStationId":"1305025",
           "precipitationAmountInMillimeter":0.69,
           "validUntil":"2015-11-24T13:00:00Z",
           "windGustInMeterPerSecond":15.8963375,
-          "stationTimeZoneName":"Europe/Amsterdam",
           "validFrom":"2015-11-24T12:00:00Z",
           "validPeriod":"PT1H"
         },
         {
           "sunshineDurationInMinutes":0,
-          "stationLocation":[4.4061,52.0767],
-          "meteoGroupStationName":"Leidschendam Kostverlorenweg",
           "meteoGroupStationId":"1305027",
           "precipitationAmountInMillimeter":1.05,
           "validUntil":"2015-11-24T12:00:00Z",
           "windGustInMeterPerSecond":17.336782,
-          "stationTimeZoneName":"Europe/Amsterdam",
           "validFrom":"2015-11-24T11:00:00Z",
           "validPeriod":"PT1H"
         },
         {
           "sunshineDurationInMinutes":0,
-          "stationLocation":[4.4061,52.0767],
-          "meteoGroupStationName":"Leidschendam Kostverlorenweg",
           "meteoGroupStationId":"1305027",
           "precipitationAmountInMillimeter":0.65,
           "validUntil":"2015-11-24T13:00:00Z",
           "windGustInMeterPerSecond":17.285337,
-          "stationTimeZoneName":"Europe/Amsterdam",
           "validFrom":"2015-11-24T12:00:00Z",
           "validPeriod":"PT1H"
         }
