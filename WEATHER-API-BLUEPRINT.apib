@@ -375,11 +375,11 @@ Here are relationship between observation periods and fields appropriately:
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
 + Parameters
-    + locatedAt: `48.2047,11.4513` (string, required) - longitude,latitude; can occur multiple times for multiple locations
+    + locatedAt: `13.0947,55.5525` (string, required) - longitude,latitude; can occur multiple times for multiple locations
     + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
-    + validFrom: `2016-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + validUntil: `2016-11-29T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + validPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
+    + validFrom: `2015-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2015-11-24T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. PT1H refers to one hour forecast periods.
 
 + Response 200 (application/json)
 
@@ -529,7 +529,7 @@ Here are relationship between observation periods and fields appropriately:
 
 + Parameters
     + locatedAt: `qx4x68in6Bmpug19Ew902zmk2C` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations  
-    + fields: `ddewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
+    + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
     + validFrom: `2015-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2015-11-24T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT0S` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
@@ -625,7 +625,7 @@ Here are relationship between observation periods and fields appropriately:
         "validPeriod" : "PT0S"
       } ]
     }
-
+	
 # Group Warning
 
 ## Retrieve severe weather warnings [/warnings?location={latitudeInDegree,longitudeInDegree}]
