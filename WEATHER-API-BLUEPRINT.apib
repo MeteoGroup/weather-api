@@ -342,6 +342,9 @@ You can request forecast for locations or for concrete meteostations IDs. There 
 For any requested location a relevant station is searched.
 The searching algorithm stops at a maximum distance of 100km (between requested location and station).
 By default, the latest known weather forecast data from a relevant station is returned.
+If validFrom and validUntil are missing then application sets validFrom as current time and validUntil as current time plus 1 day.
+if validFrom is not missing and validUntil is missing then application sets  validUntil as current time plus 1 day.
+It's possible to search forecast data either by geographical locations (long,lat) using 'locatedAt' request parameter or by MeteoGroup station IDs using 'stationIds' parameter.
 
 *Meteorological hints*
 
