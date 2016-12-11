@@ -71,7 +71,7 @@ Here are relationship between observation periods and fields appropriately:
 - **PT24H** - precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours
 
 + Parameters
-    + stationId: `3007237` (string, optional) - station id
+    + stationIds: `3007237,43081` (string, optional) - station ids; can be several stations separated by comma
     + locatedAt: `-2.2323,47.4593` (string, optional) - longitude,latitude; can occur multiple times for multiple stations
     + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations,
     + fields: `meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,sunshineDurationInMinutes,airTemperatureInCelsius,windGustInKnots,windSpeedInKnots...` (string, required) - comma separated list of parameters to be contained inside response. All possible names are present in section 'Fields names'
