@@ -639,7 +639,7 @@ Here are relationship between observation periods and fields appropriately:
 ## Retrieve weather forecast [/search?locatedAt={locatedAt}&stationIds={stationIds}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]   
 
 #### Example
-`https://point-forecast.weather.mg/search?locatedAt=48.2047,11.4513&validPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&validFrom=2016-11-24T11:00:00Z&validTo=2016-11-29T11:00:00Z&fields=dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,`  
+`https://point-forecast.weather.mg/search?locatedAt=48.2047,11.4513&validPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&validFrom=2016-11-24T11:00:00Z&validTo=2016-11-29T11:00:00Z&fields=dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent`  
 
 ### Search for forecast data from weather stations for multiple given locations [GET]
 
@@ -687,7 +687,7 @@ Here are relationship between observation periods and fields appropriately:
 
 + Parameters
     + locatedAt: `13.0947,55.5525` (string, required) - longitude, latitude; can occur multiple times for multiple locations
-    + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
+    + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent` (string, required) - comma separated list of parameters to be contained inside response 
     + validFrom: `2015-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2015-11-24T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. PT1H refers to one hour forecast periods.
@@ -840,7 +840,7 @@ Here are relationship between observation periods and fields appropriately:
 
 + Parameters
     + locatedAt: `qx4x68in6Bmpug19Ew902zmk2C` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations  
-    + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent,validFrom` (string, required) - comma separated list of parameters to be contained inside response 
+    + fields: `dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent` (string, required) - comma separated list of parameters to be contained inside response 
     + validFrom: `2015-11-24T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2015-11-24T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT0S` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
