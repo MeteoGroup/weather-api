@@ -61,7 +61,7 @@ Common names of filed which can be included in all periods: meteoGroupStationId,
 
 Here are relationship between observation periods and fields appropriately:
 
-- **PT0S** - airTemperatureInCelsius, airTemperatureInFahrenheit, feelsLikeTemperatureInCelsius, feelsLikeTemperatureInFahrenheit, airPressureInHpa,
+- **PT0S** - airTemperatureInCelsius, airTemperatureInFahrenheit, feelsLikeTemperatureInCelsius, feelsLikeTemperatureInFahrenheit, airPressureInHectoPascal,
              windSpeedInMeterPerSecond, windSpeedInKilometerPerHour, windSpeedInMilePerHour, windSpeedInBeaufort, windSpeedInKnot, windDirectionInDegree,
              dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, relativeHumidityInPercent100based, effectiveCloudCoverInOcta, visibilityInMeter,
              visibilityInKilometers, visibilityInNauticalMile, visibilityInStatuteMile, presentWeather, weatherSymbol
@@ -110,7 +110,7 @@ Here are relationship between observation periods and fields appropriately:
                 "airTemperatureInFahrenheit": 38.12,
                 "feelsLikeTemperatureInCelsius": 3.9,
                 "feelsLikeTemperatureInFahrenheit": 39.02,
-                "airPressureInHpa": 1005.5,
+                "airPressureInHectoPascal": 1005.5,
                 "windSpeedInMeterPerSecond": 0.5144445,
                 "windSpeedInKilometerPerHour": 1.852,
                 "windSpeedInMilePerHour": 1.1507794,
@@ -227,7 +227,7 @@ Here are relationship between observation periods and fields appropriately:
                 "airTemperatureInFahrenheit": 36.68,
                 "feelsLikeTemperatureInCelsius": 3.1,
                 "feelsLikeTemperatureInFahrenheit": 37.58,
-                "airPressureInHpa": 1005.5,
+                "airPressureInHectoPascal": 1005.5,
                 "windSpeedInMeterPerSecond": 0.5144445,
                 "windSpeedInKilometerPerHour": 1.852,
                 "windSpeedInMilePerHour": 1.1507794,
@@ -332,7 +332,7 @@ Here are relationship between observation periods and fields appropriately:
 [/search?stationIds={stationIds}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}]
 
 #### Example
-`https://point-observation.weather.mg/search?stationIds=3007237,3007300&fields=meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,airTemperatureInCelsius,airTemperatureInFahrenheit,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,airPressureInHpa,windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilePerHour,windSpeedInBeaufort,windSpeedInKnot,windDirectionInDegree,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent100based,effectiveCloudCoverInOcta,visibilityInMeter,visibilityInKilometers,visibilityInNauticalMile,visibilityInStatuteMile,presentWeather,weatherSymbol,windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilePerHour,windGustInBeaufort,windGustInKnot,precipitationAmountInMillimeter,precipitationAmountInInch,pressureTendencyCode,pressureChangeInHectoPascal,temperatureMaxInDegreeCelsius,temperatureMaxInFahrenheit,temperatureMinInDegreeCelsius,temperatureMinInFahrenheit,precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&observedFrom=2016-10-15T08:00:00Z&observedUntil=2016-10-15T10:00:00Z`
+`https://point-observation.weather.mg/search?stationIds=3007237,3007300&fields=meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,airTemperatureInCelsius,airTemperatureInFahrenheit,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,airPressureInHectoPascal,windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilePerHour,windSpeedInBeaufort,windSpeedInKnot,windDirectionInDegree,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent100based,effectiveCloudCoverInOcta,visibilityInMeter,visibilityInKilometers,visibilityInNauticalMile,visibilityInStatuteMile,presentWeather,weatherSymbol,windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilePerHour,windGustInBeaufort,windGustInKnot,precipitationAmountInMillimeter,precipitationAmountInInch,pressureTendencyCode,pressureChangeInHectoPascal,temperatureMaxInDegreeCelsius,temperatureMaxInFahrenheit,temperatureMinInDegreeCelsius,temperatureMinInFahrenheit,precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&observedFrom=2016-10-15T08:00:00Z&observedUntil=2016-10-15T10:00:00Z`
 
 + Response 200 (application/json)
 
@@ -345,7 +345,7 @@ Here are relationship between observation periods and fields appropriately:
                 "observedPeriod": "PT0S",
                 "feelsLikeTemperatureInCelsius": 3.9,
                 "meteoGroupStationName": "Pleucadeuc",
-                "airPressureInHpa": 1005.5,
+                "airPressureInHectoPascal": 1005.5,
                 "stationTimeZoneName": "Europe/Prague",
                 "effectiveCloudCoverInOcta": 5,
                 "observedUntil": "2016-10-15T08:00:00Z",
@@ -442,7 +442,7 @@ Here are relationship between observation periods and fields appropriately:
                 "observedPeriod": "PT0S",
                 "feelsLikeTemperatureInCelsius": 3.1,
                 "meteoGroupStationName": "Pleucadeuc",
-                "airPressureInHpa": 1005.5,
+                "airPressureInHectoPascal": 1005.5,
                 "stationTimeZoneName": "Europe/Prague",
                 "effectiveCloudCoverInOcta": 5,
                 "observedUntil": "2016-10-15T09:00:00Z",
@@ -539,7 +539,7 @@ Here are relationship between observation periods and fields appropriately:
                 "observedPeriod": "PT0S",
                 "feelsLikeTemperatureInCelsius": 14.1,
                 "meteoGroupStationName": "Germ",
-                "airPressureInHpa": 1005.5,
+                "airPressureInHectoPascal": 1005.5,
                 "stationTimeZoneName": "Europe/Berlin",
                 "effectiveCloudCoverInOcta": 5,
                 "observedUntil": "2016-10-15T09:00:01Z",
