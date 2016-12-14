@@ -64,7 +64,7 @@ Here are relationship between observation periods and fields appropriately:
 - **PT0S** - airTemperatureInCelsius, airTemperatureInFahrenheit, feelsLikeTemperatureInCelsius, feelsLikeTemperatureInFahrenheit, airPressureInHectoPascal,
              windSpeedInMeterPerSecond, windSpeedInKilometerPerHour, windSpeedInMilePerHour, windSpeedInBeaufort, windSpeedInKnot, windDirectionInDegree,
              dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, relativeHumidityInPercent, effectiveCloudCoverInOcta, visibilityInMeter,
-             visibilityInKilometers, visibilityInNauticalMile, visibilityInStatuteMile, presentWeather, weatherSymbol
+             visibilityInKilometers, visibilityInNauticalMile, visibilityInStatuteMile, weatherCode, weatherSymbol
 - **PT1H** - windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilePerHour, windGustInBeaufort, windGustInKnot, precipitationAmountInMillimeter, precipitationAmountInInch
 - **PT3H** - pressureTendencyCode, pressureChangeInHectoPascal
 - **PT12H** - temperatureMaxInDegreeCelsius, temperatureMaxInFahrenheit, temperatureMinInDegreeCelsius, temperatureMinInFahrenheit
@@ -125,7 +125,7 @@ Here are relationship between observation periods and fields appropriately:
                 "visibilityInKilometers": 2,
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
-                "presentWeather": "2",
+                "weatherCode": "2",
                 "weatherSymbol": 100000
               },
               {
@@ -242,7 +242,7 @@ Here are relationship between observation periods and fields appropriately:
                 "visibilityInKilometers": 2,
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
-                "presentWeather": "2",
+                "weatherCode": "2",
                 "weatherSymbol": 100000
               },
               {
@@ -332,7 +332,7 @@ Here are relationship between observation periods and fields appropriately:
 [/search?stationIds={stationIds}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}]
 
 #### Example
-`https://point-observation.weather.mg/search?stationIds=3007237,3007300&fields=meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,airTemperatureInCelsius,airTemperatureInFahrenheit,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,airPressureInHectoPascal,windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilePerHour,windSpeedInBeaufort,windSpeedInKnot,windDirectionInDegree,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent,effectiveCloudCoverInOcta,visibilityInMeter,visibilityInKilometers,visibilityInNauticalMile,visibilityInStatuteMile,presentWeather,weatherSymbol,windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilePerHour,windGustInBeaufort,windGustInKnot,precipitationAmountInMillimeter,precipitationAmountInInch,pressureTendencyCode,pressureChangeInHectoPascal,temperatureMaxInDegreeCelsius,temperatureMaxInFahrenheit,temperatureMinInDegreeCelsius,temperatureMinInFahrenheit,precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&observedFrom=2016-10-15T08:00:00Z&observedUntil=2016-10-15T10:00:00Z`
+`https://point-observation.weather.mg/search?stationIds=3007237,3007300&fields=meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,airTemperatureInCelsius,airTemperatureInFahrenheit,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,airPressureInHectoPascal,windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilePerHour,windSpeedInBeaufort,windSpeedInKnot,windDirectionInDegree,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent,effectiveCloudCoverInOcta,visibilityInMeter,visibilityInKilometers,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,weatherSymbol,windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilePerHour,windGustInBeaufort,windGustInKnot,precipitationAmountInMillimeter,precipitationAmountInInch,pressureTendencyCode,pressureChangeInHectoPascal,temperatureMaxInDegreeCelsius,temperatureMaxInFahrenheit,temperatureMinInDegreeCelsius,temperatureMinInFahrenheit,precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&observedFrom=2016-10-15T08:00:00Z&observedUntil=2016-10-15T10:00:00Z`
 
 + Response 200 (application/json)
 
@@ -369,7 +369,7 @@ Here are relationship between observation periods and fields appropriately:
                 "meteoGroupStationId": "3007237",
                 "relativeHumidityInPercent": 97,
                 "weatherSymbol": 100000,
-                "presentWeather": "2",
+                "weatherCode": "2",
                 "airTemperatureInFahrenheit": 38.12,
                 "visibilityInStatuteMile": 1.2427424
               },
@@ -466,7 +466,7 @@ Here are relationship between observation periods and fields appropriately:
                 "meteoGroupStationId": "3007237",
                 "relativeHumidityInPercent": 98,
                 "weatherSymbol": 100000,
-                "presentWeather": "2",
+                "weatherCode": "2",
                 "airTemperatureInFahrenheit": 36.68,
                 "visibilityInStatuteMile": 1.2427424
               },
@@ -563,7 +563,7 @@ Here are relationship between observation periods and fields appropriately:
                 "meteoGroupStationId": "3007300",
                 "relativeHumidityInPercent": 98,
                 "weatherSymbol": 100000,
-                "presentWeather": "2",
+                "weatherCode": "2",
                 "airTemperatureInFahrenheit": 59.18,
                 "visibilityInStatuteMile": 1.2427424
               },
