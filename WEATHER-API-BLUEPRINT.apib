@@ -61,14 +61,14 @@ Common names of filed which can be included in all periods: meteoGroupStationId,
 
 Here are relationship between observation periods and fields appropriately:
 
-- **PT0S** - airTemperatureInCelsius, airTemperatureInFahrenheit, feelsLikeTemperatureInCelsius, feelsLikeTemperatureInFahrenheit, airPressureInHectoPascal,
-             windSpeedInMeterPerSecond, windSpeedInKilometerPerHour, windSpeedInMilePerHour, windSpeedInBeaufort, windSpeedInKnot, windDirectionInDegree,
-             dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, relativeHumidityInPercent, effectiveCloudCoverInOcta, visibilityInMeter,
-             visibilityInKilometers, visibilityInNauticalMile, visibilityInStatuteMile, weatherCode
-- **PT1H** - windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilePerHour, windGustInBeaufort, windGustInKnot, precipitationAmountInMillimeter, precipitationAmountInInch
-- **PT3H** - pressureTendencyCode, pressureChangeInHectoPascal
-- **PT12H** - temperatureMaxInDegreeCelsius, temperatureMaxInFahrenheit, temperatureMinInDegreeCelsius, temperatureMinInFahrenheit
-- **PT24H** - precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours
+- **PT0S** -    airTemperatureInCelsius, airTemperatureInFahrenheit, airTemperatureInKelvin, feelsLikeTemperatureInCelsius, feelsLikeTemperatureInFahrenheit,
+                feelsLikeTemperatureInKelvin, airPressureInHectoPascal, windSpeedInMeterPerSecond, windSpeedInKilometerPerHour, windSpeedInMilesPerHour,
+                windSpeedInBeaufort, windSpeedInKnots, windDirectionInDegree, dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, dewPointTemperatureInKelvin,
+                relativeHumidityInPercent, effectiveCloudCoverInOcta, visibilityInMeter, visibilityInKilometer, visibilityInNauticalMile,visibilityInStatuteMile, weatherCode
+- **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter, precipitationAmountInInch
+- **PT3H** -    pressureTendencyCode, pressureChangeInHectoPascal
+- **PT12H** -   temperatureMaxInCelsius, temperatureMaxInFahrenheit, temperatureMaxInKelvin, temperatureMinInCelsius, temperatureMinInFahrenheit, temperatureMinInKelvin
+- **PT24H** -   precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours, sunshineDurationInMinutes
 
 The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
 
@@ -94,75 +94,60 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
           {
             "observations": [
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-15T08:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
                 "observedPeriod": "PT0S",
                 "airTemperatureInCelsius": 3.4,
                 "airTemperatureInFahrenheit": 38.12,
+                "airTemperatureInKelvin": 276.55,
                 "feelsLikeTemperatureInCelsius": 3.9,
                 "feelsLikeTemperatureInFahrenheit": 39.02,
+                "feelsLikeTemperatureInKelvin":277.05,
                 "airPressureInHectoPascal": 1005.5,
                 "windSpeedInMeterPerSecond": 0.5144445,
                 "windSpeedInKilometerPerHour": 1.852,
-                "windSpeedInMilePerHour": 1.1507794,
+                "windSpeedInMilesPerHour": 1.1507794,
                 "windSpeedInBeaufort": 1,
-                "windSpeedInKnot": 0.99999976,
+                "windSpeedInKnots": 0.99999976,
                 "windDirectionInDegree": 210,
                 "dewPointTemperatureInCelsius": 3,
                 "dewPointTemperatureInFahrenheit": 37.4,
+                "dewPointTemperatureInKelvin": 276.15,
                 "relativeHumidityInPercent": 97,
                 "effectiveCloudCoverInOcta": 5,
                 "visibilityInMeter": 2000,
-                "visibilityInKilometers": 2,
+                "visibilityInKilometer": 2,
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2"
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-15T07:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
                 "observedPeriod": "PT1H",
                 "windGustInMeterPerSecond": 0.8231112,
                 "windGustInKilometerPerHour": 2.9632,
-                "windGustInMilePerHour": 1.8412471,
+                "windGustInMilesPerHour": 1.8412471,
                 "windGustInBeaufort": 1,
-                "windGustInKnot": 1.5999997,
+                "windGustInKnots": 1.5999997,
                 "precipitationAmountInMillimeter": 0,
                 "precipitationAmountInInch": 0
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-15T05:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
@@ -171,114 +156,90 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
                 "pressureTendencyCode": 1
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-14T20:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
                 "observedPeriod": "PT12H",
-                "temperatureMaxInDegreeCelsius": 3.7,
+                "temperatureMaxInCelsius": 3.7,
                 "temperatureMaxInFahrenheit": 38.66,
-                "temperatureMinInDegreeCelsius": 3.1,
-                "temperatureMinInFahrenheit": 37.58
+                "temperatureMaxInKelvin": 276.85,
+                "temperatureMinInCelsius": 3.1,
+                "temperatureMinInFahrenheit": 37.58,
+                "temperatureMinInKelvin": 276.25
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-14T08:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
                 "observedPeriod": "PT24H",
                 "precipitationAmountInMillimeter": 0.2,
                 "precipitationAmountInInch": 0.008,
-                "sunshineDurationInHours": 12
+                "sunshineDurationInHours": 12,
+                "sunshineDurationInMinutes": 720.0
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-15T09:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT0S",
                 "airTemperatureInCelsius": 2.6,
                 "airTemperatureInFahrenheit": 36.68,
+                "airTemperatureInKelvin": 275.75,
                 "feelsLikeTemperatureInCelsius": 3.1,
                 "feelsLikeTemperatureInFahrenheit": 37.58,
+                "feelsLikeTemperatureInKelvin": 276.25,
                 "airPressureInHectoPascal": 1005.5,
                 "windSpeedInMeterPerSecond": 0.5144445,
                 "windSpeedInKilometerPerHour": 1.852,
-                "windSpeedInMilePerHour": 1.1507794,
+                "windSpeedInMilesPerHour": 1.1507794,
                 "windSpeedInBeaufort": 1,
-                "windSpeedInKnot": 0.99999976,
+                "windSpeedInKnots": 0.99999976,
                 "windDirectionInDegree": 230,
                 "dewPointTemperatureInCelsius": 2.3,
                 "dewPointTemperatureInFahrenheit": 36.14,
+                "dewPointTemperatureInKelvin": 275.44998,
                 "relativeHumidityInPercent": 98,
                 "effectiveCloudCoverInOcta": 5,
                 "visibilityInMeter": 2000,
-                "visibilityInKilometers": 2,
+                "visibilityInKilometer": 2,
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2"
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-15T08:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT1H",
                 "windGustInMeterPerSecond": 0.97744447,
                 "windGustInKilometerPerHour": 3.5188,
-                "windGustInMilePerHour": 2.1864808,
+                "windGustInMilesPerHour": 2.1864808,
                 "windGustInBeaufort": 1,
-                "windGustInKnot": 1.8999995,
+                "windGustInKnots": 1.8999995,
                 "precipitationAmountInMillimeter": 0,
                 "precipitationAmountInInch": 0
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-15T06:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
@@ -287,43 +248,34 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
                 "pressureTendencyCode": 1
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-14T21:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT12H",
-                "temperatureMaxInDegreeCelsius": 2.5,
+                "temperatureMaxInCelsius": 2.5,
                 "temperatureMaxInFahrenheit": 36.5,
-                "temperatureMinInDegreeCelsius": 2.8,
-                "temperatureMinInFahrenheit": 37.04
+                "temperatureMaxInKelvin" : 275.65,
+                "temperatureMinInCelsius": 2.8,
+                "temperatureMinInFahrenheit": 37.04,
+                "temperatureMinInKelvin" : 275.94998
               },
               {
-                "locatedAt": [
-                  -2.2323,
-                  47.4593
-                ],
+                "locatedAt": [ -2.2323, 47.4593 ],
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-14T09:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT24H",
                 "precipitationAmountInMillimeter": 0.1,
                 "precipitationAmountInInch": 0.004,
-                "sunshineDurationInHours": 12
+                "sunshineDurationInHours": 12,
+                "sunshineDurationInMinutes": 720.0
               }
             ]
           }
@@ -332,7 +284,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
 [/search?stationIds={stationIds}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}]
 
 #### Example
-`https://point-observation.weather.mg/search?stationIds=3007237,3007300&fields=meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,airTemperatureInCelsius,airTemperatureInFahrenheit,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,airPressureInHectoPascal,windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilePerHour,windSpeedInBeaufort,windSpeedInKnot,windDirectionInDegree,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent,effectiveCloudCoverInOcta,visibilityInMeter,visibilityInKilometers,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilePerHour,windGustInBeaufort,windGustInKnot,precipitationAmountInMillimeter,precipitationAmountInInch,pressureTendencyCode,pressureChangeInHectoPascal,temperatureMaxInDegreeCelsius,temperatureMaxInFahrenheit,temperatureMinInDegreeCelsius,temperatureMinInFahrenheit,precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&observedFrom=2016-10-15T08:00:00Z&observedUntil=2016-10-15T10:00:00Z`
+`https://point-observation.weather.mg/search?stationIds=3007237,3007300&fields=meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,airPressureInHectoPascal,windSpeedInMeterPerSecond,windSpeedInKilometerPerHour,windSpeedInMilesPerHour,windSpeedInBeaufort,windSpeedInKnots,windDirectionInDegree,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,relativeHumidityInPercent,effectiveCloudCoverInOcta,visibilityInMeter,visibilityInKilometer,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,windGustInMeterPerSecond,windGustInKilometerPerHour,windGustInMilesPerHour,windGustInBeaufort,windGustInKnots,precipitationAmountInMillimeter,precipitationAmountInInch,pressureTendencyCode,pressureChangeInHectoPascal,temperatureMaxInCelsius,temperatureMaxInFahrenheit,temperatureMaxInKelvin,temperatureMinInCelsius,temperatureMinInFahrenheit,temperatureMinInKelvin,precipitationAmountInMillimeter,precipitationAmountInInch,sunshineDurationInHours,sunshineDurationInMinutes&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&observedFrom=2016-10-15T08:00:00Z&observedUntil=2016-10-15T10:00:00Z`
 
 + Response 200 (application/json)
 
@@ -341,292 +293,265 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
           {
             "observations": [
               {
-                "dewPointTemperatureInCelsius": 3,
-                "observedPeriod": "PT0S",
-                "feelsLikeTemperatureInCelsius": 3.9,
+                "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "airPressureInHectoPascal": 1005.5,
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "effectiveCloudCoverInOcta": 5,
-                "observedUntil": "2016-10-15T08:00:00Z",
-                "dewPointTemperatureInFahrenheit": 37.4,
-                "windSpeedInMeterPerSecond": 0.5144445,
-                "airTemperatureInCelsius": 3.4,
                 "observedFrom": "2016-10-15T08:00:00Z",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "visibilityInNauticalMile": 1.0799999,
-                "feelsLikeTemperatureInFahrenheit": 39.02,
-                "windSpeedInMilePerHour": 1.1507794,
-                "visibilityInKilometers": 2,
-                "windSpeedInKilometerPerHour": 1.852,
-                "windSpeedInBeaufort": 1,
-                "visibilityInMeter": 2000,
-                "windDirectionInDegree": 210,
-                "windSpeedInKnot": 0.99999976,
-                "meteoGroupStationId": "3007237",
-                "relativeHumidityInPercent": 97,
-                "weatherCode": "2",
-                "airTemperatureInFahrenheit": 38.12,
-                "visibilityInStatuteMile": 1.2427424
-              },
-              {
-                "observedFrom": "2016-10-15T07:00:00Z",
-                "windGustInKnot": 1.5999997,
-                "observedPeriod": "PT1H",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "meteoGroupStationName": "Pleucadeuc",
-                "precipitationAmountInMillimeter": 0,
-                "windGustInBeaufort": 1,
-                "stationTimeZoneName": "Europe/Prague",
-                "windGustInKilometerPerHour": 2.9632,
                 "observedUntil": "2016-10-15T08:00:00Z",
-                "precipitationAmountInInch": 0,
-                "meteoGroupStationId": "3007237",
-                "windGustInMilePerHour": 1.8412471,
-                "windGustInMeterPerSecond": 0.8231112
+                "observedPeriod": "PT0S",
+                "airTemperatureInCelsius": 3.4,
+                "airTemperatureInFahrenheit": 38.12,
+                "airTemperatureInKelvin": 276.55,
+                "feelsLikeTemperatureInCelsius": 3.9,
+                "feelsLikeTemperatureInFahrenheit": 39.02,
+                "feelsLikeTemperatureInKelvin": 277.05,
+                "airPressureInHectoPascal": 1005.5,
+                "windSpeedInMeterPerSecond": 0.5144445,
+                "windSpeedInKilometerPerHour": 1.852,
+                "windSpeedInMilesPerHour": 1.1507794,
+                "windSpeedInBeaufort": 1.0,
+                "windSpeedInKnots": 0.99999976,
+                "windDirectionInDegree": 210,
+                "dewPointTemperatureInCelsius": 3.0,
+                "dewPointTemperatureInFahrenheit": 37.4,
+                "dewPointTemperatureInKelvin": 276.15,
+                "relativeHumidityInPercent": 97,
+                "effectiveCloudCoverInOcta": 5,
+                "visibilityInMeter": 2000.0,
+                "visibilityInKilometer": 2.0,
+                "visibilityInNauticalMile": 1.0799999,
+                "visibilityInStatuteMile": 1.2427424,
+                "weatherCode": "2"
               },
               {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
+                "observedFrom": "2016-10-15T07:00:00Z",
+                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedPeriod": "PT1H",
+                "windGustInMeterPerSecond": 0.8231112,
+                "windGustInKilometerPerHour": 2.9632,
+                "windGustInMilesPerHour": 1.8412471,
+                "windGustInBeaufort": 1.0,
+                "windGustInKnots": 1.5999997,
+                "precipitationAmountInMillimeter": 0.0,
+                "precipitationAmountInInch": 0.0
+              },
+              {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-15T05:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
                 "observedPeriod": "PT3H",
-                "pressureTendencyCode": 1,
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "meteoGroupStationName": "Pleucadeuc",
-                "meteoGroupStationId": "3007237",
-                "stationTimeZoneName": "Europe/Prague",
-                "pressureChangeInHectoPascal": 2
+                "pressureChangeInHectoPascal": 2.0,
+                "pressureTendencyCode": 1
               },
               {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-14T20:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
                 "observedPeriod": "PT12H",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "temperatureMaxInDegreeCelsius": 3.7,
-                "meteoGroupStationName": "Pleucadeuc",
-                "meteoGroupStationId": "3007237",
-                "temperatureMinInDegreeCelsius": 3.1,
-                "stationTimeZoneName": "Europe/Prague",
+                "temperatureMaxInCelsius": 3.7,
+                "temperatureMaxInFahrenheit": 38.66,
+                "temperatureMaxInKelvin": 276.85,
+                "temperatureMinInCelsius": 3.1,
                 "temperatureMinInFahrenheit": 37.58,
-                "temperatureMaxInFahrenheit": 38.66
+                "temperatureMinInKelvin": 276.25
               },
               {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-14T08:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
                 "observedPeriod": "PT24H",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "precipitationAmountInInch": 0.008,
-                "meteoGroupStationName": "Pleucadeuc",
-                "meteoGroupStationId": "3007237",
                 "precipitationAmountInMillimeter": 0.2,
-                "stationTimeZoneName": "Europe/Prague",
-                "sunshineDurationInHours": 12
+                "precipitationAmountInInch": 0.008,
+                "sunshineDurationInHours": 12.0,
+                "sunshineDurationInMinutes": 720.0
               },
               {
-                "dewPointTemperatureInCelsius": 2.3,
-                "observedPeriod": "PT0S",
-                "feelsLikeTemperatureInCelsius": 3.1,
+                "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
-                "airPressureInHectoPascal": 1005.5,
+                "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "effectiveCloudCoverInOcta": 5,
-                "observedUntil": "2016-10-15T09:00:00Z",
-                "dewPointTemperatureInFahrenheit": 36.14,
-                "windSpeedInMeterPerSecond": 0.5144445,
-                "airTemperatureInCelsius": 2.6,
                 "observedFrom": "2016-10-15T09:00:00Z",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "visibilityInNauticalMile": 1.0799999,
-                "feelsLikeTemperatureInFahrenheit": 37.58,
-                "windSpeedInMilePerHour": 1.1507794,
-                "visibilityInKilometers": 2,
-                "windSpeedInKilometerPerHour": 1.852,
-                "windSpeedInBeaufort": 1,
-                "visibilityInMeter": 2000,
-                "windDirectionInDegree": 230,
-                "windSpeedInKnot": 0.99999976,
-                "meteoGroupStationId": "3007237",
-                "relativeHumidityInPercent": 98,
-                "weatherCode": "2",
-                "airTemperatureInFahrenheit": 36.68,
-                "visibilityInStatuteMile": 1.2427424
-              },
-              {
-                "observedFrom": "2016-10-15T08:00:00Z",
-                "windGustInKnot": 1.8999995,
-                "observedPeriod": "PT1H",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "meteoGroupStationName": "Pleucadeuc",
-                "precipitationAmountInMillimeter": 0,
-                "windGustInBeaufort": 1,
-                "stationTimeZoneName": "Europe/Prague",
-                "windGustInKilometerPerHour": 3.5188,
                 "observedUntil": "2016-10-15T09:00:00Z",
-                "precipitationAmountInInch": 0,
-                "meteoGroupStationId": "3007237",
-                "windGustInMilePerHour": 2.1864808,
-                "windGustInMeterPerSecond": 0.97744447
+                "observedPeriod": "PT0S",
+                "airTemperatureInCelsius": 2.6,
+                "airTemperatureInFahrenheit": 36.68,
+                "airTemperatureInKelvin": 275.75,
+                "feelsLikeTemperatureInCelsius": 3.1,
+                "feelsLikeTemperatureInFahrenheit": 37.58,
+                "feelsLikeTemperatureInKelvin": 276.25,
+                "airPressureInHectoPascal": 1005.5,
+                "windSpeedInMeterPerSecond": 0.5144445,
+                "windSpeedInKilometerPerHour": 1.852,
+                "windSpeedInMilesPerHour": 1.1507794,
+                "windSpeedInBeaufort": 1.0,
+                "windSpeedInKnots": 0.99999976,
+                "windDirectionInDegree": 230,
+                "dewPointTemperatureInCelsius": 2.3,
+                "dewPointTemperatureInFahrenheit": 36.14,
+                "dewPointTemperatureInKelvin": 275.44998,
+                "relativeHumidityInPercent": 98,
+                "effectiveCloudCoverInOcta": 5,
+                "visibilityInMeter": 2000.0,
+                "visibilityInKilometer": 2.0,
+                "visibilityInNauticalMile": 1.0799999,
+                "visibilityInStatuteMile": 1.2427424,
+                "weatherCode": "2"
               },
               {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
+                "observedFrom": "2016-10-15T08:00:00Z",
+                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedPeriod": "PT1H",
+                "windGustInMeterPerSecond": 0.97744447,
+                "windGustInKilometerPerHour": 3.5188,
+                "windGustInMilesPerHour": 2.1864808,
+                "windGustInBeaufort": 1.0,
+                "windGustInKnots": 1.8999995,
+                "precipitationAmountInMillimeter": 0.0,
+                "precipitationAmountInInch": 0.0
+              },
+              {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-15T06:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT3H",
-                "pressureTendencyCode": 1,
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "meteoGroupStationName": "Pleucadeuc",
-                "meteoGroupStationId": "3007237",
-                "stationTimeZoneName": "Europe/Prague",
-                "pressureChangeInHectoPascal": 2
+                "pressureChangeInHectoPascal": 2.0,
+                "pressureTendencyCode": 1
               },
               {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-14T21:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT12H",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "temperatureMaxInDegreeCelsius": 2.5,
-                "meteoGroupStationName": "Pleucadeuc",
-                "meteoGroupStationId": "3007237",
-                "temperatureMinInDegreeCelsius": 2.8,
-                "stationTimeZoneName": "Europe/Prague",
+                "temperatureMaxInCelsius": 2.5,
+                "temperatureMaxInFahrenheit": 36.5,
+                "temperatureMaxInKelvin": 275.65,
+                "temperatureMinInCelsius": 2.8,
                 "temperatureMinInFahrenheit": 37.04,
-                "temperatureMaxInFahrenheit": 36.5
+                "temperatureMinInKelvin": 275.94998
               },
               {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
                 "observedFrom": "2016-10-14T09:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT24H",
-                "stationLocation": [
-                  -2.2323,
-                  47.4593
-                ],
-                "precipitationAmountInInch": 0.004,
-                "meteoGroupStationName": "Pleucadeuc",
-                "meteoGroupStationId": "3007237",
                 "precipitationAmountInMillimeter": 0.1,
-                "stationTimeZoneName": "Europe/Prague",
-                "sunshineDurationInHours": 12
+                "precipitationAmountInInch": 0.004,
+                "sunshineDurationInHours": 12.0,
+                "sunshineDurationInMinutes": 720.0
               },
               {
-                "dewPointTemperatureInCelsius": 14.3,
-                "observedPeriod": "PT0S",
-                "feelsLikeTemperatureInCelsius": 14.1,
+                "meteoGroupStationId": "3007300",
                 "meteoGroupStationName": "Germ",
-                "airPressureInHectoPascal": 1005.5,
+                "stationLocation": [ 13.2323, 52.4593 ],
                 "stationTimeZoneName": "Europe/Berlin",
-                "effectiveCloudCoverInOcta": 5,
-                "observedUntil": "2016-10-15T09:00:01Z",
-                "dewPointTemperatureInFahrenheit": 57.739998,
-                "windSpeedInMeterPerSecond": 0.5144445,
-                "airTemperatureInCelsius": 15.1,
                 "observedFrom": "2016-10-15T09:00:01Z",
-                "stationLocation": [
-                  13.2323,
-                  52.4593
-                ],
-                "visibilityInNauticalMile": 1.0799999,
-                "feelsLikeTemperatureInFahrenheit": 57.38,
-                "windSpeedInMilePerHour": 1.1507794,
-                "visibilityInKilometers": 2,
-                "windSpeedInKilometerPerHour": 1.852,
-                "windSpeedInBeaufort": 1,
-                "visibilityInMeter": 2000,
-                "windDirectionInDegree": 230,
-                "windSpeedInKnot": 0.99999976,
-                "meteoGroupStationId": "3007300",
-                "relativeHumidityInPercent": 98,
-                "weatherCode": "2",
-                "airTemperatureInFahrenheit": 59.18,
-                "visibilityInStatuteMile": 1.2427424
-              },
-              {
-                "observedFrom": "2016-10-15T08:00:01Z",
-                "windGustInKnot": 1.8999995,
-                "observedPeriod": "PT1H",
-                "stationLocation": [
-                  13.2323,
-                  52.4593
-                ],
-                "meteoGroupStationName": "Germ",
-                "precipitationAmountInMillimeter": 0,
-                "windGustInBeaufort": 1,
-                "stationTimeZoneName": "Europe/Berlin",
-                "windGustInKilometerPerHour": 3.5188,
                 "observedUntil": "2016-10-15T09:00:01Z",
-                "precipitationAmountInInch": 0,
-                "meteoGroupStationId": "3007300",
-                "windGustInMilePerHour": 2.1864808,
-                "windGustInMeterPerSecond": 0.97744447
+                "observedPeriod": "PT0S",
+                "airTemperatureInCelsius": 15.1,
+                "airTemperatureInFahrenheit": 59.18,
+                "airTemperatureInKelvin": 288.25,
+                "feelsLikeTemperatureInCelsius": 14.1,
+                "feelsLikeTemperatureInFahrenheit": 57.38,
+                "feelsLikeTemperatureInKelvin": 287.25,
+                "airPressureInHectoPascal": 1005.5,
+                "windSpeedInMeterPerSecond": 0.5144445,
+                "windSpeedInKilometerPerHour": 1.852,
+                "windSpeedInMilesPerHour": 1.1507794,
+                "windSpeedInBeaufort": 1.0,
+                "windSpeedInKnots": 0.99999976,
+                "windDirectionInDegree": 230,
+                "dewPointTemperatureInCelsius": 14.3,
+                "dewPointTemperatureInFahrenheit": 57.739998,
+                "dewPointTemperatureInKelvin": 287.44998,
+                "relativeHumidityInPercent": 98,
+                "effectiveCloudCoverInOcta": 5,
+                "visibilityInMeter": 2000.0,
+                "visibilityInKilometer": 2.0,
+                "visibilityInNauticalMile": 1.0799999,
+                "visibilityInStatuteMile": 1.2427424,
+                "weatherCode": "2"
               },
               {
+                "meteoGroupStationId": "3007300",
+                "meteoGroupStationName": "Germ",
+                "stationLocation": [ 13.2323, 52.4593 ],
+                "stationTimeZoneName": "Europe/Berlin",
+                "observedFrom": "2016-10-15T08:00:01Z",
+                "observedUntil": "2016-10-15T09:00:01Z",
+                "observedPeriod": "PT1H",
+                "windGustInMeterPerSecond": 0.97744447,
+                "windGustInKilometerPerHour": 3.5188,
+                "windGustInMilesPerHour": 2.1864808,
+                "windGustInBeaufort": 1.0,
+                "windGustInKnots": 1.8999995,
+                "precipitationAmountInMillimeter": 0.0,
+                "precipitationAmountInInch": 0.0
+              },
+              {
+                "meteoGroupStationId": "3007300",
+                "meteoGroupStationName": "Germ",
+                "stationLocation": [ 13.2323, 52.4593 ],
+                "stationTimeZoneName": "Europe/Berlin",
                 "observedFrom": "2016-10-15T06:00:01Z",
                 "observedUntil": "2016-10-15T09:00:01Z",
                 "observedPeriod": "PT3H",
-                "pressureTendencyCode": 1,
-                "stationLocation": [
-                  13.2323,
-                  52.4593
-                ],
-                "meteoGroupStationName": "Germ",
-                "meteoGroupStationId": "3007300",
-                "stationTimeZoneName": "Europe/Berlin",
-                "pressureChangeInHectoPascal": 2
+                "pressureChangeInHectoPascal": 2.0,
+                "pressureTendencyCode": 1
               },
               {
+                "meteoGroupStationId": "3007300",
+                "meteoGroupStationName": "Germ",
+                "stationLocation": [ 13.2323, 52.4593 ],
+                "stationTimeZoneName": "Europe/Berlin",
                 "observedFrom": "2016-10-14T21:00:01Z",
                 "observedUntil": "2016-10-15T09:00:01Z",
                 "observedPeriod": "PT12H",
-                "stationLocation": [
-                  13.2323,
-                  52.4593
-                ],
-                "temperatureMaxInDegreeCelsius": 16.5,
-                "meteoGroupStationName": "Germ",
-                "meteoGroupStationId": "3007300",
-                "temperatureMinInDegreeCelsius": 12.8,
-                "stationTimeZoneName": "Europe/Berlin",
+                "temperatureMaxInCelsius": 16.5,
+                "temperatureMaxInFahrenheit": 61.7,
+                "temperatureMaxInKelvin": 289.65,
+                "temperatureMinInCelsius": 12.8,
                 "temperatureMinInFahrenheit": 55.04,
-                "temperatureMaxInFahrenheit": 61.7
+                "temperatureMinInKelvin": 285.94998
               },
               {
+                "meteoGroupStationId": "3007300",
+                "meteoGroupStationName": "Germ",
+                "stationLocation": [ 13.2323, 52.4593 ],
+                "stationTimeZoneName": "Europe/Berlin",
                 "observedFrom": "2016-10-14T09:00:01Z",
                 "observedUntil": "2016-10-15T09:00:01Z",
                 "observedPeriod": "PT24H",
-                "stationLocation": [
-                  13.2323,
-                  52.4593
-                ],
-                "precipitationAmountInInch": 0.004,
-                "meteoGroupStationName": "Germ",
-                "meteoGroupStationId": "3007300",
                 "precipitationAmountInMillimeter": 0.1,
-                "stationTimeZoneName": "Europe/Berlin",
-                "sunshineDurationInHours": 12
+                "precipitationAmountInInch": 0.004,
+                "sunshineDurationInHours": 12.0,
+                "sunshineDurationInMinutes": 720.0
               }
             ]
           }
