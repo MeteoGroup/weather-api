@@ -648,70 +648,99 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
             E-Tag: "a987dff"
             Cache-Control: max-age=600
 
-    + Body
-
-            {
-              forecasts" : [{
-			"dewPointTemperatureInCelsius" : 13.3,
-			"visibilityProbabilityLessThan200MeterInPercent" : 1,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-13T11:00:00Z",
-			"saturationDeficitInHectoPascal" : 6.9,
-			"validFrom" : "2016-12-13T11:00:00Z",
-			"validPeriod" : "PT0S"
-		}, {
-			"relativeGlobalRadiationInPercent" : 82,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-13T12:00:00Z",
-			"validFrom" : "2016-12-13T11:00:00Z",
-			"validPeriod" : "PT1H"
-		}, {
-			"dewPointTemperatureInCelsius" : 13.6,
-			"visibilityProbabilityLessThan200MeterInPercent" : 0,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-13T12:00:00Z",
-			"saturationDeficitInHectoPascal" : 6.9,
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT0S"
-		}, {
-			"relativeGlobalRadiationInPercent" : 77,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-13T13:00:00Z",
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT1H"
-		}, {
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-13T15:00:00Z",
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT3H"
-		}, {
-			"weatherCode" : 3,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-13T18:00:00Z",
-			"precipitationProbabilityMoreThan4_4MillimeterInPercent" : 0,
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT6H"
-		}, {
-			"weatherCode" : 2,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-14T00:00:00Z",
-			"precipitationProbabilityMoreThan4_4MillimeterInPercent" : 0,
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT12H"
-		}, {
-			"evaporationMakkinkInMillimeter" : 2,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-14T12:00:00Z",
-			"precipitationProbabilityMoreThan4_4MillimeterInPercent" : 0,
-			"saturationDeficitInHectoPascal" : 5.5,
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT24H"
-		}
-	]
-            }
+    + Body 
+   {"forecasts":[  
+      {  
+         "dewPointTemperatureInCelsius":13.3,
+         "visibilityProbabilityLessThan200MeterInPercent":1,
+         "weatherCode":4,
+         "locatedAt":[  
+            -16.78,
+            32.69
+         ],
+         "validUntil":"2016-12-13T11:00:00Z",
+         "saturationDeficitInHectoPascal":6.9,
+         "validFrom":"2016-12-13T11:00:00Z",
+         "validPeriod":"PT0S"
+      },
+      {  
+         "relativeGlobalRadiationInPercent":82,
+         "locatedAt":[  
+            -16.78,
+            32.69
+         ],
+         "validUntil":"2016-12-13T12:00:00Z",
+         "validFrom":"2016-12-13T11:00:00Z",
+         "validPeriod":"PT1H"
+      },
+      {  
+         "dewPointTemperatureInCelsius":13.6,
+         "visibilityProbabilityLessThan200MeterInPercent":0,
+         "weatherCode":4,
+         "locatedAt":[  
+            -16.78,
+            32.69
+         ],
+         "validUntil":"2016-12-13T12:00:00Z",
+         "saturationDeficitInHectoPascal":6.9,
+         "validFrom":"2016-12-13T12:00:00Z",
+         "validPeriod":"PT0S"
+      },
+      {  
+         "relativeGlobalRadiationInPercent":77,
+         "locatedAt":[  
+            -16.78,
+            32.69
+         ],
+         "validUntil":"2016-12-13T13:00:00Z",
+         "validFrom":"2016-12-13T12:00:00Z",
+         "validPeriod":"PT1H"
+      },
+      {  
+         "weatherCode":4,
+         "locatedAt":[  
+            -16.78,
+            32.69
+         ],
+         "validUntil":"2016-12-13T15:00:00Z",
+         "validFrom":"2016-12-13T12:00:00Z",
+         "validPeriod":"PT3H"
+      },
+      {  
+         "weatherCode":3,
+         "locatedAt":[  
+            -16.78,
+            32.69
+         ],
+         "validUntil":"2016-12-13T18:00:00Z",
+         "precipitationProbabilityMoreThan4_4MillimeterInPercent":0,
+         "validFrom":"2016-12-13T12:00:00Z",
+         "validPeriod":"PT6H"
+      },
+      {  
+         "weatherCode":2,
+         "locatedAt":[  
+            -16.78,
+            32.69
+         ],
+         "validUntil":"2016-12-14T00:00:00Z",
+         "precipitationProbabilityMoreThan4_4MillimeterInPercent":0,
+         "validFrom":"2016-12-13T12:00:00Z",
+         "validPeriod":"PT12H"
+      },
+      {  
+         "evaporationMakkinkInMillimeter":2,
+         "locatedAt":[  
+            -16.78,
+            32.69
+         ],
+         "validUntil":"2016-12-14T12:00:00Z",
+         "precipitationProbabilityMoreThan4_4MillimeterInPercent":0,
+         "saturationDeficitInHectoPascal":5.5,
+         "validFrom":"2016-12-13T12:00:00Z",
+         "validPeriod":"PT24H"
+      }
+   ]}
 
 # Example 2:
 ### Forecasted weather for a given collection of *latitude* and *longitude* pairs, compressed by Point Compression Algorithm [GET]
