@@ -59,7 +59,8 @@ Here are relationship between observation periods and fields appropriately:
 - **PT0S** -    airTemperatureInCelsius, airTemperatureInFahrenheit, airTemperatureInKelvin, feelsLikeTemperatureInCelsius, feelsLikeTemperatureInFahrenheit,
                 feelsLikeTemperatureInKelvin, airPressureInHectoPascal, windSpeedInMeterPerSecond, windSpeedInKilometerPerHour, windSpeedInMilesPerHour,
                 windSpeedInBeaufort, windSpeedInKnots, windDirectionInDegree, dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, dewPointTemperatureInKelvin,
-                relativeHumidityInPercent, effectiveCloudCoverInOcta, visibilityInMeter, visibilityInKilometer, visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional
+                relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
+                visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter, precipitationAmountInInch
 - **PT3H** -    pressureTendencyCode, pressureChangeInHectoPascal
 - **PT12H** -   temperatureMaxInCelsius, temperatureMaxInFahrenheit, temperatureMaxInKelvin, temperatureMinInCelsius, temperatureMinInFahrenheit, temperatureMinInKelvin
@@ -79,7 +80,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
 ### Search for observation data for multiple given locations [GET]
 
 #### Example
-`https://point-observation.weather.mg/search?locatedAt=-2.2323,47.4593&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendencyCode,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
+`https://point-observation.weather.mg/search?locatedAt=-2.2323,47.4593&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendencyCode,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
 
 + Request Search weather observation data for given locatedAt
 
@@ -127,6 +128,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
                 "dewPointTemperatureInKelvin": 276.15,
                 "relativeHumidityInPercent": 97,
                 "effectiveCloudCoverInOcta": 5,
+                "totalCloudCoverInOcta": 6,
                 "visibilityInMeter": 2000,
                 "visibilityInKilometer": 2,
                 "visibilityInNauticalMile": 1.0799999,
@@ -220,6 +222,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
                 "dewPointTemperatureInKelvin": 275.44998,
                 "relativeHumidityInPercent": 98,
                 "effectiveCloudCoverInOcta": 5,
+                "totalCloudCoverInOcta": 6,
                 "visibilityInMeter": 2000,
                 "visibilityInKilometer": 2,
                 "visibilityInNauticalMile": 1.0799999,
@@ -289,10 +292,10 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
             ]
           }
 
-## Retrieve weather observation for multiple station IDs [GET]
+### Retrieve weather observation for multiple station IDs [GET]
 
 #### Example
-`https://point-observation.weather.mg/search?stationIds=3007237,3007300&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendencyCode,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
+`https://point-observation.weather.mg/search?stationIds=3007237,3007300&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendencyCode,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
 
 + Request Search weather observation data for given stationIds
 
@@ -339,6 +342,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
                 "dewPointTemperatureInKelvin": 276.15,
                 "relativeHumidityInPercent": 97,
                 "effectiveCloudCoverInOcta": 5,
+                "totalCloudCoverInOcta": 6,
                 "visibilityInMeter": 2000.0,
                 "visibilityInKilometer": 2.0,
                 "visibilityInNauticalMile": 1.0799999,
@@ -427,6 +431,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
                 "dewPointTemperatureInKelvin": 275.44998,
                 "relativeHumidityInPercent": 98,
                 "effectiveCloudCoverInOcta": 5,
+                "totalCloudCoverInOcta": 6,
                 "visibilityInMeter": 2000.0,
                 "visibilityInKilometer": 2.0,
                 "visibilityInNauticalMile": 1.0799999,
@@ -515,6 +520,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
                 "dewPointTemperatureInKelvin": 287.44998,
                 "relativeHumidityInPercent": 98,
                 "effectiveCloudCoverInOcta": 5,
+                "totalCloudCoverInOcta": 4,
                 "visibilityInMeter": 2000.0,
                 "visibilityInKilometer": 2.0,
                 "visibilityInNauticalMile": 1.0799999,
