@@ -589,14 +589,14 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
 
 # Group Forecast
 
-## Retrieve weather forecast [/search?locatedAt={locatedAt}&stationIds={stationIds}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]   
+## Retrieve weather forecast [/search?locatedAt={locatedAt}&meteoGroupStationIds={stationIds}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]   
 
 #### Example
 `https://point-forecast.weather.mg/search?locatedAt=48.2047,11.4513&validPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&validFrom=2016-11-24T11:00:00Z&validTo=2016-11-29T11:00:00Z&fields=dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent`  
 
 ### Search for forecast data from weather stations for multiple given locations [GET]
 
-You can request forecast for locations or for concrete meteostations IDs. There are two request parameters: 'locatedAt' and 'stationIds'. One of these parameters must be included in the request. You can't use both of them in one request.
+You can request forecast for locations or for concrete meteostations IDs. There are two request parameters: 'locatedAt' and 'meteoGroupStationIds'. One of these parameters must be included in the request. You can't use both of them in one request.
 
 For any requested location a relevant station is searched.
 The searching algorithm stops at a maximum distance of 100km (between requested location and station).
@@ -853,7 +853,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
 ### Forecasted weather for multiple stations [GET]
 
 + Parameters
-    + stationIds: `8521,8522` (string, optional) - comma separated list of required meteostaions IDs.
+    + meteoGroupStationIds: `8521,8522` (string, optional) - comma separated list of required meteostaions IDs.
     + fields: `windGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response 
     + validFrom: `2016-12-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2016-12-13T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
