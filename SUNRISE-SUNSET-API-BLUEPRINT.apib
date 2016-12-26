@@ -1,0 +1,168 @@
+FORMAT: 1A
+
+Sunrise and Sunset API
+=============================
+
+
+# General information
+
+This is technical documentation for the Sunrise and Sunset API
+This document uses [API blueprint format](https://apiblueprint.org/documentation/).
+
+### Authentication
+
+All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
+If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+
+#Sunrise and Sunset
+
++ Parameters
+    + meteoGroupStationIds: `3007237,3007238` (string, optional) - MeteoGroup station ids; can be several stations separated by comma. Either the meteoGroupStationIds or locatedAt parameter must be specified at once;
+    + locatedAt: `-2.2323,47.4593` (string, optional) - longitude, latitude;
+    + locatedAt: `g9p734o7sC-36xi5iyD` (string, optional) - compressed list of locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations;
+    + validAt: `2016-12-27` (string, optional) - ISO8601 date notation, means incl. If the parameter is not specified the current date is taken.
+
+### Get a sunrise and sunset time for a single station id [GET]
+
+####An example
+'https://point-observation.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237&validAt=2016-12-27'
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            Cache-Control: max-age=90
+
+    + Body
+
+        {
+          "sunriseSunsetTime": [
+            {
+              "civilSunsetTime": "2016-12-27T18:00+01:00",
+              "nauticalSunriseTime": "2016-12-27T07:42+01:00",
+              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
+              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
+              "nauticalSunsetTime": "2016-12-27T18:40+01:00",
+              "validAt": "2016-12-27",
+              "civilSunriseTime": "2016-12-27T08:22+01:00",
+              "meteoGroupStationId": "3007237"
+            }
+          ]
+        }
+        
+### Get a sunrise and sunset time for multiple station ids [GET]
+
+####An example
+'https://point-observation.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237,3007238&validAt=2016-12-27'
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            Cache-Control: max-age=90
+
+    + Body
+
+        {
+          "sunriseSunsetTime": [
+            {
+              "civilSunsetTime": "2016-12-27T18:00+01:00",
+              "nauticalSunriseTime": "2016-12-27T07:42+01:00",
+              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
+              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
+              "nauticalSunsetTime": "2016-12-27T18:40+01:00",
+              "validAt": "2016-12-27",
+              "civilSunriseTime": "2016-12-27T08:22+01:00",
+              "meteoGroupStationId": "3007237"
+            },
+            {
+              "civilSunsetTime": "2016-12-27T18:00+01:00",
+              "nauticalSunriseTime": "2016-12-27T07:43+01:00",
+              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
+              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
+              "nauticalSunsetTime": "2016-12-27T18:39+01:00",
+              "validAt": "2016-12-27",
+              "civilSunriseTime": "2016-12-27T08:23+01:00",
+              "meteoGroupStationId": "3007238"
+            }
+          ]
+        }
+        
+### Get a sunrise and sunset time for a single location [GET]
+
+####An example
+'https://point-observation.weather.mg/sunrise-sunset?locatedAt=13,52&validAt=2016-12-27'
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            Cache-Control: max-age=90
+
+    + Body
+
+        {
+          "sunriseSunsetTime": [
+            {
+              "civilSunsetTime": "2016-12-27T16:44+01:00",
+              "nauticalSunriseTime": "2016-12-27T06:52+01:00",
+              "astronomicalSunriseTime": "2016-12-27T06:10+01:00",
+              "astronomicalSunsetTime": "2016-12-27T18:09+01:00",
+              "nauticalSunsetTime": "2016-12-27T17:27+01:00",
+              "locatedAt": [
+                13,
+                52
+              ],
+              "validAt": "2016-12-27",
+              "civilSunriseTime": "2016-12-27T07:35+01:00"
+            }
+          ]
+        }
+        
+### Get a sunrise and sunset time for multiple encoded locations [GET]
+
+####An example
+'https://point-observation.weather.mg/sunrise-sunset?locatedAt=g9p734o7sC-36xi5iyD&validAt=2016-12-27'
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            Cache-Control: max-age=90
+
+    + Body
+
+        {
+          "sunriseSunsetTime": [
+            {
+              "civilSunsetTime": "2016-12-27T16:44+01:00",
+              "nauticalSunriseTime": "2016-12-27T06:52+01:00",
+              "astronomicalSunriseTime": "2016-12-27T06:10+01:00",
+              "astronomicalSunsetTime": "2016-12-27T18:09+01:00",
+              "nauticalSunsetTime": "2016-12-27T17:27+01:00",
+              "locatedAt": [
+                13,
+                52
+              ],
+              "validAt": "2016-12-27",
+              "civilSunriseTime": "2016-12-27T07:35+01:00"
+            },
+            {
+              "civilSunsetTime": "2016-12-27T17:11+02:00",
+              "nauticalSunriseTime": "2016-12-27T07:00+02:00",
+              "astronomicalSunriseTime": "2016-12-27T06:21+02:00",
+              "astronomicalSunsetTime": "2016-12-27T18:30+02:00",
+              "nauticalSunsetTime": "2016-12-27T17:51+02:00",
+              "locatedAt": [
+                24,
+                49
+              ],
+              "validAt": "2016-12-27",
+              "civilSunriseTime": "2016-12-27T07:40+02:00"
+            }
+          ]
+        }
