@@ -739,13 +739,13 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
 #### Example
-'https://point-forecast.weather.mg/search?locatedAt=-16.78,32.69&validPeriod=PT0S,PT1H,PT3H,PT6H,PT12H,PT24H&validFrom=2017-01-05T11:00:00Z&validUntil=2017-01-05T12:00:00Z&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent'
+'https://point-forecast.weather.mg/search?locatedAt=-16.78,32.69&validPeriod=PT0S,PT1H,PT3H,PT6H,PT12H,PT24H&validFrom=2016-12-13T11:00:00Z&validUntil=2016-12-13T12:00:00Z&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent'
 
 + Parameters
     + locatedAt: `-16.78,32.69` (string, required) - longitude, latitude; can occur multiple times for multiple locations
     + fields: `dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent` (string, required) - comma separated list of parameters to be contained inside response
-    + validFrom: `2017-01-05T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + validUntil: `2017-01-05T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validFrom: `2016-12-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2016-12-13T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT0S,PT1H,PT3H,PT6H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. PT1H refers to one hour forecast periods.
 
 + Response 200 (application/json)
@@ -756,68 +756,79 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
             Cache-Control: max-age=90
 
     + Body 
-{"forecasts" : [{
-			"dewPointTemperatureInCelsius" : 14,
-			"feelsLikeTemperatureInCelsius" : 20.8,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2017-01-05T11:00:00Z",
-			"saturationDeficitInHectoPascal" : 5.8,
-			"validFrom" : "2017-01-05T11:00:00Z",
-			"validPeriod" : "PT0S"
-		}, {
-			"relativeGlobalRadiationInPercent" : 75,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2017-01-05T11:00:00Z",
-			"validFrom" : "2017-01-05T10:00:00Z",
-			"validPeriod" : "PT1H"
-		}, {
-			"dewPointTemperatureInCelsius" : 14.1,
-			"feelsLikeTemperatureInCelsius" : 21.4,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2017-01-05T12:00:00Z",
-			"saturationDeficitInHectoPascal" : 6.3,
-			"validFrom" : "2017-01-05T12:00:00Z",
-			"validPeriod" : "PT0S"
-		}, {
-			"relativeGlobalRadiationInPercent" : 73,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2017-01-05T12:00:00Z",
-			"validFrom" : "2017-01-05T11:00:00Z",
-			"validPeriod" : "PT1H"
-		}, {
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2017-01-05T12:00:00Z",
-			"validFrom" : "2017-01-05T09:00:00Z",
-			"validPeriod" : "PT3H"
-		}, {
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2017-01-05T12:00:00Z",
-			"precipitationProbabilityMoreThan4_4MillimeterInPercent" : 1,
-			"validFrom" : "2017-01-05T06:00:00Z",
-			"validPeriod" : "PT6H"
-		}, {
-			"weatherCode" : 3,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2017-01-05T12:00:00Z",
-			"precipitationProbabilityMoreThan4_4MillimeterInPercent" : 1,
-			"validFrom" : "2017-01-05T00:00:00Z",
-			"validPeriod" : "PT12H"
-		}, {
-			"evaporationMakkinkInMillimeter" : 1.9,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2017-01-05T12:00:00Z",
-			"precipitationProbabilityMoreThan4_4MillimeterInPercent" : 1,
-			"saturationDeficitInHectoPascal" : 4.3,
-			"validFrom" : "2017-01-04T12:00:00Z",
-			"validPeriod" : "PT24H"
+{
+	"forecasts": [
+		{
+			"dewPointTemperatureInCelsius": 13.3,
+			"feelsLikeTemperatureInCelsius": 21.2,
+			"visibilityProbabilityLessThan200MeterInPercent": 1,
+			"weatherCode": 4,
+			"locatedAt": [-16.78, 32.69],
+			"validUntil": "2016-12-13T11:00:00Z",
+			"saturationDeficitInHectoPascal": 6.9,
+			"validFrom": "2016-12-13T11:00:00Z",
+			"validPeriod": "PT0S"
+		},
+		{
+			"relativeGlobalRadiationInPercent": 82,
+			"locatedAt": [-16.78, 32.69],
+			"validUntil": "2016-12-13T11:00:00Z",
+			"validFrom": "2016-12-13T10:00:00Z",
+			"validPeriod": "PT1H"
+		},
+		{
+			"dewPointTemperatureInCelsius": 13.6,
+			"feelsLikeTemperatureInCelsius": 21.4,
+			"visibilityProbabilityLessThan200MeterInPercent": 0,
+			"weatherCode": 4,
+			"locatedAt": [-16.78, 32.69],
+			"validUntil": "2016-12-13T12:00:00Z",
+			"saturationDeficitInHectoPascal": 6.9,
+			"validFrom": "2016-12-13T12:00:00Z",
+			"validPeriod": "PT0S"
+		},
+		{
+			"relativeGlobalRadiationInPercent": 77,
+			"locatedAt": [-16.78, 32.69],
+			"validUntil": "2016-12-13T12:00:00Z",
+			"validFrom": "2016-12-13T11:00:00Z",
+			"validPeriod": "PT1H"
+		},
+		{
+			"weatherCode": 4,
+			"locatedAt": [-16.78, 32.69
+			],
+			"validUntil": "2016-12-13T12:00:00Z",
+			"validFrom": "2016-12-13T09:00:00Z",
+			"validPeriod": "PT3H"
+		},
+		{
+			"weatherCode": 3,
+			"locatedAt": [-16.78, 32.69],
+			"validUntil": "2016-12-13T12:00:00Z",
+			"precipitationProbabilityMoreThan4_4MillimeterInPercent": 0,
+			"validFrom": "2016-12-13T06:00:00Z",
+			"validPeriod": "PT6H"
+		},
+		{
+			"weatherCode": 2,
+			"locatedAt": [-16.78,32.69],
+			"validUntil": "2016-12-13T12:00:00Z",
+			"precipitationProbabilityMoreThan4_4MillimeterInPercent": 0,
+			"validFrom": "2016-12-13T00:00:00Z",
+			"validPeriod": "PT12H"
+		},
+		{
+			"evaporationMakkinkInMillimeter": 2,
+			"locatedAt": [-16.78, 32.69],
+			"validUntil": "2016-12-13T12:00:00Z",
+			"precipitationProbabilityMoreThan4_4MillimeterInPercent": 0,
+			"saturationDeficitInHectoPascal": 5.5,
+			"validFrom": "2016-12-12T12:00:00Z",
+			"validPeriod": "PT24H"
 		}
 	]
 }
-
 # Example 2:
 ### Forecasted weather for a given collection of *latitude* and *longitude* pairs, compressed by Point Compression Algorithm [GET]
 
