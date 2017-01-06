@@ -1,0 +1,95 @@
+FORMAT: 1A
+
+Weather API
+=============================
+
+
+# General information
+
+This technical document was created for developers who are creating applications based on weather data provided by this API.
+This document is using [API blueprint format](https://apiblueprint.org/documentation/).
+
+### Authentication
+
+All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
+If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+
+### Backward compatibility
+
+Every endpoint may add one or more response parameters in the future.
+Clients should ignore unknown parameters, to avoid technical issues.
+
+# Group Lightning
+
+## Retrieve lightning observation [?provider={provider1,provider2}&locationWithin={lonTopLeft,latTopLeft,lonBottomRigth,latBottomRigth}&occurrenceFrom={startTime}&occurrenceUntil={endTime}]
+## Retrieve lightning observation [?provider={provider1,provider2}&locationWithin={lonTopLeft,latTopLeft,lonBottomRigth,latBottomRigth}&occuredFrom={startTime}]
+
+#### Example
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[10,80],[-10,5]&occurrenceFrom=2017-01-05T12:21:14Z&occurrenceUntil=2017-01-05T12:21:15Z
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[10,80],[-10,5]&occurrenceFrom=2017-01-05T12:21:14Z
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[10,80],[-10,5]
+
+### Observed lightning for a given boundingBox and time period
+
+This resource provides data from existing lightning observation providers.
+For any request service returns a set of lightnings occurred in geographical
+bounding box locations during period of time specified in parameters.
+
+
++ Parameters
+    + locationWithin: `[10,80],[-10,5]`   (longitude top left,
+                                           latitude top left,
+                                           longitude bottom right,
+                                           latitude bottom_right, required)
+        - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32,
+        - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
+
+    + occurrenceFrom: `2017-01-05T12:21:14Z` (start time range, optional)
+        - start lightning observation time. End time is current time by default, setup by the service.
+
+    + occurrenceUntil: `2017-01-05T12:21:15Z` (end time range, optional)
+        - time range period for lightning observation.
+
+
+    + provider: `ENGLN,NOWCAST' (string, required)
+        - lightning providers.
+
+
+
++ Response 200 (application/json)
+
+    + Headers
+
+            X-Request-Calls-Per-Interval: 4711
+            E-Tag: "x234dff"
+            Cache-Control: max-age=3628800
+
+    + Body
+        {
+           "strokes":[
+              {
+                 "occurredAt":"2017-01-05T12:21:14.974Z",
+                 "provider":"NOWCAST",
+                 "strokeType":"CLOUD_TO_GROUND",
+                 "heightInKilometer":0,
+                 "currentInAmpere":4500,
+                 "location":[
+                    41.6345,
+                    19.3064
+                 ]
+              },
+              {
+                 "occurredAt":"2017-01-05T12:21:14.974Z",
+                 "provider":"ENGLN",
+                 "strokeType":"CLOUD_TO_GROUND",
+                 "heightInKilometer":0,
+                 "currentInAmpere":4700,
+                 "location":[
+                    42.6345,
+                    20.3064
+                 ]
+              }
+           ]
+        }
+
+#
