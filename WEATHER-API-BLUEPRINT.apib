@@ -646,10 +646,10 @@ Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLA
 
 # Group Forecast
 
-## Retrieve weather forecast [/search?locatedAt={locatedAt}&meteoGroupStationIds={stationIds}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]   
+## Retrieve weather forecast [/search?locatedAt={locatedAt}&meteoGroupStationIds={stationIds}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]
 
 #### Example
-`https://point-forecast.weather.mg/search?locatedAt=48.2047,11.4513&validPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&validFrom=2016-11-24T11:00:00Z&validUntil=2016-11-29T11:00:00Z&fields=dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent`  
+`https://point-forecast.weather.mg/search?locatedAt=48.2047,11.4513&validPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&validFrom=2016-11-24T11:00:00Z&validUntil=2016-11-29T11:00:00Z&fields=dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent`
 
 ### Search for forecast data from weather stations for multiple given locations [GET]
 
@@ -755,7 +755,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
             Last-Modified:Tue, 03 Jan 2017 09:29:41 GMT
             Cache-Control: max-age=90
 
-    + Body 
+    + Body
 	{"forecasts" : [{
 			"dewPointTemperatureInCelsius" : 13.3,
 			"feelsLikeTemperatureInCelsius" : 21.2,
@@ -831,8 +831,8 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 ### Forecasted weather for a given collection of *latitude* and *longitude* pairs, compressed by Point Compression Algorithm [GET]
 
 + Parameters
-    + locatedAt: `463pklwwsB4-4jtN81qz8hR` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations  
-    + fields: `dewPointTemperatureInCelsius,visibilityProbabilityLessThan200MeterInPercent,saturationDeficitInHectoPascal` (string, required) - comma separated list of parameters to be contained inside response 
+    + locatedAt: `463pklwwsB4-4jtN81qz8hR` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations
+    + fields: `dewPointTemperatureInCelsius,visibilityProbabilityLessThan200MeterInPercent,saturationDeficitInHectoPascal` (string, required) - comma separated list of parameters to be contained inside response
     + validFrom: `2016-12-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2016-12-13T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT0S` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
@@ -855,7 +855,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"saturationDeficitInHectoPascal" : 6.9,
 			"validFrom" : "2016-12-13T11:00:00Z",
 			"validPeriod" : "PT0S"
-		}, 
+		},
 		{
 			"dewPointTemperatureInCelsius" : 13.6,
 			"visibilityProbabilityLessThan200MeterInPercent" : 0,
@@ -865,7 +865,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"saturationDeficitInHectoPascal" : 6.9,
 			"validFrom" : "2016-12-13T12:00:00Z",
 			"validPeriod" : "PT0S"
-		}, 
+		},
 		{
 			"dewPointTemperatureInCelsius" : 13,
 			"visibilityProbabilityLessThan200MeterInPercent" : 1,
@@ -875,7 +875,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"saturationDeficitInHectoPascal" : 8.8,
 			"validFrom" : "2016-12-13T11:00:00Z",
 			"validPeriod" : "PT0S"
-		}, 
+		},
 		{
 			"dewPointTemperatureInCelsius" : 13.3,
 			"visibilityProbabilityLessThan200MeterInPercent" : 1,
@@ -885,7 +885,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"saturationDeficitInHectoPascal" : 9,
 			"validFrom" : "2016-12-13T12:00:00Z",
 			"validPeriod" : "PT0S"
-		}, 
+		},
 		{
 			"dewPointTemperatureInCelsius" : 15,
 			"visibilityProbabilityLessThan200MeterInPercent" : 0,
@@ -895,7 +895,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"saturationDeficitInHectoPascal" : 5.4,
 			"validFrom" : "2016-12-13T11:00:00Z",
 			"validPeriod" : "PT0S"
-		}, 
+		},
 		{
 			"dewPointTemperatureInCelsius" : 15,
 			"visibilityProbabilityLessThan200MeterInPercent" : 0,
@@ -913,7 +913,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 
 + Parameters
     + meteoGroupStationIds: `8521,8522` (string, optional) - comma separated list of required meteostaions IDs.
-    + fields: `windGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response 
+    + fields: `windGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response
     + validFrom: `2016-12-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2016-12-13T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT1H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
@@ -1035,15 +1035,15 @@ This symbolic digit shall embrace the total fraction of the celestial dome cover
 
 # Extreme values
 
-## Retrieve extreme values for the last X days for Y country [/extreme?wmoCountryId={wmoCountryId}&periodInDays={periodInDays}]
+## Retrieve extreme values [/extreme]
 
-By default [/extreme] endpoint (without any URL parameters) finds extreme values for the last 7 days and for 91 wmoCountryId (the id of UK). It is also possible to define X period (trough periodInDays URL parameter) and/or Y country (trough wmoCountryId URL parameter).
+By default [/extreme] endpoint finds extreme values for the last 7 days and for all UK's stations which are identified by wmoCountryId=91 in Geostation file (the id of UK). Extreme values recalculate every hour.
 
 ### Example
 
-`https://point-observation.weather.mg/extreme?wmoCountryId=261&periodInDays=90`
+`https://point-observation.weather.mg/extreme`
 
-+ Request extreme temperature data for country with 261 wmo country id (France) for the las 90 days
++ Request extreme temperature data for UK for the last 7 days
 
     + Headers
 
@@ -1060,37 +1060,32 @@ By default [/extreme] endpoint (without any URL parameters) finds extreme values
 
     + Body
 
-            {  
-                "min":{  
-                    "observations":[  
-                        {  
-                            "observedAt":1476522000,
-                            "latitude":47.4593,
-                            "airTemperatureInCelsius":2.6,
-                            "temperatureMaxInCelcius":2.5,
-                            "stationName":"Pleucadeuc",
-                            "temperatureMinInCelcius":2.8,
-                            "stationId":"3007237",
-                            "quality":29,
-                            "longitude":-2.2323
-                        }
-                    ],
-                    "airTemperatureInCelsius":2.6
-                },
-                "max":{  
-                    "observations":[  
-                        {  
-                            "observedAt":1476522001,
-                            "latitude":52.4593,
-                            "airTemperatureInCelsius":15.1,
-                            "temperatureMaxInCelcius":16.5,
-                            "stationName":"Germ",
-                            "temperatureMinInCelcius":12.8,
-                            "stationId":"3007300",
-                            "quality":29,
-                            "longitude":13.2323
-                        }
-                    ],
-                    "airTemperatureInCelsius":16.5
-                }
+            {
+                "wmoCountryId": 91,
+                "until": 1484127329,
+                "from": 1483522529,
+                "minAirTemperatureInCelsius": -8.3,
+                "minObservations": [
+                    {
+                        "stationId": "3065",
+                        "observedAt": 1483606800
+                    }
+                ],
+                "maxAirTemperatureInCelsius": 13.9,
+                "maxObservations": [
+                    {
+                        "stationId": "3313",
+                        "observedAt": 1484100000
+                    }
+                ]
             }
+Here "until" and "from" fields represent period that has been used to recalculate extreme values (because extreme values recalculate every hour, difference between "until" value and request time can be up to 1 hour). minObservations and maxObservations are arrays that contain information about station where extreme value has been found and time where it has been observed. Because inside period many stations can have the same extreme values and/or the same extreme values can be observed many times, the arrays can contain many objects, not only one.
+
+The extreme values recalculating algorithm based on the following:
+ + best observation parameters are use to calculate this
+ + for min temperature in a certain time range, use the lowest value from these two values:
+   + the lowest values of the hourly “airTemperatureInCelsius” values ("PT0S")
+   + the lowest value of all reported “minAirTemperatureInCelsius” within that period ("PT12H")
+ + for max temperature in a certain time range, use the highest value from these two values:
+   + the highest values of the hourly “airTemperatureInCelsius” values ("PT0S")
+   + the highest value of all reported “maxAirTemperatureInCelsius” within that period ("PT12H").
