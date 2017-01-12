@@ -1060,25 +1060,38 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
 
     + Body
 
-            {
-                "wmoCountryId": 91,
-                "until": 1484127329,
-                "from": 1483522529,
-                "minAirTemperatureInCelsius": -8.3,
-                "minObservations": [
-                    {
-                        "stationId": "3065",
-                        "observedAt": 1483606800
-                    }
-                ],
-                "maxAirTemperatureInCelsius": 13.9,
-                "maxObservations": [
-                    {
-                        "stationId": "3313",
-                        "observedAt": 1484100000
-                    }
-                ]
-            }
+           {
+             "wmoCountryId": 91,
+             "observedUntil": 1484228128,
+             "observedFrom": 1483623328,
+             "minAirTemperatureInCelsius": -8.1,
+             "minWeatherObservations": [
+               {
+                 "meteoGroupStationId": "3065",
+                 "meteoGroupStationName": "Cairngorm",
+                 "observedAt": 1484200800
+               },
+               {
+                 "meteoGroupStationId": "3065",
+                 "meteoGroupStationName": "Cairngorm",
+                 "observedAt": 1484211600
+               },
+               {
+                 "meteoGroupStationId": "99020",
+                 "meteoGroupStationName": "Tyndrum",
+                 "observedAt": 1483650000
+               }
+             ],
+             "maxAirTemperatureInCelsius": 14.1,
+             "maxWeatherObservations": [
+               {
+                 "meteoGroupStationId": "3313",
+                 "meteoGroupStationName": "Rhyl",
+                 "observedAt": 1484125200
+               }
+             ]
+           }
+
 Here "until" and "from" fields represent period that has been used to recalculate extreme values (because extreme values recalculate every hour, difference between "until" value and request time can be up to 1 hour). minObservations and maxObservations are arrays that contain information about station where extreme value has been found and time where it has been observed. Because inside period many stations can have the same extreme values and/or the same extreme values can be observed many times, the arrays can contain many objects, not only one.
 
 The extreme values recalculating algorithm based on the following:
