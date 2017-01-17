@@ -694,7 +694,7 @@ Here are relationship between observation periods and fields appropriately:
                 visibilityInMeter,weatherCode,weatherCodeTraditional,clearSkyUVIndex,airTemperatureErrorInKelvin,windSpeedErrorInKnots,freezingLevelHeightInMeter,
                 freezingRainProbabilityInPercent,noSnowPossibleBelowHeightInMeter,snowCertainAboveHeightInMeter,saturationDeficitInHectoPascal,
                 airTemperatureNearGroundInCelsius,visibilityProbabilityLessThan200MeterInPercent,visibilityProbabilityLessThan1000MeterInPercent
-- **PT1H** -    windGustInMeterPerSecond,windGustInKnots,windGustInMilesPerHour,sunshineDurationInMinutes,precipitationAmountInMillimeter,precipitationAmountInInch,
+- **PT1H** -    maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,sunshineDurationInMinutes,precipitationAmountInMillimeter,precipitationAmountInInch,
                 precipitationProbabilityInPercent,convectivePrecipitationProbabilityInPercent,maxPrecipitationAmountInMillimeter,precipitationType,
                 hailProbabilityInPercent,directRadiationInJoulePerSquareCentimeter,globalRadiationInJoulePerSquareCentimeter,relativeGlobalRadiationInPercent,
                 freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,relativeSunshineDurationInPercent,windGustProbabilityGreaterThan40KnotsInPercent,
@@ -915,7 +915,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 
 + Parameters
     + meteoGroupStationIds: `8521,8522` (string, optional) - comma separated list of required meteostaions IDs.
-    + fields: `windGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response
+    + fields: `maxWindGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response
     + validFrom: `2016-12-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2016-12-13T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT1H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
@@ -935,7 +935,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"meteoGroupStationId": "8521",
 			"precipitationAmountInMillimeter": 0,
 			"validUntil": "2016-12-13T11:00:00Z",
-			"windGustInMeterPerSecond": 4.2184453,
+			"maxWindGustInMeterPerSecond": 4.2184453,
 			"validFrom": "2016-12-13T10:00:00Z",
 			"validPeriod": "PT1H"
 		},
@@ -944,7 +944,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"meteoGroupStationId": "8521",
 			"precipitationAmountInMillimeter": 0,
 			"validUntil": "2016-12-13T12:00:00Z",
-			"windGustInMeterPerSecond": 5.504557,
+			"maxWindGustInMeterPerSecond": 5.504557,
 			"validFrom": "2016-12-13T11:00:00Z",
 			"validPeriod": "PT1H"
 		},
@@ -953,7 +953,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"meteoGroupStationId": "8522",
 			"precipitationAmountInMillimeter": 0,
 			"validUntil": "2016-12-13T11:00:00Z",
-			"windGustInMeterPerSecond": 4.2698903,
+			"maxWindGustInMeterPerSecond": 4.2698903,
 			"validFrom": "2016-12-13T10:00:00Z",
 			"validPeriod": "PT1H"
 		},
@@ -962,7 +962,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"meteoGroupStationId": "8522",
 			"precipitationAmountInMillimeter": 0,
 			"validUntil": "2016-12-13T12:00:00Z",
-			"windGustInMeterPerSecond": 4.4242234,
+			"maxWindGustInMeterPerSecond": 4.4242234,
 			"validFrom": "2016-12-13T11:00:00Z",
 			"validPeriod": "PT1H"
 		}
