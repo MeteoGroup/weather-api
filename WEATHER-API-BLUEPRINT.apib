@@ -1066,7 +1066,7 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
     + Body
 
            {
-             "wmoCountryId": 91,
+             "isoCountryCode": "UK",
              "observedUntil": "2017-01-13T10:35:31Z",
              "observedFrom": "2017-01-06T10:35:31Z",
              "minAirTemperatureInCelsius": -9.2,
@@ -1097,13 +1097,13 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
              ]
            }
 
-Here "until" and "from" fields represent period that has been used to recalculate extreme values (because extreme values recalculate every hour, difference between "until" value and request time can be up to 1 hour). minObservations and maxObservations are arrays that contain information about station where extreme value has been found and time where it has been observed. Because inside period many stations can have the same extreme values and/or the same extreme values can be observed many times, the arrays can contain many objects, not only one.
+Here `observedUntil` and `observedFrom` fields represent period that has been used to recalculate extreme values. Because extreme values recalculate every hour, difference between `observedUntil` value and time of the request can be up to 1 hour. The fields `minWeatherObservations` and `maxWeatherObservations` are arrays that contain information about station where extreme value has been found and time where it has been observed. Because inside period the same extreme values can be observed many times, the arrays can contain many weather observations.
 
 The extreme values recalculating algorithm based on the following:
- + best observation parameters are use to calculate this
+ + best observation parameters are used to calculate this
  + for min temperature in a certain time range, use the lowest value from these two values:
-   + the lowest values of the hourly “airTemperatureInCelsius” values ("PT0S")
-   + the lowest value of all reported “minAirTemperatureInCelsius” within that period ("PT12H")
+   + the lowest values of the hourly `airTemperatureInCelsius` values (`PT0S`)
+   + the lowest value of all reported `minAirTemperatureInCelsius` within that period (`PT12H`)
  + for max temperature in a certain time range, use the highest value from these two values:
-   + the highest values of the hourly “airTemperatureInCelsius” values ("PT0S")
-   + the highest value of all reported “maxAirTemperatureInCelsius” within that period ("PT12H").
+   + the highest values of the hourly `airTemperatureInCelsius` values (`PT0S`)
+   + the highest value of all reported `maxAirTemperatureInCelsius` within that period (`PT12H`).
