@@ -690,7 +690,7 @@ Here are relationship between observation periods and fields appropriately:
 - **PT0S** -    airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,
                 dewPointTemperatureInKelvin,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,airPressureAtSeaLevelInHectoPascal,
                 windSpeedInMeterPerSecond,windSpeedInKnots,windSpeedInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windDirectionInDegree,
-                effectiveCloudCoverInOcta, totalCloudCoverInOcta,cloudCoverLowerThan2000MeterInOcta,cloudCoverLowerThan5000MeterInOcta,relativeHumidityInPercent,
+                effectiveCloudCoverInOcta, totalCloudCoverInOcta,cloudCoverLowerThan2000MeterInOcta,cloudCoverLowerThan5000MeterInOcta,cloudBaseHeightInMeter,relativeHumidityInPercent,
                 visibilityInMeter,weatherCode,weatherCodeTraditional,clearSkyUVIndex,airTemperatureErrorInKelvin,windSpeedErrorInKnots,freezingLevelHeightInMeter,
                 freezingRainProbabilityInPercent,noSnowPossibleBelowHeightInMeter,snowCertainAboveHeightInMeter,saturationDeficitInHectoPascal,
                 airTemperatureNearGroundInCelsius,visibilityProbabilityLessThan200MeterInPercent,visibilityProbabilityLessThan1000MeterInPercent
@@ -1016,7 +1016,7 @@ THIS IS A DRAFT.
                     "longitude": 13.37788,
                 },
                 "warningId": "1234-5678",
-                "issueAt": "2016-08-03T00:00:00+02:00",
+                "issuedAt": "2016-08-03T00:00:00+02:00",
                 "validAt": "2016-08-03T00:00:00+02:00",
                 "warningSeverity": "HIGH",
                 "affectedRegion": {
