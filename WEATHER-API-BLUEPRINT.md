@@ -736,10 +736,17 @@ Here are relationship between observation periods and fields appropriately:
                 relativeSunshineDurationInPercent,globalRadiationInJoulePerSquareCentimeter,averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,
                 averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour
 
-The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
-The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
-The mostLikelyHighAirTemperature equals maxAirTemperature plus airTemperatureError.
-The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureError.
++ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
++ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
++ The mostLikelyHighAirTemperature equals maxAirTemperature plus airTemperatureError.
++ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureError.
++ min/maxAirTemperature
+    + The min/maxAirTemperature parameters for the PT3H, PT6H are calculated as a min/max value of the airTemperature parameter for previous 3 and 6 hours respectively.
+    + The minAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula  
+        minAirTemperatureInCelsius = -2.46934 + 0.85674 * minAirTemperatureInCelsiusValueForPrevious12Hours + 0.10476 * maxAirTemperatureInCelsiusValueForPrevious12Hours + 0.03747 * windSpeedInKnotsValueInTheMiddleOf12HourPeriod + 0.23575 * effectiveCloudCoverInOctaValueInTheMiddleOf12HourPeriod + 0.02364 * effectiveCloudCoverInOctaValueAtTheEndOf12HourPeriod
+    + The maxAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula  
+        maxAirTemperatureInCelsius = 0.566 + 1.01062 * maxAirTemperatureInCelsiusValueForPrevious12Hours + 0.0289 * totalCloudCoverInOctaInTheMiddleOf12HourPeriod -0.03689 * lowCloudCoverInOctaInTheMiddleOf12HourPeriod - 0.0162 * minAirTemperatureInCelsiusValueForPrevious12Hours
+    + The min/maxAirTemperature parameter for the PT24H is calculated as min/max value of two previous PT12H min/maxAirTemperature values respectively. 
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
