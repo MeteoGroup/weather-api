@@ -683,18 +683,18 @@ The observations in the response are ordered ascending by field 'validFrom'.
 
 *Fields mapping*
 
-Common names of filed which can be included in all periods: locatedAt,meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,validFrom,validUntil,validPeriod
+Common names of filed which can be included in all periods: locatedAt,meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,validFrom,validUntil,validPeriod,issuedAt
 
 Here are relationship between observation periods and fields appropriately:
 
 - **PT0S** -    airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,
                 dewPointTemperatureInKelvin,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,airPressureAtSeaLevelInHectoPascal,
                 windSpeedInMeterPerSecond,windSpeedInKnots,windSpeedInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windDirectionInDegree,
-                effectiveCloudCoverInOcta, totalCloudCoverInOcta,cloudCoverLowerThan2000MeterInOcta,cloudCoverLowerThan5000MeterInOcta,relativeHumidityInPercent,
+                effectiveCloudCoverInOcta, totalCloudCoverInOcta,cloudCoverLowerThan2000MeterInOcta,cloudCoverLowerThan5000MeterInOcta,cloudBaseHeightInMeter,relativeHumidityInPercent,
                 visibilityInMeter,weatherCode,weatherCodeTraditional,clearSkyUVIndex,airTemperatureErrorInKelvin,windSpeedErrorInKnots,freezingLevelHeightInMeter,
                 freezingRainProbabilityInPercent,noSnowPossibleBelowHeightInMeter,snowCertainAboveHeightInMeter,saturationDeficitInHectoPascal,
                 airTemperatureNearGroundInCelsius,visibilityProbabilityLessThan200MeterInPercent,visibilityProbabilityLessThan1000MeterInPercent
-- **PT1H** -    windGustInMeterPerSecond,windGustInKnots,windGustInMilesPerHour,sunshineDurationInMinutes,precipitationAmountInMillimeter,precipitationAmountInInch,
+- **PT1H** -    maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,sunshineDurationInMinutes,precipitationAmountInMillimeter,precipitationAmountInInch,
                 precipitationProbabilityInPercent,convectivePrecipitationProbabilityInPercent,maxPrecipitationAmountInMillimeter,precipitationType,
                 hailProbabilityInPercent,directRadiationInJoulePerSquareCentimeter,globalRadiationInJoulePerSquareCentimeter,relativeGlobalRadiationInPercent,
                 freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,relativeSunshineDurationInPercent,windGustProbabilityGreaterThan40KnotsInPercent,
@@ -709,15 +709,17 @@ Here are relationship between observation periods and fields appropriately:
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
                 mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
-                maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,
-                precipitationProbabilityMoreThan0_2MillimeterInPercent,precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,
+                precipitationAmountInMillimeter,precipitationAmountInInch,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,
+                precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,
+                precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,
                 precipitationDurationInMinutes,freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,effectiveCloudCoverInOcta,averageRelativeHumidityInPercent,
                 averageWindSpeedInMeterPerSecond,averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour
 - **PT12H** -   maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
                 mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
-                convectivePrecipitationProbabilityInPercent,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,
+                convectivePrecipitationProbabilityInPercent,precipitationAmountInMillimeter,precipitationAmountInInch,
+                maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,
                 precipitationProbabilityMoreThan0_2MillimeterInPercent,precipitationProbabilityMoreThan1_4MillimeterInPercent,precipitationProbabilityMoreThan4_4MillimeterInPercent,
                 precipitationProbabilityMoreThan20MillimeterInPercent,precipitationProbabilityInPercent,thunderstormProbabilityInPercent,mostSignificantWeatherCode,
                 mostSignificantWeatherCodeTraditional,effectiveCloudCoverInOcta,freezingRainProbabilityInPercent,groundFrostProbabilityInPercent,hailProbabilityInPercent,
@@ -726,17 +728,25 @@ Here are relationship between observation periods and fields appropriately:
 - **PT24H** -   maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
-                mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,maxPrecipitationAmountInMillimeter,
-                minPrecipitationAmountInMillimeter,precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,
+                mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,
+                precipitationAmountInMillimeter,precipitationAmountInInch,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,
+                precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,
                 precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,mostSignificantWeatherCode,mostSignificantWeatherCodeTraditional,
                 evaporationMakkinkInMillimeter,evaporationPenmanInMillimeter,mostSignificantPrecipitationType,saturationDeficitInHectoPascal,sunshineDurationInMinutes,
                 relativeSunshineDurationInPercent,globalRadiationInJoulePerSquareCentimeter,averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,
                 averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour
 
-The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
-The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
-The mostLikelyHighAirTemperature equals maxAirTemperature plus airTemperatureError.
-The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureError.
++ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
++ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
++ The mostLikelyHighAirTemperature equals maxAirTemperature plus airTemperatureError.
++ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureError.
++ min/maxAirTemperature
+    + The min/maxAirTemperature parameters for the PT3H, PT6H are calculated as a min/max value of the airTemperature parameter for previous 3 and 6 hours respectively.
+    + The minAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula  
+        minAirTemperatureInCelsius = -2.46934 + 0.85674 * minAirTemperatureInCelsiusValueForPrevious12Hours + 0.10476 * maxAirTemperatureInCelsiusValueForPrevious12Hours + 0.03747 * windSpeedInKnotsValueInTheMiddleOf12HourPeriod + 0.23575 * effectiveCloudCoverInOctaValueInTheMiddleOf12HourPeriod + 0.02364 * effectiveCloudCoverInOctaValueAtTheEndOf12HourPeriod
+    + The maxAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula  
+        maxAirTemperatureInCelsius = 0.566 + 1.01062 * maxAirTemperatureInCelsiusValueForPrevious12Hours + 0.0289 * totalCloudCoverInOctaInTheMiddleOf12HourPeriod -0.03689 * lowCloudCoverInOctaInTheMiddleOf12HourPeriod - 0.0162 * minAirTemperatureInCelsiusValueForPrevious12Hours
+    + The min/maxAirTemperature parameter for the PT24H is calculated as min/max value of two previous PT12H min/maxAirTemperature values respectively. 
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
@@ -810,7 +820,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 			"validFrom" : "2016-12-13T06:00:00Z",
 			"validPeriod" : "PT6H"
 		}, {
-			"maxAirTemperatureInFahrenheit" : 66.74,
+			"maxAirTemperatureInFahrenheit" : 67.7,
 			"precipitationProbabilityInPercent" : 8,
 			"weatherCode" : 2,
 			"locatedAt" : [-16.78, 32.69],
@@ -915,7 +925,7 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 
 + Parameters
     + meteoGroupStationIds: `8521,8522` (string, optional) - comma separated list of required meteostaions IDs.
-    + fields: `windGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response
+    + fields: `maxWindGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response
     + validFrom: `2016-12-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2016-12-13T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT1H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
@@ -931,38 +941,38 @@ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureErr
 
 	{"forecasts": [
 		{
-			"sunshineDurationInMinutes": 3.78,
+			"sunshineDurationInMinutes": 37.8,
 			"meteoGroupStationId": "8521",
 			"precipitationAmountInMillimeter": 0,
 			"validUntil": "2016-12-13T11:00:00Z",
-			"windGustInMeterPerSecond": 4.2184453,
+			"maxWindGustInMeterPerSecond": 4.2184453,
 			"validFrom": "2016-12-13T10:00:00Z",
 			"validPeriod": "PT1H"
 		},
 		{
-			"sunshineDurationInMinutes": 3.36,
+			"sunshineDurationInMinutes": 33.6,
 			"meteoGroupStationId": "8521",
 			"precipitationAmountInMillimeter": 0,
 			"validUntil": "2016-12-13T12:00:00Z",
-			"windGustInMeterPerSecond": 5.504557,
+			"maxWindGustInMeterPerSecond": 5.504557,
 			"validFrom": "2016-12-13T11:00:00Z",
 			"validPeriod": "PT1H"
 		},
 		{
-			"sunshineDurationInMinutes": 3.1799998,
+			"sunshineDurationInMinutes": 31.8,
 			"meteoGroupStationId": "8522",
 			"precipitationAmountInMillimeter": 0,
 			"validUntil": "2016-12-13T11:00:00Z",
-			"windGustInMeterPerSecond": 4.2698903,
+			"maxWindGustInMeterPerSecond": 4.2698903,
 			"validFrom": "2016-12-13T10:00:00Z",
 			"validPeriod": "PT1H"
 		},
 		{
-			"sunshineDurationInMinutes": 2.8799999,
+			"sunshineDurationInMinutes": 28.8,
 			"meteoGroupStationId": "8522",
 			"precipitationAmountInMillimeter": 0,
 			"validUntil": "2016-12-13T12:00:00Z",
-			"windGustInMeterPerSecond": 4.4242234,
+			"maxWindGustInMeterPerSecond": 4.4242234,
 			"validFrom": "2016-12-13T11:00:00Z",
 			"validPeriod": "PT1H"
 		}
@@ -1006,7 +1016,7 @@ THIS IS A DRAFT.
                     "longitude": 13.37788,
                 },
                 "warningId": "1234-5678",
-                "issueAt": "2016-08-03T00:00:00+02:00",
+                "issuedAt": "2016-08-03T00:00:00+02:00",
                 "validAt": "2016-08-03T00:00:00+02:00",
                 "warningSeverity": "HIGH",
                 "affectedRegion": {
@@ -1063,7 +1073,7 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
     + Body
 
            {
-             "wmoCountryId": 91,
+             "isoCountryCode": "UK",
              "observedUntil": "2017-01-13T10:35:31Z",
              "observedFrom": "2017-01-06T10:35:31Z",
              "minAirTemperatureInCelsius": -9.2,
@@ -1094,13 +1104,16 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
              ]
            }
 
-Here "until" and "from" fields represent period that has been used to recalculate extreme values (because extreme values recalculate every hour, difference between "until" value and request time can be up to 1 hour). minObservations and maxObservations are arrays that contain information about station where extreme value has been found and time where it has been observed. Because inside period many stations can have the same extreme values and/or the same extreme values can be observed many times, the arrays can contain many objects, not only one.
+Here `observedUntil` and `observedFrom` fields represent period that has been used to recalculate extreme values.
+Because extreme values recalculate every hour, difference between `observedUntil` value and time of the request can be up to 1 hour.
+The fields `minWeatherObservations` and `maxWeatherObservations` are arrays that contain information about station where extreme value has been found and time where it has been observed.
+Because inside period the same extreme values can be observed many times, the arrays can contain many weather observations.
 
 The extreme values recalculating algorithm based on the following:
- + best observation parameters are use to calculate this
+ + best observation parameters are used to calculate this
  + for min temperature in a certain time range, use the lowest value from these two values:
-   + the lowest values of the hourly “airTemperatureInCelsius” values ("PT0S")
-   + the lowest value of all reported “minAirTemperatureInCelsius” within that period ("PT12H")
+   + the lowest values of the hourly `airTemperatureInCelsius` values (`PT0S`)
+   + the lowest value of all reported `minAirTemperatureInCelsius` within that period (`PT12H`)
  + for max temperature in a certain time range, use the highest value from these two values:
-   + the highest values of the hourly “airTemperatureInCelsius” values ("PT0S")
-   + the highest value of all reported “maxAirTemperatureInCelsius” within that period ("PT12H").
+   + the highest values of the hourly `airTemperatureInCelsius` values (`PT0S`)
+   + the highest value of all reported `maxAirTemperatureInCelsius` within that period (`PT12H`).

@@ -9,6 +9,16 @@ Sunrise and Sunset API
 This is technical documentation for the Sunrise and Sunset API
 This document uses [API blueprint format](https://apiblueprint.org/documentation/).
 
+This is a service to compute the local sunrise and sunset at a given longitue/latitude and date combination. 
+Uses the algorithm found at: 
+    Almanac for Computers, 1990
+	published by Nautical Almanac Office
+	United States Naval Observatory
+	Washington, DC 20392
+    http://web.archive.org/web/20161202180207/http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
+    
+NOTE: For locations inside polar circles service may not return all sunrise/sunset values.
+
 ### Authentication
 
 All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
