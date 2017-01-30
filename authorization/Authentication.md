@@ -72,7 +72,8 @@ Connection: close
 ```
 __Resource Response omitted__
 
-```...```
+```...
+```
 
 ## Java Code Sample
 
@@ -123,7 +124,9 @@ HttpEntity entity = new HttpEntity<>(headers);
 
 ResponseEntity<ResponseType> response = restTemplate.exchange(entity, ResponseType.class);
 // process response...
+
 ```
+
 
 ## Postman Sample
 
