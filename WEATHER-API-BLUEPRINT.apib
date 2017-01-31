@@ -704,7 +704,7 @@ Here are relationship between observation periods and fields appropriately:
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
                 mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
                 averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,
-                averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal,precipitationProbabilityInPercent
+                averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal,precipitationProbabilityInPercent,maxUVIndexWithClouds
 - **PT6H** -    maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
@@ -714,7 +714,7 @@ Here are relationship between observation periods and fields appropriately:
                 precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,
                 precipitationDurationInMinutes,freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,effectiveCloudCoverInOcta,averageRelativeHumidityInPercent,
                 averageWindSpeedInMeterPerSecond,averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour,
-                averageAirPressureAtSeaLevelInHectoPascal
+                averageAirPressureAtSeaLevelInHectoPascal,maxUVIndexWithClouds
 - **PT12H** -   maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
@@ -725,7 +725,8 @@ Here are relationship between observation periods and fields appropriately:
                 precipitationProbabilityMoreThan20MillimeterInPercent,precipitationProbabilityInPercent,thunderstormProbabilityInPercent,mostSignificantWeatherCode,
                 mostSignificantWeatherCodeTraditional,effectiveCloudCoverInOcta,freezingRainProbabilityInPercent,groundFrostProbabilityInPercent,hailProbabilityInPercent,
                 snowFallProbabilityInPercent,minAirTemperatureNearGroundInCelsius,averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,averageWindSpeedInKnots,
-                averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal
+                averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal,
+                maxUVIndexWithClouds
 - **PT24H** -   maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
@@ -735,7 +736,8 @@ Here are relationship between observation periods and fields appropriately:
                 precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,mostSignificantWeatherCode,mostSignificantWeatherCodeTraditional,
                 evaporationMakkinkInMillimeter,evaporationPenmanInMillimeter,mostSignificantPrecipitationType,saturationDeficitInHectoPascal,sunshineDurationInMinutes,
                 relativeSunshineDurationInPercent,globalRadiationInJoulePerSquareCentimeter,averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,
-                averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal
+                averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal,
+                maxUVIndexWithClouds
 
 + The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
 + The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
@@ -747,7 +749,9 @@ Here are relationship between observation periods and fields appropriately:
         minAirTemperatureInCelsius = -2.46934 + 0.85674 * minAirTemperatureInCelsiusValueForPrevious12Hours + 0.10476 * maxAirTemperatureInCelsiusValueForPrevious12Hours + 0.03747 * windSpeedInKnotsValueInTheMiddleOf12HourPeriod + 0.23575 * effectiveCloudCoverInOctaValueInTheMiddleOf12HourPeriod + 0.02364 * effectiveCloudCoverInOctaValueAtTheEndOf12HourPeriod
     + The maxAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula  
         maxAirTemperatureInCelsius = 0.566 + 1.01062 * maxAirTemperatureInCelsiusValueForPrevious12Hours + 0.0289 * totalCloudCoverInOctaInTheMiddleOf12HourPeriod -0.03689 * lowCloudCoverInOctaInTheMiddleOf12HourPeriod - 0.0162 * minAirTemperatureInCelsiusValueForPrevious12Hours
-    + The min/maxAirTemperature parameter for the PT24H is calculated as min/max value of two previous PT12H min/maxAirTemperature values respectively. 
+    + The min/maxAirTemperature parameter for the PT24H is calculated as min/max value of two previous PT12H min/maxAirTemperature values respectively.
++ The maxUVIndexWithClouds parameter is calculated as a maximum of hourly values
+    UVIndexWithClouds = clearSkyUVIndex * (1.0 - 0.9 * (effectiveCloudCoverInOcta / 8)^2) + 0.4
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
