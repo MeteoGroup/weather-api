@@ -781,6 +781,8 @@ Here are relationship between observation periods and fields appropriately:
 - **PT3H** -    maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
+				minFeelsLikeTemperatureInCelsius,minFeelsLikeTemperatureInFahrenheit,minFeelsLikeTemperatureInKelvin,
+				maxFeelsLikeTemperatureInCelsius,maxFeelsLikeTemperatureInFahrenheit,maxFeelsLikeTemperatureInKelvin,
                 mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
                 averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,
                 averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal,precipitationProbabilityInPercent,maxUVIndexWithClouds,minVisibilityInMeter
@@ -788,6 +790,8 @@ Here are relationship between observation periods and fields appropriately:
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
                 mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
+				minFeelsLikeTemperatureInCelsius,minFeelsLikeTemperatureInFahrenheit,minFeelsLikeTemperatureInKelvin,
+				maxFeelsLikeTemperatureInCelsius,maxFeelsLikeTemperatureInFahrenheit,maxFeelsLikeTemperatureInKelvin,
                 precipitationAmountInMillimeter,precipitationAmountInInch,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,
                 precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,
                 precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,
@@ -798,6 +802,8 @@ Here are relationship between observation periods and fields appropriately:
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
                 mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
+				minFeelsLikeTemperatureInCelsius,minFeelsLikeTemperatureInFahrenheit,minFeelsLikeTemperatureInKelvin,
+				maxFeelsLikeTemperatureInCelsius,maxFeelsLikeTemperatureInFahrenheit,maxFeelsLikeTemperatureInKelvin,
                 convectivePrecipitationProbabilityInPercent,precipitationAmountInMillimeter,precipitationAmountInInch,
                 maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,
                 precipitationProbabilityMoreThan0_2MillimeterInPercent,precipitationProbabilityMoreThan1_4MillimeterInPercent,precipitationProbabilityMoreThan4_4MillimeterInPercent,
@@ -810,6 +816,8 @@ Here are relationship between observation periods and fields appropriately:
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
                 mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,
+				minFeelsLikeTemperatureInCelsius,minFeelsLikeTemperatureInFahrenheit,minFeelsLikeTemperatureInKelvin,
+				maxFeelsLikeTemperatureInCelsius,maxFeelsLikeTemperatureInFahrenheit,maxFeelsLikeTemperatureInKelvin,
                 precipitationAmountInMillimeter,precipitationAmountInInch,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,
                 precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,
                 precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,mostSignificantWeatherCode,mostSignificantWeatherCodeTraditional,
@@ -833,6 +841,7 @@ Here are relationship between observation periods and fields appropriately:
     UVIndexWithClouds = clearSkyUVIndex * (1.0 - 0.9 * (effectiveCloudCoverInOcta / 8)^2) + 0.4
 + The minVisibilityInMeter parameters for PT3H, PT6H, PT12H and PT24H are calculated as a min value of the visibilityInMeter parameter from PT0S for the last 3, 6, 12 and 24 hours respectively,
     including marginal values. E.g for PT3H period 4 PT0S values are used to cover the full three hours (validUntil-3h,validUntil-2h,validUntil-1h and validUntil).
++ The min/max FeelsLikeTemperatureIn Celsius/Fahrenheit/Kelvin parameters for PT3H, PT6H, PT12H and PT24H are calculated as a min/max value of the feelsLikeTemperatureIn Celsius/Fahrenheit/Kelvin parameter from PT0S for the last 3, 6, 12 and 24 hours respectively, including marginal values. E.g for PT3H period 4 PT0S values are used to cover the full three hours (validUntil-3h,validUntil-2h,validUntil-1h and validUntil).
     
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
