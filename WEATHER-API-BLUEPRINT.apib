@@ -63,11 +63,15 @@ Here are relationship between observation periods and fields appropriately:
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
                 precipitationAmountInInch
-- **PT3H** -    pressureTendencyCode, pressureChangeInHectoPascal,precipitationAmountInMillimeter,precipitationAmountInInch
-- **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch
+- **PT3H** -    pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
+                maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots
+- **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort,
+                maxWindGustInKnots
 - **PT12H** -   temperatureMaxInCelsius, temperatureMaxInFahrenheit, temperatureMaxInKelvin, temperatureMinInCelsius, temperatureMinInFahrenheit, temperatureMinInKelvin,
-                precipitationAmountInMillimeter,precipitationAmountInInch
-- **PT24H** -   precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours, sunshineDurationInMinutes
+                precipitationAmountInMillimeter, precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour,
+                maxWindGustInBeaufort, maxWindGustInKnots
+- **PT24H** -   precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours, sunshineDurationInMinutes, maxWindGustInMeterPerSecond,
+                maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots
 
 The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
 The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
