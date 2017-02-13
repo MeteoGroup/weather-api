@@ -49,6 +49,25 @@ For convenience reasons, a single location can be requested, but the response al
 For multiple locations, its recommended to just use the point compression.
 The observations in the response collection are "flat" to allow easy streaming and filtering on client side.
 The observations in the response are ordered ascending by field 'observedFrom'.
+The pressureTendency field returns string values based on the following table:
+
+WMO table 010063: CHARACTERISTIC OF PRESSURE TENDENCY
+ 
+code  meaning
+----  -------
+   0  INCREASING, THEN DECREASING: ATMOSPHERIC PRESSURE THE SAME OR HIGHER THAN
+      3 HOURS AGO
+   1  INCREASING, THEN STEADY; OR INCREASING; THEN MORE SLOWLY
+   2  INCREASING (STEADILY OR UNSTEADILY )
+   3  DECREASING OR STEADY, THEN INCREASING; RAPIDLY
+   4  STEADY; ATMOSPHERIC PRESSURE THE SAME AS 3 HOURS AGO
+   5  DECREASING; THEN INCREASING; ATMOSPHERIC PRESSURE THE SAME OR LOWER THAN 
+      3 HOURS AGO
+   6  DECREASING, THEN STEADY; OR DECREASING, DECREASING MORE SLOWLY
+   7  DECREASING (STEADILY OR UNSTEADELY )
+   8  STEADY OR INCREASING, THEN DECREASING; OR DECREASING, THEN DECREASING MORE
+      RAPIDLY
+  15  MISSING VALUE
 
 *Fields mapping*
 
