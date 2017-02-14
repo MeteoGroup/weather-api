@@ -800,12 +800,12 @@ Here are relationship between observation periods and fields appropriately:
                 effectiveCloudCoverInOcta, totalCloudCoverInOcta,cloudCoverLowerThan2000MeterInOcta,cloudCoverLowerThan5000MeterInOcta,cloudBaseHeightInMeter,relativeHumidityInPercent,
                 visibilityInMeter,weatherCode,weatherCodeTraditional,clearSkyUVIndex,airTemperatureErrorInKelvin,windSpeedErrorInKnots,freezingLevelHeightInMeter,
                 freezingRainProbabilityInPercent,noSnowPossibleBelowHeightInMeter,snowCertainAboveHeightInMeter,saturationDeficitInHectoPascal,
-                airTemperatureNearGroundInCelsius,visibilityProbabilityLessThan200MeterInPercent,visibilityProbabilityLessThan1000MeterInPercent
+                airTemperatureNearGroundInCelsius,visibilityProbabilityLessThan200MeterInPercent,visibilityProbabilityLessThan1000MeterInPercent,
+				convectivePrecipitationProbabilityInPercent,precipitationProbabilityInPercent,precipitationType,hailProbabilityInPercent,
+				snowFallProbabilityInPercent,thunderstormProbabilityInPercent
 - **PT1H** -    maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,sunshineDurationInMinutes,precipitationAmountInMillimeter,precipitationAmountInInch,
-                precipitationProbabilityInPercent,convectivePrecipitationProbabilityInPercent,maxPrecipitationAmountInMillimeter,precipitationType,
-                hailProbabilityInPercent,directRadiationInJoulePerSquareCentimeter,globalRadiationInJoulePerSquareCentimeter,relativeGlobalRadiationInPercent,
+                maxPrecipitationAmountInMillimeter,directRadiationInJoulePerSquareCentimeter,globalRadiationInJoulePerSquareCentimeter,relativeGlobalRadiationInPercent,
                 freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,relativeSunshineDurationInPercent,windGustProbabilityGreaterThan40KnotsInPercent,
-                snowFallProbabilityInPercent,thunderstormProbabilityInPercent
 - **PT3H** -    maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,
                 minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
                 maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
@@ -860,9 +860,9 @@ Here are relationship between observation periods and fields appropriately:
 + The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureError.
 + min/maxAirTemperature
     + The min/maxAirTemperature parameters for the PT3H, PT6H are calculated as a min/max value of the airTemperature parameter for previous 3 and 6 hours respectively.
-    + The minAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula  
+    + The minAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula
         minAirTemperatureInCelsius = -2.46934 + 0.85674 * minAirTemperatureInCelsiusValueForPrevious12Hours + 0.10476 * maxAirTemperatureInCelsiusValueForPrevious12Hours + 0.03747 * windSpeedInKnotsValueInTheMiddleOf12HourPeriod + 0.23575 * effectiveCloudCoverInOctaValueInTheMiddleOf12HourPeriod + 0.02364 * effectiveCloudCoverInOctaValueAtTheEndOf12HourPeriod
-    + The maxAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula  
+    + The maxAirTemperatureInCelsius parameter for the PT12H is calculated using the following formula
         maxAirTemperatureInCelsius = 0.566 + 1.01062 * maxAirTemperatureInCelsiusValueForPrevious12Hours + 0.0289 * totalCloudCoverInOctaInTheMiddleOf12HourPeriod -0.03689 * lowCloudCoverInOctaInTheMiddleOf12HourPeriod - 0.0162 * minAirTemperatureInCelsiusValueForPrevious12Hours
     + The min/maxAirTemperature parameter for the PT24H is calculated as min/max value of two previous PT12H min/maxAirTemperature values respectively.
 + The maxUVIndexWithClouds parameter is calculated as a maximum of hourly values
@@ -870,7 +870,7 @@ Here are relationship between observation periods and fields appropriately:
 + The minVisibilityInMeter parameters for PT3H, PT6H, PT12H and PT24H are calculated as a min value of the visibilityInMeter parameter from PT0S for the last 3, 6, 12 and 24 hours respectively,
     including marginal values. E.g for PT3H period 4 PT0S values are used to cover the full three hours (validUntil-3h,validUntil-2h,validUntil-1h and validUntil).
 + The min/max FeelsLikeTemperatureIn Celsius/Fahrenheit/Kelvin parameters for PT3H, PT6H, PT12H and PT24H are calculated as a min/max value of the feelsLikeTemperatureIn Celsius/Fahrenheit/Kelvin parameter from PT0S for the last 3, 6, 12 and 24 hours respectively, including marginal values. E.g for PT3H period 4 PT0S values are used to cover the full three hours (validUntil-3h,validUntil-2h,validUntil-1h and validUntil).
-    
+
 
 ### Forecasted weather for a given *latitude* and *longitude* [GET]
 
@@ -896,6 +896,7 @@ Here are relationship between observation periods and fields appropriately:
 			"dewPointTemperatureInCelsius" : 13.3,
 			"feelsLikeTemperatureInCelsius" : 21.2,
 			"visibilityProbabilityLessThan200MeterInPercent" : 1,
+			"precipitationProbabilityInPercent" : 5,
 			"weatherCode" : 4,
 			"locatedAt" : [-16.78, 32.69],
 			"validUntil" : "2016-12-13T11:00:00Z",
@@ -904,7 +905,6 @@ Here are relationship between observation periods and fields appropriately:
 			"validPeriod" : "PT0S"
 		}, {
 			"relativeGlobalRadiationInPercent" : 82,
-			"precipitationProbabilityInPercent" : 5,
 			"locatedAt" : [-16.78, 32.69],
 			"validUntil" : "2016-12-13T11:00:00Z",
 			"validFrom" : "2016-12-13T10:00:00Z",
@@ -913,6 +913,7 @@ Here are relationship between observation periods and fields appropriately:
 			"dewPointTemperatureInCelsius" : 13.6,
 			"feelsLikeTemperatureInCelsius" : 21.4,
 			"visibilityProbabilityLessThan200MeterInPercent" : 0,
+			"precipitationProbabilityInPercent" : 7,
 			"weatherCode" : 4,
 			"locatedAt" : [-16.78, 32.69],
 			"validUntil" : "2016-12-13T12:00:00Z",
@@ -921,7 +922,6 @@ Here are relationship between observation periods and fields appropriately:
 			"validPeriod" : "PT0S"
 		}, {
 			"relativeGlobalRadiationInPercent" : 77,
-			"precipitationProbabilityInPercent" : 7,
 			"locatedAt" : [-16.78, 32.69],
 			"validUntil" : "2016-12-13T12:00:00Z",
 			"validFrom" : "2016-12-13T11:00:00Z",
