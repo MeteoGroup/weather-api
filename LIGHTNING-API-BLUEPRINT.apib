@@ -21,13 +21,14 @@ Clients should ignore unknown parameters, to avoid technical issues.
 
 # Group Lightning
 
-## Retrieve lightning observation [?provider={provider1,provider2}&locationWithin={lonTopLeft,latTopLeft,lonBottomRigth,latBottomRigth}&occurrenceFrom={startTime}&occurrenceUntil={endTime}]
-## Retrieve lightning observation [?provider={provider1,provider2}&locationWithin={lonTopLeft,latTopLeft,lonBottomRigth,latBottomRigth}&occuredFrom={startTime}]
+## Retrieve lightning observation [?provider={provider1,provider2}&locationWithin={lonTopLeft,latTopLeft,lonBottomRight,latBottomRight}&occurrenceFrom={startTime}&occurrenceUntil={endTime}]
+## Retrieve lightning observation [?provider={provider1,provider2}&locationWithin={lonTopLeft,latTopLeft,lonBottomRight,latBottomRight}&occurredFrom={startTime}]
 
 #### Example
-https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[10,80],[-10,5]&occurrenceFrom=2017-01-05T12:21:14Z&occurrenceUntil=2017-01-05T12:21:15Z
-https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[10,80],[-10,5]&occurrenceFrom=2017-01-05T12:21:14Z
-https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[10,80],[-10,5]
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]&occurrenceFrom=2017-01-05T12:21:14Z&occurrenceUntil=2017-01-05T12:21:15Z
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]&occurrenceFrom=2017-01-05T12:21:14Z
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]
+
 
 ### Observed lightning for a given boundingBox and time period
 
@@ -37,7 +38,7 @@ bounding box locations during period of time specified in parameters.
 
 
 + Parameters
-    + locationWithin: `[10,80],[-10,5]`   (longitude top left,
+    + locationWithin: `[-10,80],[10,5]`   (longitude top left,
                                            latitude top left,
                                            longitude bottom right,
                                            latitude bottom_right, required)
@@ -72,7 +73,7 @@ bounding box locations during period of time specified in parameters.
                  "heightInKilometer":0,
                  "currentInAmpere":4500,
                  "location":[
-                    41.6345,
+                    9.6345,
                     19.3064
                  ]
               },
@@ -83,11 +84,95 @@ bounding box locations during period of time specified in parameters.
                  "heightInKilometer":0,
                  "currentInAmpere":4700,
                  "location":[
-                    42.6345,
+                    8.6345,
                     20.3064
                  ]
-              }
+              },
+               {
+                  "provider": "NOWCAST",
+                  "occurredAt": "2017-01-05T12:20:14.974Z",
+                  "heightInKilometer": 0,
+                  "strokeType": "CLOUD_TO_GROUND",
+                  "currentInAmpere": -3500,
+                  "location": [
+                    9.3345,
+                    19.7064
+                  ]
+                }
            ]
         }
+
+#
+
+# Weighted Lightning
+
+## Retrieve weighted lightning observation [?timeSpan={timeSpan}&spatialResolution={resolution}&locationWithin={lonTopLeft,latTopLeft,lonBottomRight,latBottomRight}&occurrenceFrom={startTime}&occurrenceUntil={endTime}]
+## Retrieve weighted lightning observation [?timeSpan={timeSpan}&spatialResolution={resolution}&locationWithin={lonTopLeft,latTopLeft,lonBottomRight,latBottomRight}&occurredFrom={startTime}]
+
+
+#### Example
+https://lightning.weather.mg/weigh?&timeSpan=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]&occurrenceFrom=2017-01-05T12:19:14Z&occurrenceUntil=2017-01-05T12:21:15Z
+https://lightning.weather.mg/weigh?&timeSpan=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]&occurrenceFrom=2017-01-05T12:19:14Z
+https://lightning.weather.mg/weigh?&timeSpan=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]
+
+### Observed weighted lightning for a given boundingBox, time period, weighted by time span and spatial resolution
+
+This resource provides data from existing lightning observation providers.
+For any request service returns a set of lightnings occurred in geographical
+bounding box locations during period of time specified in parameters.
+
+
++ Parameters
+    + timeSpan: 'PT15M, PT5M' (string required)
+         - time span interval in which lightning should be weighted
+
+    + spatialResolution '0.5, 0.25, 0.05' (string required)
+         - spatial resolution within which lightning should be weighted
+
+    + locationWithin: `[-10,80],[10,5]`   (longitude top left,
+                                           latitude top left,
+                                           longitude bottom right,
+                                           latitude bottom_right, required)
+        - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32,
+        - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
+
+    + occurrenceFrom: `2017-01-05T12:21:14Z` (start time range, optional)
+        - start lightning observation time. End time is current time by default, setup by the service.
+
+    + occurrenceUntil: `2017-01-05T12:21:15Z` (end time range, optional)
+        - time range period for lightning observation.
+
+
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
+
+    + Body
+           {
+           	"weightedLightningList": [{
+            			"occurredFrom": "2017-01-05T12:15:00.000Z",
+            			"currentSum": 8000,
+            			"weightedLocation": [9.5033, 19.4814],
+            			"strikesNumber": 2,
+            			"timeSpan": "PT15M",
+            			"occurredTo": "2017-01-05T12:30:00.000Z",
+            			"region": [[9.25, 19.75], [9.75, 19.25]],
+            			"weightedObservation": "2017-01-05T12:20:47.000Z"
+            		}, {
+            			"occurredFrom": "2017-01-05T12:15:00.000Z",
+            			"currentSum": 4700,
+            			"weightedLocation": [8.6345, 20.3064],
+            			"strikesNumber": 1,
+            			"timeSpan": "PT15M",
+            			"occurredTo": "2017-01-05T12:30:00.000Z",
+            			"region": [[8.25, 20.75], [8.75, 20.25]],
+            			"weightedObservation": "2017-01-05T12:21:14.000Z"
+            		}
+            ]
+          }
+
 
 #
