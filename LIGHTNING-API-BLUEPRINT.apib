@@ -29,6 +29,10 @@ https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10
 https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]&occurrenceFrom=2017-01-05T12:21:14Z
 https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]
 
+##### Limitation
+Lambda service response can have size < 6MB which is near 25000 records
+If locationWithin is worldwide [-180, 90][180, -90] and occurrence ~3 days it is big probability that response is > 6Mb
+In such scenario service respond only first 25000 records.
 
 ### Observed lightning for a given boundingBox and time period
 
