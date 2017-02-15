@@ -1,0 +1,90 @@
+FORMAT: 1A
+HOST: https://air-quality-forecast.weather.mg/
+
+# Air Quality Forecast Service
+
+## HTTP Status Codes
+This API uses HTTP status codes to communicate with the API consumer .
+
++ `200 OK` - Response to a successful GET.
++ `400 Bad Request` - Malformed request; validation errors.
++ `401 Unauthorized` - When no or invalid authentication details are provided.
++ `403 Forbidden` - When authentication succeeded but authenticated user doesn't have access to the resource.
++ `404 Not Found` - When a non-existent resource is requested.
++ `405 Method Not Allowed` - Method not allowed.
++ `415 Unsupported Media Type` - Unsupported media type in request.
+
+## Error Responses
+
+This API returns HTTP status code `400 Bad Request` and human-readable error messages in response body when an error is encountered.
+
+### Generic Errors
+
+Example:
+```
+{
+    "__ERROR__": [
+        "Something weird happened."
+    ]
+}
+```
+
+### Validation Errors
+
+Example:
+```
+{
+    "locatedAt": [
+        "Required field cannot be left blank."
+    ]
+}
+```
+
+## Search [/search?locatedAt={locatedAt}&fields={fields} ]
+
+### Search forecast for multiple locations [GET ]
+
++ Parameters
+    + locatedAt: `-2.2323,47.4593` (string, required) - longitude,latitude; can occur multiple times. Or compressed list of station locations using Microsoft Point Compression algorithm.
+    + fields: `airPollutionIndex,pollenIndex` (string, required) - comma separated list
+    
++ Response 200 (application/json)
+    
+    Returns forecasts for today + 4 days.
+    
+    + Body
+        
+            {
+                "forecasts": [
+                    {
+                        "locatedAt": [
+                            -2.2323,
+                            47.4593
+                        ],
+                        "forecastLocation": [
+                            -2.2323,
+                            47.4593
+                        ],
+                        "publishedAt": "2017-01-22T12:40:51Z",
+                        "validFrom" : "2017-01-23T15:00:00Z",
+                        "validUntil" : "2017-01-24T15:00:00Z",
+                        "period": "PT24H",
+                        "airPollutionIndex": 2
+                    },
+                    {
+                        "locatedAt": [
+                            -2.2323,
+                            47.4593
+                        ],
+                        "forecastLocation": [
+                            -2.43,
+                            48.3
+                        ],
+                        "publishedAt": "2017-01-22T12:40:51Z",
+                        "validFrom" : "2017-01-23T12:00:00Z",
+                        "validUntil" : "2017-01-24T12:00:00Z",
+                        "period": "PT24H",
+                        "pollenIndex": 2
+                    }
+                ]
+            }
