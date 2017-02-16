@@ -40,12 +40,12 @@ Example:
 }
 ```
 
-## Search [/search?locatedAt={locatedAt}&fields={fields} ]
+## Search [/search?locatedAt={locatedAt}&fields={fields}]
 
-### Search forecast for multiple locations [GET ]
+### Search air pollution and pollen forecasts for locations [GET]
 
 + Parameters
-    + locatedAt: `-2.2323,47.4593` (string, required) - longitude,latitude; can occur multiple times. Or compressed list of station locations using Microsoft Point Compression algorithm.
+    + locatedAt: `-2.2323,47.4593` (string, required) - longitude,latitude;
     + fields: `airPollutionIndex,pollenIndex` (string, required) - comma separated list
     
 + Response 200 (application/json)
@@ -88,3 +88,4 @@ Example:
                     }
                 ]
             }
+#
