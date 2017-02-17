@@ -22,7 +22,7 @@ Clients should ignore unknown parameters, to avoid technical issues.
 
 # Group Observation
 
-## Retrieve weather observation [/search?locatedAt={locatedAt}&stationIds={stationIds}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}]
+## Retrieve weather observation [/search?locatedAt={locatedAt}&meteoGroupStationIds={stationIds}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}]
 
 For any requested location a relevant station is searched.
 The searching algorithm stops at a maximum distance of 100km (between requested location and station)
@@ -96,7 +96,7 @@ The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present wea
 The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
 
 + Parameters
-    + stationIds: `3007237` (string, optional) - station ids; can be several stations separated by comma
+    + meteoGroupStationIds: `3007237` (string, optional) - station ids; can be several stations separated by comma
     + locatedAt: `-2.2323,47.4593` (string, optional) - longitude,latitude; can occur multiple times for multiple stations
     + locatedAt: `joionluqqFvwqmo629nC` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations,
     + fields: `meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,sunshineDurationInMinutes,airTemperatureInCelsius,windGustInKnots,windSpeedInKnots...` (string, required) - comma separated list of parameters to be contained inside response. All possible names are present in section 'Fields names'
@@ -356,9 +356,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
 ### Retrieve weather observation for multiple station IDs [GET]
 
 #### Example
-`https://point-observation.weather.mg/search?stationIds=3007237,3007300&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendency,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
+`https://point-observation.weather.mg/search?meteoGroupStationIds=3007237,3007300&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendency,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
 
-+ Request Search weather observation data for given stationIds
++ Request Search weather observation data for given meteoGroupStationIds
 
     + Headers
 
@@ -695,14 +695,14 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
             ]
           }
 
-### Retrieve weather observation by BUOY ID [GET]. Please be aware that querying observation by BUOY|SHIP|PLATFORM is totaly the same as querying observations by stationIds.
-The same endpoint as for querying observation by stationIds is being used. The stationId for either BUOY|SHIP|PLATFORM has to be built by the next rule: NAME + LOCATOR columns from FMDecoded file.
+### Retrieve weather observation by BUOY ID [GET]. Please be aware that querying observation by BUOY|SHIP|PLATFORM is totaly the same as querying observations by meteoGroupStationIds.
+The same endpoint as for querying observation by meteoGroupStationIds is being used. The stationId for either BUOY|SHIP|PLATFORM has to be built by the next rule: NAME + LOCATOR columns from FMDecoded file.
 Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLATFORMs. The only one way to determine the ID is to use real FMDecoded source file.
 
 #### Example
-`https://point-observation.weather.mg/search?stationIds=41044BUOY&observedPeriod=PT0S,PT12H,PT1H,PT24H,PT3H&fields=airPressureInHectoPascal,airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin,effectiveCloudCoverInOcta,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,meteoGroupStationId,meteoGroupStationName,precipitationAmountInInch,precipitationAmountInMillimeter,pressureChangeInHectoPascal,pressureTendency,relativeHumidityInPercent,stationLocation,stationTimeZoneName,sunshineDurationInHours,sunshineDurationInMinutes,temperatureMaxInCelsius,temperatureMaxInFahrenheit,temperatureMaxInKelvin,temperatureMinInCelsius,temperatureMinInFahrenheit,temperatureMinInKelvin,totalCloudCoverInOcta,visibilityInKilometer,visibilityInMeter,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,weatherCodeTraditional,windDirectionInDegree,windGustInBeaufort,windGustInKilometerPerHour,windGustInKnots,windGustInMeterPerSecond,windGustInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windSpeedInKnots,windSpeedInMeterPerSecond,windSpeedInMilesPerHour&observedFrom=2016-12-28T06:00:00.753Z&observedUntil=2016-12-28T08:00:00.753Z`
+`https://point-observation.weather.mg/search?meteoGroupStationIds=41044BUOY&observedPeriod=PT0S,PT12H,PT1H,PT24H,PT3H&fields=airPressureInHectoPascal,airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin,effectiveCloudCoverInOcta,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,meteoGroupStationId,meteoGroupStationName,precipitationAmountInInch,precipitationAmountInMillimeter,pressureChangeInHectoPascal,pressureTendency,relativeHumidityInPercent,stationLocation,stationTimeZoneName,sunshineDurationInHours,sunshineDurationInMinutes,temperatureMaxInCelsius,temperatureMaxInFahrenheit,temperatureMaxInKelvin,temperatureMinInCelsius,temperatureMinInFahrenheit,temperatureMinInKelvin,totalCloudCoverInOcta,visibilityInKilometer,visibilityInMeter,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,weatherCodeTraditional,windDirectionInDegree,windGustInBeaufort,windGustInKilometerPerHour,windGustInKnots,windGustInMeterPerSecond,windGustInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windSpeedInKnots,windSpeedInMeterPerSecond,windSpeedInMilesPerHour&observedFrom=2016-12-28T06:00:00.753Z&observedUntil=2016-12-28T08:00:00.753Z`
 
-+ Request Search weather observation data for given stationIds
++ Request Search weather observation data for given meteoGroupStationIds
 
     + Headers
 
@@ -798,7 +798,7 @@ Here are relationship between observation periods and fields appropriately:
                 dewPointTemperatureInKelvin,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,airPressureAtSeaLevelInHectoPascal,
                 windSpeedInMeterPerSecond,windSpeedInKnots,windSpeedInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windDirectionInDegree,
                 effectiveCloudCoverInOcta, totalCloudCoverInOcta,cloudCoverLowerThan2000MeterInOcta,cloudCoverLowerThan5000MeterInOcta,cloudBaseHeightInMeter,relativeHumidityInPercent,
-                visibilityInMeter,weatherCode,weatherCodeTraditional,clearSkyUVIndex,airTemperatureErrorInKelvin,windSpeedErrorInKnots,freezingLevelHeightInMeter,
+                visibilityInMeter,weatherCode,weatherCodeTraditional,clearSkyUVIndex,uvIndexWithClouds,airTemperatureErrorInKelvin,windSpeedErrorInKnots,freezingLevelHeightInMeter,
                 freezingRainProbabilityInPercent,noSnowPossibleBelowHeightInMeter,snowCertainAboveHeightInMeter,saturationDeficitInHectoPascal,
                 airTemperatureNearGroundInCelsius,visibilityProbabilityLessThan200MeterInPercent,visibilityProbabilityLessThan1000MeterInPercent,
 				convectivePrecipitationProbabilityInPercent,precipitationProbabilityInPercent,precipitationType,hailProbabilityInPercent,
