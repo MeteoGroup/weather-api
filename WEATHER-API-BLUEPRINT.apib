@@ -79,9 +79,9 @@ Here are relationship between observation periods and fields appropriately:
                 feelsLikeTemperatureInKelvin, airPressureInHectoPascal, windSpeedInMeterPerSecond, windSpeedInKilometerPerHour, windSpeedInMilesPerHour,
                 windSpeedInBeaufort, windSpeedInKnots, windDirectionInDegree, dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, dewPointTemperatureInKelvin,
                 relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
-                visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional
+                visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
-                precipitationAmountInInch
+                precipitationAmountInInch,freshSnowfallInCentimeter,freshSnowfallInInch
 - **PT3H** -    pressureTendency, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
                 maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, pressureTendencyCode
 - **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort,
@@ -107,7 +107,7 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
 ### Search for observation data for multiple given locations [GET]
 
 #### Example
-`https://point-observation.weather.mg/search?locatedAt=-2.2323,47.4593&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendency,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
+`https://point-observation.weather.mg/search?locatedAt=-2.2323,47.4593&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendency,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal,snowDepthInCentimeter,snowDepthInInch,freshSnowfallInCentimeter,freshSnowfallInInch`
 
 + Request Search weather observation data for given locatedAt
 
@@ -161,7 +161,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
-                "weatherCodeTraditional": 2
+                "weatherCodeTraditional": 2,
+				"snowDepthInCentimeter": 10.8,
+				"snowDepthInInch": 4.252
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -178,7 +180,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windGustInBeaufort": 1,
                 "windGustInKnots": 1.5999997,
                 "precipitationAmountInMillimeter": 0.7,
-                "precipitationAmountInInch": 0.028
+                "precipitationAmountInInch": 0.028,
+				"freshSnowfallInCentimeter": 1.5,
+				"freshSnowfallInInch": 0.591
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -272,7 +276,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
-                "weatherCodeTraditional": 2
+                "weatherCodeTraditional": 2,
+				"snowDepthInCentimeter": 5.4,
+				"snowDepthInInch": 2.126
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -289,7 +295,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windGustInBeaufort": 1,
                 "windGustInKnots": 1.8999995,
                 "precipitationAmountInMillimeter": 0.5,
-                "precipitationAmountInInch": 0.02
+                "precipitationAmountInInch": 0.02,
+				"freshSnowfallInCentimeter": 1,
+				"freshSnowfallInInch": 0.394
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -409,7 +417,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
-                "weatherCodeTraditional": 2
+                "weatherCodeTraditional": 2,
+				"snowDepthInCentimeter": 10.8,
+				"snowDepthInInch": 4.252
               },
               {
                 "meteoGroupStationId": "3007237",
@@ -425,7 +435,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windGustInBeaufort": 1.0,
                 "windGustInKnots": 1.5999997,
                 "precipitationAmountInMillimeter": 0.7,
-                "precipitationAmountInInch": 0.028
+                "precipitationAmountInInch": 0.028,
+				"freshSnowfallInCentimeter": 1.5,
+				"freshSnowfallInInch": 0.591
               },
               {
                 "meteoGroupStationId": "3007237",
@@ -514,7 +526,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
-                "weatherCodeTraditional": 2
+                "weatherCodeTraditional": 2,
+				"snowDepthInCentimeter": 5.4,
+				"snowDepthInInch": 2.126
               },
               {
                 "meteoGroupStationId": "3007237",
@@ -530,7 +544,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windGustInBeaufort": 1.0,
                 "windGustInKnots": 1.8999995,
                 "precipitationAmountInMillimeter": 0.5,
-                "precipitationAmountInInch": 0.02
+                "precipitationAmountInInch": 0.02,
+				"freshSnowfallInCentimeter": 1,
+				"freshSnowfallInInch": 0.394
               },
               {
                 "meteoGroupStationId": "3007237",
@@ -619,7 +635,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
-                "weatherCodeTraditional": 2
+                "weatherCodeTraditional": 2,
+				"snowDepthInCentimeter": 25.2,
+				"snowDepthInInch": 9.921
               },
               {
                 "meteoGroupStationId": "3007300",
@@ -635,7 +653,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windGustInBeaufort": 1.0,
                 "windGustInKnots": 1.8999995,
                 "precipitationAmountInMillimeter": 0,
-                "precipitationAmountInInch": 0
+                "precipitationAmountInInch": 0,
+				"freshSnowfallInCentimeter": 5.5,
+				"freshSnowfallInInch": 2.165
               },
               {
                 "meteoGroupStationId": "3007300",
