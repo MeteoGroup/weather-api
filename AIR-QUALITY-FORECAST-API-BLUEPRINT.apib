@@ -14,31 +14,6 @@ This API uses HTTP status codes to communicate with the API consumer .
 + `405 Method Not Allowed` - Method not allowed.
 + `415 Unsupported Media Type` - Unsupported media type in request.
 
-## Error Responses
-
-This API returns HTTP status code `400 Bad Request` and human-readable error messages in response body when an error is encountered.
-
-### Generic Errors
-
-Example:
-```
-{
-    "__ERROR__": [
-        "Something weird happened."
-    ]
-}
-```
-
-### Validation Errors
-
-Example:
-```
-{
-    "locatedAt": [
-        "Required field cannot be left blank."
-    ]
-}
-```
 
 ## Search [/search?locatedAt={locatedAt}&fields={fields}]
 
