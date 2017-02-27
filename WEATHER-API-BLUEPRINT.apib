@@ -81,7 +81,7 @@ Here are relationship between observation periods and fields appropriately:
                 relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
-                precipitationAmountInInch,freshSnowfallInCentimeter,freshSnowfallInInch
+                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch
 - **PT3H** -    pressureTendency, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
                 maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, pressureTendencyCode
 - **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort,
@@ -90,7 +90,7 @@ Here are relationship between observation periods and fields appropriately:
                 precipitationAmountInMillimeter, precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour,
                 maxWindGustInBeaufort, maxWindGustInKnots, pressureTendency
 - **PT24H** -   precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours, sunshineDurationInMinutes, maxWindGustInMeterPerSecond,
-                maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, pressureTendency
+                maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, pressureTendency, freshSnowfallInCentimeter, freshSnowfallInInch
 
 The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
 The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
@@ -241,7 +241,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "precipitationAmountInMillimeter": 6,
                 "precipitationAmountInInch": 0.236,
                 "sunshineDurationInHours": 12,
-                "sunshineDurationInMinutes": 720.0
+                "sunshineDurationInMinutes": 720.0,
+                "freshSnowfallInCentimeter": 5.5,
+                "freshSnowfallInInch": 2.165
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -356,7 +358,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "precipitationAmountInMillimeter": 6.1,
                 "precipitationAmountInInch": 0.24,
                 "sunshineDurationInHours": 12,
-                "sunshineDurationInMinutes": 720.0
+                "sunshineDurationInMinutes": 720.0,
+                "freshSnowfallInCentimeter": 5.5,
+                "freshSnowfallInInch": 2.165
               }
             ]
           }
@@ -492,7 +496,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "precipitationAmountInMillimeter": 6,
                 "precipitationAmountInInch": 0.236,
                 "sunshineDurationInHours": 12.0,
-                "sunshineDurationInMinutes": 720.0
+                "sunshineDurationInMinutes": 720.0,
+                "freshSnowfallInCentimeter": 5.5,
+                "freshSnowfallInInch": 2.165
               },
               {
                 "meteoGroupStationId": "3007237",
@@ -601,7 +607,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "precipitationAmountInMillimeter": 6.1,
                 "precipitationAmountInInch": 0.24,
                 "sunshineDurationInHours": 12.0,
-                "sunshineDurationInMinutes": 720.0
+                "sunshineDurationInMinutes": 720.0,
+                "freshSnowfallInCentimeter": 5.5,
+                "freshSnowfallInInch": 2.165
               },
               {
                 "meteoGroupStationId": "3007300",
@@ -710,7 +718,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "precipitationAmountInMillimeter": 0.1,
                 "precipitationAmountInInch": 0.004,
                 "sunshineDurationInHours": 12.0,
-                "sunshineDurationInMinutes": 720.0
+                "sunshineDurationInMinutes": 720.0,
+                "freshSnowfallInCentimeter": 5.5,
+                "freshSnowfallInInch": 2.165
               }
             ]
           }
