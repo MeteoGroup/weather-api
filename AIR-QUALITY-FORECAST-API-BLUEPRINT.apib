@@ -28,9 +28,9 @@ The token is only a valid for a limited time, after this it will expired and you
 HTTP GET request to the endpoints needs to provide Authorization Token into **Authorization** HTTP Header.
 More information about JWT token might be found here: https://en.wikipedia.org/wiki/JSON_Web_Token.
 
-The example is: HTTP Header: "Authorization" : "Bearer {ENCRYPTED TOKEN HERE}"
+HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
 
-The Authorization contains the Scopes which the client is allowed to have. (**air-quality-forecast** is the scope which allows to request Air Quality Forecast Service)
+The Authorization token contains the Scopes which the client is allowed to have. (**air-quality-forecast** is the scope which allows to request Air Quality Forecast Service)
 
 ### Search [/search?locatedAt={locatedAt}&fields={fields}]
 
