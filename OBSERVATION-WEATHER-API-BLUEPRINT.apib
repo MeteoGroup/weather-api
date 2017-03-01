@@ -27,16 +27,16 @@ Once you have your client credentials (Client-ID + Password), you can request a 
 The token will be in the return message, encrypted with a key from the authorization service.
 
 It will contain the client-ID, scopes and expiration date.
-The token is only a valid for a limited time, after this it is expired and you have to request a token again.
+The token is only a valid for a limited time, after this it will expired and you have to request a new token again.
 
 #### Using Authorization Token
 
-HTTP GET request to the endpoints needs to provide JWT Bearer Token into **Authorization** HTTP Header.
+HTTP GET request to the endpoints needs to provide Authorization Token into **Authorization** HTTP Header.
 More information about JWT token might be found here: https://en.wikipedia.org/wiki/JSON_Web_Token.
 
-HTTP Header: "Authorization" : "Bearer {ENCRYPTED TOKEN HERE}"
+The example is: HTTP Header: "Authorization" : "Bearer {ENCRYPTED TOKEN HERE}"
 
-The JWT-Token contains the Scopes which the client is allowed to have. (Eg.: **point-observation** is the scope which allows to request Point Observation Service)
+The Authorization contains the Scopes which the client is allowed to have. (**point-observation** is the scope which allows to request Point Observation Service)
 
 ### Backward compatibility
 
