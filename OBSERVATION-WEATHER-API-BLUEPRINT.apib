@@ -11,8 +11,22 @@ This document is using [API blueprint format](https://apiblueprint.org/documenta
 
 ### Authentication
 
-All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
-If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+All endpoints are **secured** using OAuth2 authorization protocol with transmitting data over HTTPS. The authorization flows are described here [authorization flow](http://oauthbible.com/#oauth-2-two-legged)
+
+#### Client Credentials
+Before getting an access to any endpoints, need to obtain **client id** and **client secret**. For achieving this, please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+
+#### Authorization Token
+Once you have your client credentials (Client-ID + Password), you can request a token on [Authorization server](https://auth.weather.mg/oauth/token?grant_type=client_credentials with http basic auth).
+The token will be in the return message, encrypted with a key from the authorization service. It will contain the client-ID, scopes and expiration date.
+The token is only a valid for a limited time, after this it is expired and you have to request a token again.
+
+#### Using Authorization Token
+
+GET request to the endpoints needs to provide JWT Bearer Token into **Authorization** HTTP Header: https://en.wikipedia.org/wiki/JSON_Web_Token
+"Authorization" : "Bearer {ENCRYPTED TOKEN HERE}"
+
+The JWT-Token contains the Scopes which the client is allowed to have. (Eg.: **point-observation** is the scope which allows to request Point Observation Service)
 
 ### Backward compatibility
 
