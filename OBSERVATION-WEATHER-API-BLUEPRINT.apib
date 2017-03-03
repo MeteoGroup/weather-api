@@ -106,9 +106,9 @@ Here are relationship between observation periods and fields appropriately:
                 relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
-                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch
-- **PT3H** -    pressureTendency, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
-                maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, pressureTendencyCode
+                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendency, pressureTendencyCode
+- **PT3H** -    pressureTendency, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
+                maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots
 - **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort,
                 maxWindGustInKnots, pressureTendency
 - **PT12H** -   temperatureMaxInCelsius, temperatureMaxInFahrenheit, temperatureMaxInKelvin, temperatureMinInCelsius, temperatureMinInFahrenheit, temperatureMinInKelvin,
@@ -207,7 +207,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "precipitationAmountInMillimeter": 0.7,
                 "precipitationAmountInInch": 0.028,
 				"freshSnowfallInCentimeter": 1.5,
-				"freshSnowfallInInch": 0.591
+				"freshSnowfallInInch": 0.591,
+				"pressureTendency": "STEADY",
+                "pressureTendencyCode": 4
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
