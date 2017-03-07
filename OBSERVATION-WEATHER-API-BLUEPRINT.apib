@@ -868,7 +868,20 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                  "meteoGroupStationName": "Rhyl",
                  "observedAt": "2017-01-11T09:00:00Z"
                }
-             ]
+             ],
+			 "maxWindSpeedInKnots": 10.1,
+			 "maxWindSpeedObservations": [
+               {
+                 "meteoGroupStationId": "43081",
+                 "meteoGroupStationName": "Baskervilles",
+                 "observedAt": "2017-01-13T00:00:00Z"
+               },
+               {
+                 "meteoGroupStationId": "30651",
+                 "meteoGroupStationName": "Leatherhead",
+                 "observedAt": "2017-01-13T06:00:00Z"
+               }
+			 ]
            }
 
 Here `observedUntil` and `observedFrom` fields represent period that has been used to recalculate extreme values.
