@@ -128,6 +128,7 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
     + observedFrom: `2016-10-15T08:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedUntil: `2016-10-15T09:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
+    + timeZone: `Europe/Paris` (string, optional) - Time zone refers to the IANA Time Zone Database (TZDB).
 
 ### Search for observation data for multiple given locations [GET]
 
@@ -159,8 +160,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T08:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-15T10:00:00+02:00",
+                "observedUntil": "2016-10-15T10:00:00+02:00",
                 "observedPeriod": "PT0S",
                 "airTemperatureInCelsius": 3.4,
                 "airTemperatureInFahrenheit": 38.12,
@@ -196,8 +197,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T07:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-15T09:00:00+02:00",
+                "observedUntil": "2016-10-15T10:00:00+02:00",
                 "observedPeriod": "PT1H",
                 "windGustInMeterPerSecond": 0.8231112,
                 "windGustInKilometerPerHour": 2.9632,
@@ -215,8 +216,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T05:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-15T07:00:00+02:00",
+                "observedUntil": "2016-10-15T10:00:00+02:00",
                 "observedPeriod": "PT3H",
                 "pressureChangeInHectoPascal": 2,
                 "pressureTendencyDescription": "INCREASING_THEN_STEADY",
@@ -230,8 +231,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T02:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-15T04:00:00+02:00",
+                "observedUntil": "2016-10-15T10:00:00+02:00",
                 "observedPeriod": "PT6H",
                 "precipitationAmountInMillimeter": 1.4,
                 "precipitationAmountInInch": 0.055
@@ -242,8 +243,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T20:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-14T22:00:00+02:00",
+                "observedUntil": "2016-10-15T10:00:00+02:00",
                 "observedPeriod": "PT12H",
                 "temperatureMaxInCelsius": 3.7,
                 "temperatureMaxInFahrenheit": 38.66,
@@ -260,8 +261,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T08:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-14T10:00:00+02:00",
+                "observedUntil": "2016-10-15T10:00:00+02:00",
                 "observedPeriod": "PT24H",
                 "precipitationAmountInMillimeter": 6,
                 "precipitationAmountInInch": 0.236,
@@ -276,8 +277,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T09:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T11:00:00+02:00",
+                "observedUntil": "2016-10-15T11:00:00+02:00",
                 "observedPeriod": "PT0S",
                 "airTemperatureInCelsius": 2.6,
                 "airTemperatureInFahrenheit": 36.68,
@@ -313,8 +314,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T08:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T10:00:00+02:00",
+                "observedUntil": "2016-10-15T11:00:00+02:00",
                 "observedPeriod": "PT1H",
                 "windGustInMeterPerSecond": 0.97744447,
                 "windGustInKilometerPerHour": 3.5188,
@@ -334,8 +335,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T06:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T08:00:00+02:00",
+                "observedUntil": "2016-10-15T11:00:00+02:00",
                 "observedPeriod": "PT3H",
                 "pressureChangeInHectoPascal": 2,
                 "pressureTendencyDescription": "INCREASING_THEN_STEADY",
@@ -349,8 +350,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T03:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T05:00:00+02:00",
+                "observedUntil": "2016-10-15T11:00:00+02:00",
                 "observedPeriod": "PT6H",
                 "precipitationAmountInMillimeter": 1.5,
                 "precipitationAmountInInch": 0.059
@@ -361,8 +362,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T21:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-14T23:00:00+02:00",
+                "observedUntil": "2016-10-15T11:00:00+02:00",
                 "observedPeriod": "PT12H",
                 "temperatureMaxInCelsius": 2.5,
                 "temperatureMaxInFahrenheit": 36.5,
@@ -379,8 +380,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T09:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-14T11:00:00+02:00",
+                "observedUntil": "2016-10-15T11:00:00+02:00",
                 "observedPeriod": "PT24H",
                 "precipitationAmountInMillimeter": 6.1,
                 "precipitationAmountInInch": 0.24,
@@ -395,7 +396,7 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
 ### Retrieve weather observation for multiple station IDs [GET]
 
 #### Example
-`https://point-observation.weather.mg/search?meteoGroupStationIds=3007237,3007300&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendencyDescription,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
+`https://point-observation.weather.mg/search?meteoGroupStationIds=3007237,3007300&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendencyDescription,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal&timeZone=UTC`
 
 + Request Search weather observation data for given meteoGroupStationIds
 
