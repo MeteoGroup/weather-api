@@ -816,13 +816,13 @@ Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLA
 
 ## Retrieve extreme values [/extreme]
 
-By default [/extreme] endpoint finds extreme values for the last 7 days and for all UK's stations which are identified by wmoCountryId=91 in Geostation file (the id of UK). Extreme values recalculate every hour.
+Extreme endpoint returns extreme values for the last 7 days for all the stations in the given country (trough `isoCountryCode` URL parameter). Mapping of country code to country id (in database) is present in Geostation file. Extreme values for UK pre-calculate every hour.
 
 ### Example
 
-`https://point-observation.weather.mg/extreme`
+`https://point-observation.weather.mg/extreme?isoCountryCode=UK`
 
-+ Request extreme temperature data for UK for the last 7 days
++ Request extreme weather values for UK for the last 7 days
 
     + Headers
 
@@ -881,13 +881,28 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                  "meteoGroupStationName": "Leatherhead",
                  "observedAt": "2017-01-13T06:00:00Z"
                }
-			 ]
+			 ],
+             "maxWindGustInKnots": 53.06694,
+             "maxWindGustObservations": [
+                 {
+                     "meteoGroupStationId": "3809",
+                     "meteoGroupStationName": "Culdrose",
+                     "observedAt": "2017-03-05T15:00:00Z"
+                 }
+             ],
+             "maxSunshineDurationInMinutes": 720,
+             "maxSunshineDurationObservations": [
+                 {
+                     "meteoGroupStationId": "3002",
+                     "meteoGroupStationName": "Baltasound",
+                     "observedAt": "2017-03-03T00:00:00Z"
+                 }
+             ]
            }
 
 Here `observedUntil` and `observedFrom` fields represent period that has been used to recalculate extreme values.
-Because extreme values recalculate every hour, difference between `observedUntil` value and time of the request can be up to 1 hour.
-The fields `minWeatherObservations` and `maxWeatherObservations` are arrays that contain information about station where extreme value has been found and time where it has been observed.
-Because inside period the same extreme values can be observed many times, the arrays can contain many weather observations.
+Because extreme values for UK recalculate every hour, difference between `observedUntil` value and time of the request can be up to 1 hour.
+The fields `minWeatherObservations`, `maxWeatherObservations`, `maxWindSpeedObservations`, `maxWindGustObservations` and `maxSunshineDurationObservations` are arrays that contain all the observations when extreme value has been observed.
 
 The extreme values recalculating algorithm based on the following:
  + best observation parameters are used to calculate this
