@@ -27,7 +27,7 @@ Once you have your client credentials (Client-ID + Password), you can request a 
 The token will be in the return message, encrypted with a key from the authorization service.
 
 It will contain the client-ID, scopes and expiration date.
-The token is only a valid for a limited time, after this it will expired and you have to request a new token again.
+The token is valid only for a limited time, after this it will expired and you have to request a new token again.
 
 #### Using Authorization Token
 
@@ -61,7 +61,7 @@ The searching algorithm stops at a maximum distance of 100km (between requested 
 By default, the latest known weather forecast data from a relevant station is returned.
 If validFrom and validUntil are missing then application sets validFrom as current time and validUntil as current time plus 1 day.
 if validFrom is not missing and validUntil is missing then application sets  validUntil as current time plus 1 day.
-It's possible to search forecast data either by geographical locations (long,lat) using 'locatedAt' request parameter or by MeteoGroup station IDs using 'stationIds' parameter.
+It's possible to search forecast data either by geographical locations (long,lat) using 'locatedAt' request parameter or by MeteoGroup station IDs using 'meteoGroupStationIds' parameter.
 
 *Meteorological hints*
 
@@ -71,6 +71,17 @@ For example air temperature is forecasted for one moment in time.
 Whereas max air temperature is typically forecasted for a period of one our.
 There are other forecast periods possible, where parameters than are aggregated among e.g. 12 hours.
 In the response JSON document the weather parameters will be associated with their according period.
+
+If a user specifies the 'timeZone' parameter, `validFrom`, `validUntil` and all aggregated fields will be presented in this time zone.
+If a user doesn't specify 'timeZone' parameter, `validFrom`, `validUntil` and all aggregated fields will be presented either in a time zone 
+of a requested location or in a time zone of a meteo station (when requesting forecast by `locatedAt` or `meteoGroupStationIds` correspondingly).
+
+All aggregated parameters (e.g. `maxAirTemperatureInCelsius`) are calculated at fixed hours as follows:
+PT1H - every hour
+PT3H - at 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00 and 21:00
+PT6H - at 00:00, 06:00, 12:00 and 18:00
+PT12H - at 06:00 and 18:00
+PT24H - at 00:00
 
 *Technical hints*
 
@@ -173,7 +184,8 @@ Here are relationship between observation periods and fields appropriately:
     + validFrom: `2016-12-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validUntil: `2016-12-13T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT0S,PT1H,PT3H,PT6H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. PT1H refers to one hour forecast periods.
-
+    + timeZone: `UTC` (string, optional) - a time-zone ID, such as `Europe/Paris`, `-01:00` etc.
+	
 + Response 200 (application/json)
 
     + Headers
