@@ -816,13 +816,13 @@ Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLA
 
 ## Retrieve extreme values [/extreme]
 
-Extreme endpoint returns extreme values for the last 7 days for all the stations in the given country (trough `isoCountryCode` URL parameter). Mapping of country code to country id (in database) is present in Geostation file. Extreme values for UK pre-calculate every hour.
+By default [/extreme] endpoint finds extreme values for the last 7 days and for all UK's stations which are identified by wmoCountryId=91 in Geostation file (the id of UK). Extreme values recalculate every hour.
 
 ### Example
 
 `https://point-observation.weather.mg/extreme?isoCountryCode=UK`
 
-+ Request extreme weather values for UK for the last 7 days
++ Request extreme temperature data for UK for the last 7 days
 
     + Headers
 
@@ -837,72 +837,461 @@ Extreme endpoint returns extreme values for the last 7 days for all the stations
             Content-Type: application/json
             x-amzn-RequestId: fbf51991-c2b2-11e6-bbb7-0153a49228b7
 
-    + Body
+	+ Parameters
+        + isoCountryCode: `UK` (string, required) - the ISO code of the country, for which extreme values should be returned; currenlty the UK only is supported
 
-           {
-             "isoCountryCode": "UK",
-             "observedUntil": "2017-01-13T10:35:31Z",
-             "observedFrom": "2017-01-06T10:35:31Z",
-             "minAirTemperatureInCelsius": -9.2,
-             "minWeatherObservations": [
-               {
-                 "meteoGroupStationId": "3065",
-                 "meteoGroupStationName": "Cairngorm",
-                 "observedAt": "2017-01-13T00:00:00Z"
-               },
-               {
-                 "meteoGroupStationId": "3065",
-                 "meteoGroupStationName": "Cairngorm",
-                 "observedAt": "2017-01-13T06:00:00Z"
-               },
-               {
-                 "meteoGroupStationId": "3065",
-                 "meteoGroupStationName": "Cairngorm",
-                 "observedAt": "2017-01-13T09:00:00Z"
-               }
-             ],
-             "maxAirTemperatureInCelsius": 14.1,
-             "maxWeatherObservations": [
-               {
-                 "meteoGroupStationId": "3313",
-                 "meteoGroupStationName": "Rhyl",
-                 "observedAt": "2017-01-11T09:00:00Z"
-               }
-             ],
-			 "maxWindSpeedInKnots": 10.1,
-			 "maxWindSpeedObservations": [
-               {
-                 "meteoGroupStationId": "43081",
-                 "meteoGroupStationName": "Baskervilles",
-                 "observedAt": "2017-01-13T00:00:00Z"
-               },
-               {
-                 "meteoGroupStationId": "30651",
-                 "meteoGroupStationName": "Leatherhead",
-                 "observedAt": "2017-01-13T06:00:00Z"
-               }
-			 ],
-             "maxWindGustInKnots": 53.06694,
-             "maxWindGustObservations": [
-                 {
-                     "meteoGroupStationId": "3809",
-                     "meteoGroupStationName": "Culdrose",
-                     "observedAt": "2017-03-05T15:00:00Z"
-                 }
-             ],
-             "maxSunshineDurationInMinutes": 720,
-             "maxSunshineDurationObservations": [
-                 {
-                     "meteoGroupStationId": "3002",
-                     "meteoGroupStationName": "Baltasound",
-                     "observedAt": "2017-03-03T00:00:00Z"
-                 }
-             ]
-           }
+	+ Body
 
-Here `observedUntil` and `observedFrom` fields represent period that has been used to recalculate extreme values.
-Because extreme values for UK recalculate every hour, difference between `observedUntil` value and time of the request can be up to 1 hour.
-The fields `minWeatherObservations`, `maxWeatherObservations`, `maxWindSpeedObservations`, `maxWindGustObservations` and `maxSunshineDurationObservations` are arrays that contain all the observations when extreme value has been observed.
+      {
+        "extremes": [
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-01T00:00:00Z",
+            "observedUntil": "2017-03-07T10:35:31Z",
+            "minAirTemperatureInCelsius": -11.5,
+            "minWeatherObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-03T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-03T06:00:00Z"
+              }      ],
+            "maxAirTemperatureInCelsius": 20.1,
+            "maxWeatherObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-04T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 12.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-06T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-06T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 20.1,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-06T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 720,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-03T00:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-01T00:00:00Z",
+            "observedUntil": "2017-03-02T00:00:00Z",
+            "minAirTemperatureInCelsius": -9.5,
+            "minWeatherObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-01T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-01T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 12.1,
+            "maxWeatherObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-01T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 5.1,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-01T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-01T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 6.2,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-01T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 650,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-01T00:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-02T00:00:00Z",
+            "observedUntil": "2017-03-03T00:00:00Z",
+            "minAirTemperatureInCelsius": -7.2,
+            "minWeatherObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-02T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-02T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 11.1,
+            "maxWeatherObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-02T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 10.9,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-02T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-02T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 18.1,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-02T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 665,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-02T00:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-03T00:00:00Z",
+            "observedUntil": "2017-03-04T00:00:00Z",
+            "minAirTemperatureInCelsius": -11.5,
+            "minWeatherObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-03T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-03T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 7.0,
+            "maxWeatherObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-03T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 10.8,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-03T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-03T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 13.1,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-03T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 720,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-03T00:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-04T00:00:00Z",
+            "observedUntil": "2017-03-05T00:00:00Z",
+            "minAirTemperatureInCelsius": 1.3,
+            "minWeatherObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-04T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-04T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 20.1,
+            "maxWeatherObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-04T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 7.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-04T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-04T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 9.3,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-04T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 700,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-04T00:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-05T00:00:00Z",
+            "observedUntil": "2017-03-06T00:00:00Z",
+            "minAirTemperatureInCelsius": -3.2,
+            "minWeatherObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-05T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-05T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 11.1,
+            "maxWeatherObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-05T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 8.9,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-05T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-05T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 11.0,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-05T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 555,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-05T00:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-06T00:00:00Z",
+            "observedUntil": "2017-03-07T00:00:00Z",
+            "minAirTemperatureInCelsius": -7.2,
+            "minWeatherObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-06T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-06T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 13.1,
+            "maxWeatherObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-06T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 12.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-06T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-06T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 20.1,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-06T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 333,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-06T00:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-07T00:00:00Z",
+            "observedUntil": "2017-03-07T10:35:31Z",
+            "minAirTemperatureInCelsius": -5.2,
+            "minWeatherObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-07T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-07T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 13.1,
+            "maxWeatherObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-07T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 10.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-07T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-07T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 15.6,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-07T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 123,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-07T00:00:00Z"
+                }
+            ]
+          }
+        ]
+      }
+
+#### Description
+The first element in the array contains extreme values for seven days, every next one - data for the individual days.  
+Here `observedUntil` and `observedFrom` fields represent period that has been used for extreme values calculation.
+Because extreme values recalculate every hour, difference between `observedUntil` value and time of the request can be up to 1 hour.
+The fields `minWeatherObservations`, `maxWeatherObservations`, `maxWindSpeedObservations`, `maxWindGustObservations` and `maxSunshineDurationObservations` are arrays that contain information about station where extreme value has been found and time where it has been observed.
+Because inside period the same extreme values can be observed many times, the arrays can contain many weather observations.
 
 The extreme values recalculating algorithm based on the following:
  + best observation parameters are used to calculate this
@@ -911,4 +1300,7 @@ The extreme values recalculating algorithm based on the following:
    + the lowest value of all reported `minAirTemperatureInCelsius` within that period (`PT12H`)
  + for max temperature in a certain time range, use the highest value from these two values:
    + the highest values of the hourly `airTemperatureInCelsius` values (`PT0S`)
-   + the highest value of all reported `maxAirTemperatureInCelsius` within that period (`PT12H`).
+   + the highest value of all reported `maxAirTemperatureInCelsius` within that period (`PT12H`)
+ + for max wind speed calculation `PT0S` period is used
+ + for max wind gusts speed calculation `PT1H` period is used
+ 
