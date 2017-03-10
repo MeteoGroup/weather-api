@@ -72,16 +72,19 @@ Whereas max air temperature is typically forecasted for a period of one our.
 There are other forecast periods possible, where parameters than are aggregated among e.g. 12 hours.
 In the response JSON document the weather parameters will be associated with their according period.
 
-If a user specifies the 'timeZone' parameter, `validFrom`, `validUntil` and all aggregated fields will be presented in this time zone.
-If a user doesn't specify 'timeZone' parameter, `validFrom`, `validUntil` and all aggregated fields will be presented either in a time zone 
-of a requested location or in a time zone of a meteo station (when requesting forecast by `locatedAt` or `meteoGroupStationIds` correspondingly).
-
-All aggregated parameters (e.g. `maxAirTemperatureInCelsius`) are calculated at fixed hours as follows:
+All aggregated weather parameters (e.g. `maxAirTemperatureInCelsius`) are calculated at fixed hours as follows:
 PT1H - every hour
 PT3H - at 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00 and 21:00
 PT6H - at 00:00, 06:00, 12:00 and 18:00
 PT12H - at 06:00 and 18:00
 PT24H - at 00:00
+
+By default they are calculated either in a time zone of a requested location or in a time zone of a meteo station 
+when requesting forecast by `locatedAt` or `meteoGroupStationIds` correspondingly. `validFrom` and `validUntil` 
+will also be presented in a time zone of location or station.
+
+If a user specifies the 'timeZone' parameter, all aggregated weather parameters will be calculated at fixed hours 
+of this time zone and `validFrom` and `validUntil` will be presented in it.
 
 *Technical hints*
 
