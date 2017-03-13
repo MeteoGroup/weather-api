@@ -126,6 +126,99 @@ ResponseEntity<ResponseType> response = restTemplate.exchange(entity, ResponseTy
 // process response...
 
 ```
+## NodeJS Code Sample
+
+Here is a simple implementation example in NodeJS with [request](https://www.npmjs.com/package/request).
+
+```
+var request = require('request');
+
+request({
+    url: 'https://auth.weather.mg/oauth/token',
+    method: 'POST',
+    auth: {
+        user: 'your_client_id',         // replace 'your_client_id' with your own ClientId 
+        pass: 'your_client_secret'      // replace 'your_client_secret' with your own ClientSecret
+    },
+    form: {
+        'grant_type': 'client_credentials'
+    }
+}, function (error, response, body) {
+    if (error) {
+        console.error(error);
+    } else {
+        var body = JSON.parse(body);
+        console.log(body);
+    }
+});
+
+```
+Response
+```
+{
+  access_token: 'eyJraWQiOiJhdXRoLXNlcnZlci1iODA5MzIwMS03MjNkLTazZTgtYTgwMC1iOWU0ZTFjMDIxMGQiLCJhbGciOiJSUzI1NiJ1.eyJzdWIiOiJhbmRyZS5zY2hhZGUiLCJzY29wZSI6WyJwb2ludC1vYnNlcnZhdGlvbiIsInBvaW50LWZvcmVjYXN0Il0sImRvbWFpbiI6Im1ldGVvZ3JvdXAiLCJleHAiOjE0ODkxNDQyMTIsImp0aSI6IjZjZTJmYzlkLWUxYWEtNGNhMy04NzQ5LWI0NGU0ZWQ5MzdjZCIsImNsaWVudF8pZCI7ImFuZHJlLnNjaGFkZSJ9.XC8spP9mQICozXpmFx8PE8RFtKeZ1M0CNp0MWPMtqD3XiWp8ve1FJ_qoPImTbsS0QUlmvquGf3j0A8QeQ5QJyQ',
+  token_type: 'bearer',
+  expires_in: 3599,
+  scope: 'point-observation point-forecast',
+  domain: 'meteogroup',
+  jti: '6ce2fc9d-e1aa-4ca3-8749-b44e4ed937cd'
+}
+```
+
+That is a sample request then for the **point observation service** for the **latest values** only which uses [dateformat](https://www.npmjs.com/package/dateformat) to calculate the necessary timestamp for the observedFrom query parameter. This example ask diectly for a MeteoGroup station instead of asking for a location with latitude and longitude.
+```
+var request = require('request'),
+    dateformat = require('dateformat'),
+    observedFromDate = new Date();
+
+observedFromDate.setHours(observedFromDate.getHours() - 1);
+
+request({
+    url: 'https://point-observation.weather.mg/search',
+    auth: {
+        'bearer': 'OAuth2_token' //replace that with the token you got from the auth process
+    },
+    qs: {
+        meteoGroupStationIds: 10853,
+        observedFrom: dateformat(observedFromDate, "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"),
+        observedPeriod: "PT0S,PT1H",
+        fields: "airTemperatureInCelsius,feelsLikeTemperatureInCelsius,airPressureInHectoPascal,windSpeedInKnots,windDirectionInDegree,dewPointTemperatureInCelsius,relativeHumidityInPercent,effectiveCloudCoverInOcta,totalCloudCoverInOcta,weatherCode,weatherCodeTraditional,windGustInKnots,precipitationAmountInMillimeter"
+    }
+}, function (error, response, body) {
+    if (error) {
+        console.error(error)
+    } else {
+        console.log(JSON.parse(body));
+    }
+});
+
+```
+Response
+```
+{
+  observations: [
+    {
+      meteoGroupStationId: '10853',
+      observedFrom: '2017-03-09T20:00:00Z',
+      observedUntil: '2017-03-09T20:00:00Z',
+      observedPeriod: 'PT0S',
+      airTemperatureInCelsius: 9.7,
+      feelsLikeTemperatureInCelsius: 7.6,
+      airPressureInHectoPascal: 1018.8,
+      windSpeedInKnots: 13.606908,
+      windDirectionInDegree: 270,
+      dewPointTemperatureInCelsius: 7.6,
+      relativeHumidityInPercent: 87,
+      effectiveCloudCoverInOcta: 7,
+      totalCloudCoverInOcta: 7,
+      weatherCode: '508',
+      weatherCodeTraditional: 0
+    }
+  ]
+}
+```
+
+
 
 
 ## Postman Sample
