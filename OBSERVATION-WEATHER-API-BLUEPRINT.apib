@@ -892,7 +892,15 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                 {
                     "meteoGroupStationId": "3002",
                     "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-03T00:00:00Z"
+                    "observedAt": "2017-03-03T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 11.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-03T06:00:00Z"
                 }
             ]
           },
@@ -947,7 +955,15 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                 {
                     "meteoGroupStationId": "3002",
                     "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-01T00:00:00Z"
+                    "observedAt": "2017-03-02T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 1.2,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-02T06:00:00Z"
                 }
             ]
           },
@@ -1002,7 +1018,15 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                 {
                     "meteoGroupStationId": "3002",
                     "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-02T00:00:00Z"
+                    "observedAt": "2017-03-03T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 11.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-03T06:00:00Z"
                 }
             ]
           },
@@ -1057,7 +1081,15 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                 {
                     "meteoGroupStationId": "3002",
                     "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-03T00:00:00Z"
+                    "observedAt": "2017-03-04T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 1.5,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-04T06:00:00Z"
                 }
             ]
           },
@@ -1112,7 +1144,15 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                 {
                     "meteoGroupStationId": "3002",
                     "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-04T00:00:00Z"
+                    "observedAt": "2017-03-05T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 2.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "43081",
+                    "meteoGroupStationName": "Baskervilles",
+                    "observedAt": "2017-03-05T06:00:00Z"
                 }
             ]
           },
@@ -1167,7 +1207,15 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                 {
                     "meteoGroupStationId": "3002",
                     "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-05T00:00:00Z"
+                    "observedAt": "2017-03-06T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 6.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "43081",
+                    "meteoGroupStationName": "Baskervilles",
+                    "observedAt": "2017-03-06T06:00:00Z"
                 }
             ]
           },
@@ -1222,7 +1270,15 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                 {
                     "meteoGroupStationId": "3002",
                     "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-06T00:00:00Z"
+                    "observedAt": "2017-03-07T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 10.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "43081",
+                    "meteoGroupStationName": "Baskervilles",
+                    "observedAt": "2017-03-07T06:00:00Z"
                 }
             ]
           },
@@ -1271,24 +1327,16 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
                 "meteoGroupStationName": "Baskervilles",
                 "observedAt": "2017-03-07T00:00:00Z"
               }
-            ],
-            "maxSunshineDurationInMinutes": 123,
-            "maxSunshineDurationObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-07T00:00:00Z"
-                }
             ]
           }
         ]
       }
 
 #### Description
-The first element in the array contains extreme values for seven days, every next one - data for the individual days.  
+The first element in the array contains extreme values for seven days, every next one - data for the individual days.
 Here `observedUntil` and `observedFrom` fields represent period that has been used for extreme values calculation.
 Because extreme values recalculate every hour, difference between `observedUntil` value and time of the request can be up to 1 hour.
-The fields `minAirTemperatureObservations`, `maxAirTemperatureObservations`, `maxWindSpeedObservations`, `maxWindGustObservations` and `maxSunshineDurationObservations` are arrays that contain information about station where extreme value has been found and time where it has been observed.
+The fields `minAirTemperatureObservations`, `maxAirTemperatureObservations`, `maxWindSpeedObservations`, `maxWindGustObservations`, `maxSunshineDurationObservations` and `maxPrecipitationAmountObservations` are arrays that contain information about station where extreme value has been found and time where it has been observed.
 Because inside period the same extreme values can be observed many times, the arrays can contain many weather observations.
 
 The extreme values recalculating algorithm based on the following:
@@ -1301,4 +1349,5 @@ The extreme values recalculating algorithm based on the following:
    + the highest value of all reported `maxAirTemperatureInCelsius` within that period (`PT12H`)
  + for max wind speed calculation `PT0S` period is used
  + for max wind gusts speed calculation `PT1H` period is used
+ + for max sunshine duration and max precipitation amount `PT24H` period is used. The source values for calculation fetches from the next day after relevant, that's why these parameters are never present in the current day but for the previous days. 
  
