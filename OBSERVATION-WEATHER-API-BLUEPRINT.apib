@@ -74,7 +74,7 @@ For convenience reasons, a single location can be requested, but the response al
 For multiple locations, its recommended to just use the point compression.
 The observations in the response collection are "flat" to allow easy streaming and filtering on client side.
 The observations in the response are ordered ascending by field 'observedFrom'.
-The pressureTendency field returns string values based on the following table:
+The pressureTendencyDescription field returns string values based on the following table:
 
 WMO table 010063: CHARACTERISTIC OF PRESSURE TENDENCY
  
@@ -106,16 +106,17 @@ Here are relationship between observation periods and fields appropriately:
                 relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
-                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendency, pressureTendencyCode
-- **PT3H** -    pressureTendency, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
+                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode
+- **PT3H** -    pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
                 maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots
 - **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort,
-                maxWindGustInKnots, pressureTendency
+                maxWindGustInKnots, pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal
 - **PT12H** -   temperatureMaxInCelsius, temperatureMaxInFahrenheit, temperatureMaxInKelvin, temperatureMinInCelsius, temperatureMinInFahrenheit, temperatureMinInKelvin,
                 precipitationAmountInMillimeter, precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour,
-                maxWindGustInBeaufort, maxWindGustInKnots, pressureTendency
+                maxWindGustInBeaufort, maxWindGustInKnots, pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal
 - **PT24H** -   precipitationAmountInMillimeter, precipitationAmountInInch, sunshineDurationInHours, sunshineDurationInMinutes, maxWindGustInMeterPerSecond,
-                maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, pressureTendency, freshSnowfallInCentimeter, freshSnowfallInInch
+                maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal,
+                freshSnowfallInCentimeter, freshSnowfallInInch
 
 The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
 The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
@@ -128,11 +129,12 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
     + observedFrom: `2016-10-15T08:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedUntil: `2016-10-15T09:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
+    + timeZone: `Europe/Paris` (string, optional) - Time zone refers to the IANA Time Zone Database (TZDB).
 
 ### Search for observation data for multiple given locations [GET]
 
 #### Example
-`https://point-observation.weather.mg/search?locatedAt=-2.2323,47.4593&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendency,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal,snowDepthInCentimeter,snowDepthInInch,freshSnowfallInCentimeter,freshSnowfallInInch`
+`https://point-observation.weather.mg/search?locatedAt=-2.2323,47.4593observedFrom=2016-10-14T00:00:00%2B02:00&observedUntil=2016-10-15T12:00:00%2B02:00&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendencyDescription,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,lInHectoPascal,snowDepthInCentimeter,snowDepthInInch,freshSnowfallInCentimeter,freshSnowfallInInch`
 
 + Request Search weather observation data for given locatedAt
 
@@ -159,15 +161,64 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T08:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-14T00:00:00+02:00",
+                "observedUntil": "2016-10-15T00:00:00+02:00",
+                "observedPeriod": "PT24H",
+                "precipitationAmountInMillimeter": 6,
+                "precipitationAmountInInch": 0.236,
+                "sunshineDurationInHours": 12,
+                "sunshineDurationInMinutes": 720,
+                "freshSnowfallInCentimeter": 5.5,
+                "freshSnowfallInInch": 2.165
+              },
+              {
+                "locatedAt": [ -2.2323, 47.4593 ],
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
+                "observedFrom": "2016-10-14T18:00:00+02:00",
+                "observedUntil": "2016-10-15T06:00:00+02:00",
+                "observedPeriod": "PT12H",
+                "temperatureMaxInCelsius": 3.7,
+                "temperatureMaxInFahrenheit": 38.66,
+                "temperatureMaxInKelvin": 276.85,
+                "temperatureMinInCelsius": 3.1,
+                "temperatureMinInFahrenheit": 37.58,
+                "temperatureMinInKelvin": 276.25,
+                "precipitationAmountInMillimeter": 1.8,
+                "precipitationAmountInInch": 0.071
+              },
+              {
+                "locatedAt": [ -2.2323, 47.4593 ],
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
+                "observedFrom": "2016-10-15T06:00:00+02:00",
+                "observedUntil": "2016-10-15T09:00:00+02:00",
+                "observedPeriod": "PT3H",
+                "precipitationAmountInMillimeter": 1.2,
+                "precipitationAmountInInch": 0.047,
+                "pressureTendencyDescription": "INCREASING_THEN_STEADY",
+                "pressureTendencyCode": 1,
+                "pressureChangeInHectoPascal": 2
+              },
+              {
+                "locatedAt": [ -2.2323, 47.4593 ],
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
+                "observedFrom": "2016-10-15T10:00:00+02:00",
+                "observedUntil": "2016-10-15T10:00:00+02:00",
                 "observedPeriod": "PT0S",
                 "airTemperatureInCelsius": 3.4,
                 "airTemperatureInFahrenheit": 38.12,
                 "airTemperatureInKelvin": 276.55,
                 "feelsLikeTemperatureInCelsius": 3.9,
                 "feelsLikeTemperatureInFahrenheit": 39.02,
-                "feelsLikeTemperatureInKelvin":277.05,
+                "feelsLikeTemperatureInKelvin": 277.05,
                 "airPressureInHectoPascal": 1005.5,
                 "windSpeedInMeterPerSecond": 0.5144445,
                 "windSpeedInKilometerPerHour": 1.852,
@@ -187,8 +238,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
                 "weatherCodeTraditional": 2,
-				"snowDepthInCentimeter": 10.8,
-				"snowDepthInInch": 4.252
+                "snowDepthInCentimeter": 10.8,
+                "snowDepthInInch": 4.252
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -196,8 +247,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T07:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-15T09:00:00+02:00",
+                "observedUntil": "2016-10-15T10:00:00+02:00",
                 "observedPeriod": "PT1H",
                 "windGustInMeterPerSecond": 0.8231112,
                 "windGustInKilometerPerHour": 2.9632,
@@ -206,8 +257,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windGustInKnots": 1.5999997,
                 "precipitationAmountInMillimeter": 0.7,
                 "precipitationAmountInInch": 0.028,
-				"freshSnowfallInCentimeter": 1.5,
-				"freshSnowfallInInch": 0.591
+                "freshSnowfallInCentimeter": 1.5,
+                "freshSnowfallInInch": 0.591
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -215,69 +266,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T05:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
-                "observedPeriod": "PT3H",
-                "pressureChangeInHectoPascal": 2,
-                "pressureTendency": "INCREASING_THEN_STEADY",
-                "pressureTendencyCode": 1,
-                "precipitationAmountInMillimeter": 1.2,
-                "precipitationAmountInInch": 0.047
-              },
-              {
-                "locatedAt": [ -2.2323, 47.4593 ],
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T02:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
-                "observedPeriod": "PT6H",
-                "precipitationAmountInMillimeter": 1.4,
-                "precipitationAmountInInch": 0.055
-              },
-              {
-                "locatedAt": [ -2.2323, 47.4593 ],
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T20:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
-                "observedPeriod": "PT12H",
-                "temperatureMaxInCelsius": 3.7,
-                "temperatureMaxInFahrenheit": 38.66,
-                "temperatureMaxInKelvin": 276.85,
-                "temperatureMinInCelsius": 3.1,
-                "temperatureMinInFahrenheit": 37.58,
-                "temperatureMinInKelvin": 276.25,
-                "precipitationAmountInMillimeter": 1.8,
-                "precipitationAmountInInch": 0.071
-              },
-              {
-                "locatedAt": [ -2.2323, 47.4593 ],
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T08:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
-                "observedPeriod": "PT24H",
-                "precipitationAmountInMillimeter": 6,
-                "precipitationAmountInInch": 0.236,
-                "sunshineDurationInHours": 12,
-                "sunshineDurationInMinutes": 720.0,
-                "freshSnowfallInCentimeter": 5.5,
-                "freshSnowfallInInch": 2.165
-              },
-              {
-                "locatedAt": [ -2.2323, 47.4593 ],
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T09:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T11:00:00+02:00",
+                "observedUntil": "2016-10-15T11:00:00+02:00",
                 "observedPeriod": "PT0S",
                 "airTemperatureInCelsius": 2.6,
                 "airTemperatureInFahrenheit": 36.68,
@@ -304,8 +294,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
                 "weatherCodeTraditional": 2,
-				"snowDepthInCentimeter": 5.4,
-				"snowDepthInInch": 2.126
+                "snowDepthInCentimeter": 5.4,
+                "snowDepthInInch": 2.126
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -313,20 +303,21 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T08:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T10:00:00+02:00",
+                "observedUntil": "2016-10-15T11:00:00+02:00",
                 "observedPeriod": "PT1H",
                 "windGustInMeterPerSecond": 0.97744447,
                 "windGustInKilometerPerHour": 3.5188,
                 "windGustInMilesPerHour": 2.1864808,
                 "windGustInBeaufort": 1,
                 "windGustInKnots": 1.8999995,
+                "pressureTendencyDescription": "STEADY",
+                "pressureTendencyCode": 4,
                 "precipitationAmountInMillimeter": 0.5,
                 "precipitationAmountInInch": 0.02,
-				"freshSnowfallInCentimeter": 1,
-				"freshSnowfallInInch": 0.394,
-				"pressureTendency": "STEADY",
-				"pressureTendencyCode": 4
+                "freshSnowfallInCentimeter": 1,
+                "freshSnowfallInInch": 0.394,
+                "pressureChangeInHectoPascal": 0
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -334,14 +325,14 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T06:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T09:00:00+02:00",
+                "observedUntil": "2016-10-15T12:00:00+02:00",
                 "observedPeriod": "PT3H",
-                "pressureChangeInHectoPascal": 2,
-                "pressureTendency": "INCREASING_THEN_STEADY",
-                "pressureTendencyCode": 1,
                 "precipitationAmountInMillimeter": 1.3,
-                "precipitationAmountInInch": 0.051
+                "precipitationAmountInInch": 0.051,
+                "pressureTendencyDescription": "INCREASING_THEN_STEADY",
+                "pressureTendencyCode": 1,
+                "pressureChangeInHectoPascal": 2
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -349,45 +340,11 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T03:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T06:00:00+02:00",
+                "observedUntil": "2016-10-15T12:00:00+02:00",
                 "observedPeriod": "PT6H",
                 "precipitationAmountInMillimeter": 1.5,
                 "precipitationAmountInInch": 0.059
-              },
-              {
-                "locatedAt": [ -2.2323, 47.4593 ],
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T21:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
-                "observedPeriod": "PT12H",
-                "temperatureMaxInCelsius": 2.5,
-                "temperatureMaxInFahrenheit": 36.5,
-                "temperatureMaxInKelvin" : 275.65,
-                "temperatureMinInCelsius": 2.8,
-                "temperatureMinInFahrenheit": 37.04,
-                "temperatureMinInKelvin" : 275.94998,
-                "precipitationAmountInMillimeter": 2,
-                "precipitationAmountInInch": 0.079
-              },
-              {
-                "locatedAt": [ -2.2323, 47.4593 ],
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T09:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
-                "observedPeriod": "PT24H",
-                "precipitationAmountInMillimeter": 6.1,
-                "precipitationAmountInInch": 0.24,
-                "sunshineDurationInHours": 12,
-                "sunshineDurationInMinutes": 720.0,
-                "freshSnowfallInCentimeter": 5.5,
-                "freshSnowfallInInch": 2.165
               }
             ]
           }
@@ -395,7 +352,7 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
 ### Retrieve weather observation for multiple station IDs [GET]
 
 #### Example
-`https://point-observation.weather.mg/search?meteoGroupStationIds=3007237,3007300&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendency,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal`
+`https://point-observation.weather.mg/search?meteoGroupStationIds=3007237,3007300observedFrom=2016-10-14T00:00:00Z&observedUntil=2016-10-15T12:00:00Z&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,weatherCode,meteoGroupStationName,windSpeedInMilesPerHour,windGustInBeaufort,stationTimeZoneName,effectiveCloudCoverInOcta,totalCloudCoverInOcta,windGustInKilometerPerHour,temperatureMinInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,precipitationAmountInInch,airTemperatureInCelsius,dewPointTemperatureInKelvin,temperatureMaxInKelvin,windGustInMeterPerSecond,sunshineDurationInMinutes,feelsLikeTemperatureInKelvin,pressureTendencyDescription,stationLocation,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,temperatureMinInCelsius,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,temperatureMinInKelvin,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,windDirectionInDegree,windGustInMilesPerHour,meteoGroupStationId,sunshineDurationInHours,relativeHumidityInPercent,airTemperatureInFahrenheit,temperatureMaxInCelsius,visibilityInStatuteMile,pressureChangeInHectoPascal&timeZone=UTC`
 
 + Request Search weather observation data for given meteoGroupStationIds
 
@@ -421,76 +378,37 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T08:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
-                "observedPeriod": "PT0S",
-                "airTemperatureInCelsius": 3.4,
-                "airTemperatureInFahrenheit": 38.12,
-                "airTemperatureInKelvin": 276.55,
-                "feelsLikeTemperatureInCelsius": 3.9,
-                "feelsLikeTemperatureInFahrenheit": 39.02,
-                "feelsLikeTemperatureInKelvin": 277.05,
-                "airPressureInHectoPascal": 1005.5,
-                "windSpeedInMeterPerSecond": 0.5144445,
-                "windSpeedInKilometerPerHour": 1.852,
-                "windSpeedInMilesPerHour": 1.1507794,
-                "windSpeedInBeaufort": 1.0,
-                "windSpeedInKnots": 0.99999976,
-                "windDirectionInDegree": 210,
-                "dewPointTemperatureInCelsius": 3.0,
-                "dewPointTemperatureInFahrenheit": 37.4,
-                "dewPointTemperatureInKelvin": 276.15,
-                "relativeHumidityInPercent": 97,
-                "effectiveCloudCoverInOcta": 5,
-                "totalCloudCoverInOcta": 6,
-                "visibilityInMeter": 2000.0,
-                "visibilityInKilometer": 2.0,
-                "visibilityInNauticalMile": 1.0799999,
-                "visibilityInStatuteMile": 1.2427424,
-                "weatherCode": "2",
-                "weatherCodeTraditional": 2,
-				"snowDepthInCentimeter": 10.8,
-				"snowDepthInInch": 4.252
+                "observedFrom": "2016-10-14T00:00:00Z",
+                "observedUntil": "2016-10-15T00:00:00Z",
+                "observedPeriod": "PT24H",
+                "precipitationAmountInMillimeter": 6,
+                "precipitationAmountInInch": 0.236,
+                "sunshineDurationInHours": 12,
+                "sunshineDurationInMinutes": 720,
+                "freshSnowfallInCentimeter": 5.5,
+                "freshSnowfallInInch": 2.165
               },
               {
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T07:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
-                "observedPeriod": "PT1H",
-                "windGustInMeterPerSecond": 0.8231112,
-                "windGustInKilometerPerHour": 2.9632,
-                "windGustInMilesPerHour": 1.8412471,
-                "windGustInBeaufort": 1.0,
-                "windGustInKnots": 1.5999997,
-                "precipitationAmountInMillimeter": 0.7,
-                "precipitationAmountInInch": 0.028,
-				"freshSnowfallInCentimeter": 1.5,
-				"freshSnowfallInInch": 0.591
-              },
-              {
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T05:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-15T03:00:00Z",
+                "observedUntil": "2016-10-15T06:00:00Z",
                 "observedPeriod": "PT3H",
-                "pressureChangeInHectoPascal": 2.0,
-                "pressureTendency": "INCREASING_THEN_STEADY",
-                "pressureTendencyCode": 1,
                 "precipitationAmountInMillimeter": 1.2,
-                "precipitationAmountInInch": 0.047
+                "precipitationAmountInInch": 0.047,
+                "pressureTendencyDescription": "INCREASING_THEN_STEADY",
+                "pressureTendencyCode": 1,
+                "pressureChangeInHectoPascal": 2
               },
               {
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T02:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-15T00:00:00Z",
+                "observedUntil": "2016-10-15T06:00:00Z",
                 "observedPeriod": "PT6H",
                 "precipitationAmountInMillimeter": 1.4,
                 "precipitationAmountInInch": 0.055
@@ -500,8 +418,8 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T20:00:00Z",
-                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedFrom": "2016-10-14T18:00:00Z",
+                "observedUntil": "2016-10-15T06:00:00Z",
                 "observedPeriod": "PT12H",
                 "temperatureMaxInCelsius": 3.7,
                 "temperatureMaxInFahrenheit": 38.66,
@@ -517,15 +435,54 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T08:00:00Z",
+                "observedFrom": "2016-10-15T08:00:00Z",
                 "observedUntil": "2016-10-15T08:00:00Z",
-                "observedPeriod": "PT24H",
-                "precipitationAmountInMillimeter": 6,
-                "precipitationAmountInInch": 0.236,
-                "sunshineDurationInHours": 12.0,
-                "sunshineDurationInMinutes": 720.0,
-                "freshSnowfallInCentimeter": 5.5,
-                "freshSnowfallInInch": 2.165
+                "observedPeriod": "PT0S",
+                "airTemperatureInCelsius": 3.4,
+                "airTemperatureInFahrenheit": 38.12,
+                "airTemperatureInKelvin": 276.55,
+                "feelsLikeTemperatureInCelsius": 3.9,
+                "feelsLikeTemperatureInFahrenheit": 39.02,
+                "feelsLikeTemperatureInKelvin": 277.05,
+                "airPressureInHectoPascal": 1005.5,
+                "windSpeedInMeterPerSecond": 0.5144445,
+                "windSpeedInKilometerPerHour": 1.852,
+                "windSpeedInMilesPerHour": 1.1507794,
+                "windSpeedInBeaufort": 1,
+                "windSpeedInKnots": 0.99999976,
+                "windDirectionInDegree": 210,
+                "dewPointTemperatureInCelsius": 3,
+                "dewPointTemperatureInFahrenheit": 37.4,
+                "dewPointTemperatureInKelvin": 276.15,
+                "relativeHumidityInPercent": 97,
+                "effectiveCloudCoverInOcta": 5,
+                "totalCloudCoverInOcta": 6,
+                "visibilityInMeter": 2000,
+                "visibilityInKilometer": 2,
+                "visibilityInNauticalMile": 1.0799999,
+                "visibilityInStatuteMile": 1.2427424,
+                "weatherCode": "2",
+                "weatherCodeTraditional": 2,
+                "snowDepthInCentimeter": 10.8,
+                "snowDepthInInch": 4.252
+              },
+              {
+                "meteoGroupStationId": "3007237",
+                "meteoGroupStationName": "Pleucadeuc",
+                "stationLocation": [ -2.2323, 47.4593 ],
+                "stationTimeZoneName": "Europe/Prague",
+                "observedFrom": "2016-10-15T07:00:00Z",
+                "observedUntil": "2016-10-15T08:00:00Z",
+                "observedPeriod": "PT1H",
+                "windGustInMeterPerSecond": 0.8231112,
+                "windGustInKilometerPerHour": 2.9632,
+                "windGustInMilesPerHour": 1.8412471,
+                "windGustInBeaufort": 1,
+                "windGustInKnots": 1.5999997,
+                "precipitationAmountInMillimeter": 0.7,
+                "precipitationAmountInInch": 0.028,
+                "freshSnowfallInCentimeter": 1.5,
+                "freshSnowfallInInch": 0.591
               },
               {
                 "meteoGroupStationId": "3007237",
@@ -545,7 +502,7 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windSpeedInMeterPerSecond": 0.5144445,
                 "windSpeedInKilometerPerHour": 1.852,
                 "windSpeedInMilesPerHour": 1.1507794,
-                "windSpeedInBeaufort": 1.0,
+                "windSpeedInBeaufort": 1,
                 "windSpeedInKnots": 0.99999976,
                 "windDirectionInDegree": 230,
                 "dewPointTemperatureInCelsius": 2.3,
@@ -554,14 +511,14 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "relativeHumidityInPercent": 98,
                 "effectiveCloudCoverInOcta": 5,
                 "totalCloudCoverInOcta": 6,
-                "visibilityInMeter": 2000.0,
-                "visibilityInKilometer": 2.0,
+                "visibilityInMeter": 2000,
+                "visibilityInKilometer": 2,
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
                 "weatherCodeTraditional": 2,
-				"snowDepthInCentimeter": 5.4,
-				"snowDepthInInch": 2.126
+                "snowDepthInCentimeter": 5.4,
+                "snowDepthInInch": 2.126
               },
               {
                 "meteoGroupStationId": "3007237",
@@ -574,14 +531,15 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windGustInMeterPerSecond": 0.97744447,
                 "windGustInKilometerPerHour": 3.5188,
                 "windGustInMilesPerHour": 2.1864808,
-                "windGustInBeaufort": 1.0,
+                "windGustInBeaufort": 1,
                 "windGustInKnots": 1.8999995,
+                "pressureTendencyDescription": "STEADY",
+                "pressureTendencyCode": 4,
                 "precipitationAmountInMillimeter": 0.5,
                 "precipitationAmountInInch": 0.02,
-				"freshSnowfallInCentimeter": 1,
-				"freshSnowfallInInch": 0.394,
-				"pressureTendency": "STEADY",
-                "pressureTendencyCode": 4
+                "freshSnowfallInCentimeter": 1,
+                "freshSnowfallInInch": 0.394,
+                "pressureChangeInHectoPascal": 0
               },
               {
                 "meteoGroupStationId": "3007237",
@@ -591,54 +549,65 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "observedFrom": "2016-10-15T06:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT3H",
-                "pressureChangeInHectoPascal": 2.0,
-                "pressureTendency": "INCREASING_THEN_STEADY",
-                "pressureTendencyCode": 1,
                 "precipitationAmountInMillimeter": 1.3,
-                "precipitationAmountInInch": 0.051
+                "precipitationAmountInInch": 0.051,
+                "pressureTendencyDescription": "INCREASING_THEN_STEADY",
+                "pressureTendencyCode": 1,
+                "pressureChangeInHectoPascal": 2
               },
               {
                 "meteoGroupStationId": "3007237",
                 "meteoGroupStationName": "Pleucadeuc",
                 "stationLocation": [ -2.2323, 47.4593 ],
                 "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-15T03:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T06:00:00Z",
+                "observedUntil": "2016-10-15T12:00:00Z",
                 "observedPeriod": "PT6H",
                 "precipitationAmountInMillimeter": 1.5,
                 "precipitationAmountInInch": 0.059
               },
               {
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T21:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
-                "observedPeriod": "PT12H",
-                "temperatureMaxInCelsius": 2.5,
-                "temperatureMaxInFahrenheit": 36.5,
-                "temperatureMaxInKelvin": 275.65,
-                "temperatureMinInCelsius": 2.8,
-                "temperatureMinInFahrenheit": 37.04,
-                "temperatureMinInKelvin": 275.94998,
-                "precipitationAmountInMillimeter": 2,
-                "precipitationAmountInInch": 0.079
-              },
-              {
-                "meteoGroupStationId": "3007237",
-                "meteoGroupStationName": "Pleucadeuc",
-                "stationLocation": [ -2.2323, 47.4593 ],
-                "stationTimeZoneName": "Europe/Prague",
-                "observedFrom": "2016-10-14T09:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "meteoGroupStationId": "3007300",
+                "meteoGroupStationName": "Germ",
+                "stationLocation": [ 13.2323, 52.4593 ],
+                "stationTimeZoneName": "Europe/Berlin",
+                "observedFrom": "2016-10-14T00:00:00Z",
+                "observedUntil": "2016-10-15T00:00:00Z",
                 "observedPeriod": "PT24H",
-                "precipitationAmountInMillimeter": 6.1,
-                "precipitationAmountInInch": 0.24,
-                "sunshineDurationInHours": 12.0,
-                "sunshineDurationInMinutes": 720.0,
+                "precipitationAmountInMillimeter": 0.1,
+                "precipitationAmountInInch": 0.004,
+                "sunshineDurationInHours": 12,
+                "sunshineDurationInMinutes": 720,
                 "freshSnowfallInCentimeter": 5.5,
                 "freshSnowfallInInch": 2.165
+              },
+              {
+                "meteoGroupStationId": "3007300",
+                "meteoGroupStationName": "Germ",
+                "stationLocation": [ 13.2323, 52.4593 ],
+                "stationTimeZoneName": "Europe/Berlin",
+                "observedFrom": "2016-10-15T00:00:00Z",
+                "observedUntil": "2016-10-15T06:00:00Z",
+                "observedPeriod": "PT6H",
+                "precipitationAmountInMillimeter": 0.1,
+                "precipitationAmountInInch": 0.004
+              },
+              {
+                "meteoGroupStationId": "3007300",
+                "meteoGroupStationName": "Germ",
+                "stationLocation": [ 13.2323, 52.4593 ],
+                "stationTimeZoneName": "Europe/Berlin",
+                "observedFrom": "2016-10-14T18:00:00Z",
+                "observedUntil": "2016-10-15T06:00:00Z",
+                "observedPeriod": "PT12H",
+                "temperatureMaxInCelsius": 16.5,
+                "temperatureMaxInFahrenheit": 61.7,
+                "temperatureMaxInKelvin": 289.65,
+                "temperatureMinInCelsius": 12.8,
+                "temperatureMinInFahrenheit": 55.04,
+                "temperatureMinInKelvin": 285.94998,
+                "precipitationAmountInMillimeter": 0.1,
+                "precipitationAmountInInch": 0.004
               },
               {
                 "meteoGroupStationId": "3007300",
@@ -658,7 +627,7 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windSpeedInMeterPerSecond": 0.5144445,
                 "windSpeedInKilometerPerHour": 1.852,
                 "windSpeedInMilesPerHour": 1.1507794,
-                "windSpeedInBeaufort": 1.0,
+                "windSpeedInBeaufort": 1,
                 "windSpeedInKnots": 0.99999976,
                 "windDirectionInDegree": 230,
                 "dewPointTemperatureInCelsius": 14.3,
@@ -667,14 +636,14 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "relativeHumidityInPercent": 98,
                 "effectiveCloudCoverInOcta": 5,
                 "totalCloudCoverInOcta": 4,
-                "visibilityInMeter": 2000.0,
-                "visibilityInKilometer": 2.0,
+                "visibilityInMeter": 2000,
+                "visibilityInKilometer": 2,
                 "visibilityInNauticalMile": 1.0799999,
                 "visibilityInStatuteMile": 1.2427424,
                 "weatherCode": "2",
                 "weatherCodeTraditional": 2,
-				"snowDepthInCentimeter": 25.2,
-				"snowDepthInInch": 9.921
+                "snowDepthInCentimeter": 25.2,
+                "snowDepthInInch": 9.921
               },
               {
                 "meteoGroupStationId": "3007300",
@@ -687,12 +656,12 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "windGustInMeterPerSecond": 0.97744447,
                 "windGustInKilometerPerHour": 3.5188,
                 "windGustInMilesPerHour": 2.1864808,
-                "windGustInBeaufort": 1.0,
+                "windGustInBeaufort": 1,
                 "windGustInKnots": 1.8999995,
                 "precipitationAmountInMillimeter": 0,
                 "precipitationAmountInInch": 0,
-				"freshSnowfallInCentimeter": 5.5,
-				"freshSnowfallInInch": 2.165
+                "freshSnowfallInCentimeter": 5.5,
+                "freshSnowfallInInch": 2.165
               },
               {
                 "meteoGroupStationId": "3007300",
@@ -702,54 +671,22 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "observedFrom": "2016-10-15T06:00:00Z",
                 "observedUntil": "2016-10-15T09:00:00Z",
                 "observedPeriod": "PT3H",
-                "pressureChangeInHectoPascal": 2.0,
-                "pressureTendency": "INCREASING_THEN_STEADY",
-                "pressureTendencyCode": 1,
                 "precipitationAmountInMillimeter": 0,
-                "precipitationAmountInInch": 0
+                "precipitationAmountInInch": 0,
+                "pressureTendencyDescription": "INCREASING_THEN_STEADY",
+                "pressureTendencyCode": 1,
+                "pressureChangeInHectoPascal": 2
               },
               {
                 "meteoGroupStationId": "3007300",
                 "meteoGroupStationName": "Germ",
                 "stationLocation": [ 13.2323, 52.4593 ],
                 "stationTimeZoneName": "Europe/Berlin",
-                "observedFrom": "2016-10-15T03:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
+                "observedFrom": "2016-10-15T06:00:00Z",
+                "observedUntil": "2016-10-15T12:00:00Z",
                 "observedPeriod": "PT6H",
                 "precipitationAmountInMillimeter": 0.1,
                 "precipitationAmountInInch": 0.004
-              },
-              {
-                "meteoGroupStationId": "3007300",
-                "meteoGroupStationName": "Germ",
-                "stationLocation": [ 13.2323, 52.4593 ],
-                "stationTimeZoneName": "Europe/Berlin",
-                "observedFrom": "2016-10-14T21:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
-                "observedPeriod": "PT12H",
-                "temperatureMaxInCelsius": 16.5,
-                "temperatureMaxInFahrenheit": 61.7,
-                "temperatureMaxInKelvin": 289.65,
-                "temperatureMinInCelsius": 12.8,
-                "temperatureMinInFahrenheit": 55.04,
-                "temperatureMinInKelvin": 285.94998,
-                "precipitationAmountInMillimeter": 0.1,
-                "precipitationAmountInInch": 0.004
-              },
-              {
-                "meteoGroupStationId": "3007300",
-                "meteoGroupStationName": "Germ",
-                "stationLocation": [ 13.2323, 52.4593 ],
-                "stationTimeZoneName": "Europe/Berlin",
-                "observedFrom": "2016-10-14T09:00:00Z",
-                "observedUntil": "2016-10-15T09:00:00Z",
-                "observedPeriod": "PT24H",
-                "precipitationAmountInMillimeter": 0.1,
-                "precipitationAmountInInch": 0.004,
-                "sunshineDurationInHours": 12.0,
-                "sunshineDurationInMinutes": 720.0,
-                "freshSnowfallInCentimeter": 5.5,
-                "freshSnowfallInInch": 2.165
               }
             ]
           }
@@ -759,7 +696,7 @@ The same endpoint as for querying observation by meteoGroupStationIds is being u
 Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLATFORMs. The only one way to determine the ID is to use real FMDecoded source file.
 
 #### Example
-`https://point-observation.weather.mg/search?meteoGroupStationIds=41044BUOY&observedPeriod=PT0S,PT12H,PT1H,PT24H,PT3H&fields=airPressureInHectoPascal,airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin,effectiveCloudCoverInOcta,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,meteoGroupStationId,meteoGroupStationName,precipitationAmountInInch,precipitationAmountInMillimeter,pressureChangeInHectoPascal,pressureTendency,relativeHumidityInPercent,stationLocation,stationTimeZoneName,sunshineDurationInHours,sunshineDurationInMinutes,temperatureMaxInCelsius,temperatureMaxInFahrenheit,temperatureMaxInKelvin,temperatureMinInCelsius,temperatureMinInFahrenheit,temperatureMinInKelvin,totalCloudCoverInOcta,visibilityInKilometer,visibilityInMeter,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,weatherCodeTraditional,windDirectionInDegree,windGustInBeaufort,windGustInKilometerPerHour,windGustInKnots,windGustInMeterPerSecond,windGustInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windSpeedInKnots,windSpeedInMeterPerSecond,windSpeedInMilesPerHour&observedFrom=2016-12-28T06:00:00.753Z&observedUntil=2016-12-28T08:00:00.753Z`
+`https://point-observation.weather.mg/search?meteoGroupStationIds=41044BUOY&observedPeriod=PT0S,PT12H,PT1H,PT24H,PT3H&fields=airPressureInHectoPascal,airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin,effectiveCloudCoverInOcta,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,meteoGroupStationId,meteoGroupStationName,precipitationAmountInInch,precipitationAmountInMillimeter,pressureChangeInHectoPascal,pressureTendencyDescription,relativeHumidityInPercent,stationLocation,stationTimeZoneName,sunshineDurationInHours,sunshineDurationInMinutes,temperatureMaxInCelsius,temperatureMaxInFahrenheit,temperatureMaxInKelvin,temperatureMinInCelsius,temperatureMinInFahrenheit,temperatureMinInKelvin,totalCloudCoverInOcta,visibilityInKilometer,visibilityInMeter,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,weatherCodeTraditional,windDirectionInDegree,windGustInBeaufort,windGustInKilometerPerHour,windGustInKnots,windGustInMeterPerSecond,windGustInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windSpeedInKnots,windSpeedInMeterPerSecond,windSpeedInMilesPerHour&observedFrom=2016-12-28T06:00:00.753Z&observedUntil=2016-12-28T08:00:00.753Z`
 
 + Request Search weather observation data for given meteoGroupStationIds
 
@@ -819,14 +756,12 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
 
 ### Example
 
-`https://point-observation.weather.mg/extreme`
+`https://point-observation.weather.mg/extreme?isoCountryCode=UK`
 
 + Request extreme temperature data for UK for the last 7 days
 
     + Headers
 
-            X-Api-Key:  gGf8JqkD6h4cq6em6HY609isFK85nJnp7iNUgggi
-            Or
             Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
 
 + Response 200 (application/json)
@@ -836,43 +771,508 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
             Content-Type: application/json
             x-amzn-RequestId: fbf51991-c2b2-11e6-bbb7-0153a49228b7
 
-    + Body
+	+ Parameters
+        + isoCountryCode: `UK` (string, required) - the ISO code of the country, for which extreme values should be returned; currenlty the UK only is supported
 
-           {
-             "isoCountryCode": "UK",
-             "observedUntil": "2017-01-13T10:35:31Z",
-             "observedFrom": "2017-01-06T10:35:31Z",
-             "minAirTemperatureInCelsius": -9.2,
-             "minWeatherObservations": [
-               {
-                 "meteoGroupStationId": "3065",
-                 "meteoGroupStationName": "Cairngorm",
-                 "observedAt": "2017-01-13T00:00:00Z"
-               },
-               {
-                 "meteoGroupStationId": "3065",
-                 "meteoGroupStationName": "Cairngorm",
-                 "observedAt": "2017-01-13T06:00:00Z"
-               },
-               {
-                 "meteoGroupStationId": "3065",
-                 "meteoGroupStationName": "Cairngorm",
-                 "observedAt": "2017-01-13T09:00:00Z"
-               }
-             ],
-             "maxAirTemperatureInCelsius": 14.1,
-             "maxWeatherObservations": [
-               {
-                 "meteoGroupStationId": "3313",
-                 "meteoGroupStationName": "Rhyl",
-                 "observedAt": "2017-01-11T09:00:00Z"
-               }
-             ]
-           }
+	+ Body
 
-Here `observedUntil` and `observedFrom` fields represent period that has been used to recalculate extreme values.
+      {
+        "extremes": [
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-01T00:00:00Z",
+            "observedUntil": "2017-03-07T10:35:31Z",
+            "minAirTemperatureInCelsius": -11.5,
+            "minAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-03T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-03T06:00:00Z"
+              }      ],
+            "maxAirTemperatureInCelsius": 20.1,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-04T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 12.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-06T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-06T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 20.1,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-06T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 720,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-03T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 11.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-03T06:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-01T00:00:00Z",
+            "observedUntil": "2017-03-02T00:00:00Z",
+            "minAirTemperatureInCelsius": -9.5,
+            "minAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-01T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-01T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 12.1,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-01T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 5.1,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-01T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-01T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 6.2,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-01T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 650,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-02T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 1.2,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-02T06:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-02T00:00:00Z",
+            "observedUntil": "2017-03-03T00:00:00Z",
+            "minAirTemperatureInCelsius": -7.2,
+            "minAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-02T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-02T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 11.1,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-02T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 10.9,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-02T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-02T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 18.1,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-02T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 665,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-03T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 11.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-03T06:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-03T00:00:00Z",
+            "observedUntil": "2017-03-04T00:00:00Z",
+            "minAirTemperatureInCelsius": -11.5,
+            "minAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-03T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-03T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 7.0,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-03T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 10.8,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-03T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-03T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 13.1,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-03T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 720,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-04T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 1.5,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-04T06:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-04T00:00:00Z",
+            "observedUntil": "2017-03-05T00:00:00Z",
+            "minAirTemperatureInCelsius": 1.3,
+            "minAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-04T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-04T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 20.1,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-04T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 7.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-04T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-04T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 9.3,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-04T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 700,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-05T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 2.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "43081",
+                    "meteoGroupStationName": "Baskervilles",
+                    "observedAt": "2017-03-05T06:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-05T00:00:00Z",
+            "observedUntil": "2017-03-06T00:00:00Z",
+            "minAirTemperatureInCelsius": -3.2,
+            "minAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-05T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-05T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 11.1,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-05T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 8.9,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-05T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-05T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 11.0,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-05T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 555,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-06T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 6.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "43081",
+                    "meteoGroupStationName": "Baskervilles",
+                    "observedAt": "2017-03-06T06:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-06T00:00:00Z",
+            "observedUntil": "2017-03-07T00:00:00Z",
+            "minAirTemperatureInCelsius": -7.2,
+            "minAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-06T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-06T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 13.1,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-06T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 12.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-06T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-06T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 20.1,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-06T00:00:00Z"
+              }
+            ],
+            "maxSunshineDurationInMinutes": 333,
+            "maxSunshineDurationObservations": [
+                {
+                    "meteoGroupStationId": "3002",
+                    "meteoGroupStationName": "Baltasound",
+                    "observedAt": "2017-03-07T06:00:00Z"
+                }
+            ],
+            "maxPrecipitationAmountInMillimeters": 10.1,
+            "maxPrecipitationAmountObservations": [
+                {
+                    "meteoGroupStationId": "43081",
+                    "meteoGroupStationName": "Baskervilles",
+                    "observedAt": "2017-03-07T06:00:00Z"
+                }
+            ]
+          },
+          {
+            "isoCountryCode": "UK",
+            "observedFrom": "2017-03-07T00:00:00Z",
+            "observedUntil": "2017-03-07T10:35:31Z",
+            "minAirTemperatureInCelsius": -5.2,
+            "minAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-07T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-03-07T06:00:00Z"
+              }
+            ],
+            "maxAirTemperatureInCelsius": 13.1,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "3313",
+                "meteoGroupStationName": "Rhyl",
+                "observedAt": "2017-03-07T09:00:00Z"
+              }
+            ],
+            "maxWindSpeedInKnots": 10.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-07T00:00:00Z"
+              },
+              {
+                "meteoGroupStationId": "30651",
+                "meteoGroupStationName": "Leatherhead",
+                "observedAt": "2017-03-07T06:00:00Z"
+              }
+            ],
+            "maxWindGustInKnots": 15.6,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "43081",
+                "meteoGroupStationName": "Baskervilles",
+                "observedAt": "2017-03-07T00:00:00Z"
+              }
+            ]
+          }
+        ]
+      }
+
+#### Description
+The first element in the array contains extreme values for seven days, every next one - data for the individual days.
+Here `observedUntil` and `observedFrom` fields represent period that has been used for extreme values calculation.
 Because extreme values recalculate every hour, difference between `observedUntil` value and time of the request can be up to 1 hour.
-The fields `minWeatherObservations` and `maxWeatherObservations` are arrays that contain information about station where extreme value has been found and time where it has been observed.
+The fields `minAirTemperatureObservations`, `maxAirTemperatureObservations`, `maxWindSpeedObservations`, `maxWindGustObservations`, `maxSunshineDurationObservations` and `maxPrecipitationAmountObservations` are arrays that contain information about station where extreme value has been found and time where it has been observed.
 Because inside period the same extreme values can be observed many times, the arrays can contain many weather observations.
 
 The extreme values recalculating algorithm based on the following:
@@ -882,4 +1282,7 @@ The extreme values recalculating algorithm based on the following:
    + the lowest value of all reported `minAirTemperatureInCelsius` within that period (`PT12H`)
  + for max temperature in a certain time range, use the highest value from these two values:
    + the highest values of the hourly `airTemperatureInCelsius` values (`PT0S`)
-   + the highest value of all reported `maxAirTemperatureInCelsius` within that period (`PT12H`).
+   + the highest value of all reported `maxAirTemperatureInCelsius` within that period (`PT12H`)
+ + for max wind speed calculation `PT0S` period is used
+ + for max wind gusts speed calculation `PT1H` period is used
+ + for max sunshine duration and max precipitation amount `PT24H` period is used. The source values for calculation fetches from the next day after relevant, that's why these parameters are never present in the current day but for the previous days.
