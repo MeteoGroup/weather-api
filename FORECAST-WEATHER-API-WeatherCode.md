@@ -1,5 +1,5 @@
 
-weather Code table 
+Weather Code table 
 ===================
 
 Used for the parameters "mostSignificantWeatherCode" and "weatherCode" in Point Forecast Service.
