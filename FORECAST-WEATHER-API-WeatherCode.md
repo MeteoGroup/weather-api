@@ -1,7 +1,11 @@
 
-Code table for mostSignificantWeatherCode and weatherCode in Point Forecast Service
-===================================================================================
+weather Code table 
+===================
 
+Used for the parameters "mostSignificantWeatherCode" and "weatherCode" in Point Forecast Service.
+
+Code | meaning
+-|-
 -8	|	Thick cirrus clouds
 -7	|	Snow storm
 -6	|	Storm
