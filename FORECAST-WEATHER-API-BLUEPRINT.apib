@@ -280,68 +280,74 @@ Here are relationship between observation periods and fields appropriately:
             Cache-Control: max-age=90
 
     + Body
-	{"forecasts" : [
-		{
-			"dewPointTemperatureInCelsius" : 13.3,
-			"visibilityProbabilityLessThan200MeterInPercent" : 1,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-13T11:00:00Z",
-			"saturationDeficitInHectoPascal" : 6.9,
-			"validFrom" : "2016-12-13T11:00:00Z",
-			"validPeriod" : "PT0S"
-		},
-		{
-			"dewPointTemperatureInCelsius" : 13.6,
-			"visibilityProbabilityLessThan200MeterInPercent" : 0,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.78, 32.69],
-			"validUntil" : "2016-12-13T12:00:00Z",
-			"saturationDeficitInHectoPascal" : 6.9,
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT0S"
-		},
-		{
-			"dewPointTemperatureInCelsius" : 13,
-			"visibilityProbabilityLessThan200MeterInPercent" : 1,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.89, 32.65],
-			"validUntil" : "2016-12-13T11:00:00Z",
-			"saturationDeficitInHectoPascal" : 8.8,
-			"validFrom" : "2016-12-13T11:00:00Z",
-			"validPeriod" : "PT0S"
-		},
-		{
-			"dewPointTemperatureInCelsius" : 13.3,
-			"visibilityProbabilityLessThan200MeterInPercent" : 1,
-			"weatherCode" : 5,
-			"locatedAt" : [-16.89, 32.65],
-			"validUntil" : "2016-12-13T12:00:00Z",
-			"saturationDeficitInHectoPascal" : 9,
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT0S"
-		},
-		{
-			"dewPointTemperatureInCelsius" : 15,
-			"visibilityProbabilityLessThan200MeterInPercent" : 0,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.35, 33.067],
-			"validUntil" : "2016-12-13T11:00:00Z",
-			"saturationDeficitInHectoPascal" : 5.4,
-			"validFrom" : "2016-12-13T11:00:00Z",
-			"validPeriod" : "PT0S"
-		},
-		{
-			"dewPointTemperatureInCelsius" : 15,
-			"visibilityProbabilityLessThan200MeterInPercent" : 0,
-			"weatherCode" : 4,
-			"locatedAt" : [-16.35, 33.067],
-			"validUntil" : "2016-12-13T12:00:00Z",
-			"saturationDeficitInHectoPascal" : 6,
-			"validFrom" : "2016-12-13T12:00:00Z",
-			"validPeriod" : "PT0S"
-		}
-	]}
+	{
+      "forecasts": [
+        {
+          "locatedAt": [-16.78, 32.69],
+          "validUntil": "2016-12-13T00:00:00+02:00",
+          "validFrom": "2016-12-12T18:00:00+02:00",
+          "validPeriod": "PT6H",
+          "precipitationProbabilityInPercent": 4,
+          "maxWindSpeedInKnots": 5.8
+        }, {
+          "locatedAt": [-16.78, 32.69],
+          "validUntil": "2016-12-13T00:00:00+02:00",
+          "validFrom": "2016-12-12T00:00:00+02:00",
+          "validPeriod": "PT24H",
+          "precipitationProbabilityInPercent": 8,
+          "maxWindSpeedInKnots": 9.3
+        }, {
+          "locatedAt": [-16.78, 32.69],
+          "validUntil": "2016-12-13T06:00:00+02:00",
+          "validFrom": "2016-12-13T00:00:00+02:00",
+          "validPeriod": "PT6H",
+          "precipitationProbabilityInPercent": 2,
+          "maxWindSpeedInKnots": 3.9
+        }, {
+          "locatedAt": [-16.89, 32.65],
+          "validUntil": "2016-12-13T00:00:00+02:00",
+          "validFrom": "2016-12-12T18:00:00+02:00",
+          "validPeriod": "PT6H",
+          "precipitationProbabilityInPercent": 1,
+          "maxWindSpeedInKnots": 4.7
+        }, {
+          "locatedAt": [-16.89, 32.65],
+          "validUntil": "2016-12-13T00:00:00+02:00",
+          "validFrom": "2016-12-12T00:00:00+02:00",
+          "validPeriod": "PT24H",
+          "precipitationProbabilityInPercent": 5,
+          "maxWindSpeedInKnots": 5.1
+        }, {
+          "locatedAt": [-16.89, 32.65],
+          "validUntil": "2016-12-13T06:00:00+02:00",
+          "validFrom": "2016-12-13T00:00:00+02:00",
+          "validPeriod": "PT6H",
+          "precipitationProbabilityInPercent": 1,
+          "maxWindSpeedInKnots": 3.7
+        }, {
+          "locatedAt": [-16.35, 33.067],
+          "validUntil": "2016-12-13T00:00:00+02:00",
+          "validFrom": "2016-12-12T18:00:00+02:00",
+          "validPeriod": "PT6H",
+          "precipitationProbabilityInPercent": 3,
+          "maxWindSpeedInKnots": 5.8
+        }, {
+          "locatedAt": [-16.35, 33.067],
+          "validUntil": "2016-12-13T00:00:00+02:00",
+          "validFrom": "2016-12-12T00:00:00+02:00",
+          "validPeriod": "PT24H",
+          "precipitationProbabilityInPercent": 3,
+          "maxWindSpeedInKnots": 9
+        }, {
+          "locatedAt": [-16.35, 33.067],
+          "validUntil": "2016-12-13T06:00:00+02:00",
+          "validFrom": "2016-12-13T00:00:00+02:00",
+          "validPeriod": "PT6H",
+          "precipitationProbabilityInPercent": 1,
+          "maxWindSpeedInKnots": 4.3
+        }
+      ]
+    }
 
 # Example 3:
 ### Forecasted weather for multiple stations [GET]
