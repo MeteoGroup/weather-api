@@ -62,6 +62,51 @@ If you want to get access please use [request form](https://meteogroup.zendesk.c
             }
           ]
         }
+
+### Get a sunrise and sunset time for a single station id and multiple dates [GET]
+
+####An example
+'https://point-forecast.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237&validFrom=2016-12-27&validUntil=2016-12-28'
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            Cache-Control: max-age=90
+
+    + Body
+
+        {
+          "sunriseSunsetTime": [
+            {
+              "civilSunsetTime": "2016-12-27T18:00+01:00",
+              "nauticalSunriseTime": "2016-12-27T07:42+01:00",
+              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
+              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
+              "nauticalSunsetTime": "2016-12-27T18:40+01:00",
+              "officialSunriseTime": "2016-12-27T08:58+01:00",
+              "validAt": "2016-12-27",
+              "civilSunriseTime": "2016-12-27T08:22+01:00",
+              "meteoGroupStationId": "3007237",
+              "locationTimeZoneName": "Europe/Paris",
+              "officialSunsetTime": "2016-12-27T17:24+01:00"
+            },
+            {
+              "civilSunsetTime": "2016-12-28T18:01+01:00",
+              "nauticalSunriseTime": "2016-12-28T07:43+01:00",
+              "astronomicalSunriseTime": "2016-12-28T07:05+01:00",
+              "astronomicalSunsetTime": "2016-12-28T19:18+01:00",
+              "nauticalSunsetTime": "2016-12-28T18:40+01:00",
+              "officialSunriseTime": "2016-12-28T08:58+01:00",
+              "validAt": "2016-12-28",
+              "civilSunriseTime": "2016-12-28T08:22+01:00",
+              "meteoGroupStationId": "3007237",
+              "locationTimeZoneName": "Europe/Paris",
+              "officialSunsetTime": "2016-12-28T17:25+01:00"
+            }			
+          ]
+        }
         
 ### Get a sunrise and sunset time for multiple station ids [GET]
 
