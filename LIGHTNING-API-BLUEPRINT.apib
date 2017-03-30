@@ -55,9 +55,8 @@ https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10
 https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]
 
 ##### Limitation
-AWS Lambda service response can have size < 6MB which is near 25000 records
-If locationWithin is worldwide [-180, 90][180, -90] and occurrence ~3 days it is big probability that response is > 6Mb
-In such scenario service respond only first 25000 records.
+AWS Lambda service response can have size < 6MB
+If locationWithin is worldwide [-180, 90][180, -90] and occurrence ~3 days
 
 ### Observed lightning for a given boundingBox and time period
 
@@ -94,12 +93,12 @@ bounding box locations during period of time specified in parameters.
 
     + Body
         {
-           "strokes":[
+           "lightnings":[
               {
                  "occurredAt":"2017-01-05T12:21:14.974Z",
                  "provider":"NOWCAST",
-                 "strokeType":"CLOUD_TO_GROUND",
-                 "heightInKilometer":0,
+                 "lightningType":"CLOUD_TO_GROUND",
+                 "elevationInKilometers":0,
                  "currentInAmpere":4500,
                  "location":[
                     9.6345,
@@ -109,8 +108,8 @@ bounding box locations during period of time specified in parameters.
               {
                  "occurredAt":"2017-01-05T12:21:14.974Z",
                  "provider":"ENGLN",
-                 "strokeType":"CLOUD_TO_GROUND",
-                 "heightInKilometer":0,
+                 "lightningType":"CLOUD_TO_GROUND",
+                 "elevationInKilometers":0,
                  "currentInAmpere":4700,
                  "location":[
                     8.6345,
@@ -120,8 +119,8 @@ bounding box locations during period of time specified in parameters.
                {
                   "provider": "NOWCAST",
                   "occurredAt": "2017-01-05T12:20:14.974Z",
-                  "heightInKilometer": 0,
-                  "strokeType": "CLOUD_TO_GROUND",
+                  "elevationInKilometers": 0,
+                  "lightningType": "CLOUD_TO_GROUND",
                   "currentInAmpere": -3500,
                   "location": [
                     9.3345,
@@ -181,12 +180,12 @@ bounding box locations during period of time specified in parameters.
 
     + Body
            {
-           	"weightedLightning": [{
+           	"weightedLightnings": [{
             			"occurredFrom": "2017-01-05T12:15:00.000Z",
             			"occurredUntil": "2017-01-05T12:30:00.000Z",
             			"totalCurrentInAmpere": 8000,
             			"weightedLocation": [9.5033, 19.4814],
-            			"numberOfStrikes": 2,
+            			"numberOfLightnings": 2,
             			"temporalResolution": "PT15M",
             			"region": [[9.25, 19.75], [9.75, 19.25]],
             			"weightedOccurrence": "2017-01-05T12:20:47.000Z"
@@ -195,7 +194,7 @@ bounding box locations during period of time specified in parameters.
             			"occurredUntil": "2017-01-05T12:30:00.000Z",
             			"totalCurrentInAmpere": 4700,
             			"weightedLocation": [8.6345, 20.3064],
-            			"numberOfStrikes": 1,
+            			"numberOfLightnings": 1,
             			"temporalResolution": "PT15M",
             			"region": [[8.25, 20.75], [8.75, 20.25]],
             			"weightedOccurrence": "2017-01-05T12:21:14.000Z"

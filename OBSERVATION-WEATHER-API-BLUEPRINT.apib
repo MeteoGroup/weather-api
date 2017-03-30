@@ -56,6 +56,7 @@ By default, the latest known weather observation data from a relevant station is
 If observedFrom and observedUntil are missing then application sets observedFrom as current time minus 3 hours and observedUntil as current time.
 if observedFrom is not missing and observedUntil is missing then application sets observedUntil as observedFrom plus 3 days ahead.
 There is possible to use station ID parameter instead of location parameter. in order to get observation for concrete station.
+The observations are available only from now and 7 days back. Data that are older than 7 days are expired(deleted) from DB.
 
 *Meteorological hints*
 
