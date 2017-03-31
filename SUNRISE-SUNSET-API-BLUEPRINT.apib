@@ -29,9 +29,9 @@ If you want to get access please use [request form](https://meteogroup.zendesk.c
 + Parameters
     + meteoGroupStationIds: `3007237,3007238` (string, optional) - MeteoGroup station ids; can be several stations separated by comma. Either the meteoGroupStationIds or locatedAt parameter must be specified at once;
     + locatedAt: `-2.2323,47.4593` (string, optional) - longitude, latitude; or `g9p734o7sC-36xi5iyD` - compressed list of locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations;
-    + validAt: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the day for which the sunrise and sunset data should be returned;
-	+ validFrom: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the first of period, for which the sunrise and sunset data should be returned, inclusive;
-	+ validUntil: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the last of period, for which the sunrise and sunset data should be returned, inclusive.
+    + validAt(deprecated): `2016-12-27` (string, optional) - ISO8601 date notation. Represents the day for which the sunrise and sunset data should be returned;
+    + validFrom: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the first of period, for which the sunrise and sunset data should be returned, inclusive;
+    + validUntil: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the last of period, for which the sunrise and sunset data should be returned, inclusive.
 	
 NOTE.
     - if no any among validAt, validFrom and validUntil is specified the service returns data for the current day
