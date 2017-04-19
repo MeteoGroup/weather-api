@@ -765,7 +765,7 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
             x-amzn-RequestId: fbf51991-c2b2-11e6-bbb7-0153a49228b7
 
 	+ Parameters
-        + isoCountryCode: `UK` (string, required) - the ISO code of the country, for which extreme values should be returned; currenlty the UK only is supported
+        + isoCountryCode: `UK` (string, required) - the ISO code of the country, for which extreme values should be returned; currently the UK only is supported
 
 	+ Body
 
@@ -773,504 +773,636 @@ By default [/extreme] endpoint finds extreme values for the last 7 days and for 
         "extremes": [
           {
             "isoCountryCode": "UK",
-            "observedFrom": "2017-03-01T00:00:00Z",
-            "observedUntil": "2017-03-07T10:35:31Z",
-            "minAirTemperatureInCelsius": -11.5,
+            "observedFrom": "2017-04-12T23:00:00Z",
+            "observedUntil": "2017-04-19T06:36:09Z",
+            "minAirTemperatureInCelsius": -7.8,
             "minAirTemperatureObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-03T00:00:00Z"
+                "observedAt": "2017-04-18T09:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
+              }
+            ],
+            "maxAirTemperatureInCelsius": 25.6,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "6103004",
+                "meteoGroupStationName": "Frankley",
+                "observedAt": "2017-04-18T18:00:00Z",
+                "lon": -1.9903,
+                "lat": 52.4193
+              }
+            ],
+            "maxWindSpeedInKnots": 62.00862,
+            "maxWindSpeedInMilesPerHour": 71.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "3894",
+                "meteoGroupStationName": "Guernsey",
+                "observedAt": "2017-04-15T06:00:00Z",
+                "lon": -2.6,
+                "lat": 49.433334
+              }
+            ],
+            "maxWindGustInMilesPerHour": 74.7,
+            "maxWindGustInKnots": 64.92439,
+            "maxWindGustObservations": [
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-15T01:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               },
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-03T06:00:00Z"
-              }      ],
-            "maxAirTemperatureInCelsius": 20.1,
-            "maxAirTemperatureObservations": [
-              {
-                "meteoGroupStationId": "3313",
-                "meteoGroupStationName": "Rhyl",
-                "observedAt": "2017-03-04T09:00:00Z"
+                "observedAt": "2017-04-15T05:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxWindSpeedInMilesPerHour": 14.3,
-            "maxWindSpeedInKnots": 12.4,
-            "maxWindSpeedObservations": [
+            "maxSunshineDurationInMinutes": 774,
+            "maxSunshineDurationObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-06T00:00:00Z"
+                "meteoGroupStationId": "99095",
+                "meteoGroupStationName": "Kew Gardens",
+                "observedAt": "2017-04-19T06:00:00Z",
+                "lon": -0.3,
+                "lat": 51.483334
+              }
+            ],
+            "maxPrecipitationAmountInMillimeters": 14.4,
+            "maxPrecipitationAmountObservations": [
+              {
+                "meteoGroupStationId": "3305",
+                "meteoGroupStationName": "Capel Curig",
+                "observedAt": "2017-04-15T06:00:00Z",
+                "lon": -3.9333334,
+                "lat": 53.083332
               },
               {
-                "meteoGroupStationId": "30651",
-                "meteoGroupStationName": "Leatherhead",
-                "observedAt": "2017-03-06T06:00:00Z"
+                "meteoGroupStationId": "3503",
+                "meteoGroupStationName": "Trawscoed",
+                "observedAt": "2017-04-15T06:00:00Z",
+                "lon": -3.95,
+                "lat": 52.333332
               }
-            ],
-            "maxWindGustInMilesPerHour": 23.1,
-            "maxWindGustInKnots": 20.1,
-            "maxWindGustObservations": [
-              {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-06T00:00:00Z"
-              }
-            ],
-            "maxSunshineDurationInMinutes": 720,
-            "maxSunshineDurationObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-03T06:00:00Z"
-                }
-            ],
-            "maxPrecipitationAmountInMillimeters": 11.1,
-            "maxPrecipitationAmountObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-03T06:00:00Z"
-                }
             ]
           },
           {
             "isoCountryCode": "UK",
-            "observedFrom": "2017-03-01T00:00:00Z",
-            "observedUntil": "2017-03-02T00:00:00Z",
-            "minAirTemperatureInCelsius": -9.5,
+            "observedFrom": "2017-04-12T23:00:00Z",
+            "observedUntil": "2017-04-13T23:00:00Z",
+            "minAirTemperatureInCelsius": -3.8,
             "minAirTemperatureObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-01T00:00:00Z"
+                "observedAt": "2017-04-13T06:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               },
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-01T06:00:00Z"
+                "observedAt": "2017-04-13T09:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxAirTemperatureInCelsius": 12.1,
+            "maxAirTemperatureInCelsius": 17,
             "maxAirTemperatureObservations": [
               {
-                "meteoGroupStationId": "3313",
-                "meteoGroupStationName": "Rhyl",
-                "observedAt": "2017-03-01T09:00:00Z"
+                "meteoGroupStationId": "6103004",
+                "meteoGroupStationName": "Frankley",
+                "observedAt": "2017-04-13T18:00:00Z",
+                "lon": -1.9903,
+                "lat": 52.4193
               }
             ],
-            "maxWindSpeedInMilesPerHour": 5.7,
-            "maxWindSpeedInKnots": 5.1,
+            "maxWindSpeedInKnots": 44.902798,
+            "maxWindSpeedInMilesPerHour": 51.7,
             "maxWindSpeedObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-01T00:00:00Z"
-              },
-              {
-                "meteoGroupStationId": "30651",
-                "meteoGroupStationName": "Leatherhead",
-                "observedAt": "2017-03-01T06:00:00Z"
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-13T07:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxWindGustInMilesPerHour": 7.1,
-            "maxWindGustInKnots": 6.2,
+            "maxWindGustInMilesPerHour": 69.1,
+            "maxWindGustInKnots": 60.064777,
             "maxWindGustObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-01T00:00:00Z"
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-13T00:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxSunshineDurationInMinutes": 650,
+            "maxSunshineDurationInMinutes": 510,
             "maxSunshineDurationObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-02T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "3894",
+                "meteoGroupStationName": "Guernsey",
+                "observedAt": "2017-04-14T09:00:00Z",
+                "lon": -2.6,
+                "lat": 49.433334
+              }
             ],
-            "maxPrecipitationAmountInMillimeters": 1.2,
+            "maxPrecipitationAmountInMillimeters": 10.4,
             "maxPrecipitationAmountObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-02T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "99117",
+                "meteoGroupStationName": "Cluanie Inn No 3",
+                "observedAt": "2017-04-14T06:00:00Z",
+                "lon": -5.1833334,
+                "lat": 57.166668
+              }
             ]
           },
           {
             "isoCountryCode": "UK",
-            "observedFrom": "2017-03-02T00:00:00Z",
-            "observedUntil": "2017-03-03T00:00:00Z",
-            "minAirTemperatureInCelsius": -7.2,
+            "observedFrom": "2017-04-13T23:00:00Z",
+            "observedUntil": "2017-04-14T23:00:00Z",
+            "minAirTemperatureInCelsius": -4.1,
             "minAirTemperatureObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-02T00:00:00Z"
-              },
+                "observedAt": "2017-04-14T23:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
+              }
+            ],
+            "maxAirTemperatureInCelsius": 17,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "2003937",
+                "meteoGroupStationName": "Southend-On-Sea",
+                "observedAt": "2017-04-14T17:20:00Z",
+                "lon": 0.7,
+                "lat": 51.566666
+              }
+            ],
+            "maxWindSpeedInKnots": 40.043186,
+            "maxWindSpeedInMilesPerHour": 46.1,
+            "maxWindSpeedObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-02T06:00:00Z"
+                "observedAt": "2017-04-14T02:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxAirTemperatureInCelsius": 11.1,
-            "maxAirTemperatureObservations": [
-              {
-                "meteoGroupStationId": "3313",
-                "meteoGroupStationName": "Rhyl",
-                "observedAt": "2017-03-02T09:00:00Z"
-              }
-            ],
-            "maxWindSpeedInMilesPerHour": 12.5,
-            "maxWindSpeedInKnots": 10.9,
-            "maxWindSpeedObservations": [
-              {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-02T00:00:00Z"
-              },
-              {
-                "meteoGroupStationId": "30651",
-                "meteoGroupStationName": "Leatherhead",
-                "observedAt": "2017-03-02T06:00:00Z"
-              }
-            ],
-            "maxWindGustInMilesPerHour": 20.8,
-            "maxWindGustInKnots": 18.1,
+            "maxWindGustInMilesPerHour": 61.1,
+            "maxWindGustInKnots": 53.06694,
             "maxWindGustObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-02T00:00:00Z"
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-14T23:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxSunshineDurationInMinutes": 665,
+            "maxSunshineDurationInMinutes": 462,
             "maxSunshineDurationObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-03T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "3894",
+                "meteoGroupStationName": "Guernsey",
+                "observedAt": "2017-04-15T09:00:00Z",
+                "lon": -2.6,
+                "lat": 49.433334
+              }
             ],
-            "maxPrecipitationAmountInMillimeters": 11.1,
+            "maxPrecipitationAmountInMillimeters": 14.4,
             "maxPrecipitationAmountObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-03T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "3305",
+                "meteoGroupStationName": "Capel Curig",
+                "observedAt": "2017-04-15T06:00:00Z",
+                "lon": -3.9333334,
+                "lat": 53.083332
+              },
+              {
+                "meteoGroupStationId": "3503",
+                "meteoGroupStationName": "Trawscoed",
+                "observedAt": "2017-04-15T06:00:00Z",
+                "lon": -3.95,
+                "lat": 52.333332
+              }
             ]
           },
           {
             "isoCountryCode": "UK",
-            "observedFrom": "2017-03-03T00:00:00Z",
-            "observedUntil": "2017-03-04T00:00:00Z",
-            "minAirTemperatureInCelsius": -11.5,
+            "observedFrom": "2017-04-14T23:00:00Z",
+            "observedUntil": "2017-04-15T23:00:00Z",
+            "minAirTemperatureInCelsius": -4.7,
             "minAirTemperatureObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-03T00:00:00Z"
+                "observedAt": "2017-04-15T05:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               },
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-03T06:00:00Z"
-              }
-            ],
-            "maxAirTemperatureInCelsius": 7.0,
-            "maxAirTemperatureObservations": [
-              {
-                "meteoGroupStationId": "3313",
-                "meteoGroupStationName": "Rhyl",
-                "observedAt": "2017-03-03T09:00:00Z"
-              }
-            ],
-            "maxWindSpeedInMilesPerHour": 12.4,
-            "maxWindSpeedInKnots": 10.8,
-            "maxWindSpeedObservations": [
-              {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-03T00:00:00Z"
+                "observedAt": "2017-04-15T06:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               },
               {
-                "meteoGroupStationId": "30651",
-                "meteoGroupStationName": "Leatherhead",
-                "observedAt": "2017-03-03T06:00:00Z"
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-15T09:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxWindGustInMilesPerHour": 15.1,
-            "maxWindGustInKnots": 13.1,
+            "maxAirTemperatureInCelsius": 22.8,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "6103004",
+                "meteoGroupStationName": "Frankley",
+                "observedAt": "2017-04-15T18:00:00Z",
+                "lon": -1.9903,
+                "lat": 52.4193
+              }
+            ],
+            "maxWindSpeedInKnots": 62.00862,
+            "maxWindSpeedInMilesPerHour": 71.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "3894",
+                "meteoGroupStationName": "Guernsey",
+                "observedAt": "2017-04-15T06:00:00Z",
+                "lon": -2.6,
+                "lat": 49.433334
+              }
+            ],
+            "maxWindGustInMilesPerHour": 74.7,
+            "maxWindGustInKnots": 64.92439,
             "maxWindGustObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-03T00:00:00Z"
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-15T01:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
+              },
+              {
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-15T05:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxSunshineDurationInMinutes": 720,
+            "maxSunshineDurationInMinutes": 684,
             "maxSunshineDurationObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-04T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "3158",
+                "meteoGroupStationName": "Charterhall",
+                "observedAt": "2017-04-16T06:00:00Z",
+                "lon": -2.3833332,
+                "lat": 55.716667
+              }
             ],
-            "maxPrecipitationAmountInMillimeters": 1.5,
+            "maxPrecipitationAmountInMillimeters": 13.6,
             "maxPrecipitationAmountObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-04T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "3031",
+                "meteoGroupStationName": "Loch Glascarnoch",
+                "observedAt": "2017-04-16T06:00:00Z",
+                "lon": -4.9,
+                "lat": 57.733334
+              }
             ]
           },
           {
             "isoCountryCode": "UK",
-            "observedFrom": "2017-03-04T00:00:00Z",
-            "observedUntil": "2017-03-05T00:00:00Z",
-            "minAirTemperatureInCelsius": 1.3,
+            "observedFrom": "2017-04-15T23:00:00Z",
+            "observedUntil": "2017-04-16T23:00:00Z",
+            "minAirTemperatureInCelsius": -4.2,
             "minAirTemperatureObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-04T00:00:00Z"
-              },
+                "observedAt": "2017-04-16T23:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
+              }
+            ],
+            "maxAirTemperatureInCelsius": 16.3,
+            "maxAirTemperatureObservations": [
+              {
+                "meteoGroupStationId": "99212",
+                "meteoGroupStationName": "Gosport/Fleetlands",
+                "observedAt": "2017-04-16T18:00:00Z",
+                "lon": -1.1666666,
+                "lat": 50.833332
+              }
+            ],
+            "maxWindSpeedInKnots": 34.989193,
+            "maxWindSpeedInMilesPerHour": 40.3,
+            "maxWindSpeedObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-04T06:00:00Z"
-              }
-            ],
-            "maxAirTemperatureInCelsius": 20.1,
-            "maxAirTemperatureObservations": [
-              {
-                "meteoGroupStationId": "3313",
-                "meteoGroupStationName": "Rhyl",
-                "observedAt": "2017-03-04T09:00:00Z"
-              }
-            ],
-            "maxWindSpeedInMilesPerHour": 8.5,
-            "maxWindSpeedInKnots": 7.4,
-            "maxWindSpeedObservations": [
-              {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-04T00:00:00Z"
+                "observedAt": "2017-04-16T02:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               },
               {
-                "meteoGroupStationId": "30651",
-                "meteoGroupStationName": "Leatherhead",
-                "observedAt": "2017-03-04T06:00:00Z"
+                "meteoGroupStationId": "2003001",
+                "meteoGroupStationName": "Cormorant Alpha Oil Rig",
+                "observedAt": "2017-04-16T06:20:00Z",
+                "lon": 1.0666667,
+                "lat": 61.1
+              },
+              {
+                "meteoGroupStationId": "2003001",
+                "meteoGroupStationName": "Cormorant Alpha Oil Rig",
+                "observedAt": "2017-04-16T16:20:00Z",
+                "lon": 1.0666667,
+                "lat": 61.1
               }
             ],
-            "maxWindGustInMilesPerHour": 10.7,
-            "maxWindGustInKnots": 9.3,
+            "maxWindGustInMilesPerHour": 54.1,
+            "maxWindGustInKnots": 47.041027,
             "maxWindGustObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-04T00:00:00Z"
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-16T02:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxSunshineDurationInMinutes": 700,
+            "maxSunshineDurationInMinutes": 750,
             "maxSunshineDurationObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-05T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "3894",
+                "meteoGroupStationName": "Guernsey",
+                "observedAt": "2017-04-17T09:00:00Z",
+                "lon": -2.6,
+                "lat": 49.433334
+              }
             ],
-            "maxPrecipitationAmountInMillimeters": 2.1,
+            "maxPrecipitationAmountInMillimeters": 11.2,
             "maxPrecipitationAmountObservations": [
-                {
-                    "meteoGroupStationId": "43081",
-                    "meteoGroupStationName": "Baskervilles",
-                    "observedAt": "2017-03-05T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "6103530",
+                "meteoGroupStationName": "Brough Sowerby",
+                "observedAt": "2017-04-17T06:00:00Z",
+                "lon": -2.2402,
+                "lat": 54.5043
+              }
             ]
           },
           {
             "isoCountryCode": "UK",
-            "observedFrom": "2017-03-05T00:00:00Z",
-            "observedUntil": "2017-03-06T00:00:00Z",
-            "minAirTemperatureInCelsius": -3.2,
+            "observedFrom": "2017-04-16T23:00:00Z",
+            "observedUntil": "2017-04-17T23:00:00Z",
+            "minAirTemperatureInCelsius": -6.6,
             "minAirTemperatureObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-05T00:00:00Z"
+                "observedAt": "2017-04-17T20:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               },
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-05T06:00:00Z"
+                "observedAt": "2017-04-17T21:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxAirTemperatureInCelsius": 11.1,
+            "maxAirTemperatureInCelsius": 15.8,
             "maxAirTemperatureObservations": [
               {
-                "meteoGroupStationId": "3313",
-                "meteoGroupStationName": "Rhyl",
-                "observedAt": "2017-03-05T09:00:00Z"
+                "meteoGroupStationId": "6103004",
+                "meteoGroupStationName": "Frankley",
+                "observedAt": "2017-04-17T18:00:00Z",
+                "lon": -1.9903,
+                "lat": 52.4193
               }
             ],
-            "maxWindSpeedInMilesPerHour": 10.2,
-            "maxWindSpeedInKnots": 8.9,
+            "maxWindSpeedInKnots": 32.073425,
+            "maxWindSpeedInMilesPerHour": 36.9,
             "maxWindSpeedObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-05T00:00:00Z"
-              },
-              {
-                "meteoGroupStationId": "30651",
-                "meteoGroupStationName": "Leatherhead",
-                "observedAt": "2017-03-05T06:00:00Z"
+                "meteoGroupStationId": "2003958",
+                "meteoGroupStationName": "Harding",
+                "observedAt": "2017-04-17T03:20:00Z",
+                "lon": 1.5,
+                "lat": 59.266666
               }
             ],
-            "maxWindGustInMilesPerHour": 12.7,
-            "maxWindGustInKnots": 11,
+            "maxWindGustInMilesPerHour": 45,
+            "maxWindGustInKnots": 39.071266,
             "maxWindGustObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-05T00:00:00Z"
+                "meteoGroupStationId": "3065",
+                "meteoGroupStationName": "Cairngorm",
+                "observedAt": "2017-04-17T13:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxSunshineDurationInMinutes": 555,
+            "maxSunshineDurationInMinutes": 744,
             "maxSunshineDurationObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-06T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "3100",
+                "meteoGroupStationName": "Tiree",
+                "observedAt": "2017-04-18T06:00:00Z",
+                "lon": -6.883333,
+                "lat": 56.5
+              }
             ],
-            "maxPrecipitationAmountInMillimeters": 6.1,
+            "maxPrecipitationAmountInMillimeters": 4.8,
             "maxPrecipitationAmountObservations": [
-                {
-                    "meteoGroupStationId": "43081",
-                    "meteoGroupStationName": "Baskervilles",
-                    "observedAt": "2017-03-06T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "3008",
+                "meteoGroupStationName": "Fair Isle",
+                "observedAt": "2017-04-18T06:00:00Z",
+                "lon": -1.6333333,
+                "lat": 59.533333
+              }
             ]
           },
           {
             "isoCountryCode": "UK",
-            "observedFrom": "2017-03-06T00:00:00Z",
-            "observedUntil": "2017-03-07T00:00:00Z",
-            "minAirTemperatureInCelsius": -7.2,
+            "observedFrom": "2017-04-17T23:00:00Z",
+            "observedUntil": "2017-04-18T23:00:00Z",
+            "minAirTemperatureInCelsius": -7.8,
             "minAirTemperatureObservations": [
               {
                 "meteoGroupStationId": "3065",
                 "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-06T00:00:00Z"
-              },
-              {
-                "meteoGroupStationId": "3065",
-                "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-06T06:00:00Z"
+                "observedAt": "2017-04-18T09:00:00Z",
+                "lon": -3.6333332,
+                "lat": 57.116665
               }
             ],
-            "maxAirTemperatureInCelsius": 13.1,
+            "maxAirTemperatureInCelsius": 25.6,
             "maxAirTemperatureObservations": [
               {
-                "meteoGroupStationId": "3313",
-                "meteoGroupStationName": "Rhyl",
-                "observedAt": "2017-03-06T09:00:00Z"
+                "meteoGroupStationId": "6103004",
+                "meteoGroupStationName": "Frankley",
+                "observedAt": "2017-04-18T18:00:00Z",
+                "lon": -1.9903,
+                "lat": 52.4193
               }
             ],
-            "maxWindSpeedInMilesPerHour": 14.3,
-            "maxWindSpeedInKnots": 12.4,
+            "maxWindSpeedInKnots": 29.935196,
+            "maxWindSpeedInMilesPerHour": 34.4,
             "maxWindSpeedObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-06T00:00:00Z"
-              },
-              {
-                "meteoGroupStationId": "30651",
-                "meteoGroupStationName": "Leatherhead",
-                "observedAt": "2017-03-06T06:00:00Z"
+                "meteoGroupStationId": "2003968",
+                "meteoGroupStationName": "West Sole",
+                "observedAt": "2017-04-18T04:20:00Z",
+                "lon": 1.1333333,
+                "lat": 53.7
               }
             ],
-            "maxWindGustInMilesPerHour": 23.1,
-            "maxWindGustInKnots": 20.1,
+            "maxWindGustInMilesPerHour": 39.1,
+            "maxWindGustInKnots": 34.01727,
             "maxWindGustObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-06T00:00:00Z"
+                "meteoGroupStationId": "3072",
+                "meteoGroupStationName": "Cairnwell",
+                "observedAt": "2017-04-18T00:00:00Z",
+                "lon": -3.4166667,
+                "lat": 56.883335
+              },
+              {
+                "meteoGroupStationId": "3226",
+                "meteoGroupStationName": "Warcop",
+                "observedAt": "2017-04-18T00:00:00Z",
+                "lon": -2.4166667,
+                "lat": 54.566666
               }
             ],
-            "maxSunshineDurationInMinutes": 333,
+            "maxSunshineDurationInMinutes": 774,
             "maxSunshineDurationObservations": [
-                {
-                    "meteoGroupStationId": "3002",
-                    "meteoGroupStationName": "Baltasound",
-                    "observedAt": "2017-03-07T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "99095",
+                "meteoGroupStationName": "Kew Gardens",
+                "observedAt": "2017-04-19T06:00:00Z",
+                "lon": -0.3,
+                "lat": 51.483334
+              }
             ],
-            "maxPrecipitationAmountInMillimeters": 10.1,
+            "maxPrecipitationAmountInMillimeters": 9.2,
             "maxPrecipitationAmountObservations": [
-                {
-                    "meteoGroupStationId": "43081",
-                    "meteoGroupStationName": "Baskervilles",
-                    "observedAt": "2017-03-07T06:00:00Z"
-                }
+              {
+                "meteoGroupStationId": "6103370",
+                "meteoGroupStationName": "Oxford",
+                "observedAt": "2017-04-19T06:00:00Z",
+                "lon": -1.272,
+                "lat": 51.7492
+              }
             ]
           },
           {
             "isoCountryCode": "UK",
-            "observedFrom": "2017-03-07T00:00:00Z",
-            "observedUntil": "2017-03-07T10:35:31Z",
-            "minAirTemperatureInCelsius": -5.2,
+            "observedFrom": "2017-04-18T23:00:00Z",
+            "observedUntil": "2017-04-19T06:36:09Z",
+            "minAirTemperatureInCelsius": -3.8,
             "minAirTemperatureObservations": [
               {
-                "meteoGroupStationId": "3065",
-                "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-07T00:00:00Z"
-              },
-              {
-                "meteoGroupStationId": "3065",
-                "meteoGroupStationName": "Cairngorm",
-                "observedAt": "2017-03-07T06:00:00Z"
+                "meteoGroupStationId": "99118",
+                "meteoGroupStationName": "Santon Downham",
+                "observedAt": "2017-04-19T06:00:00Z",
+                "lon": 0.6666667,
+                "lat": 52.466667
               }
             ],
-            "maxAirTemperatureInCelsius": 13.1,
+            "maxAirTemperatureInCelsius": 10,
             "maxAirTemperatureObservations": [
               {
-                "meteoGroupStationId": "3313",
-                "meteoGroupStationName": "Rhyl",
-                "observedAt": "2017-03-07T09:00:00Z"
-              }
-            ],
-            "maxWindSpeedInMilesPerHour": 12,
-            "maxWindSpeedInKnots": 10.4,
-            "maxWindSpeedObservations": [
-              {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-07T00:00:00Z"
+                "meteoGroupStationId": "2003956",
+                "meteoGroupStationName": "Magnus",
+                "observedAt": "2017-04-18T23:20:00Z",
+                "lon": 1.3,
+                "lat": 61.616665
               },
               {
-                "meteoGroupStationId": "30651",
-                "meteoGroupStationName": "Leatherhead",
-                "observedAt": "2017-03-07T06:00:00Z"
+                "meteoGroupStationId": "2003956",
+                "meteoGroupStationName": "Magnus",
+                "observedAt": "2017-04-19T02:20:00Z",
+                "lon": 1.3,
+                "lat": 61.616665
+              },
+              {
+                "meteoGroupStationId": "2003956",
+                "meteoGroupStationName": "Magnus",
+                "observedAt": "2017-04-19T03:20:00Z",
+                "lon": 1.3,
+                "lat": 61.616665
+              },
+              {
+                "meteoGroupStationId": "2003956",
+                "meteoGroupStationName": "Magnus",
+                "observedAt": "2017-04-19T04:20:00Z",
+                "lon": 1.3,
+                "lat": 61.616665
+              },
+              {
+                "meteoGroupStationId": "2003956",
+                "meteoGroupStationName": "Magnus",
+                "observedAt": "2017-04-19T05:20:00Z",
+                "lon": 1.3,
+                "lat": 61.616665
+              },
+              {
+                "meteoGroupStationId": "2003956",
+                "meteoGroupStationName": "Magnus",
+                "observedAt": "2017-04-19T06:20:00Z",
+                "lon": 1.3,
+                "lat": 61.616665
               }
             ],
-            "maxWindGustInMilesPerHour": 18,
-            "maxWindGustInKnots": 15.6,
+            "maxWindSpeedInKnots": 29.935196,
+            "maxWindSpeedInMilesPerHour": 34.4,
+            "maxWindSpeedObservations": [
+              {
+                "meteoGroupStationId": "2003956",
+                "meteoGroupStationName": "Magnus",
+                "observedAt": "2017-04-19T02:20:00Z",
+                "lon": 1.3,
+                "lat": 61.616665
+              },
+              {
+                "meteoGroupStationId": "2003956",
+                "meteoGroupStationName": "Magnus",
+                "observedAt": "2017-04-19T04:20:00Z",
+                "lon": 1.3,
+                "lat": 61.616665
+              }
+            ],
+            "maxWindGustInMilesPerHour": 35.6,
+            "maxWindGustInKnots": 30.907118,
             "maxWindGustObservations": [
               {
-                "meteoGroupStationId": "43081",
-                "meteoGroupStationName": "Baskervilles",
-                "observedAt": "2017-03-07T00:00:00Z"
+                "meteoGroupStationId": "3039",
+                "meteoGroupStationName": "Bealach",
+                "observedAt": "2017-04-19T00:00:00Z",
+                "lon": -5.6833334,
+                "lat": 57.416668
               }
             ]
           }
