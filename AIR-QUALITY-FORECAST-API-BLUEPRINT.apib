@@ -103,7 +103,7 @@ This endpoint is deprecated and will be removed in the near future.
                 ]
             }
 
-### Search air pollution forecasts for location [GET /pollution/search?locatedAt={locatedAt}&fields={fields}]
+### Search air pollution forecasts for location [GET /pollution/search?locatedAt={locatedAt}&fields={fields}&timeZone={timeZone}]
 
 + Request
 
@@ -167,7 +167,7 @@ This endpoint is deprecated and will be removed in the near future.
               ]
             }
 
-### Search pollen forecasts for location [GET /pollen/search?locatedAt={locatedAt}&fields={fields}]
+### Search pollen forecasts for location [GET /pollen/search?locatedAt={locatedAt}&fields={fields}&timeZone={timeZone}]
 
 Pollen forecast available only on United Kingdom. When you try querying outside UK, you are receive response with status code `400 Bad Request`.
 Available pollen forecast separated on 16 regions. The `pollenForecastRegion` and `pollenForecastRegionName` parameters refers on table, see below:
