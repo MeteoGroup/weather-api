@@ -747,7 +747,7 @@ This endpoint allow you querying observation from moving station (BUOY|SHIP|PLAT
 
 + Parameters
     + locationWithin: [-10,80],[10,5] (string, required) - bounding box [longitude_top_left, latitude_top_left],[longitude_bottom_right, latitude_bottom_right];
-    + isType: `BUOY` (string, required) - comma separated list of moving stations types, list of acceptable values: BUOY, SHIP, PLAT
+    + isType: `BUOY` (string, required) - comma separated list of moving stations types, list of acceptable values: BUOY, SHIP, PLATFORM
     + fields: `meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,sunshineDurationInMinutes,airTemperatureInCelsius,windGustInKnots,windSpeedInKnots...` (string, required) - comma separated list of parameters to be contained inside response. All possible names are present in section 'Fields names'
     + observedFrom: `2017-06-01T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedUntil: `2017-06-01T13:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
