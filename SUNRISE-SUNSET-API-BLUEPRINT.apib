@@ -9,7 +9,7 @@ Sunrise and Sunset API
 This is technical documentation for the Sunrise and Sunset API
 This document uses [API blueprint format](https://apiblueprint.org/documentation/).
 
-This is a service to compute the local sunrise and sunset at a given longitue/latitude and date combination. 
+This is a service to compute the local sunrise and sunset at a given longitue/latitude and date(s) combination. 
 Uses the algorithm found at: 
     Almanac for Computers, 1990
 	published by Nautical Almanac Office
@@ -29,7 +29,15 @@ If you want to get access please use [request form](https://meteogroup.zendesk.c
 + Parameters
     + meteoGroupStationIds: `3007237,3007238` (string, optional) - MeteoGroup station ids; can be several stations separated by comma. Either the meteoGroupStationIds or locatedAt parameter must be specified at once;
     + locatedAt: `-2.2323,47.4593` (string, optional) - longitude, latitude; or `g9p734o7sC-36xi5iyD` - compressed list of locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations;
-    + validAt: `2016-12-27` (string, optional) - ISO8601 date notation. If the parameter is not specified the current date is taken.
+    + validAt(deprecated): `2016-12-27` (string, optional) - ISO8601 date notation. Represents the day for which the sunrise and sunset data should be returned;
+    + validFrom: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the first of period, for which the sunrise and sunset data should be returned, inclusive;
+    + validUntil: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the last of period, for which the sunrise and sunset data should be returned, inclusive.
+	
+NOTE.
+    - if no any among validAt, validFrom and validUntil is specified the service returns data for the current day
+    - if an only one among validFrom and validUntil is specified the service returns data for this single day
+    - if validAt and any of validFrom or validUntil is specified the service returns response with 400 status code
+    - if difference between validFrom and validUntil is bigger than one year the service returns response with 400 status code
 
 ### Get a sunrise and sunset time for a single station id [GET]
 
@@ -60,6 +68,51 @@ If you want to get access please use [request form](https://meteogroup.zendesk.c
               "locationTimeZoneName": "Europe/Paris",
               "officialSunsetTime": "2016-12-27T17:24+01:00"
             }
+          ]
+        }
+
+### Get a sunrise and sunset time for a single station id and multiple dates [GET]
+
+####An example
+'https://point-forecast.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237&validFrom=2016-12-27&validUntil=2016-12-28'
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            Cache-Control: max-age=90
+
+    + Body
+
+        {
+          "sunriseSunsetTime": [
+            {
+              "civilSunsetTime": "2016-12-27T18:00+01:00",
+              "nauticalSunriseTime": "2016-12-27T07:42+01:00",
+              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
+              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
+              "nauticalSunsetTime": "2016-12-27T18:40+01:00",
+              "officialSunriseTime": "2016-12-27T08:58+01:00",
+              "validAt": "2016-12-27",
+              "civilSunriseTime": "2016-12-27T08:22+01:00",
+              "meteoGroupStationId": "3007237",
+              "locationTimeZoneName": "Europe/Paris",
+              "officialSunsetTime": "2016-12-27T17:24+01:00"
+            },
+            {
+              "civilSunsetTime": "2016-12-28T18:01+01:00",
+              "nauticalSunriseTime": "2016-12-28T07:43+01:00",
+              "astronomicalSunriseTime": "2016-12-28T07:05+01:00",
+              "astronomicalSunsetTime": "2016-12-28T19:18+01:00",
+              "nauticalSunsetTime": "2016-12-28T18:40+01:00",
+              "officialSunriseTime": "2016-12-28T08:58+01:00",
+              "validAt": "2016-12-28",
+              "civilSunriseTime": "2016-12-28T08:22+01:00",
+              "meteoGroupStationId": "3007237",
+              "locationTimeZoneName": "Europe/Paris",
+              "officialSunsetTime": "2016-12-28T17:25+01:00"
+            }			
           ]
         }
         
