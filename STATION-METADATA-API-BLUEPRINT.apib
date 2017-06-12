@@ -1,0 +1,99 @@
+FORMAT: 1A
+
+Station Metadata API
+=============================
+
+
+# General information
+
+This is technical documentation for the Station Metadata API
+This document uses [API blueprint format](https://apiblueprint.org/documentation/).
+
+Station Metadata is a service to get information about stations in GeoJSON format. 
+
+### Authentication
+
+All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
+If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+
+#Stations Metadata API
+
+## Retrieve station metadata [/stations]
+
+For any request all the GET HTTP parameters are optional.
+
++ Parameters
+    + locationWithin: `[-180,90],[180,-90]` (string, optional) - top left and bottom right coordinates that construct bounding box of station locations;
+    + accessVisibility: `public` (string, optional) - parameter that filter **public** or **private** stations to show;
+    + providerOrType: `WMO` (string, optional) - describes data provider or type;
+    + type: `SKI_RESORT` (string, optional) - describes type of station place;
+    + hasForecastData: `true` (boolean, optional) - show only stations that provide forecasts;
+    + hasObservationData: `true` (boolean, optional) - show only stations that provide observations;
+    + countryIsoCode: `DE` (string, optional) - filter stations by country ISO code.
+
+### Get a stations metadata for Germany [GET]
+
+####An example
+'https://station-metadata.weather.mg/stations?countryIsoCode=DE&hasObservationData=true'
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            Cache-Control: max-age=86400
+    
+    + Body
+        
+            {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "accessVisibility": "public",
+                            "icaoCode": "EDXW",
+                            "countryIsoCode": "DE",
+                            "hasForecastData": true,
+                            "wmoCountryId": 69,
+                            "meteoGroupStationId": 10018,
+                            "name": "Westerland/Sylt",
+                            "providerStationId": "GWT",
+                            "providerOrType": "AVIATION",
+                            "hasObservationData": true,
+                            "stationTimeZoneName": "Europe/Berlin"
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                                8.35,
+                                54.9167,
+                                20
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "accessVisibility": "public",
+                            "countryIsoCode": "DE",
+                            "hasForecastData": true,
+                            "wmoCountryId": 69,
+                            "meteoGroupStationId": 10020,
+                            "name": "List/Sylt",
+                            "providerOrType": "WMO/DWD",
+                            "hasObservationData": true,
+                            "stationTimeZoneName": "Europe/Berlin"
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                                8.4125,
+                                55.0112,
+                                26
+                            ]
+                        }
+                    }
+                ]
+            }
+#
