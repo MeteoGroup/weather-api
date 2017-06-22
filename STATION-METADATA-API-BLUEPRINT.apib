@@ -23,8 +23,9 @@ If you want to get access please use [request form](https://meteogroup.zendesk.c
 For any request all the GET HTTP parameters are optional.
 
 + Parameters
-    + locationWithin: `[-180,90],[180,-90]` (string, optional) - top left and bottom right coordinates that construct bounding box of station locations;
-    + polygonLocationWithin: `[-10,80],[10,5],[-5,-5]` (string, optional) - bounding box [longitude, latitude],[longitude, latitude],[longitude, latitude];
+    + locatedWithin:
+        - {"type":"bbox","coordinates":[[lon,lat],[lon,lat]]} (string, optional) - top left and bottom right coordinates that construct bounding box;
+        - {"type":"polygon","coordinates":[[-10,10],[10,5],[-5,-5]]} - polygon coordinates.
     + accessVisibility: `public` (string, optional) - parameter that filter **public** or **private** stations to show;
     + providerOrType: `WMO` (string, optional) - describes data provider or type;
     + type: `SKI_RESORT` (string, optional) - describes type of station place;
@@ -36,6 +37,8 @@ For any request all the GET HTTP parameters are optional.
 
 ####An example
 'https://station-metadata.weather.mg/stations?countryIsoCode=DE&hasObservationData=true'
+'https://station-metadata.weather.mg/stations?locatedWithin={"type":"polygon","coordinates":[[-10,10],[10,5],[-5,-5]]}'
+'https://station-metadata.weather.mg/stations?locatedWithin={"type":"bbox","coordinates":[[-10,80],[10,5]]}'
 
 + Response 200 (application/json)
 
