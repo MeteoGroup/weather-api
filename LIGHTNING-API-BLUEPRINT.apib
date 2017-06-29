@@ -55,8 +55,8 @@ https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10
 https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]
 
 ##### Limitation
-AWS Lambda service response can have size < 6MB
-If locationWithin is worldwide [-180, 90][180, -90] and occurrence ~3 days
+AWS service response can't be more than < 6MB because of technical limitations(AWS lambda)
+If locationWithin is worldwide [-180, 90][180, -90] and occurrence ~3 days the response size is usually grater than 6MB.
 
 ### Observed lightning for a given boundingBox and time period
 
@@ -145,16 +145,16 @@ https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolutio
 
 ### Observed weighted lightning for a given boundingBox, time period, weighted by time span and spatial resolution
 
-This resource provides data from existing lightning observation providers.
+This resource provides data from existing lightning observation providers: NOWCAST and ENGLN.
 For any request service returns a set of lightnings occurred in geographical
 bounding box locations during period of time specified in parameters.
 
 
 + Parameters
-    + temporalResolution: 'PT15M, PT5M' (string required)
+    + temporalResolution: 'PT15M, PT5M' in minutes(string required)
          - time span interval in which lightning should be weighted
 
-    + spatialResolution '0.5, 0.25, 0.05' (string required)
+    + spatialResolution '0.5, 0.25, 0.05' degree(string required)
          - spatial resolution within which lightning should be weighted
 
     + locationWithin: `[-10,80],[10,5]`   (longitude top left,
