@@ -33,86 +33,15 @@ HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
 The Authorization token contains the Scopes which the client is allowed to have.
 **air-quality-forecast** is the scope which allows to request Air Quality Forecast Service.
 
-### Search air quality forecasts for location [GET /search?locatedAt={locatedAt}&fields={fields}]
-
-This /search endpoint is deprecated and will be removed in the near future.
-Please use endpoints /pollen or /pollution instead (see below)
-     _                               _           _ 
-    | |                             | |         | |
-  __| | ___ _ __  _ __ ___  ___ __ _| |_ ___  __| |
- / _` |/ _ \ '_ \| '__/ _ \/ __/ _` | __/ _ \/ _` |
-| (_| |  __/ |_) | | |  __/ (_| (_| | ||  __/ (_| |
- \__,_|\___| .__/|_|  \___|\___\__,_|\__\___|\__,_|
-           | |                                     
-           |_|                                     
-
-+ Request
-
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
-
-    + Parameters
-        + locatedAt: `-2.2323,47.4593` (string, required) - longitude,latitude;
-        + fields: `airPollutionIndex` (string, required) - comma separated list of [airPollutionIndex,pollenIndex] or single value
-    
-+ Response 200 (application/json)
-    
-    Returns forecasts for today + 4 days.
-    
-    + Body
-        
-            {
-                "forecasts": [
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-22T06:00:00Z",
-                      "validFrom": "2017-01-22T00:00:00Z",
-                      "validUntil": "2017-01-23T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 1,
-                      "type": "pollution"
-                    },
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-23T06:00:00Z",
-                      "validFrom": "2017-01-23T00:00:00Z",
-                      "validUntil": "2017-01-24T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 2,
-                      "type": "pollution"
-                    },
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-24T06:00:00Z",
-                      "validFrom": "2017-01-24T00:00:00Z",
-                      "validUntil": "2017-01-25T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 3,
-                      "type": "pollution"
-                    },
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-25T06:00:00Z",
-                      "validFrom": "2017-01-25T00:00:00Z",
-                      "validUntil": "2017-01-26T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 4,
-                      "type": "pollution"
-                    },
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-26T06:00:00Z",
-                      "validFrom": "2017-01-26T00:00:00Z",
-                      "validUntil": "2017-01-27T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 5,
-                      "type": "pollution"
-                    }
-                ]
-            }
-
 ### Search air pollution forecasts for location [GET /pollution/search?locatedAt={locatedAt}&fields={fields}&timeZone={timeZone}]
+
+The Air pollution index shows the 'Daily Air Quality Index' which is dependent on pollutant concentrations averaged over day. 
+The data for UK comes from Met Office air pollution forecast feed and is generated from a regional model working on a 12km grid resolution.
+Index Bands
+1-3 : Low
+4-6 : Moderate
+7-9 : High
+10  : Very High
 
 + Request
 
@@ -176,6 +105,7 @@ Please use endpoints /pollen or /pollution instead (see below)
               ]
             }
 
+
 ### Returns all available locations of pollution forecasts in geo json format [GET /pollution/locations]
 
 + Request
@@ -228,7 +158,7 @@ Please use endpoints /pollen or /pollution instead (see below)
 
 ### Search pollen forecasts for location [GET /pollen/search?locatedAt={locatedAt}&fields={fields}&timeZone={timeZone}]
 
-Pollen forecast available only on United Kingdom. When you try querying outside UK, you are receive response with status code `400 Bad Request`.
+Pollen forecast available only on United Kingdom and comes from Met Office data feed. When you try querying outside UK, you are receive response with status code `400 Bad Request`.
 Available pollen forecast separated on 16 regions. The `pollenForecastRegion` and `pollenForecastRegionName` parameters refers on table, see below:
 
 Id  Name
@@ -367,4 +297,84 @@ This feature collection contains list of geometry shape like as `Polygon` and `M
                   }
                 }
               ]
+            }
+            
+
+### Search air quality forecasts for location [GET /search?locatedAt={locatedAt}&fields={fields}]
+     _                               _           _ 
+    | |                             | |         | |
+  __| | ___ _ __  _ __ ___  ___ __ _| |_ ___  __| |
+ / _` |/ _ \ '_ \| '__/ _ \/ __/ _` | __/ _ \/ _` |
+| (_| |  __/ |_) | | |  __/ (_| (_| | ||  __/ (_| |
+ \__,_|\___| .__/|_|  \___|\___\__,_|\__\___|\__,_|
+           | |                                     
+           |_|                                     
+
+This /search endpoint is deprecated and will be removed in the near future.
+Please use endpoints /pollen or /pollution instead (see below)
+
++ Request
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
+
+    + Parameters
+        + locatedAt: `-2.2323,47.4593` (string, required) - longitude,latitude;
+        + fields: `airPollutionIndex` (string, required) - comma separated list of [airPollutionIndex,pollenIndex] or single value
+    
++ Response 200 (application/json)
+    
+    Returns forecasts for today + 4 days.
+    
+    + Body
+        
+            {
+                "forecasts": [
+                    {
+                      "forecastLocation": [ -2.2323, 47.4593 ],
+                      "publishedAt": "2017-01-22T06:00:00Z",
+                      "validFrom": "2017-01-22T00:00:00Z",
+                      "validUntil": "2017-01-23T00:00:00Z",
+                      "period": "PT24H",
+                      "airPollutionIndex": 1,
+                      "type": "pollution"
+                    },
+                    {
+                      "forecastLocation": [ -2.2323, 47.4593 ],
+                      "publishedAt": "2017-01-23T06:00:00Z",
+                      "validFrom": "2017-01-23T00:00:00Z",
+                      "validUntil": "2017-01-24T00:00:00Z",
+                      "period": "PT24H",
+                      "airPollutionIndex": 2,
+                      "type": "pollution"
+                    },
+                    {
+                      "forecastLocation": [ -2.2323, 47.4593 ],
+                      "publishedAt": "2017-01-24T06:00:00Z",
+                      "validFrom": "2017-01-24T00:00:00Z",
+                      "validUntil": "2017-01-25T00:00:00Z",
+                      "period": "PT24H",
+                      "airPollutionIndex": 3,
+                      "type": "pollution"
+                    },
+                    {
+                      "forecastLocation": [ -2.2323, 47.4593 ],
+                      "publishedAt": "2017-01-25T06:00:00Z",
+                      "validFrom": "2017-01-25T00:00:00Z",
+                      "validUntil": "2017-01-26T00:00:00Z",
+                      "period": "PT24H",
+                      "airPollutionIndex": 4,
+                      "type": "pollution"
+                    },
+                    {
+                      "forecastLocation": [ -2.2323, 47.4593 ],
+                      "publishedAt": "2017-01-26T06:00:00Z",
+                      "validFrom": "2017-01-26T00:00:00Z",
+                      "validUntil": "2017-01-27T00:00:00Z",
+                      "period": "PT24H",
+                      "airPollutionIndex": 5,
+                      "type": "pollution"
+                    }
+                ]
             }
