@@ -426,6 +426,77 @@ Here are relationship between observation periods and fields appropriately:
 		}
 	]}
 
+# Group Aggregations by polygon
+
+#### Example - Get maxThunderstormProbabilityInPercent for PT0S period
+'http://point-forecast.weather.mg/aggregate?locatedWithin={"type":"Polygon","coordinates":[[12,53],[14,53],[13,52.9]]}&validFrom=2017-07-01T00:00:00Z&validUntil=2017-07-01T01:00:00Z&validPeriod=PT0S&fields=maxThunderstormProbabilityInPercent'
+
++ Parameters
+    + locatedWithin: `{"type":"Polygon","coordinates":[[12,53],[14,53],[13,52.9]]}` (string, required) - polygon, [longitude,latitude]
+    + validFrom: `2017-07-01T00:00:00Z` (string, required) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2017-07-01T01:00:00Z` (string, required) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT0S` (string, required) - comma separated list of periods to be retrieved.
+    + fields: `maxThunderstormProbabilityInPercent` (string, required) - comma separated list of parameters to be contained inside response.
+
++ Response 200 (application/json)
+
+    + Headers
+            Content-Type:application/json
+            Cache-Control: max-age=90
+
+    + Body
+	{
+      "forecasts": [
+        {
+          "locatedWithin": {
+            "coordinates": [
+              [
+                12,
+                53
+              ],
+              [
+                14,
+                53
+              ],
+              [
+                13,
+                52.9
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "validUntil": "2017-07-01T00:00:00Z",
+          "maxThunderstormProbabilityInPercent": 1,
+          "validFrom": "2017-07-01T00:00:00Z",
+          "validPeriod": "PT0S"
+        },
+        {
+          "locatedWithin": {
+            "coordinates": [
+              [
+                12,
+                53
+              ],
+              [
+                14,
+                53
+              ],
+              [
+                13,
+                52.9
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "validUntil": "2017-07-01T01:00:00Z",
+          "maxThunderstormProbabilityInPercent": 1,
+          "validFrom": "2017-07-01T01:00:00Z",
+          "validPeriod": "PT0S"
+        }
+      ]
+    }
+
+
 # Group Warning
 
 ## Retrieve severe weather warnings [/warnings?location={latitudeInDegree,longitudeInDegree}]
