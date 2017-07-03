@@ -32,6 +32,13 @@ If you want to get access please use [request form](https://meteogroup.zendesk.c
     + validAt(deprecated): `2016-12-27` (string, optional) - ISO8601 date notation. Represents the day for which the sunrise and sunset data should be returned;
     + validFrom: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the first of period, for which the sunrise and sunset data should be returned, inclusive;
     + validUntil: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the last of period, for which the sunrise and sunset data should be returned, inclusive.
+    + fields: `beginOfMorningAstronomicalTwilight,endOfMorningAstronomicalTwilight`(string, required) - comma separated list of parameters to be contained inside a response. All possible names are present in section 'Fields names'
+
+## Fields names
+    locatedAt, meteoGroupStationId, validAt, locationTimeZoneName, officialSunriseTime, officialSunsetTime,
+    beginOfMorningAstronomicalTwilight, endOfMorningAstronomicalTwilight, beginOfEveningAstronomicalTwilight, endOfEveningAstronomicalTwilight,
+    beginOfMorningCivilTwilight, endOfMorningCivilTwilight, beginOfEveningCivilTwilight, endOfEveningCivilTwilight,
+    beginOfMorningNauticalTwilight, endOfMorningNauticalTwilight, beginOfEveningNauticalTwilight, endOfEveningNauticalTwilight.
 	
 NOTE.
     - if no any among validAt, validFrom and validUntil is specified the service returns data for the current day
@@ -42,7 +49,7 @@ NOTE.
 ### Get a sunrise and sunset time for a single station id [GET]
 
 ####An example
-'https://point-forecast.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237&validAt=2016-12-27'
+'https://point-forecast.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237&validAt=2016-12-27&fields=beginOfMorningAstronomicalTwilight,endOfMorningCivilTwilight,endOfMorningNauticalTwilight,officialSunriseTime,locatedAt,validAt,endOfEveningAstronomicalTwilight,beginOfMorningNauticalTwilight,beginOfEveningCivilTwilight,officialSunsetTime,endOfEveningNauticalTwilight,endOfEveningCivilTwilight,beginOfEveningAstronomicalTwilight,beginOfEveningNauticalTwilight,meteoGroupStationId,locationTimeZoneName,beginOfMorningCivilTwilight,endOfMorningAstronomicalTwilight'
 
 + Response 200 (application/json)
 
@@ -53,28 +60,34 @@ NOTE.
 
     + Body
 
-        {
-          "sunriseSunsetTime": [
-            {
-              "civilSunsetTime": "2016-12-27T18:00+01:00",
-              "nauticalSunriseTime": "2016-12-27T07:42+01:00",
-              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
-              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
-              "nauticalSunsetTime": "2016-12-27T18:40+01:00",
-              "officialSunriseTime": "2016-12-27T08:58+01:00",
-              "validAt": "2016-12-27",
-              "civilSunriseTime": "2016-12-27T08:22+01:00",
-              "meteoGroupStationId": "3007237",
-              "locationTimeZoneName": "Europe/Paris",
-              "officialSunsetTime": "2016-12-27T17:24+01:00"
-            }
-          ]
-        }
+      {
+        "sunriseSunsetTime": [
+          {
+            "beginOfMorningAstronomicalTwilight": "2016-12-27T07:05+01:00",
+            "endOfMorningCivilTwilight": "2016-12-27T08:58+01:00",
+            "endOfMorningNauticalTwilight": "2016-12-27T08:58+01:00",
+            "officialSunriseTime": "2016-12-27T08:58+01:00",
+            "validAt": "2016-12-27",
+            "endOfEveningAstronomicalTwilight": "2016-12-27T19:17+01:00",
+            "beginOfMorningNauticalTwilight": "2016-12-27T07:42+01:00",
+            "beginOfEveningCivilTwilight": "2016-12-27T17:24+01:00",
+            "officialSunsetTime": "2016-12-27T17:24+01:00",
+            "endOfEveningNauticalTwilight": "2016-12-27T18:40+01:00",
+            "endOfEveningCivilTwilight": "2016-12-27T18:00+01:00",
+            "beginOfEveningAstronomicalTwilight": "2016-12-27T17:24+01:00",
+            "beginOfEveningNauticalTwilight": "2016-12-27T17:24+01:00",
+            "meteoGroupStationId": "3007237",
+            "locationTimeZoneName": "Europe/Paris",
+            "beginOfMorningCivilTwilight": "2016-12-27T08:22+01:00",
+            "endOfMorningAstronomicalTwilight": "2016-12-27T08:58+01:00"
+          }
+        ]
+      }
 
 ### Get a sunrise and sunset time for a single station id and multiple dates [GET]
 
 ####An example
-'https://point-forecast.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237&validFrom=2016-12-27&validUntil=2016-12-28'
+'https://point-forecast.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237&validFrom=2016-12-27&validUntil=2016-12-28&fields=officialSunriseTime,officialSunsetTime'
 
 + Response 200 (application/json)
 
@@ -86,40 +99,28 @@ NOTE.
     + Body
 
         {
-          "sunriseSunsetTime": [
-            {
-              "civilSunsetTime": "2016-12-27T18:00+01:00",
-              "nauticalSunriseTime": "2016-12-27T07:42+01:00",
-              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
-              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
-              "nauticalSunsetTime": "2016-12-27T18:40+01:00",
-              "officialSunriseTime": "2016-12-27T08:58+01:00",
-              "validAt": "2016-12-27",
-              "civilSunriseTime": "2016-12-27T08:22+01:00",
-              "meteoGroupStationId": "3007237",
-              "locationTimeZoneName": "Europe/Paris",
-              "officialSunsetTime": "2016-12-27T17:24+01:00"
-            },
-            {
-              "civilSunsetTime": "2016-12-28T18:01+01:00",
-              "nauticalSunriseTime": "2016-12-28T07:43+01:00",
-              "astronomicalSunriseTime": "2016-12-28T07:05+01:00",
-              "astronomicalSunsetTime": "2016-12-28T19:18+01:00",
-              "nauticalSunsetTime": "2016-12-28T18:40+01:00",
-              "officialSunriseTime": "2016-12-28T08:58+01:00",
-              "validAt": "2016-12-28",
-              "civilSunriseTime": "2016-12-28T08:22+01:00",
-              "meteoGroupStationId": "3007237",
-              "locationTimeZoneName": "Europe/Paris",
-              "officialSunsetTime": "2016-12-28T17:25+01:00"
-            }			
-          ]
+           "sunriseSunsetTime": [
+             {
+               "officialSunriseTime": "2016-12-27T08:58+01:00",
+               "validAt": "2016-12-27",
+               "meteoGroupStationId": "3007237",
+               "locationTimeZoneName": "Europe/Paris",
+               "officialSunsetTime": "2016-12-27T17:24+01:00"
+             },
+             {
+               "officialSunriseTime": "2016-12-28T08:58+01:00",
+               "validAt": "2016-12-28",
+               "meteoGroupStationId": "3007237",
+               "locationTimeZoneName": "Europe/Paris",
+               "officialSunsetTime": "2016-12-28T17:25+01:00"
+             }
+           ]
         }
         
 ### Get a sunrise and sunset time for multiple station ids [GET]
 
 ####An example
-'https://point-forecast.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237,3007238&validAt=2016-12-27'
+'https://point-forecast.weather.mg/sunrise-sunset?meteoGroupStationIds=3007237,3007238&validAt=2016-12-27&fields=officialSunriseTime,officialSunsetTime'
 
 + Response 200 (application/json)
 
@@ -133,27 +134,15 @@ NOTE.
         {
           "sunriseSunsetTime": [
             {
-              "civilSunsetTime": "2016-12-27T18:00+01:00",
-              "nauticalSunriseTime": "2016-12-27T07:42+01:00",
-              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
-              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
-              "nauticalSunsetTime": "2016-12-27T18:40+01:00",
               "officialSunriseTime": "2016-12-27T08:58+01:00",
               "validAt": "2016-12-27",
-              "civilSunriseTime": "2016-12-27T08:22+01:00",
               "meteoGroupStationId": "3007237",
               "locationTimeZoneName": "Europe/Paris",
               "officialSunsetTime": "2016-12-27T17:24+01:00"
             },
             {
-              "civilSunsetTime": "2016-12-27T18:00+01:00",
-              "nauticalSunriseTime": "2016-12-27T07:43+01:00",
-              "astronomicalSunriseTime": "2016-12-27T07:05+01:00",
-              "astronomicalSunsetTime": "2016-12-27T19:17+01:00",
-              "nauticalSunsetTime": "2016-12-27T18:39+01:00",
               "officialSunriseTime": "2016-12-27T08:59+01:00",
               "validAt": "2016-12-27",
-              "civilSunriseTime": "2016-12-27T08:23+01:00",
               "meteoGroupStationId": "3007238",
               "locationTimeZoneName": "Europe/Paris",
               "officialSunsetTime": "2016-12-27T17:23+01:00"
@@ -164,7 +153,7 @@ NOTE.
 ### Get a sunrise and sunset time for a single location [GET]
 
 ####An example
-'https://point-forecast.weather.mg/sunrise-sunset?locatedAt=13,52&validAt=2016-12-27'
+'https://point-forecast.weather.mg/sunrise-sunset?locatedAt=13,52&validAt=2016-12-27&fields=officialSunriseTime,officialSunsetTime'
 
 + Response 200 (application/json)
 
@@ -178,18 +167,12 @@ NOTE.
         {
           "sunriseSunsetTime": [
             {
-              "civilSunsetTime": "2016-12-27T16:44+01:00",
-              "nauticalSunriseTime": "2016-12-27T06:52+01:00",
-              "astronomicalSunriseTime": "2016-12-27T06:10+01:00",
-              "astronomicalSunsetTime": "2016-12-27T18:09+01:00",
-              "nauticalSunsetTime": "2016-12-27T17:27+01:00",
               "officialSunriseTime": "2016-12-27T08:16+01:00",
               "locatedAt": [
                 13,
                 52
               ],
               "validAt": "2016-12-27",
-              "civilSunriseTime": "2016-12-27T07:35+01:00",
               "locationTimeZoneName": "Europe/Berlin",
               "officialSunsetTime": "2016-12-27T16:03+01:00"
             }
@@ -199,7 +182,7 @@ NOTE.
 ### Get a sunrise and sunset time for multiple encoded locations [GET]
 
 ####An example
-'https://point-forecast.weather.mg/sunrise-sunset?locatedAt=g9p734o7sC-36xi5iyD&validAt=2016-12-27'
+'https://point-forecast.weather.mg/sunrise-sunset?locatedAt=g9p734o7sC-36xi5iyD&validAt=2016-12-27&fields=officialSunriseTime,officialSunsetTime'
 
 + Response 200 (application/json)
 
@@ -213,38 +196,24 @@ NOTE.
         {
           "sunriseSunsetTime": [
             {
-              "civilSunsetTime": "2016-12-27T16:44+01:00",
-              "nauticalSunriseTime": "2016-12-27T06:52+01:00",
-              "astronomicalSunriseTime": "2016-12-27T06:10+01:00",
-              "astronomicalSunsetTime": "2016-12-27T18:09+01:00",
-              "nauticalSunsetTime": "2016-12-27T17:27+01:00",
               "officialSunriseTime": "2016-12-27T08:16+01:00",
               "locatedAt": [
                 13,
                 52
               ],
               "validAt": "2016-12-27",
-              "civilSunriseTime": "2016-12-27T07:35+01:00",
               "locationTimeZoneName": "Europe/Berlin",
               "officialSunsetTime": "2016-12-27T16:03+01:00"
             },
             {
-              "civilSunsetTime": "2016-12-27T17:11+02:00",
-              "nauticalSunriseTime": "2016-12-27T07:00+02:00",
-              "astronomicalSunriseTime": "2016-12-27T06:21+02:00",
-              "astronomicalSunsetTime": "2016-12-27T18:30+02:00",
-              "nauticalSunsetTime": "2016-12-27T17:51+02:00",
               "officialSunriseTime": "2016-12-27T08:18+02:00",
               "locatedAt": [
                 24,
                 49
               ],
               "validAt": "2016-12-27",
-              "civilSunriseTime": "2016-12-27T07:40+02:00",
               "locationTimeZoneName": "Europe/Kiev",
               "officialSunsetTime": "2016-12-27T16:33+02:00"
             }
           ]
         }
-
-#
