@@ -37,6 +37,8 @@ The Authorization token contains the Scopes which the client is allowed to have.
 
 The Air pollution index shows the 'Daily Air Quality Index' which is dependent on pollutant concentrations averaged over day. 
 The data for UK comes from Met Office air pollution forecast feed and is generated from a regional model working on a 12km grid resolution.
+The forecasts are only available in UK. Therefore if a query contains location outside UK, then the app throws error - 404 Not Found
+
 Index Bands
 1-3 : Low
 4-6 : Moderate
@@ -162,7 +164,7 @@ The source of all possible locations for which pollution data are provided: http
 
 ### Search pollen forecasts for location [GET /pollen/search?locatedAt={locatedAt}&fields={fields}&timeZone={timeZone}]
 
-Pollen forecast available only on United Kingdom and comes from Met Office data feed. When you try querying outside UK, you are receive response with status code `400 Bad Request`.
+Pollen forecast available only on United Kingdom and comes from Met Office data feed. When you try querying outside UK, you are receive response with status code `404 Not Found`.
 Available pollen forecast separated on 16 regions. The `pollenForecastRegion` and `pollenForecastRegionName` parameters refers on table, see below:
 
 Id  Name
