@@ -41,6 +41,11 @@ HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
 The Authorization token contains the Scopes which the client is allowed to have.
 **station-metadata** is the scope which allows to request Point Observation Service.
 
+#### Cache control headers:
+
+if data unchanged since this date using the If-Modified-Since request header
+the server will return with an empty body with the 304 response code.
+
 ### Backward compatibility
 
 Every endpoint may add one or more response parameters in the future.
@@ -76,6 +81,7 @@ For any request all the GET HTTP parameters are optional.
 
             Content-Type: application/json
             Cache-Control: max-age=86400
+            Last-Modified: Mon, 10 Jul 2017 08:37:16 GMT
     
     + Body
         
