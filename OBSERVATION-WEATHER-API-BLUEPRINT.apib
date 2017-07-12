@@ -121,6 +121,18 @@ Here are relationship between observation periods and fields appropriately:
                 maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal,
                 freshSnowfallInCentimeter, freshSnowfallInInch
 
+List of mandatory fields:
+
+- **PT0S** -    airTemperatureInCelsius, airTemperatureInFahrenheit, airTemperatureInKelvin, feelsLikeTemperatureInCelsius, feelsLikeTemperatureInFahrenheit, feelsLikeTemperatureInKelvin, airPressureInHectoPascal,
+                windSpeedInMeterPerSecond, windSpeedInKilometerPerHour, windSpeedInMilesPerHour, windSpeedInBeaufort, windSpeedInKnots, windDirectionInDegree, dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit,
+                dewPointTemperatureInKelvin, relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer, visibilityInNauticalMile, visibilityInStatuteMile, weatherCode,
+                weatherCodeTraditional, snowDepthInCentimeter, snowDepthInInch, waterTemperatureInCelsius, waterTemperatureInFahrenheit, waterTemperatureInKelvin, totalWaveHeightInMeter, totalWavePeriodInSecond, seaHeightInMeter,
+                seaHeightInFeet, seaPeriodInSecond
+
+- **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, pressureTendencyDescription, pressureTendency, pressureTendencyCode, pressureChangeInHectoPascal,
+                precipitationAmountInMillimeter, precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch
+
+
 The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
 The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
 The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past weather".
