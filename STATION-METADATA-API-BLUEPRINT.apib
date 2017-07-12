@@ -75,6 +75,8 @@ For any request all the GET HTTP parameters are optional.
 'https://station-metadata.weather.mg/stations?locatedWithin={"type":"polygon","coordinates":[[-10,10],[10,5],[-5,-5]]}'
 'https://station-metadata.weather.mg/stations?locatedWithin={"type":"bbox","coordinates":[[-10,80],[10,5]]}'
 
+ATTENTION! **locatedWithin** parameter has to be encoded before putting it to the request. As an example, might be used URL encoder: http://www.url-encode-decode.com/
+
 + Response 200 (application/json)
 
     + Headers
