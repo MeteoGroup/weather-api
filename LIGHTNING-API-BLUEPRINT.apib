@@ -56,7 +56,7 @@ https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10
 
 ##### Limitation
 AWS Lambda service response can have size < 6MB, it is about 30000 lightning events. If there are more than 30 000 results in storage which comply to the search criteria, they can be retrieved using pagination. 
-In such case the response payload contains [HAL](http://stateless.co/hal_specification.html)-compatible _link object which contains links to the next page and the response type is application/hal+json.
+In such case the response payload contains [HAL](http://stateless.co/hal_specification.html)-compatible "_link" object which contains links to the next page and the response type is application/hal+json.
 If locationWithin is worldwide [-180, 90][180, -90] and occurrence ~3 days
 
 
