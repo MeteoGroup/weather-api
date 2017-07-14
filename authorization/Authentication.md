@@ -33,6 +33,10 @@ The access token can be reused for multiple requests until it expires (which wil
 
 
 #### Sample HTTP Request sequence
+
+All HTTP communication to/from auth.weather.mg has to be secured, in order to protect credentials.
+Hence, the server auth.weather.mg only offers the secure variant HTTPS.
+
 __Authorization Request:__
 
 ```
