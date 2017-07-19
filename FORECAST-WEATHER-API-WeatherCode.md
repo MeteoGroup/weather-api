@@ -101,8 +101,8 @@ Code | meaning
 84	|	Snow shower
 85	|	Snow shower
 86	|	Heavy snow shower
-87	|	Sleet shower
-88	|	Heavy sleet shower
+87	|	Shower of snow pellets or rain/snow mixed 
+88	|	Heavy shower of snow pellets or rain/snow mixed 
 89	|	Hail shower
 90	|	Heavy hail shower
 91	|	Thunderstorms
