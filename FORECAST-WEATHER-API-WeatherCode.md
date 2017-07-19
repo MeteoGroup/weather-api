@@ -41,7 +41,7 @@ Code | meaning
 24	|	Light freezing rain
 25	|	Light rain shower
 26	|	Light snow shower
-27	|	Sleet shower
+27	|	Light shower of snow pellets or rain/snow mixed 
 28	|	After Fog
 29	|	Isolated thunderstorm
 30	|	Sandstorm
