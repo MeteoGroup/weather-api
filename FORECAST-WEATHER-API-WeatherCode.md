@@ -1,5 +1,5 @@
 
-Weather Code table 
+Weather Code table
 ===================
 
 Used for the parameters "mostSignificantWeatherCode" and "weatherCode" in Point Forecast Service.
@@ -17,7 +17,7 @@ Code | meaning
 0	|	Clear skies
 1	|	Mainly clear skies
 2	|	Mainly Fair
-3	|	Lenghthy clear spells
+3	|	Lengthy clear spells
 4	|	Partly cloudy
 5	|	Broken clouds
 6	|	Rather cloudy
@@ -41,7 +41,7 @@ Code | meaning
 24	|	Light freezing rain
 25	|	Light rain shower
 26	|	Light snow shower
-27	|	Light shower of snow pellets or rain/snow mixed 
+27	|	Light shower of snow pellets or rain/snow mixed
 28	|	After Fog
 29	|	Isolated thunderstorm
 30	|	Sandstorm
@@ -101,8 +101,8 @@ Code | meaning
 84	|	Snow shower
 85	|	Snow shower
 86	|	Heavy snow shower
-87	|	Shower of snow pellets or rain/snow mixed 
-88	|	Heavy shower of snow pellets or rain/snow mixed 
+87	|	Shower of snow pellets or rain/snow mixed
+88	|	Heavy shower of snow pellets or rain/snow mixed
 89	|	Hail shower
 90	|	Heavy hail shower
 91	|	Thunderstorms
