@@ -41,12 +41,12 @@ Code | meaning | long description (WMO CT-4677)
 24	|	Light freezing rain | Freezing drizzle or freezing rain not falling as shower(s)
 25	|	Light rain shower | Shower(s) of rain
 26	|	Light snow shower | Shower(s) of snow, or of rain and snow
-27	|	Light shower of snow pellets or rain/snow mixed | Shower(s) of hail, or of rain and hail (Hail, small hail, snow pellets. French: grêle, grésil ou neige roulée.)
-28 ???	|	After Fog | Fog or ice fog
+27	|	Light shower of snow pellets or rain/snow mixed | Shower(s) of hail, or of rain and hail (Hail, small hail, snow pellets).
+28 	|	Patchy fog | Fog or ice fog
 29	|	Isolated thunderstorm | Thunderstorm (with or without precipitation)
 30	|	Sandstorm | Slight or moderate duststorm or sandstorm has decreased during the preceding hour
 31	|	Sandstorm | Slight or moderate duststorm or sandstorm no appreciable change during the preceding hour
-32 ???	|	Heavy sandstorm | Slight or moderate duststorm or sandstorm has begun or has increased during the preceding hour
+32  |	Sandstorm | Slight or moderate duststorm or sandstorm has begun or has increased during the preceding hour
 33	|	Heavy sandstorm | Severe duststorm or sandstorm has decreased during the preceding hour
 34	|	Heavy sandstorm | Severe duststorm or sandstorm no appreciable change during the preceding hour
 35	|	Heavy sandstorm | Severe duststorm or sandstorm has begun or has increased during the preceding hour
@@ -55,20 +55,20 @@ Code | meaning | long description (WMO CT-4677)
 38	|	Drifting snow | Slight or moderate blowing snow generally high (above eye level)
 39	|	Drifting snow | Heavy drifting snow generally high (above eye level)
 40	|	Patchy fog | Fog or ice fog at a distance at the time, but not at the station during the preceding hour, the fog or ice fog extending to a level above that of the observer
-41 ???	|	Patchy fog | Fog or ice fog in patches
-42 ???	|	Fog | Fog or ice fog, sky visible has become thinner during the preceding hour
-43 ???	|	Fog | Fog or ice fog, sky invisible has become thinner during the preceding hour
-44 ???	|	Fog | Fog or ice fog, sky visible no appreciable change during the preceding hour
-45 ???	|	Dense fog | Fog or ice fog, sky invisible no appreciable change during the preceding hour
-46 ???	|	Dense fog | Fog or ice fog, sky visible has begun or has become thicker during the preceding hour
-47 ???	|	Dense fog | Fog or ice fog, sky invisible has begun or has become thicker during the preceding hour
+41  |	Patchy fog | Fog or ice fog in patches
+42  |	Fog | Fog or ice fog, sky visible has become thinner during the preceding hour
+43 	|	Fog | Fog or ice fog, sky invisible has become thinner during the preceding hour
+44 	|	Fog | Fog or ice fog, sky visible no appreciable change during the preceding hour
+45 	|	Dense fog | Fog or ice fog, sky invisible no appreciable change during the preceding hour
+46 	|	Dense fog | Fog or ice fog, sky visible has begun or has become thicker during the preceding hour
+47 	|	Dense fog | Fog or ice fog, sky invisible has begun or has become thicker during the preceding hour
 48 	|	Freezing fog | Fog, depositing rime, sky visible
 49 	|	Freezing fog | Fog, depositing rime, sky invisible
-50 !!!	|	Light Occasional drizzle | Drizzle, not freezing, intermittent slight at time
-51 !!!	|	Light Drizzle | Drizzle, not freezing, continuous slight at time
-52 !!!	|	Occasional Drizzle | Drizzle, not freezing, intermittent moderate at time
+50 	|	Light Occasional drizzle | Drizzle, not freezing, intermittent slight at time
+51 	|	Light Drizzle | Drizzle, not freezing, continuous slight at time
+52 	|	Occasional Drizzle | Drizzle, not freezing, intermittent moderate at time
 53	|	Drizzle | Drizzle, not freezing, continuous moderate at time
-54 !!!	|	 Occasional Heavy Drizzle | Drizzle, not freezing, intermittent heavy (dense) at time
+54 	|	Heavy Drizzle | Drizzle, not freezing, intermittent heavy (dense) at time
 55	|	Heavy Drizzle | Drizzle, not freezing, continuous heavy (dense) at time
 56	|	Freezing drizzle | Drizzle, freezing, slight
 57	|	Freezing rain | Drizzle, freezing, moderate or heavy (dence)
@@ -90,15 +90,15 @@ Code | meaning | long description (WMO CT-4677)
 73	|	Snow | Continuous fall of snowflakes moderate at time
 74	|	Heavy snow | Intermittent fall of snowflakes heavy at time
 75	|	Heavy snow | Continuous fall of snowflakes heavy at time
-76 ???	|	Snow | Diamond dust (with or without fog)
+76 	|	Diamond dust | Diamond dust (with or without fog)
 77	|	Snow grains | Snow grains (with or without fog)
-78	|	Snow cristals | Isolated star-like snow crystals (with or without fog)
+78	|	Snow crystals | Isolated star-like snow crystals (with or without fog)
 79	|	Ice pellets | Ice pellets
 80	|	Rain shower | Rain shower(s), slight
 81	|	Heavy rain shower | Rain shower(s), moderate or heavy
-82 ???	|	Rain and snow shower | Rain shower(s), violent
-83 ???	|	Heavy rain and snow shower | Shower(s) of rain and snow mixed, slight
-84 ???	|	Snow shower | Shower(s) of rain and snow mixed, moderate or heavy
+82 	|	Heavy rain shower | Rain shower(s), violent
+83 	|	Rain and snow shower | Shower(s) of rain and snow mixed, slight
+84 	|	Heavy rain and snow shower | Shower(s) of rain and snow mixed, moderate or heavy
 85	|	Snow shower | Snow shower(s), slight
 86	|	Heavy snow shower | Snow shower(s), moderate or heavy
 87	|	Shower of snow pellets or rain/snow mixed | slight Shower(s) of snow pellets or small hail, with or without rain or rain and snow mixed
