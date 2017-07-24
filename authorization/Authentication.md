@@ -25,7 +25,7 @@ Authorisation is obtained using OAuth 2.0 client_credentials grant type (see als
 
 1) In order to authenticate for the authorization request, the client has to provide client credentials (i.e. ```client_id``` and ```client_secret```) as ```userid``` and ```password``` via HTTP Basic Authentication.
 
-2) After successful authentication the client retrieves an authentication token as response. This access token comes in the form of a [JSON Web Token (JWT)](https://jwt.io/introduction/). 
+2) After successful authentication the client retrieves an authentication token as response. This access token comes in the form of a [JSON Web Token (JWT)](https://jwt.io/introduction/).
 
 3) The access token can now be used to access Weather API Resources. The access token therefore is submitted as HTTP ```Authorization``` header of type ```Bearer```, when requesting against any resource.
 
@@ -49,10 +49,10 @@ Connection: close
 grant_type=client_credentials
 ```
 
-__Authorization Response:__ 
+__Authorization Response:__
 
 ```
-HTTP/1.1 200 
+HTTP/1.1 200
 Cache-Control: no-store
 Pragma: no-cache
 Content-Type: application/json;charset=UTF-8
@@ -83,7 +83,7 @@ __Resource Response omitted__
 
 For an implementation in Java we recommend the usage of Zalandos open source ```tokens``` library (see [https://github.com/zalando/tokens](https://github.com/zalando/tokens) for details).
 
-``` 
+```
 AccessTokens accessTokens = Tokens.createAccessTokensWithUri(new URI("https://auth.weather.mg/oauth/token"))
         .usingClientCredentialsProvider(() -> new SimpleClientCredentials("your_client_id", "your_client_secret"))
         .usingUserCredentialsProvider(() -> null)
@@ -91,10 +91,10 @@ AccessTokens accessTokens = Tokens.createAccessTokensWithUri(new URI("https://au
         .withGrantType("client_credentials")
         .done()
         .start();
-        
+
 ```
 
-The created ```accessTokens``` instance now handles the management for the tokens transparently. 
+The created ```accessTokens``` instance now handles the management for the tokens transparently.
 
 By calling ```accessTokens.get("token_name")``` a valid token is provided. Per default that token has at least 40% of lifetime remaining (which in this case would mean 24 minutes). Whenever the lifetime falls below that (configurable) value a new token is requested in the background.
 
@@ -141,7 +141,7 @@ request({
     url: 'https://auth.weather.mg/oauth/token',
     method: 'POST',
     auth: {
-        user: 'your_client_id',         // replace 'your_client_id' with your own ClientId 
+        user: 'your_client_id',         // replace 'your_client_id' with your own ClientId
         pass: 'your_client_secret'      // replace 'your_client_secret' with your own ClientSecret
     },
     form: {
@@ -227,6 +227,12 @@ Response
 
 ## Postman Sample
 
-Access token configuration in [Postman](https://www.getpostman.com):
+Access token configuration in [Postman](https://www.getpostman.com).
+
+| Token name | e.g. "my token" |
+| Access Token URL | https://auth.weather.mg/oauth/token |
+| Client ID | *your client id* |
+| Client Secret | *your client secret* |
+| Grant Type | Client Credentials |
 
 ![](./postman.png)
