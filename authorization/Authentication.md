@@ -229,6 +229,7 @@ Response
 
 Access token configuration in [Postman](https://www.getpostman.com).
 
+| --- | --- |
 | Token name | e.g. "my token" |
 | Access Token URL | https://auth.weather.mg/oauth/token |
 | Client ID | *your client id* |
