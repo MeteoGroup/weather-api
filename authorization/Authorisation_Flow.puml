@@ -1,0 +1,6 @@
+@startuml
+Client -> "Authorisation\nServer": 1) Authorization Request:client_credentials
+Client <-- "Authorisation\nServer": 2) Authorization Grant:Access Token
+Client -> "Weather API\nResource": 3) Resource Request:Access Token
+Client <-- "Weather API\nResource": Response
+@enduml

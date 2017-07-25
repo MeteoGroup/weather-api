@@ -1,0 +1,565 @@
+FORMAT: 1A
+
+Weather API
+=============================
+
+
+# General information
+
+This technical document was created for developers who are creating applications based on weather data provided by this API.
+This document is using [API blueprint format](https://apiblueprint.org/documentation/).
+
+### Authentication
+
+All endpoints are **secured** using OAuth2 authorization protocol with transmitting data over HTTPS.
+The authorization flows are described here [authorization flow](http://oauthbible.com/#oauth-2-two-legged)
+
+#### Client Credentials
+
+Before getting an access to any endpoints, need to obtain **client id** and **client secret**.
+For achieving this, please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+
+#### Authorization Token
+
+Once you have your client credentials (Client-ID + Password), you can request a token on
+[Authorization server](https://auth.weather.mg/oauth/token?grant_type=client_credentials with http basic auth).
+
+The token will be in the return message, encrypted with a key from the authorization service.
+
+It will contain the client-ID, scopes and expiration date.
+The token is valid only for a limited time, after this it will expired and you have to request a new token again.
+
+#### Using Authorization Token
+
+HTTP GET request to the endpoints needs to provide Authorization Token into **Authorization** HTTP Header.
+More information about JWT token might be found here: https://en.wikipedia.org/wiki/JSON_Web_Token.
+
+HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
+
+The Authorization token contains the Scopes which the client is allowed to have.
+**point-forecast** is the scope which allows to request Point Forecast Service.
+
+### Backward compatibility
+
+Every endpoint may add one or more response parameters in the future.
+Clients should ignore unknown parameters, to avoid technical issues.
+
+
+# Group Forecast
+
+## Retrieve weather forecast [/search?locatedAt={locatedAt}&meteoGroupStationIds={stationIds}&fields={fields}&validPeriod={validPeriod}&validFrom={validFrom}{&validUntil}]
+
+#### Example
+`https://point-forecast.weather.mg/search?locatedAt=48.2047,11.4513&validPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&validFrom=2016-11-24T11:00:00Z&validUntil=2016-11-29T11:00:00Z&fields=dewPointTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent`
+
+### Search for forecast data from weather stations for multiple given locations [GET]
+
+You can request forecast for locations or for concrete meteostations IDs. There are two request parameters: 'locatedAt' and 'meteoGroupStationIds'. One of these parameters must be included in the request. You can't use both of them in one request.
+
+For any requested location a relevant station is searched.
+The searching algorithm stops at a maximum distance of 100km (between requested location and station).
+By default, the latest known weather forecast data from a relevant station is returned.
+If validFrom and validUntil are missing then application sets validFrom as current time and validUntil as current time plus 1 day.
+if validFrom is not missing and validUntil is missing then application sets  validUntil as current time plus 1 day.
+It's possible to search forecast data either by geographical locations (long,lat) using 'locatedAt' request parameter or by MeteoGroup station IDs using 'meteoGroupStationIds' parameter.
+
+*Meteorological hints*
+
+The forecasted parameters always have a time period associated, which is typically one hour and one moment.
+Each weather parameter refers implicitly to one or another time period within a forecast.
+For example air temperature is forecasted for one moment in time.
+Whereas max air temperature is typically forecasted for a period of one our.
+There are other forecast periods possible, where parameters than are aggregated among e.g. 12 hours.
+In the response JSON document the weather parameters will be associated with their according period.
+
+All aggregated weather parameters (e.g. `maxAirTemperatureInCelsius`) are calculated at fixed hours as follows:
+PT1H - every hour
+PT3H - at 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00 and 21:00
+PT6H - at 00:00, 06:00, 12:00 and 18:00
+PT12H - at 06:00 and 18:00
+PT24H - at 00:00
+
+By default they are calculated either in a time zone of a requested location or in a time zone of a meteo station
+when requesting forecast by `locatedAt` or `meteoGroupStationIds` correspondingly. `validFrom` and `validUntil`
+will also be presented in a time zone of location or station.
+
+If a user specifies the 'timeZone' parameter, all aggregated weather parameters will be calculated at fixed hours
+of this time zone and `validFrom` and `validUntil` will be presented in it.
+
+*Technical hints*
+
+All timestamps and time periods/durations follow ISO8601 standard notation.
+For example 'PT1H' refers to one hour and 'PT0S' refers to one moment.
+For convinience reasons, a single location can be requested, but the response always returns a collection.
+For multiple locations, its recommended to just use the point compression.
+The observations in the response collection are "flat" to allow easy streaming and filtering on client side.
+The observations in the response are ordered ascending by field 'validFrom'.
+
+*Fields mapping*
+
+Common names of filed which can be included in all periods: locatedAt,meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,validFrom,validUntil,validPeriod,issuedAt
+
+Here are relationship between observation periods and fields appropriately:
+
+- **PT0S** -    airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,
+                dewPointTemperatureInKelvin,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,airPressureAtSeaLevelInHectoPascal,
+                windSpeedInMeterPerSecond,windSpeedInKnots,windSpeedInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windDirectionInDegree,
+                effectiveCloudCoverInOcta,effectiveCloudCoverInPercent,totalCloudCoverInOcta,cloudCoverLowerThan2000MeterInOcta,cloudCoverLowerThan5000MeterInOcta,cloudBaseHeightInMeter,relativeHumidityInPercent,
+                visibilityInMeter,weatherCode,weatherCodeTraditional,clearSkyUVIndex,uvIndexWithClouds,airTemperatureErrorInKelvin,windSpeedErrorInKnots,freezingLevelHeightInMeter,
+                freezingRainProbabilityInPercent,noSnowPossibleBelowHeightInMeter,snowCertainAboveHeightInMeter,saturationDeficitInHectoPascal,
+                airTemperatureNearGroundInCelsius,visibilityProbabilityLessThan200MeterInPercent,visibilityProbabilityLessThan1000MeterInPercent,
+				convectivePrecipitationProbabilityInPercent,precipitationProbabilityInPercent,precipitationType,hailProbabilityInPercent,
+				snowfallProbabilityInPercent,thunderstormProbabilityInPercent
+- **PT1H** -    maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,maxWindGustInKilometerPerHour,
+                sunshineDurationInMinutes,precipitationAmountInMillimeter,precipitationAmountInInch,
+                maxPrecipitationAmountInMillimeter,directRadiationInJoulePerSquareCentimeter,globalRadiationInJoulePerSquareCentimeter,averageGlobalRadiationInWattPerSquareMeter,relativeGlobalRadiationInPercent,
+                freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,relativeSunshineDurationInPercent,windGustProbabilityGreaterThan40KnotsInPercent,
+- **PT3H** -    maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindSpeedInKilometerPerHour,
+                maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,maxWindGustInKilometerPerHour,dominantWindDirectionInDegree,
+                minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
+                maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
+				minFeelsLikeTemperatureInCelsius,minFeelsLikeTemperatureInFahrenheit,minFeelsLikeTemperatureInKelvin,
+				maxFeelsLikeTemperatureInCelsius,maxFeelsLikeTemperatureInFahrenheit,maxFeelsLikeTemperatureInKelvin,
+                mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
+                averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,
+                averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal,precipitationProbabilityInPercent,maxUVIndexWithClouds,minVisibilityInMeter
+- **PT6H** -    maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindSpeedInKilometerPerHour,
+                maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,maxWindGustInKilometerPerHour,dominantWindDirectionInDegree,
+                minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
+                maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
+                mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
+				minFeelsLikeTemperatureInCelsius,minFeelsLikeTemperatureInFahrenheit,minFeelsLikeTemperatureInKelvin,
+				maxFeelsLikeTemperatureInCelsius,maxFeelsLikeTemperatureInFahrenheit,maxFeelsLikeTemperatureInKelvin,
+                precipitationAmountInMillimeter,precipitationAmountInInch,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,
+                precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,
+                precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,
+                precipitationDurationInMinutes,freshSnowfallInCentimeter,maxFreshSnowfallInCentimeter,effectiveCloudCoverInOcta,effectiveCloudCoverInPercent,averageRelativeHumidityInPercent,
+                averageWindSpeedInMeterPerSecond,averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour,
+                averageAirPressureAtSeaLevelInHectoPascal,maxUVIndexWithClouds,minVisibilityInMeter
+- **PT12H** -   maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindSpeedInKilometerPerHour,
+                maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,maxWindGustInKilometerPerHour,dominantWindDirectionInDegree,
+                minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
+                maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
+                mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,weatherCode,weatherCodeTraditional,
+				minFeelsLikeTemperatureInCelsius,minFeelsLikeTemperatureInFahrenheit,minFeelsLikeTemperatureInKelvin,
+				maxFeelsLikeTemperatureInCelsius,maxFeelsLikeTemperatureInFahrenheit,maxFeelsLikeTemperatureInKelvin,
+                convectivePrecipitationProbabilityInPercent,precipitationAmountInMillimeter,precipitationAmountInInch,
+                maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,
+                precipitationProbabilityMoreThan0_2MillimeterInPercent,precipitationProbabilityMoreThan1_4MillimeterInPercent,precipitationProbabilityMoreThan4_4MillimeterInPercent,
+                precipitationProbabilityMoreThan20MillimeterInPercent,precipitationProbabilityInPercent,thunderstormProbabilityInPercent,mostSignificantWeatherCode,
+                mostSignificantWeatherCodeTraditional,effectiveCloudCoverInOcta,effectiveCloudCoverInPercent,freezingRainProbabilityInPercent,groundFrostProbabilityInPercent,hailProbabilityInPercent,
+                snowfallProbabilityInPercent,minAirTemperatureNearGroundInCelsius,averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,averageWindSpeedInKnots,
+                averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal,
+                maxUVIndexWithClouds,minVisibilityInMeter
+- **PT24H** -   maxWindSpeedInMeterPerSecond,maxWindSpeedInKnots,maxWindSpeedInMilesPerHour,maxWindSpeedInKilometerPerHour,
+                maxWindGustInMeterPerSecond,maxWindGustInKnots,maxWindGustInMilesPerHour,maxWindGustInKilometerPerHour,dominantWindDirectionInDegree,
+                minAirTemperatureInCelsius,minAirTemperatureInFahrenheit,minAirTemperatureInKelvin,maxAirTemperatureInCelsius,maxAirTemperatureInFahrenheit,
+                maxAirTemperatureInKelvin,mostLikelyLowAirTemperatureInCelsius,mostLikelyLowAirTemperatureInFahrenheit,mostLikelyLowAirTemperatureInKelvin,
+                mostLikelyHighAirTemperatureInCelsius,mostLikelyHighAirTemperatureInFahrenheit,mostLikelyHighAirTemperatureInKelvin,
+				minFeelsLikeTemperatureInCelsius,minFeelsLikeTemperatureInFahrenheit,minFeelsLikeTemperatureInKelvin,
+				maxFeelsLikeTemperatureInCelsius,maxFeelsLikeTemperatureInFahrenheit,maxFeelsLikeTemperatureInKelvin,
+                precipitationAmountInMillimeter,precipitationAmountInInch,maxPrecipitationAmountInMillimeter,minPrecipitationAmountInMillimeter,
+                precipitationProbabilityMoreOrEqualThan0_1MillimeterInPercent,precipitationProbabilityMoreThan0_2MillimeterInPercent,
+                precipitationProbabilityMoreThan4_4MillimeterInPercent,precipitationProbabilityInPercent,mostSignificantWeatherCode,mostSignificantWeatherCodeTraditional,
+                evaporationMakkinkInMillimeter,evaporationPenmanInMillimeter,mostSignificantPrecipitationType,saturationDeficitInHectoPascal,sunshineDurationInMinutes,
+                relativeSunshineDurationInPercent,globalRadiationInJoulePerSquareCentimeter,averageGlobalRadiationInWattPerSquareMeter,averageRelativeHumidityInPercent,averageWindSpeedInMeterPerSecond,
+                averageWindSpeedInKnots,averageWindSpeedInMilesPerHour,averageWindSpeedInBeaufort,averageWindSpeedInKilometerPerHour,averageAirPressureAtSeaLevelInHectoPascal,
+                maxUVIndexWithClouds,minVisibilityInMeter
+
++ The "weatherCode" parameter refers to: [this code table](FORECAST-WEATHER-API-WeatherCode.md).
++ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
++ The mostLikelyHighAirTemperature equals maxAirTemperature plus airTemperatureError.
++ The mostLikelyLowAirTemperature equals minAirTemperature minus airTemperatureError.
++ The maxUVIndexWithClouds parameter is calculated based on clearSkyUVIndex and effectiveCloudCoverInOcta values
++ The minVisibilityInMeter parameters for PT3H, PT6H, PT12H and PT24H are calculated as a min value of the visibilityInMeter parameter from PT0S for the last 3, 6, 12 and 24 hours respectively,
+    including marginal values. E.g for PT3H period 4 PT0S values are used to cover the full three hours (validUntil-3h,validUntil-2h,validUntil-1h and validUntil).
++ The min/max FeelsLikeTemperatureIn Celsius/Fahrenheit/Kelvin parameters for PT3H, PT6H, PT12H and PT24H are calculated as a min/max value of the feelsLikeTemperatureIn Celsius/Fahrenheit/Kelvin parameter from PT0S for the last 3, 6, 12 and 24 hours respectively, including marginal values. E.g for PT3H period 4 PT0S values are used to cover the full three hours (validUntil-3h,validUntil-2h,validUntil-1h and validUntil).
+
+
+### Forecasted weather for a given *latitude* and *longitude* [GET]
+
+#### Example
+'https://point-forecast.weather.mg/search?locatedAt=-16.78,32.69&validPeriod=PT0S,PT1H,PT3H,PT6H,PT12H,PT24H&validFrom=2016-12-13T05:00:00Z&validUntil=2016-12-13T06:00:00Z&fields=dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent'
+
++ Parameters
+    + locatedAt: `-16.78,32.69` (string, required) - longitude, latitude; can occur multiple times for multiple locations
+    + fields: `dewPointTemperatureInCelsius,feelsLikeTemperatureInCelsius,maxAirTemperatureInFahrenheit,relativeGlobalRadiationInPercent,evaporationMakkinkInMillimeter,visibilityProbabilityLessThan200MeterInPercent,weatherCode,locatedAt,saturationDeficitInHectoPascal,precipitationProbabilityMoreThan4_4MillimeterInPercent` (string, required) - comma separated list of parameters to be contained inside response
+    + validFrom: `2016-12-13T05:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2016-12-13T06:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT0S,PT1H,PT3H,PT6H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. PT1H refers to one hour forecast periods.
+
++ Response 200 (application/json)
+
+    + Headers
+            Content-Type:application/json
+            Last-Modified:Tue, 03 Jan 2017 09:29:41 GMT
+            Cache-Control: max-age=90
+
+    + Body
+	{
+      "forecasts": [
+        {
+          "dewPointTemperatureInCelsius": 11.9,
+          "feelsLikeTemperatureInCelsius": 16.8,
+          "visibilityProbabilityLessThan200MeterInPercent": 1,
+          "weatherCode": 1,
+          "locatedAt": [-16.78,32.69],
+          "validUntil": "2016-12-13T05:00:00Z",
+          "saturationDeficitInHectoPascal": 3.9,
+          "validFrom": "2016-12-13T05:00:00Z",
+          "validPeriod": "PT0S",
+          "precipitationProbabilityInPercent": 1
+        }, {
+          "relativeGlobalRadiationInPercent": 95,
+          "locatedAt": [-16.78,32.69],
+          "validUntil": "2016-12-13T05:00:00Z",
+          "validFrom": "2016-12-13T04:00:00Z",
+          "validPeriod": "PT1H"
+        }, {
+          "dewPointTemperatureInCelsius": 12,
+          "feelsLikeTemperatureInCelsius": 17.1,
+          "visibilityProbabilityLessThan200MeterInPercent": 1,
+          "weatherCode": 1,
+          "locatedAt": [-16.78,32.69],
+          "validUntil": "2016-12-13T06:00:00Z",
+          "saturationDeficitInHectoPascal": 4.1,
+          "validFrom": "2016-12-13T06:00:00Z",
+          "validPeriod": "PT0S",
+          "precipitationProbabilityInPercent": 1
+        }, {
+          "relativeGlobalRadiationInPercent": 94,
+          "locatedAt": [-16.78,32.69],
+          "validUntil": "2016-12-13T06:00:00Z",
+          "validFrom": "2016-12-13T05:00:00Z",
+          "validPeriod": "PT1H"
+        }, {
+          "maxAirTemperatureInFahrenheit": 60.6,
+          "weatherCode": 1,
+          "locatedAt": [-16.78,32.69],
+          "validUntil": "2016-12-13T06:00:00Z",
+          "validFrom": "2016-12-13T03:00:00Z",
+          "validPeriod": "PT3H",
+          "precipitationProbabilityInPercent": 2
+        }, {
+          "maxAirTemperatureInFahrenheit": 62.2,
+          "weatherCode": 1,
+          "locatedAt": [-16.78,32.69],
+          "validUntil": "2016-12-13T06:00:00Z",
+          "precipitationProbabilityMoreThan4_4MillimeterInPercent": 0,
+          "validFrom": "2016-12-13T00:00:00Z",
+          "validPeriod": "PT6H",
+          "precipitationProbabilityInPercent": 2
+        }, {
+	  "maxAirTemperatureInFahrenheit" : 65.7,
+          "weatherCode": 1,
+          "locatedAt": [-16.78,32.69],
+          "validUntil": "2016-12-13T06:00:00Z",
+          "precipitationProbabilityMoreThan4_4MillimeterInPercent": 0,
+          "validFrom": "2016-12-12T18:00:00Z",
+          "validPeriod": "PT12H",
+          "precipitationProbabilityInPercent": 4
+        }
+      ]
+    }
+
+# Example 2:
+### Forecasted weather for a given collection of *latitude* and *longitude* pairs, compressed by Point Compression Algorithm [GET]
+
++ Parameters
+    + locatedAt: `463pklwwsB4-4jtN81qz8hR` (string, optional) - compressed list of station locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations
+    + fields: `precipitationProbabilityInPercent,maxWindSpeedInKnots,stationTimeZoneName` (string, required) - comma separated list of parameters to be contained inside response
+    + validFrom: `2016-12-13T00:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2016-12-13T06:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT6H,PT24H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
+    + timeZone: `+02:00` (string, optional) - a time-zone ID or offset, such as `Europe/Paris`, `-01:00` etc.
+
++ Response 200 (application/json)
+
+    + Headers
+            Content-Type:application/json
+            Last-Modified:Mon, 26 Dec 2016 14:28:05 GMT
+            Cache-Control: max-age=90
+
+    + Body
+	
+{
+  "forecasts" : [
+    {
+      "locatedAt" : [-16.78, 32.69],
+      "validUntil" : "2016-12-13T02:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-12T20:00:00+02:00",
+      "validPeriod" : "PT6H",
+      "precipitationProbabilityInPercent" : 4,
+      "maxWindSpeedInKnots" : 4.7
+    },
+    {
+      "locatedAt" : [-16.78, 32.69],
+      "validUntil" : "2016-12-13T02:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-12T02:00:00+02:00",
+      "validPeriod" : "PT24H",
+      "precipitationProbabilityInPercent" : 8,
+      "maxWindSpeedInKnots" : 8.8
+    },
+    {
+      "locatedAt" : [-16.78, 32.69],
+      "validUntil" : "2016-12-13T08:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-13T02:00:00+02:00",
+      "validPeriod" : "PT6H",
+      "precipitationProbabilityInPercent" : 2,
+      "maxWindSpeedInKnots" : 3.9
+    },
+    {
+      "locatedAt" : [-16.89, 32.65],
+      "validUntil" : "2016-12-13T02:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-12T20:00:00+02:00",
+      "validPeriod" : "PT6H",
+      "precipitationProbabilityInPercent" : 1,
+      "maxWindSpeedInKnots" : 4.3
+    },
+    {
+      "locatedAt" : [-16.89, 32.65],
+      "validUntil" : "2016-12-13T02:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-12T02:00:00+02:00",
+      "validPeriod" : "PT24H",
+      "precipitationProbabilityInPercent" : 5,
+      "maxWindSpeedInKnots" : 5.1
+    },
+    {
+      "locatedAt" : [-16.89, 32.65],
+      "validUntil" : "2016-12-13T08:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-13T02:00:00+02:00",
+      "validPeriod" : "PT6H",
+      "precipitationProbabilityInPercent" : 1,
+      "maxWindSpeedInKnots" : 3.7
+    },
+    {
+      "locatedAt" : [-16.35, 33.067],
+      "validUntil" : "2016-12-13T02:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-12T20:00:00+02:00",
+      "validPeriod" : "PT6H",
+      "precipitationProbabilityInPercent" : 2,
+      "maxWindSpeedInKnots" : 4.7
+    },
+    {
+      "locatedAt" : [-16.35, 33.067],
+      "validUntil" : "2016-12-13T02:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-12T02:00:00+02:00",
+      "validPeriod" : "PT24H",
+      "precipitationProbabilityInPercent" : 3,
+      "maxWindSpeedInKnots" : 8.8
+    },
+    {
+      "locatedAt" : [-16.35, 33.067],
+      "validUntil" : "2016-12-13T08:00:00+02:00",
+      "stationTimeZoneName" : "Atlantic/Madeira",
+      "validFrom" : "2016-12-13T02:00:00+02:00",
+      "validPeriod" : "PT6H",
+      "precipitationProbabilityInPercent" : 1,
+      "maxWindSpeedInKnots" : 4.3
+    }
+  ]
+}
+
+# Example 3:
+### Forecasted weather for multiple stations [GET]
+
++ Parameters
+    + meteoGroupStationIds: `8521,8522` (string, optional) - comma separated list of required meteostaions IDs.
+    + fields: `maxWindGustInMeterPerSecond,sunshineDurationInMinutes,precipitationAmountInMillimeter` (string, required) - comma separated list of parameters to be contained inside the response
+    + validFrom: `2016-12-13T11:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2016-12-13T12:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT1H` (string, required) - comma separated list of periods to be retrieved. use iso8601 time duration notation. PT1H refers one hour forecast periods.
+
++ Response 200 (application/json)
+
+    + Headers
+            Content-Type:application/json
+            Last-Modified:Mon, 26 Dec 2016 14:28:05 GMT
+            Cache-Control: max-age=90
+
+    + Body
+
+	{"forecasts": [
+		{
+			"sunshineDurationInMinutes": 37.8,
+			"meteoGroupStationId": "8521",
+			"precipitationAmountInMillimeter": 0,
+			"validUntil": "2016-12-13T11:00:00Z",
+			"maxWindGustInMeterPerSecond": 4.2,
+			"validFrom": "2016-12-13T10:00:00Z",
+			"validPeriod": "PT1H"
+		},
+		{
+			"sunshineDurationInMinutes": 33.6,
+			"meteoGroupStationId": "8521",
+			"precipitationAmountInMillimeter": 0,
+			"validUntil": "2016-12-13T12:00:00Z",
+			"maxWindGustInMeterPerSecond": 5.5,
+			"validFrom": "2016-12-13T11:00:00Z",
+			"validPeriod": "PT1H"
+		},
+		{
+			"sunshineDurationInMinutes": 31.8,
+			"meteoGroupStationId": "8522",
+			"precipitationAmountInMillimeter": 0,
+			"validUntil": "2016-12-13T11:00:00Z",
+			"maxWindGustInMeterPerSecond": 4.3,
+			"validFrom": "2016-12-13T10:00:00Z",
+			"validPeriod": "PT1H"
+		},
+		{
+			"sunshineDurationInMinutes": 28.8,
+			"meteoGroupStationId": "8522",
+			"precipitationAmountInMillimeter": 0,
+			"validUntil": "2016-12-13T12:00:00Z",
+			"maxWindGustInMeterPerSecond": 4.4,
+			"validFrom": "2016-12-13T11:00:00Z",
+			"validPeriod": "PT1H"
+		}
+	]}
+
+# Group Aggregations by polygon
+
+#### Example - Get maxThunderstormProbabilityInPercent for PT0S period
+'http://point-forecast.weather.mg/aggregate?locatedWithin={"type":"Polygon","coordinates":[[12,53],[14,53],[13,52.9]]}&validFrom=2017-07-01T00:00:00Z&validUntil=2017-07-01T01:00:00Z&validPeriod=PT0S&fields=maxThunderstormProbabilityInPercent'
+
++ Parameters
+    + locatedWithin: `{"type":"Polygon","coordinates":[[12,53],[14,53],[13,52.9]]}` (string, required) - polygon, [longitude,latitude]
+    + validFrom: `2017-07-01T00:00:00Z` (string, required) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2017-07-01T01:00:00Z` (string, required) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validPeriod: `PT0S` (string, required) - comma separated list of periods to be retrieved.
+    + fields: `maxThunderstormProbabilityInPercent` (string, required) - comma separated list of parameters to be contained inside response.
+
++ Response 200 (application/json)
+
+    + Headers
+            Content-Type:application/json
+            Cache-Control: max-age=90
+
+    + Body
+	{
+      "forecasts": [
+        {
+          "locatedWithin": {
+            "coordinates": [
+              [
+                12,
+                53
+              ],
+              [
+                14,
+                53
+              ],
+              [
+                13,
+                52.9
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "validUntil": "2017-07-01T00:00:00Z",
+          "maxThunderstormProbabilityInPercent": 1,
+          "validFrom": "2017-07-01T00:00:00Z",
+          "validPeriod": "PT0S"
+        },
+        {
+          "locatedWithin": {
+            "coordinates": [
+              [
+                12,
+                53
+              ],
+              [
+                14,
+                53
+              ],
+              [
+                13,
+                52.9
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "validUntil": "2017-07-01T01:00:00Z",
+          "maxThunderstormProbabilityInPercent": 1,
+          "validFrom": "2017-07-01T01:00:00Z",
+          "validPeriod": "PT0S"
+        }
+      ]
+    }
+
+
+# Group Warning
+
+## Retrieve severe weather warnings [/warnings?location={latitudeInDegree,longitudeInDegree}]
+
+### Example
+`https://api.weather.mg/forecast?location=53,13`
+
+### Severe Weather Warnings [GET]
+
+THIS IS A DRAFT.
+
++ Parameters
+    + latitudeInDegree: `52.13` (number, required)                - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
+    + longitudeInDegree: `13.2` (number, required)                - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
+
++ Request
+
+    + Headers
+
+            X-Authentication: <API-Key>
+            X-TraceId: <Trace-Id>
+
++ Response 200 (application/json)
+
+    + Headers
+
+            X-Request-Calls-Per-Interval: 4712
+            E-Tag: "a987dff"
+            Cache-Control: max-age=600
+
+    + Body
+
+            {
+                "location" : {
+                    "latitude": 52.5337,
+                    "longitude": 13.37788,
+                },
+                "warningId": "1234-5678",
+                "issuedAt": "2016-08-03T00:00:00+02:00",
+                "validAt": "2016-08-03T00:00:00+02:00",
+                "warningSeverity": "HIGH",
+                "affectedRegion": {
+                    "name": "London"
+                }
+            }
+
+
+# Data Structures
+
+## Total Cloud Cover (number)
+
+This symbolic digit shall embrace the total fraction of the celestial dome covered by clouds irrespective of their genus.
+(WMO akronym 'N')
+
+    Value | Meaning
+    ------|---------
+    0 | 0
+    1 | 1 okta or less, but not zero
+    2 | 2 oktas
+    3 | 3 oktas
+    4 | 4 oktas
+    5 | 5 oktas
+    6 | 6 oktas
+    7 | 7 oktas
+    8 | 8 oktas
+    9 | Sky obscured by fog and/or other meteorological phenomena

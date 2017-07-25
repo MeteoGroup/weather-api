@@ -1,0 +1,222 @@
+FORMAT: 1A
+
+Weather API
+=============================
+
+
+# General information
+
+This technical document was created for developers who are creating applications based on weather data provided by this API.
+This document is using [API blueprint format](https://apiblueprint.org/documentation/).
+
+### Authentication
+
+All endpoints are **secured** using OAuth2 authorization protocol with transmitting data over HTTPS.
+The authorization flows are described here [authorization flow](http://oauthbible.com/#oauth-2-two-legged)
+
+#### Client Credentials
+
+Before getting an access to any endpoints, need to obtain **client id** and **client secret**.
+For achieving this, please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+
+#### Authorization Token
+
+Once you have your client credentials (Client-ID + Password), you can request a token on
+[Authorization server](https://auth.weather.mg/oauth/token?grant_type=client_credentials with http basic auth).
+
+The token will be in the return message, encrypted with a key from the authorization service.
+
+It will contain the client-ID, scopes and expiration date.
+The token is only a valid for a limited time, after this it will expired and you have to request a new token again.
+
+#### Using Authorization Token
+
+HTTP GET request to the endpoints needs to provide Authorization Token into **Authorization** HTTP Header.
+More information about JWT token might be found here: https://en.wikipedia.org/wiki/JSON_Web_Token.
+
+HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
+
+The Authorization token contains the Scopes which the client is allowed to have.
+**lightning** is the scope which allows to request Lightning Service.
+
+### Backward compatibility
+
+Every endpoint may add one or more response parameters in the future.
+Clients should ignore unknown parameters, to avoid technical issues.
+
+# Group Lightning
+
+## Retrieve lightning observation [?provider={provider1,provider2}&locationWithin={lonTopLeft,latTopLeft,lonBottomRight,latBottomRight}&occurredFrom={startTime}&occurredUntil={endTime}&startPosition={startPosition}]
+## Retrieve lightning observation [?provider={provider1,provider2}&locationWithin={lonTopLeft,latTopLeft,lonBottomRight,latBottomRight}&occurredFrom={startTime}]
+
+#### Example
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]&occurredFrom=2017-01-05T12:21:14Z&occurredUntil=2017-01-05T12:21:15Z&startPosition=30000
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]&occurredFrom=2017-01-05T12:21:14Z
+https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]
+
+##### Limitation
+AWS Lambda service response can have size < 6MB, it is about 30000 lightning events. If there are more than 30 000 results in storage which comply to the search criteria, they can be retrieved using pagination. 
+In such case the response payload contains [HAL](http://stateless.co/hal_specification.html)-compatible  `_link` object which contains links to the next page and the response type is application/hal+json.
+If locationWithin is worldwide [-180, 90][180, -90] and occurrence ~3 days
+
+
+### Observed lightning for a given boundingBox and time period
+
+This resource provides data from existing lightning observation providers.
+For any request service returns a set of lightnings occurred in geographical
+bounding box locations during period of time specified in parameters.
+
+
++ Parameters
+    + locationWithin: `[-10,80],[10,5]`   (longitude top left,
+                                           latitude top left,
+                                           longitude bottom right,
+                                           latitude bottom_right, required)
+        - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
+        - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32,
+
+    + occurredFrom: `2017-01-05T12:21:14Z` (start time range, optional)
+        - start lightning observation time. End time is current time by default, setup by the service.
+
+    + occurredUntil: `2017-01-05T12:21:15Z` (end time range, optional)
+        - time range period for lightning observation.
+
+    + provider: `ENGLN,NOWCAST` (string, required)
+        - lightning providers.
+
+    + startPosition: `60000` (not negative integer, optional)
+        - Is used for pagination. It is recommnded to set it as multiple of 30 000.
+
+
++ Response 200 (application/hal+json)
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
+
+    + Body
+        {
+           "lightnings":[
+              {
+                 "occurredAt":"2017-01-05T12:21:14.974Z",
+                 "provider":"NOWCAST",
+                 "lightningType":"CLOUD_TO_GROUND",
+                 "elevationInKilometers":0,
+                 "currentInAmpere":4500,
+                 "location":[
+                    9.6345,
+                    19.3064
+                 ]
+              },
+              {
+                 "occurredAt":"2017-01-05T12:21:14.974Z",
+                 "provider":"ENGLN",
+                 "lightningType":"CLOUD_TO_GROUND",
+                 "elevationInKilometers":0,
+                 "currentInAmpere":4700,
+                 "location":[
+                    8.6345,
+                    20.3064
+                 ]
+              },
+               {
+                  "provider": "NOWCAST",
+                  "occurredAt": "2017-01-05T12:20:14.974Z",
+                  "elevationInKilometers": 0,
+                  "lightningType": "CLOUD_TO_GROUND",
+                  "currentInAmpere": -3500,
+                  "location": [
+                    9.3345,
+                    19.7064
+                  ]
+                }
+           ],
+           "lightningsTotal": 164256,
+           "lightningsInResponse": 30000,
+           "_links": {
+             "self": {
+               "href": "https://lightning.weather.mg/search?provider=ENGLN&startPosition=60000&locationWithin=[-180,90],[180,-90]"
+             },
+             "next": {
+               "href": "https://lightning.weather.mg/search?provider=ENGLN&startPosition=90000&locationWithin=[-180,90],[180,-90]"
+             }
+           }
+         }
+
+#
+
+# Weighted Lightning
+
+## Retrieve weighted lightning observation [?temporalResolution={temporalResolution}&spatialResolution={resolution}&locationWithin={lonTopLeft,latTopLeft,lonBottomRight,latBottomRight}&occurredFrom={startTime}&occurredUntil={endTime}]
+## Retrieve weighted lightning observation [?temporalResolution={temporalResolution}&spatialResolution={resolution}&locationWithin={lonTopLeft,latTopLeft,lonBottomRight,latBottomRight}&occurredFrom={startTime}]
+
+
+#### Example
+https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]&occurredFrom=2017-01-05T12:19:14Z&occurredUntil=2017-01-05T12:21:15Z
+https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]&occurredFrom=2017-01-05T12:19:14Z
+https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]
+
+##### Limitation
+Since AWS API Gatewey has maximum response time 30 seconds and a Lambda instance can allocate no more than 1.5Gb RAM it is impossible to process a really huge amount of lightning events. Therefore at most 200 000 first lightnings are being taken into account.
+
+### Observed weighted lightning for a given boundingBox, time period, weighted by time span and spatial resolution
+
+This resource provides data from existing lightning observation providers: NOWCAST and ENGLN.
+For any request service returns a set of lightnings occurred in geographical
+bounding box locations during period of time specified in parameters.
+
+
++ Parameters
+    + temporalResolution: 'PT15M, PT5M, PT1M' in minutes(string required)
+         - time span interval in which lightning should be weighted
+
+    + spatialResolution '0.5, 0.25, 0.05' degree(string required)
+         - spatial resolution within which lightning should be weighted
+
+    + locationWithin: `[-10,80],[10,5]`   (longitude top left,
+                                           latitude top left,
+                                           longitude bottom right,
+                                           latitude bottom_right, required)
+        - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
+        - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32,
+
+    + occurredFrom: `2017-01-05T12:21:14Z` (start time range, optional)
+        - start lightning observation time. End time is current time by default, setup by the service.
+
+    + occurredUntil: `2017-01-05T12:21:15Z` (end time range, optional)
+        - time range period for lightning observation.
+
+
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
+
+    + Body
+           {
+           	"weightedLightnings": [{
+            			"occurredFrom": "2017-01-05T12:15:00.000Z",
+            			"occurredUntil": "2017-01-05T12:30:00.000Z",
+            			"totalCurrentInAmpere": 8000,
+            			"weightedLocation": [9.5033, 19.4814],
+            			"numberOfLightnings": 2,
+            			"temporalResolution": "PT15M",
+            			"region": [[9.25, 19.75], [9.75, 19.25]],
+            			"weightedOccurrence": "2017-01-05T12:20:47.000Z"
+            		}, {
+            			"occurredFrom": "2017-01-05T12:15:00.000Z",
+            			"occurredUntil": "2017-01-05T12:30:00.000Z",
+            			"totalCurrentInAmpere": 4700,
+            			"weightedLocation": [8.6345, 20.3064],
+            			"numberOfLightnings": 1,
+            			"temporalResolution": "PT15M",
+            			"region": [[8.25, 20.75], [8.75, 20.25]],
+            			"weightedOccurrence": "2017-01-05T12:21:14.000Z"
+            		}
+            ]
+          }
+
+
+#
