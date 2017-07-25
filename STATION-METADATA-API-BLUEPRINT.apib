@@ -42,12 +42,11 @@ Here is the information about all supported HTTP request parameters and HTTP Hea
 
         + locatedWithin:
             - {"type":"bbox","coordinates":[[lon,lat],[lon,lat]]} (string, optional) - top left and bottom right coordinates that construct bounding box;
-            - {"type":"polygon","coordinates":[[[-10,10],[10,5],[-5,-5], [-10,10]], [[-5,5],[0,5],[0,0],[-5,5]]]} - polygon coordinates.
-            - {"type":"multipolygon","coordinates":[
-                                                   [[[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0]] ],
-                                                   [[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]],
-                                                    [[100.2, 0.2],[100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2]]] ]} - An array of separate polygons.
-            - First poligon's array describes polygon and another describe holes in it.
+            - {"type":"polygon","coordinates":[[[-10,10],[10,5],[-5,-5],[-10,10]],[[-5,5],[0,5],[0,0],[-5,5]]]} - polygon coordinates.
+            - {"type":"multipolygon","coordinates":[[[[102.0,2.0],[103.0,2.0],[103.0,3.0],[102.0,3.0],[102.0,2.0]]],
+                                                   [[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]],
+                                                   [[100.2,0.2],[100.8,0.2],[100.8,0.8],[100.2,0.8],[100.2,0.2]]]]} - An array of separate polygons.
+            - First polygons array describes polygon and another describe holes in it.
             - **lon** in degree numeric format and in range <-180,180> eg. -123.454, 179.864
             - **lat** in degree numeric format and in range <-90,90> eg. -85.541, 5.32,
         + accessVisibility: `public` (string, optional) - station access visibility, valid values is `public` and `private`
@@ -55,7 +54,7 @@ Here is the information about all supported HTTP request parameters and HTTP Hea
         + type: `SKI_RESORT` (string, optional) - currently filter by type. All possible types are described in section: **Get all station types**
         + hasForecastData: `false` (boolean, optional) - station has forecast data.
         + hasObservationData: `true` (boolean, optional) - station has observation data.
-        + countryIsoCode: `UK` (string, optional) - station located in this country.
+        + countryIsoCode: `GB` (string, optional) - station located in this country. ISO Code refers to the [ISO 3166 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166)
 
 The API supports various combinations for querying stations data by bounding box, polygon, multi-polygon, by provider and type, by stations that produce forecast and observation data.
 Here are a couple of examples how to query by provider and type, bounding box and polygon.
@@ -146,11 +145,11 @@ The response body is the same as for querying stations by provider and type.
 
 #### Querying by polygon
 
-Query example for getting stations by polygon: ```locatedWithin={"type":"polygon","coordinates":[[[-10,10],[10,5],[-5,-5]]]}```
+Query example for getting stations by polygon: ```locatedWithin={"type":"polygon","coordinates":[[[-0.16,51.70],[-0.43,51.29],[0.18,51.30],[-0.16,51.70]]]}```
 
 The HTTP request with encoded **locatedWithin** param is:
 ```
-GET /stations?locatedWithin=%7B%22type%22%3A%22bbox%22%2C%22coordinates%22%3A%5B%5B-10%2C80%5D%2C%5B10%2C5%5D%5D%7D
+GET /stations?locatedWithin=%7B%22type%22%3A%22polygon%22%2C%22coordinates%22%3A%5B%5B%5B-0.16%2C51.70%5D%2C%5B-0.43%2C51.29%5D%2C%5B0.18%2C51.30%5D%2C%5B-0.16%2C51.70%5D%5D%5D%7D
 ```
 
 If the station data are queried by polygon box, appropriate "type" in **locatedWithin** parameter must be mentioned: **"type":"polygon", "coordinates":{...}**.
@@ -158,13 +157,13 @@ If the station data are queried by polygon box, appropriate "type" in **locatedW
 
 #### Querying by multi-polygon
 
-Query example for getting stations by multi-polygon: ```locatedWithin={"type":"multipolygon","coordinates":[[[[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0]] ],
-                                                                                                                        [[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]],
-                                                                                                                         [[100.2, 0.2],[100.8, 0.2], [100.8, 0.8], [100.2, 0.8], [100.2, 0.2]]] ]}```
+Query example for getting stations by multi-polygon: ```locatedWithin={"type":"multipolygon","coordinates":[[[[102.0,2.0],[103.0,2.0],[103.0,3.0],[102.0,3.0],[102.0,2.0]]],
+                                                                                                            [[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]],
+                                                                                                            [[100.2,0.2],[100.8,0.2],[100.8,0.8],[100.2,0.8],[100.2,0.2]]]]}```
 
 The HTTP request with encoded **locatedWithin** param is:
 ```
-GET /stations?locatedWithin=%7B%22type%22%3A%22bbox%22%2C%22coordinates%22%3A%5B%5B-10%2C80%5D%2C%5B10%2C5%5D%5D%7D
+GET /stations?locatedWithin=%7B%22type%22%3A%22multipolygon%22%2C%22coordinates%22%3A%5B%5B%5B%5B102.0%2C2.0%5D%2C%5B103.0%2C2.0%5D%2C%5B103.0%2C3.0%5D%2C%5B102.0%2C3.0%5D%2C%5B102.0%2C2.0%5D%5D%5D%2C%5B%5B%5B100.0%2C0.0%5D%2C%5B101.0%2C0.0%5D%2C%5B101.0%2C1.0%5D%2C%5B100.0%2C1.0%5D%2C%5B100.0%2C0.0%5D%5D%2C%5B%5B100.2%2C0.2%5D%2C%5B100.8%2C0.2%5D%2C%5B100.8%2C0.8%5D%2C%5B100.2%2C0.8%5D%2C%5B100.2%2C0.2%5D%5D%5D%5D%7D
 ```
 
 If the station data are queried by polygon box, appropriate "type" in **locatedWithin** parameter must be mentioned: **"type":"polygon", "coordinates":{...}**.
