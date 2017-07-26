@@ -8,9 +8,8 @@ Station Metadata API
 This Service exists to provide the canonical API for querying and returning MeteoGroup stations and their capabilities.
 The output response with requested stations is always in GEOJson format.
 
-## Requesting the Data
-
-The GEOJson information about stations might be requested either by bounding box or by polygon.
+The API supports various combinations for querying stations data by area/region (bounding box, polygon, multi-polygon),
+by provider or type, by stations where MeteoGroup produces forecast or has observation data available.
 
 ## Authentication
 
@@ -46,8 +45,6 @@ Here is the information about all supported HTTP request parameters and HTTP Hea
         + hasObservationData: `true` (boolean, optional) - station has observation data.
         + countryIsoCode: `GB` (string, optional) - station located in this country. ISO Code refers to the [ISO 3166 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166)
 
-The API supports various combinations for querying stations data by area/region (bounding box, polygon, multi-polygon), by provider or type,
-by stations where MeteoGroup produces forecast or has observation data available.
 Here are a couple of examples how to query by provider and type, bounding box and polygon.
 
 #### Querying by provider or type
