@@ -20,14 +20,7 @@ JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
 required scope is `station-metadata`.
 
 The documentation about how to authenticate against MeteoGroup Weather API with
-OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/refactor-2-guideline/authorization/Authentication.md)
-
-### Cache control headers:
-
-if data unchanged since this date using the If-Modified-Since request header
-the server will return with an empty body with the 304 response code. Ex:
-+ Last-Modified: Mon, 10 Jul 2017 08:37:16 GMT
-+ If-Modified-Since: Thu, 13 Jul 2017 10:55:53 GMT
+OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
 ### Querying MeteoGroup stations data
 
@@ -41,14 +34,11 @@ Here is the information about all supported HTTP request parameters and HTTP Hea
 + Parameters
 
         + locatedWithin:
-            - {"type":"bbox","coordinates":[[lon,lat],[lon,lat]]} (string, optional) - top left and bottom right coordinates that construct bounding box;
-            - {"type":"polygon","coordinates":[[[-10,10],[10,5],[-5,-5],[-10,10]],[[-5,5],[0,5],[0,0],[-5,5]]]} - polygon coordinates.
+            - {"type":"bbox","coordinates":[[lon,lat],[lon,lat]]} (string, optional) - top left and bottom right coordinates that construct bounding box
+            - {"type":"polygon","coordinates":[[[-10,10],[10,5],[-5,-5],[-10,10]],[[-5,5],[0,5],[0,0],[-5,5]]]} - polygon coordinates; same as in [GeoJSON Polygon](https://tools.ietf.org/html/rfc7946#section-3.1.6)
             - {"type":"multipolygon","coordinates":[[[[102.0,2.0],[103.0,2.0],[103.0,3.0],[102.0,3.0],[102.0,2.0]]],
                                                    [[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]],
-                                                   [[100.2,0.2],[100.8,0.2],[100.8,0.8],[100.2,0.8],[100.2,0.2]]]]} - An array of separate polygons.
-            - First polygons array describes polygon and another describe holes in it.
-            - **lon** in degree numeric format and in range <-180,180> eg. -123.454, 179.864
-            - **lat** in degree numeric format and in range <-90,90> eg. -85.541, 5.32,
+                                                   [[100.2,0.2],[100.8,0.2],[100.8,0.8],[100.2,0.8],[100.2,0.2]]]]} - a multi-polygon, as in [GeoJSON MultiPolygon](https://tools.ietf.org/html/rfc7946#section-3.1.7)
         + accessVisibility: `public` (string, optional) - station access visibility, valid values is `public` and `private`
         + provider: `WMO,MG` (string, optional) - currently filter by provider or providers. All possible providers are described in section: **Get all providers**
         + type: `SKI_RESORT` (string, optional) - currently filter by type. All possible types are described in section: **Get all station types**
@@ -56,10 +46,11 @@ Here is the information about all supported HTTP request parameters and HTTP Hea
         + hasObservationData: `true` (boolean, optional) - station has observation data.
         + countryIsoCode: `GB` (string, optional) - station located in this country. ISO Code refers to the [ISO 3166 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166)
 
-The API supports various combinations for querying stations data by bounding box, polygon, multi-polygon, by provider and type, by stations that produce forecast and observation data.
+The API supports various combinations for querying stations data by area/region (bounding box, polygon, multi-polygon), by provider or type,
+by stations where MeteoGroup produces forecast or has observation data available.
 Here are a couple of examples how to query by provider and type, bounding box and polygon.
 
-#### Querying by provider and type
+#### Querying by provider or type
 
 Query example:
 
@@ -128,6 +119,11 @@ GET /stations?accessVisibility=public&provider=WMO&hasForecastData=true&hasObser
       ]
     }
     ```
+    
+### Queries by area or region (bounding box, polygone or multipolygone)
+
+When querying stations within a region queries have to formated, like geometries in [GeoJSON](https://tools.ietf.org/html/rfc7946).
+See the following examples.
 
 #### Querying by bounding box
 
@@ -167,7 +163,11 @@ GET /stations?locatedWithin=%7B%22type%22%3A%22multipolygon%22%2C%22coordinates%
 ```
 
 If the station data are queried by polygon box, appropriate "type" in **locatedWithin** parameter must be mentioned: **"type":"polygon", "coordinates":{...}**.
-**NOTE**: The **locatedWithin** parameter has to be encoded before putting it to the request. Online URL encoder: http://www.url-encode-decode.com/
+
+**NOTE**:
+The ```locatedWithin``` parameter has to be encoded before putting it to the request.
+There are free online URL encoder available, for rapid manual testing: e.g. http://www.url-encode-decode.com/
+If the query value is not proper encoded, you will receive an empty response with status code ```400 Bad Request```.
 
 #### Get all station types
 
@@ -191,4 +191,12 @@ GET /stations/providers
 Returns a list containing all current known data providers. This list can be extended in the future.
 
 
-**NOTE**: The **locatedWithin** parameter has to be encoded before putting it to the request. If you do not, you will receive **empty** response with status code **400 Bad Request**.
+### Cache control headers:
+
+The service offer regular HTTP caching hints in the reponse header.
+All clients are requested to follow good API citizen guidelines and respect these cache information.
+
+Example: f data unchanged since this date using the If-Modified-Since request header
+the server will return with an empty body with the 304 response code. Ex:
++ Last-Modified: Mon, 10 Jul 2017 08:37:16 GMT
++ If-Modified-Since: Thu, 13 Jul 2017 10:55:53 GMT
