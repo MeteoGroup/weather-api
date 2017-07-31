@@ -1,13 +1,15 @@
 # Authentication
 
 <!-- TOC -->
-- [Authentication](#authentication)
-    - [Overview](#overview)
-    - [Authorization Flow](#authorization-flow)
+* [Authentication](#authentication)
+    * [Overview](#overview)
+    * [Authorization Flow](#authorization-flow)
            - [The following grapic visualises the basic flow.](#the-following-grapic-visualises-the-basic-flow)
            - [Sample HTTP Request sequence](#sample-http-request-sequence)
-           - [Java Code Sample](#java-code-sample)
-           - [Postman Sample](#postman-sample)
+    * [Java Code Sample](#java-code-sample)
+    * [NodeJS Code Sample](#nodejs-code-sample)
+    * [Python Code Sample](#python-code-sample)
+    * [Postman Sample](#postman-sample)
 <!-- /TOC -->
 
 
@@ -25,7 +27,7 @@ Authorisation is obtained using OAuth 2.0 client_credentials grant type (see als
 
 1) In order to authenticate for the authorization request, the client has to provide client credentials (i.e. ```client_id``` and ```client_secret```) as ```userid``` and ```password``` via HTTP Basic Authentication.
 
-2) After successful authentication the client retrieves an authentication token as response. This access token comes in the form of a [JSON Web Token (JWT)](https://jwt.io/introduction/). 
+2) After successful authentication the client retrieves an authentication token as response. This access token comes in the form of a [JSON Web Token (JWT)](https://jwt.io/introduction/).
 
 3) The access token can now be used to access Weather API Resources. The access token therefore is submitted as HTTP ```Authorization``` header of type ```Bearer```, when requesting against any resource.
 
@@ -33,6 +35,10 @@ The access token can be reused for multiple requests until it expires (which wil
 
 
 #### Sample HTTP Request sequence
+
+All HTTP communication to/from auth.weather.mg has to be secured, in order to protect credentials.
+Hence, the server auth.weather.mg only offers the secure variant HTTPS.
+
 __Authorization Request:__
 
 ```
@@ -45,10 +51,10 @@ Connection: close
 grant_type=client_credentials
 ```
 
-__Authorization Response:__ 
+__Authorization Response:__
 
 ```
-HTTP/1.1 200 
+HTTP/1.1 200
 Cache-Control: no-store
 Pragma: no-cache
 Content-Type: application/json;charset=UTF-8
@@ -79,7 +85,7 @@ __Resource Response omitted__
 
 For an implementation in Java we recommend the usage of Zalandos open source ```tokens``` library (see [https://github.com/zalando/tokens](https://github.com/zalando/tokens) for details).
 
-``` 
+```
 AccessTokens accessTokens = Tokens.createAccessTokensWithUri(new URI("https://auth.weather.mg/oauth/token"))
         .usingClientCredentialsProvider(() -> new SimpleClientCredentials("your_client_id", "your_client_secret"))
         .usingUserCredentialsProvider(() -> null)
@@ -87,17 +93,17 @@ AccessTokens accessTokens = Tokens.createAccessTokensWithUri(new URI("https://au
         .withGrantType("client_credentials")
         .done()
         .start();
-        
+
 ```
 
-The created ```accessTokens``` instance now handles the management for the tokens transparently. 
+The created ```accessTokens``` instance now handles the management for the tokens transparently.
 
 By calling ```accessTokens.get("token_name")``` a valid token is provided. Per default that token has at least 40% of lifetime remaining (which in this case would mean 24 minutes). Whenever the lifetime falls below that (configurable) value a new token is requested in the background.
 
 To use the token in a request, set the token as ```Bearer``` in the ```Authorization``` header.
 
 
-```
+```java
 /**
 *  example with Apache HTTP Client
 */
@@ -112,7 +118,7 @@ CloseableHttpResponse httpResponse = httpClient.execute(get);
 // process response...
 ```
 
-```
+```Java
 /**
 * example with Spring Resttemplate
 */
@@ -124,20 +130,20 @@ HttpEntity entity = new HttpEntity<>(headers);
 
 ResponseEntity<ResponseType> response = restTemplate.exchange(entity, ResponseType.class);
 // process response...
-
 ```
+
 ## NodeJS Code Sample
 
 Here is a simple implementation example in NodeJS with [request](https://www.npmjs.com/package/request).
 
-```
+```javascript
 var request = require('request');
 
 request({
     url: 'https://auth.weather.mg/oauth/token',
     method: 'POST',
     auth: {
-        user: 'your_client_id',         // replace 'your_client_id' with your own ClientId 
+        user: 'your_client_id',         // replace 'your_client_id' with your own ClientId
         pass: 'your_client_secret'      // replace 'your_client_secret' with your own ClientSecret
     },
     form: {
@@ -153,6 +159,7 @@ request({
 });
 
 ```
+
 Response
 ```
 {
@@ -165,8 +172,12 @@ Response
 }
 ```
 
-That is a sample request then for the **point observation service** for the **latest values** only which uses [dateformat](https://www.npmjs.com/package/dateformat) to calculate the necessary timestamp for the observedFrom query parameter. This example ask diectly for a MeteoGroup station instead of asking for a location with latitude and longitude.
-```
+That is a sample request then for the **point observation service** for the **latest values** only
+which uses [dateformat](https://www.npmjs.com/package/dateformat) to calculate the necessary timestamp
+for the observedFrom query parameter.
+This example ask diectly for a MeteoGroup station instead of asking for a location with latitude and longitude.
+
+```javascript
 var request = require('request'),
     dateformat = require('dateformat'),
     observedFromDate = new Date();
@@ -182,7 +193,7 @@ request({
         meteoGroupStationIds: 10853,
         observedFrom: dateformat(observedFromDate, "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"),
         observedPeriod: "PT0S,PT1H",
-        fields: "airTemperatureInCelsius,feelsLikeTemperatureInCelsius,airPressureInHectoPascal,windSpeedInKnots,windDirectionInDegree,dewPointTemperatureInCelsius,relativeHumidityInPercent,effectiveCloudCoverInOcta,totalCloudCoverInOcta,weatherCode,weatherCodeTraditional,windGustInKnots,precipitationAmountInMillimeter"
+        fields: "airTemperatureInCelsius,windGustInKnots"
     }
 }, function (error, response, body) {
     if (error) {
@@ -193,6 +204,7 @@ request({
 });
 
 ```
+
 Response
 ```
 {
@@ -203,26 +215,57 @@ Response
       observedUntil: '2017-03-09T20:00:00Z',
       observedPeriod: 'PT0S',
       airTemperatureInCelsius: 9.7,
-      feelsLikeTemperatureInCelsius: 7.6,
-      airPressureInHectoPascal: 1018.8,
       windSpeedInKnots: 13.606908,
-      windDirectionInDegree: 270,
-      dewPointTemperatureInCelsius: 7.6,
-      relativeHumidityInPercent: 87,
-      effectiveCloudCoverInOcta: 7,
-      totalCloudCoverInOcta: 7,
-      weatherCode: '508',
-      weatherCodeTraditional: 0
     }
   ]
 }
 ```
 
+## Python Code Sample
 
+This code snippet retrieves some air temperature observation data from near Berlin,
+using OAuth authentication.
+See [full source code](https://github.com/MeteoGroup/weather-api/blob/master/authorization/examples/python/README.md)
+
+```python
+from oauthlib.oauth2 import BackendApplicationClient
+from requests_oauthlib import OAuth2Session
+
+client_id = 'test-key'
+client_secret = 'NSbpWeyfCrQR6K9kbpuuTBwsgLrOHtLm'  # SECRET! find a secure place to store, do NOT share
+
+client = BackendApplicationClient(client_id=client_id)
+client.prepare_request_body(scope=[])
+
+# fetch an access token
+session = OAuth2Session(client=client)
+session.fetch_token(token_url='https://auth.weather.mg/oauth/token',
+                    client_id=client_id,
+                    client_secret=client_secret)
+
+# fetch example observation data
+# the OAuth2Session will automatically handle adding authentication headers
+params = {
+    'locatedAt': '13,52',
+    'observedPeriod': 'PT0S',
+    'fields': 'airTemperatureInCelsius'
+}
+data = session.get('https://point-observation.weather.mg/search', params=params)
+
+print "RESPONSE DATA >>> " + data.text
+```
 
 
 ## Postman Sample
 
-Access token configuration in [Postman](https://www.getpostman.com):
+Access token configuration in [Postman](https://www.getpostman.com).
+
+| Configuration | Value |
+| ----- | ----- |
+| Token name | e.g. "my token" |
+| Access Token URL | https://auth.weather.mg/oauth/token |
+| Client ID | *your client id* |
+| Client Secret | *your client secret* |
+| Grant Type | Client Credentials |
 
 ![](./postman.png)

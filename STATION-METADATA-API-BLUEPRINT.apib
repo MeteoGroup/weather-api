@@ -3,140 +3,193 @@ FORMAT: 1A
 Station Metadata API
 =============================
 
-
 # General information
 
-This is technical documentation for the Station Metadata API.
-This document uses [API blueprint format](https://apiblueprint.org/documentation/).
+This Service exists to provide the canonical API for querying and returning MeteoGroup stations and their capabilities.
+The output response with requested stations is always in GEOJson format.
 
-Station Metadata is a service to get information about stations in GeoJSON format. 
+The API supports various combinations for querying stations meta data by area/region (bounding box, polygon, multi-polygon),
+by provider or type, by stations where MeteoGroup produces forecast or has observation data available.
 
-### Authentication
+## Authentication
 
-All endpoints are **secured** using OAuth2 authorization protocol with transmitting data over HTTPS.
-The authorization flows are described here [authorization flow](http://oauthbible.com/#oauth-2-two-legged)
+To access active-warning-service the request has to be authorised with a valid
+JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
+`https://auth.weather.mg/oauth/token`  with according client credentials. The
+required scope is `station-metadata`.
 
-#### Client Credentials
+The documentation about how to authenticate against MeteoGroup Weather API with
+OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
-Before getting an access to any endpoints, need to obtain **client id** and **client secret**.
-For achieving this, please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+### Querying MeteoGroup stations data
 
-#### Authorization Token
+Here is the information about all supported HTTP request parameters and HTTP Headers:
 
-Once you have your client credentials (Client-ID + Password), you can request a token on
-[Authorization server](https://auth.weather.mg/oauth/token?grant_type=client_credentials).
++ Headers
 
-The token will be in the return message, encrypted with a key from the authorization service.
-
-It will contain the client-ID, scopes and expiration date.
-The token is only a valid for a limited time, after this it will expired and you have to request a new token again.
-
-#### Using Authorization Token
-
-HTTP GET request to the endpoints needs to provide Authorization Token into **Authorization** HTTP Header.
-More information about JWT token might be found here: https://en.wikipedia.org/wiki/JSON_Web_Token.
-
-HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
-
-The Authorization token contains the Scopes which the client is allowed to have.
-**station-metadata** is the scope which allows to request Point Observation Service.
-
-#### Cache control headers:
-
-if data unchanged since this date using the If-Modified-Since request header
-the server will return with an empty body with the 304 response code.
-
-### Backward compatibility
-
-Every endpoint may add one or more response parameters in the future.
-Clients should ignore unknown parameters, to avoid technical issues.
-
-#Stations Metadata API
-
-## Retrieve station metadata [/stations]
-
-For any request all the GET HTTP parameters are optional.
+    + Authorization: Bearer {ENCRYPTED TOKEN HERE}
+    + If-Modified-Since: {DATE}
 
 + Parameters
-    + locatedWithin:
-        - {"type":"bbox","coordinates":[[lon,lat],[lon,lat]]} (string, optional) - top left and bottom right coordinates that construct bounding box;
-        - {"type":"polygon","coordinates":[[-10,10],[10,5],[-5,-5]]} - polygon coordinates.
-    + accessVisibility: `public` (string, optional) - parameter that filter **public** or **private** stations to show;
-    + providerOrType: `WMO` (string, optional) - describes data provider or type;
-    + type: `SKI_RESORT` (string, optional) - describes type of station place;
-    + hasForecastData: `true` (boolean, optional) - show only stations that provide forecasts;
-    + hasObservationData: `true` (boolean, optional) - show only stations that provide observations;
-    + countryIsoCode: `DE` (string, optional) - filter stations by country ISO code.
-    + meteoGroupStationId: `10020` (string, optional) - filter stations by MeteoGroup station id/(comma separated ids).
 
-### Get a stations metadata for Germany [GET]
+        + locatedWithin:
+            - {"type":"bbox","coordinates":[[lon,lat],[lon,lat]]} (string, optional) - top left and bottom right coordinates that construct bounding box
+            - {"type":"polygon","coordinates":[[[-10,10],[10,5],[-5,-5],[-10,10]],[[-5,5],[0,5],[0,0],[-5,5]]]} - polygon coordinates; same as in [GeoJSON Polygon](https://tools.ietf.org/html/rfc7946#section-3.1.6)
+            - {"type":"multipolygon","coordinates":[[[[102.0,2.0],[103.0,2.0],[103.0,3.0],[102.0,3.0],[102.0,2.0]]],
+                                                   [[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]],
+                                                   [[100.2,0.2],[100.8,0.2],[100.8,0.8],[100.2,0.8],[100.2,0.2]]]]} - a multi-polygon, as in [GeoJSON MultiPolygon](https://tools.ietf.org/html/rfc7946#section-3.1.7)
+        + accessVisibility: `public` (string, optional) - station access visibility, valid values is `public` and `private`
+        + provider: `WMO,MG` (string, optional) - currently filter by provider or providers. All possible providers are described in section: **Get all providers**
+        + type: `SKI_RESORT` (string, optional) - currently filter by type. All possible types are described in section: **Get all station types**
+        + hasForecastData: `false` (boolean, optional) - station has forecast data.
+        + hasObservationData: `true` (boolean, optional) - station has observation data.
+        + countryIsoCode: `GB` (string, optional) - station located in this country. ISO Code refers to the [ISO 3166 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166)
 
-####An example
-'https://station-metadata.weather.mg/stations?countryIsoCode=DE&hasObservationData=true'
-'https://station-metadata.weather.mg/stations?meteoGroupStationId=10020,10018'
-'https://station-metadata.weather.mg/stations?locatedWithin={"type":"polygon","coordinates":[[-10,10],[10,5],[-5,-5]]}'
-'https://station-metadata.weather.mg/stations?locatedWithin={"type":"bbox","coordinates":[[-10,80],[10,5]]}'
+Here are a couple of examples how to query by provider and type, bounding box and polygon.
 
-ATTENTION! **locatedWithin** parameter has to be encoded before putting it to the request. As an example, might be used URL encoder: http://www.url-encode-decode.com/
+#### Querying by provider or type
+
+Query example:
+
+```
+GET /stations?accessVisibility=public&provider=WMO&hasForecastData=true&hasObservationData=false&countryIsoCode=UA
+```
 
 + Response 200 (application/json)
 
     + Headers
 
-            Content-Type: application/json
-            Cache-Control: max-age=86400
             Last-Modified: Mon, 10 Jul 2017 08:37:16 GMT
-    
+
     + Body
-        
-            {
-                "type": "FeatureCollection",
-                "features": [
-                    {
-                        "type": "Feature",
-                        "properties": {
-                            "accessVisibility": "public",
-                            "icaoCode": "EDXW",
-                            "countryIsoCode": "DE",
-                            "hasForecastData": true,
-                            "wmoCountryId": 69,
-                            "meteoGroupStationId": 10018,
-                            "name": "Westerland/Sylt",
-                            "providerStationId": "GWT",
-                            "providerOrType": "AVIATION",
-                            "hasObservationData": true,
-                            "stationTimeZoneName": "Europe/Berlin"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                                8.35,
-                                54.9167,
-                                20
-                            ]
-                        }
-                    },
-                    {
-                        "type": "Feature",
-                        "properties": {
-                            "accessVisibility": "public",
-                            "countryIsoCode": "DE",
-                            "hasForecastData": true,
-                            "wmoCountryId": 69,
-                            "meteoGroupStationId": 10020,
-                            "name": "List/Sylt",
-                            "providerOrType": "WMO/DWD",
-                            "hasObservationData": true,
-                            "stationTimeZoneName": "Europe/Berlin"
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                                8.4125,
-                                55.0112,
-                                26
-                            ]
-                        }
-                    }
-                ]
+    ```
+    {
+      "type": "FeatureCollection",
+      "features": [
+    {
+        "type": "Feature",
+        "properties": {
+            "accessVisibility": "public",
+            "icaoCode": "ENAS",
+            "countryIsoCode": "NO",
+            "provider": "WMO",
+            "hasForecastData": true,
+            "wmoCountryId": 165,
+            "meteoGroupStationId": 1004,
+            "name": "Ny-Alesund II",
+            "hasObservationData": false,
+            "stationTimeZoneName": "Arctic/Longyearbyen",
+            "type": "WMO"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                11.9222,
+                78.9233,
+                16
+            ]
+        }
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "accessVisibility": "public",
+            "countryIsoCode": "NO",
+            "provider": "WMO",
+            "hasForecastData": true,
+            "wmoCountryId": 165,
+            "meteoGroupStationId": 1005,
+            "name": "Isfjord Radio",
+            "hasObservationData": false,
+            "stationTimeZoneName": "Arctic/Longyearbyen",
+            "type": "WMO"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                13.6333,
+                78.0667,
+                5
+            ]
             }
+        }
+      ]
+    }
+    ```
+    
+### Queries by area or region (bounding box, polygone or multipolygone)
+
+When querying stations within a region queries have to formated, like geometries in [GeoJSON](https://tools.ietf.org/html/rfc7946).
+See the following examples.
+
+#### Querying by bounding box
+
+Query example for getting stations by bounding box: ```locatedWithin={"type":"bbox","coordinates":[[-10,80],[10,5]]}```
+
+The HTTP request with encoded **locatedWithin** param is:
+```
+GET /stations?locatedWithin=%7B%22type%22%3A%22bbox%22%2C%22coordinates%22%3A%5B%5B-10%2C80%5D%2C%5B10%2C5%5D%5D%7D
+```
+
+**NOTE**: The **locatedWithin** parameter has to be encoded before putting it to the request. Online URL encoder: http://www.url-encode-decode.com/
+
+The response body is the same as for querying stations by provider and type.
+
+#### Querying by polygon
+
+Example GeoJSON polygon: ```{"type":"polygon","coordinates":[[[-0.16,51.70],[-0.43,51.29],[0.18,51.30],[-0.16,51.70]]]}```
+
+A corresponding HTTP request to get station within such a area needs to be URL encoded and looks like this:
+```
+GET /stations?locatedWithin=%7B%22type%22%3A%22polygon%22%2C%22coordinates%22%3A%5B%5B%5B-0.16%2C51.70%5D%2C%5B-0.43%2C51.29%5D%2C%5B0.18%2C51.30%5D%2C%5B-0.16%2C51.70%5D%5D%5D%7D
+```
+
+**NOTE**: The **locatedWithin** parameter has to be encoded before putting it to the request. Online URL encoder: http://www.url-encode-decode.com/
+
+#### Querying by multi-polygon
+
+Example GeoJSON multi-polygon: ```{"type":"multipolygon","coordinates":[[[[102.0,2.0],[103.0,2.0],[103.0,3.0],[102.0,3.0],[102.0,2.0]]],
+                                                                       [[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]],
+                                                                       [[100.2,0.2],[100.8,0.2],[100.8,0.8],[100.2,0.8],[100.2,0.2]]]]}```
+
+A corresponding HTTP request to get station within such a area needs to be URL encoded and looks like this:
+```
+GET /stations?locatedWithin=%7B%22type%22%3A%22multipolygon%22%2C%22coordinates%22%3A%5B%5B%5B%5B102.0%2C2.0%5D%2C%5B103.0%2C2.0%5D%2C%5B103.0%2C3.0%5D%2C%5B102.0%2C3.0%5D%2C%5B102.0%2C2.0%5D%5D%5D%2C%5B%5B%5B100.0%2C0.0%5D%2C%5B101.0%2C0.0%5D%2C%5B101.0%2C1.0%5D%2C%5B100.0%2C1.0%5D%2C%5B100.0%2C0.0%5D%5D%2C%5B%5B100.2%2C0.2%5D%2C%5B100.8%2C0.2%5D%2C%5B100.8%2C0.8%5D%2C%5B100.2%2C0.8%5D%2C%5B100.2%2C0.2%5D%5D%5D%5D%7D
+```
+
+**NOTE**:
+The `locatedWithin` parameter has to be encoded before putting it to the request.
+There are free online URL encoder available, for rapid manual testing: e.g. http://www.url-encode-decode.com/
+If the query value is not proper encoded, you will receive an empty response with status code ```400 Bad Request```.
+
+#### Get all station types
+
+Query example:
+
+```
+GET /stations/types
+```
+
+Returns a list containing all current known station types. This list can be extended in the future.
+
+
+#### Get all providers
+
+Query example:
+
+```
+GET /stations/providers
+```
+
+Returns a list containing all current known data providers. This list can be extended in the future.
+
+
+### Cache control headers:
+
+The service offer regular HTTP caching hints in the reponse header.
+All clients are requested to follow good API citizen guidelines and respect these cache information.
+
+Example: f data unchanged since this date using the If-Modified-Since request header
+the server will return with an empty body with the 304 response code. Ex:
++ Last-Modified: Mon, 10 Jul 2017 08:37:16 GMT
++ If-Modified-Since: Thu, 13 Jul 2017 10:55:53 GMT
