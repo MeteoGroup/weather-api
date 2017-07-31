@@ -67,11 +67,13 @@ For any request all the GET HTTP parameters are optional.
     + hasForecastData: `true` (boolean, optional) - show only stations that provide forecasts;
     + hasObservationData: `true` (boolean, optional) - show only stations that provide observations;
     + countryIsoCode: `DE` (string, optional) - filter stations by country ISO code.
+    + meteoGroupStationId: `10020` (string, optional) - filter stations by MeteoGroup station id/(comma separated ids).
 
 ### Get a stations metadata for Germany [GET]
 
 ####An example
 'https://station-metadata.weather.mg/stations?countryIsoCode=DE&hasObservationData=true'
+'https://station-metadata.weather.mg/stations?meteoGroupStationId=10020,10018'
 'https://station-metadata.weather.mg/stations?locatedWithin={"type":"polygon","coordinates":[[-10,10],[10,5],[-5,-5]]}'
 'https://station-metadata.weather.mg/stations?locatedWithin={"type":"bbox","coordinates":[[-10,80],[10,5]]}'
 
