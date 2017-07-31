@@ -1,3 +1,4 @@
 .idea/
 .pip/
 *.iml
+.DS_Store
