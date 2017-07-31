@@ -7,6 +7,8 @@
            - [The following grapic visualises the basic flow.](#the-following-grapic-visualises-the-basic-flow)
            - [Sample HTTP Request sequence](#sample-http-request-sequence)
            - [Java Code Sample](#java-code-sample)
+           - [NodeJS Code Sample](#nodejs-code-sample)
+           - [Python Code Sample](#python-code-sample)
            - [Postman Sample](#postman-sample)
 <!-- /TOC -->
 
@@ -101,7 +103,7 @@ By calling ```accessTokens.get("token_name")``` a valid token is provided. Per d
 To use the token in a request, set the token as ```Bearer``` in the ```Authorization``` header.
 
 
-```
+```java
 /**
 *  example with Apache HTTP Client
 */
@@ -134,7 +136,7 @@ ResponseEntity<ResponseType> response = restTemplate.exchange(entity, ResponseTy
 
 Here is a simple implementation example in NodeJS with [request](https://www.npmjs.com/package/request).
 
-```
+```javascript
 var request = require('request');
 
 request({
@@ -157,8 +159,9 @@ request({
 });
 
 ```
+
 Response
-```
+```json
 {
   access_token: 'eyJraWQiOiJhdXRoLXNlcnZlci1iODA5MzIwMS03MjNkLTazZTgtYTgwMC1iOWU0ZTFjMDIxMGQiLCJhbGciOiJSUzI1NiJ1.eyJzdWIiOiJhbmRyZS5zY2hhZGUiLCJzY29wZSI6WyJwb2ludC1vYnNlcnZhdGlvbiIsInBvaW50LWZvcmVjYXN0Il0sImRvbWFpbiI6Im1ldGVvZ3JvdXAiLCJleHAiOjE0ODkxNDQyMTIsImp0aSI6IjZjZTJmYzlkLWUxYWEtNGNhMy04NzQ5LWI0NGU0ZWQ5MzdjZCIsImNsaWVudF8pZCI7ImFuZHJlLnNjaGFkZSJ9.XC8spP9mQICozXpmFx8PE8RFtKeZ1M0CNp0MWPMtqD3XiWp8ve1FJ_qoPImTbsS0QUlmvquGf3j0A8QeQ5QJyQ',
   token_type: 'bearer',
@@ -169,8 +172,12 @@ Response
 }
 ```
 
-That is a sample request then for the **point observation service** for the **latest values** only which uses [dateformat](https://www.npmjs.com/package/dateformat) to calculate the necessary timestamp for the observedFrom query parameter. This example ask diectly for a MeteoGroup station instead of asking for a location with latitude and longitude.
-```
+That is a sample request then for the **point observation service** for the **latest values** only
+which uses [dateformat](https://www.npmjs.com/package/dateformat) to calculate the necessary timestamp
+for the observedFrom query parameter.
+This example ask diectly for a MeteoGroup station instead of asking for a location with latitude and longitude.
+
+```javascript
 var request = require('request'),
     dateformat = require('dateformat'),
     observedFromDate = new Date();
@@ -186,7 +193,7 @@ request({
         meteoGroupStationIds: 10853,
         observedFrom: dateformat(observedFromDate, "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"),
         observedPeriod: "PT0S,PT1H",
-        fields: "airTemperatureInCelsius,feelsLikeTemperatureInCelsius,airPressureInHectoPascal,windSpeedInKnots,windDirectionInDegree,dewPointTemperatureInCelsius,relativeHumidityInPercent,effectiveCloudCoverInOcta,totalCloudCoverInOcta,weatherCode,weatherCodeTraditional,windGustInKnots,precipitationAmountInMillimeter"
+        fields: "airTemperatureInCelsius,windGustInKnots"
     }
 }, function (error, response, body) {
     if (error) {
@@ -197,8 +204,9 @@ request({
 });
 
 ```
+
 Response
-```
+```json
 {
   observations: [
     {
@@ -207,22 +215,45 @@ Response
       observedUntil: '2017-03-09T20:00:00Z',
       observedPeriod: 'PT0S',
       airTemperatureInCelsius: 9.7,
-      feelsLikeTemperatureInCelsius: 7.6,
-      airPressureInHectoPascal: 1018.8,
       windSpeedInKnots: 13.606908,
-      windDirectionInDegree: 270,
-      dewPointTemperatureInCelsius: 7.6,
-      relativeHumidityInPercent: 87,
-      effectiveCloudCoverInOcta: 7,
-      totalCloudCoverInOcta: 7,
-      weatherCode: '508',
-      weatherCodeTraditional: 0
     }
   ]
 }
 ```
 
+## Python Code Sample
 
+This code snippet retrieves some air temperature observation data from near Berlin,
+using OAuth authentication.
+See [full source code](https://github.com/MeteoGroup/weather-api/blob/master/authorization/examples/python/README.md)
+
+```python
+from oauthlib.oauth2 import BackendApplicationClient
+from requests_oauthlib import OAuth2Session
+
+client_id = 'test-key'
+client_secret = 'NSbpWeyfCrQR6K9kbpuuTBwsgLrOHtLm'  # SECRET! find a secure place to store, do NOT share
+
+client = BackendApplicationClient(client_id=client_id)
+client.prepare_request_body(scope=[])
+
+# fetch an access token
+session = OAuth2Session(client=client)
+session.fetch_token(token_url='https://auth.weather.mg/oauth/token',
+                    client_id=client_id,
+                    client_secret=client_secret)
+
+# fetch example observation data
+# the OAuth2Session will automatically handle adding authentication headers
+params = {
+    'locatedAt': '13,52',
+    'observedPeriod': 'PT0S',
+    'fields': 'airTemperatureInCelsius'
+}
+data = session.get('https://point-observation.weather.mg/search', params=params)
+
+print "RESPONSE DATA >>> " + data.text
+```
 
 
 ## Postman Sample
