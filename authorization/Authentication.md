@@ -1,15 +1,15 @@
 # Authentication
 
 <!-- TOC -->
-- [Authentication](#authentication)
-    - [Overview](#overview)
-    - [Authorization Flow](#authorization-flow)
+* [Authentication](#authentication)
+    * [Overview](#overview)
+    * [Authorization Flow](#authorization-flow)
            - [The following grapic visualises the basic flow.](#the-following-grapic-visualises-the-basic-flow)
            - [Sample HTTP Request sequence](#sample-http-request-sequence)
-           - [Java Code Sample](#java-code-sample)
-           - [NodeJS Code Sample](#nodejs-code-sample)
-           - [Python Code Sample](#python-code-sample)
-           - [Postman Sample](#postman-sample)
+    * [Java Code Sample](#java-code-sample)
+    * [NodeJS Code Sample](#nodejs-code-sample)
+    * [Python Code Sample](#python-code-sample)
+    * [Postman Sample](#postman-sample)
 <!-- /TOC -->
 
 
@@ -118,7 +118,7 @@ CloseableHttpResponse httpResponse = httpClient.execute(get);
 // process response...
 ```
 
-```
+```Java
 /**
 * example with Spring Resttemplate
 */
@@ -130,8 +130,8 @@ HttpEntity entity = new HttpEntity<>(headers);
 
 ResponseEntity<ResponseType> response = restTemplate.exchange(entity, ResponseType.class);
 // process response...
-
 ```
+
 ## NodeJS Code Sample
 
 Here is a simple implementation example in NodeJS with [request](https://www.npmjs.com/package/request).
@@ -161,7 +161,7 @@ request({
 ```
 
 Response
-```json
+```
 {
   access_token: 'eyJraWQiOiJhdXRoLXNlcnZlci1iODA5MzIwMS03MjNkLTazZTgtYTgwMC1iOWU0ZTFjMDIxMGQiLCJhbGciOiJSUzI1NiJ1.eyJzdWIiOiJhbmRyZS5zY2hhZGUiLCJzY29wZSI6WyJwb2ludC1vYnNlcnZhdGlvbiIsInBvaW50LWZvcmVjYXN0Il0sImRvbWFpbiI6Im1ldGVvZ3JvdXAiLCJleHAiOjE0ODkxNDQyMTIsImp0aSI6IjZjZTJmYzlkLWUxYWEtNGNhMy04NzQ5LWI0NGU0ZWQ5MzdjZCIsImNsaWVudF8pZCI7ImFuZHJlLnNjaGFkZSJ9.XC8spP9mQICozXpmFx8PE8RFtKeZ1M0CNp0MWPMtqD3XiWp8ve1FJ_qoPImTbsS0QUlmvquGf3j0A8QeQ5QJyQ',
   token_type: 'bearer',
@@ -206,7 +206,7 @@ request({
 ```
 
 Response
-```json
+```
 {
   observations: [
     {
