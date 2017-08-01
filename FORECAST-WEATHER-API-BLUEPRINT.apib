@@ -497,53 +497,6 @@ Here are relationship between observation periods and fields appropriately:
     }
 
 
-# Group Warning
-
-## Retrieve severe weather warnings [/warnings?location={latitudeInDegree,longitudeInDegree}]
-
-### Example
-`https://api.weather.mg/forecast?location=53,13`
-
-### Severe Weather Warnings [GET]
-
-THIS IS A DRAFT.
-
-+ Parameters
-    + latitudeInDegree: `52.13` (number, required)                - latitude in degree numeric format and in range <-90,90> eg. -85.541, 5.32
-    + longitudeInDegree: `13.2` (number, required)                - longitude in degree numeric format and in range <-180,180> eg. -123.454, 179.864
-
-+ Request
-
-    + Headers
-
-            X-Authentication: <API-Key>
-            X-TraceId: <Trace-Id>
-
-+ Response 200 (application/json)
-
-    + Headers
-
-            X-Request-Calls-Per-Interval: 4712
-            E-Tag: "a987dff"
-            Cache-Control: max-age=600
-
-    + Body
-
-            {
-                "location" : {
-                    "latitude": 52.5337,
-                    "longitude": 13.37788,
-                },
-                "warningId": "1234-5678",
-                "issuedAt": "2016-08-03T00:00:00+02:00",
-                "validAt": "2016-08-03T00:00:00+02:00",
-                "warningSeverity": "HIGH",
-                "affectedRegion": {
-                    "name": "London"
-                }
-            }
-
-
 # Data Structures
 
 ## Total Cloud Cover (number)
