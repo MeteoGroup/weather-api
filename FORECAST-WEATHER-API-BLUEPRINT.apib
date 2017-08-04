@@ -436,12 +436,12 @@ Though a LinearRing is not explicitly represented as a GeoJSON geometry type, it
 More information is here: https://geojson.org/geojson-spec.html#polygon
 
 #### Example - Get maxThunderstormProbabilityInPercent for PT0S period
-'http://point-forecast.weather.mg/aggregate?locatedWithin=%7B%0A%22type%22%3A%20%22Polygon%22%2C%0A%22coordinates%22%3A%20%5B%0A%5B%0A%5B%0A-2.384033203125%2C%0A51.767839887322154%0A%5D%2C%0A%5B%0A-3.076171875%2C%0A51.33061163769853%0A%5D%2C%0A%5B%0A-4.075927734375%2C%0A51.29627609493991%0A%5D%2C%0A%5B%0A-5.965576171875%2C%0A50.44351305245805%0A%5D%2C%0A%5B%0A-5.789794921875%2C%0A49.78835749241399%0A%5D%2C%0A%5B%0A1.3623046875%2C%0A50.93766174471314%0A%5D%2C%0A%5B%0A1.9555664062500002%2C%0A52.948637884883205%0A%5D%2C%0A%5B%0A0.032958984375%2C%0A52.90227586168308%0A%5D%2C%0A%5B%0A-2.384033203125%2C%0A51.767839887322154%0A%5D%0A%5D%0A%5D%0A%7D&validFrom=2017-07-01T00:00:00Z&validUntil=2017-07-01T01:00:00Z&validPeriod=PT0S&fields=maxThunderstormProbabilityInPercent'
+'https://point-forecast.weather.mg/aggregate?locatedWithin={%22type%22:%22Polygon%22,%22coordinates%22:[[[12,5],[14,531],[13,52.9],[12,5]]]}&validPeriod=PT0S&fields=maxThunderstormProbabilityInPercent&validFrom=2017-08-05T00:00:00Z&validUntil=2017-08-05T03:00:00Z'
 
 + Parameters
-    + locatedWithin: `{"type":"Polygon","coordinates":[[[12,53],[14,53],[13,52.9],[12,53]]]}` (string, required) - JSON polygon geometry object, as defined in GeoJSON
-    + validFrom: `2017-07-01T00:00:00Z` (string, required) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
-    + validUntil: `2017-07-01T01:00:00Z` (string, required) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + locatedWithin: `{"type":"Polygon","coordinates":[[[12,5],[14,531],[13,52.9],[12,5]]]}` (string, required) - JSON polygon geometry object, as defined in GeoJSON
+    + validFrom: `2017-08-05T00:00:00Z` (string, required) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
+    + validUntil: `2017-08-05T03:00:00Z` (string, required) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + validPeriod: `PT0S` (string, required) - comma separated list of periods to be retrieved.
     + fields: `maxThunderstormProbabilityInPercent` (string, required) - comma separated list of parameters to be contained inside response.
 
@@ -453,54 +453,124 @@ More information is here: https://geojson.org/geojson-spec.html#polygon
 
     + Body
 	{
-      "forecasts": [
-        {
-          "locatedWithin": {
-            "coordinates": [
-              [
-                12,
-                53
-              ],
-              [
-                14,
-                53
-              ],
-              [
-                13,
-                52.9
-              ]
-            ],
-            "type": "Polygon"
-          },
-          "validUntil": "2017-07-01T00:00:00Z",
-          "maxThunderstormProbabilityInPercent": 1,
-          "validFrom": "2017-07-01T00:00:00Z",
-          "validPeriod": "PT0S"
-        },
-        {
-          "locatedWithin": {
-            "coordinates": [
-              [
-                12,
-                53
-              ],
-              [
-                14,
-                53
-              ],
-              [
-                13,
-                52.9
-              ]
-            ],
-            "type": "Polygon"
-          },
-          "validUntil": "2017-07-01T01:00:00Z",
-          "maxThunderstormProbabilityInPercent": 1,
-          "validFrom": "2017-07-01T01:00:00Z",
-          "validPeriod": "PT0S"
-        }
-      ]
+        "forecasts": [
+            {
+                "locatedWithin": {
+                    "coordinates": [
+                        [
+                            [
+                                12,
+                                5
+                            ],
+                            [
+                                14,
+                                531
+                            ],
+                            [
+                                13,
+                                52.9
+                            ],
+                            [
+                                12,
+                                5
+                            ]
+                        ]
+                    ],
+                    "type": "Polygon"
+                },
+                "validUntil": "2017-08-05T00:00:00Z",
+                "maxThunderstormProbabilityInPercent": 19,
+                "validFrom": "2017-08-05T00:00:00Z",
+                "validPeriod": "PT0S"
+            },
+            {
+                "locatedWithin": {
+                    "coordinates": [
+                        [
+                            [
+                                12,
+                                5
+                            ],
+                            [
+                                14,
+                                531
+                            ],
+                            [
+                                13,
+                                52.9
+                            ],
+                            [
+                                12,
+                                5
+                            ]
+                        ]
+                    ],
+                    "type": "Polygon"
+                },
+                "validUntil": "2017-08-05T01:00:00Z",
+                "maxThunderstormProbabilityInPercent": 16,
+                "validFrom": "2017-08-05T01:00:00Z",
+                "validPeriod": "PT0S"
+            },
+            {
+                "locatedWithin": {
+                    "coordinates": [
+                        [
+                            [
+                                12,
+                                5
+                            ],
+                            [
+                                14,
+                                531
+                            ],
+                            [
+                                13,
+                                52.9
+                            ],
+                            [
+                                12,
+                                5
+                            ]
+                        ]
+                    ],
+                    "type": "Polygon"
+                },
+                "validUntil": "2017-08-05T02:00:00Z",
+                "maxThunderstormProbabilityInPercent": 12,
+                "validFrom": "2017-08-05T02:00:00Z",
+                "validPeriod": "PT0S"
+            },
+            {
+                "locatedWithin": {
+                    "coordinates": [
+                        [
+                            [
+                                12,
+                                5
+                            ],
+                            [
+                                14,
+                                531
+                            ],
+                            [
+                                13,
+                                52.9
+                            ],
+                            [
+                                12,
+                                5
+                            ]
+                        ]
+                    ],
+                    "type": "Polygon"
+                },
+                "validUntil": "2017-08-05T03:00:00Z",
+                "maxThunderstormProbabilityInPercent": 10,
+                "validFrom": "2017-08-05T03:00:00Z",
+                "validPeriod": "PT0S"
+            }
+        ]
     }
 
 
