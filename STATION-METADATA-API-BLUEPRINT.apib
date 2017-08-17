@@ -45,6 +45,9 @@ Here is the information about all supported HTTP request parameters and HTTP Hea
         + hasObservationData: `true` (boolean, optional) - station has observation data.
         + countryIsoCode: `GB` (string, optional) - station located in this country. ISO Code refers to the [ISO 3166 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166)
         + meteoGroupStationId: `1004,1005` (string, optional) - filter stations by MeteoGroup station id/(comma separated ids).
+        + fields: accessVisibility,icaoCode,countryIsoCode,provider,type,hasForecastData,wmoCountryId,hasObservationData,countryIsoCode,
+                  meteoGroupStationId,name,stationTimeZoneName - metadata fields in response, geometry is present in every success response.
+                  If fields is absent all fields return.
 
 Here are a couple of examples how to query by provider and type, bounding box and polygon.
 
