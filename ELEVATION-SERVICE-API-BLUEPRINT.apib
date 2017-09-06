@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: https://elevation.weather.mg
 
-# Air Quality Forecast Service
+# Elevation Service
 
 #### Authorization
 
@@ -62,7 +62,7 @@ HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
             }
 
 
-### Get elevation for compressed points [GET elevation?locatedAt={compressedPoints}]
+### Get elevation for compressed points [GET /elevation?locatedAt={compressedPoints}]
 
 + Request
 
@@ -74,6 +74,8 @@ HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
         + locatedAt: `j-h6z-6rvBj19wwt1pwHysgn9xou4FlxjuglztmDoszr_ylwqD` (string, required) - compressed points;
 
 + Response 200 (application/json)
+
+    Returns elevations for compressed points in the same order as they were requested
 
     + Body
 
