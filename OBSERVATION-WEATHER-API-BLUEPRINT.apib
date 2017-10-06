@@ -101,8 +101,8 @@ Here are relationship between observation periods and fields appropriately:
                 windSpeedInBeaufort, windSpeedInKnots, windDirectionInDegree, dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, dewPointTemperatureInKelvin,
                 relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch, waterTemperatureInCelsius, waterTemperatureInFahrenheit,
-                waterTemperatureInKelvin, totalWaveHeightInMeter, totalWaveHeightInFeet, totalWavePeriodInSecond, seaHeightInMeter, seaHeightInFeet, seaPeriodInSecond, mediumCloudCoverInOcta,
-                typeOfLowCloudsCode, typeOfLowCloudsDescription, typeOfMediumCloudsCode, typeOfMediumCloudsDescription, typeOfHighCloudsCode, typeOfHighCloudsDescription
+                waterTemperatureInKelvin, totalWaveHeightInMeter, totalWaveHeightInFeet, totalWavePeriodInSecond, seaHeightInMeter, seaHeightInFeet, seaPeriodInSecond,
+                mediumCloudCoverInOcta,heightOfMediumCloudsInMeter,heightOfHighCloudsInMeter,highCloudCoverInOcta
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
                 precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode
 - **PT3H** -    pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
@@ -232,6 +232,9 @@ The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past we
                 "effectiveCloudCoverInOcta": 5,
                 "totalCloudCoverInOcta": 6,
                 "mediumCloudCoverInOcta": 2,
+                "highCloudCoverInOcta": 4,
+                "heightOfMediumCloudsInMeter": 2000,
+                "heightOfHighCloudsInMeter": 4000,
                 "visibilityInMeter": 2000,
                 "visibilityInKilometer": 2,
                 "visibilityInNauticalMile": 1.0799999,
