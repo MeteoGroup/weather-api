@@ -89,6 +89,9 @@ code  description                           comment
    7  decreasing                              | atmospheric pressure now lower than 3 hours ago
    8  steady_or_increasing_then_decreasing    |
   15  missing_value
+  
+The 'shipCourseText' returns one of the following values: "not moving", "NE", "E", "SE", "S", "SW", "W", "NW", "N", "unknown".
+The 'shipSpeedInKnots' returns one of the following values: "0", "1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "31-35", "36-40", ">40", "unknown".
 
 *Fields mapping*
 
@@ -102,7 +105,7 @@ Here are relationship between observation periods and fields appropriately:
                 relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch, waterTemperatureInCelsius, waterTemperatureInFahrenheit,
                 waterTemperatureInKelvin, totalWaveHeightInMeter, totalWaveHeightInFeet, totalWavePeriodInSecond, seaHeightInMeter, seaHeightInFeet, seaPeriodInSecond,
-                mediumCloudCoverInOcta,heightOfMediumCloudsInMeter,heightOfHighCloudsInMeter,highCloudCoverInOcta
+                mediumCloudCoverInOcta,heightOfMediumCloudsInMeter,heightOfHighCloudsInMeter,highCloudCoverInOcta,shipCallSign,shipCourseText,shipSpeedInKnots
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
                 precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode
 - **PT3H** -    pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
