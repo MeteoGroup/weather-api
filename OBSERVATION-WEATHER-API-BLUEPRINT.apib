@@ -101,13 +101,14 @@ Here are relationship between observation periods and fields appropriately:
                 windSpeedInBeaufort, windSpeedInKnots, windDirectionInDegree, dewPointTemperatureInCelsius, dewPointTemperatureInFahrenheit, dewPointTemperatureInKelvin,
                 relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch, waterTemperatureInCelsius, waterTemperatureInFahrenheit,
-                waterTemperatureInKelvin, totalWaveHeightInMeter, totalWaveHeightInFeet, totalWavePeriodInSecond, seaHeightInMeter, seaHeightInFeet, seaPeriodInSecond, mediumCloudCoverInOcta
+                waterTemperatureInKelvin, totalWaveHeightInMeter, totalWaveHeightInFeet, totalWavePeriodInSecond, seaHeightInMeter, seaHeightInFeet, seaPeriodInSecond, mediumCloudCoverInOcta,
+                typeOfLowCloudsCode, typeOfLowCloudsDescription, typeOfMediumCloudsCode, typeOfMediumCloudsDescription, typeOfHighCloudsCode, typeOfHighCloudsDescription
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
                 precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode
 - **PT3H** -    pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
                 maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots
 - **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort,
-                maxWindGustInKnots, pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal
+                maxWindGustInKnots, pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal, pastWeatherCode, pastWeatherDescription
 - **PT12H** -   temperatureMaxInCelsius, temperatureMaxInFahrenheit, temperatureMaxInKelvin, temperatureMinInCelsius, temperatureMinInFahrenheit, temperatureMinInKelvin,
                 precipitationAmountInMillimeter, precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour,
                 maxWindGustInBeaufort, maxWindGustInKnots, pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal
@@ -117,6 +118,7 @@ Here are relationship between observation periods and fields appropriately:
 
 The "weatherCode" parameter refers to the WMO code table "0 20 003 - Present weather".
 The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
+The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past weather".
 
 + Parameters
     + meteoGroupStationIds: `3007237` (string, optional) - station ids; can be several stations separated by comma
@@ -237,7 +239,13 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "weatherCode": "2",
                 "weatherCodeTraditional": 2,
                 "snowDepthInCentimeter": 10.8,
-                "snowDepthInInch": 4.252
+                "snowDepthInInch": 4.252,
+                "typeOfLowCloudsCode": 5,
+                "typeOfLowCloudsDescription": "stratocumulus",
+                "typeOfMediumCloudsCode": 3,
+                "typeOfMediumCloudsDescription": "altocumulus translucidous (mostly transparent)",
+                "typeOfHighCloudsCode": 2,
+                "typeOfHighCloudsDescription": "cirrus spissatus (dense in patches)"
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
@@ -342,7 +350,9 @@ The "weatherCodeTraditional" parameter refers to the WMO code table "4677".
                 "observedUntil": "2016-10-15T12:00:00+02:00",
                 "observedPeriod": "PT6H",
                 "precipitationAmountInMillimeter": 1.5,
-                "precipitationAmountInInch": 0.059
+                "precipitationAmountInInch": 0.059,
+                "pastWeatherCode": 10,
+                "pastWeatherDescription": "NO SIGNIFICANT WEATHER OBSERVED"
               }
             ]
           }
