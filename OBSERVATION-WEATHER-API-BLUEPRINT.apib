@@ -105,7 +105,9 @@ Here are relationship between observation periods and fields appropriately:
                 relativeHumidityInPercent, effectiveCloudCoverInOcta, totalCloudCoverInOcta, visibilityInMeter, visibilityInKilometer,
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch, waterTemperatureInCelsius, waterTemperatureInFahrenheit,
                 waterTemperatureInKelvin, totalWaveHeightInMeter, totalWaveHeightInFeet, totalWavePeriodInSecond, seaHeightInMeter, seaHeightInFeet, seaPeriodInSecond,
-                mediumCloudCoverInOcta,heightOfMediumCloudsInMeter,heightOfHighCloudsInMeter,highCloudCoverInOcta,shipCallSign,shipCourseText,shipSpeedInKnots
+                mediumCloudCoverInOcta,heightOfMediumCloudsInMeter,heightOfHighCloudsInMeter,highCloudCoverInOcta,shipCallSign,shipCourseText,shipSpeedInKnots,iCAOIdentifier,lowCloudCoverInOcta,heightOfLowCloudsInMeter,
+                directionOfFirstSwellInDegree,periodOfFirstSwellInSeconds,heightOfFirstSwellInMeters,heightOfFirstSwellInFeet,directionOfSecondSwellInDegree,periodOfSecondSwellInSeconds,heightOfSecondSwellInMeters,heightOfSecondSwellInFeet
+
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
                 precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode
 - **PT3H** -    pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
@@ -251,7 +253,18 @@ The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past we
                 "typeOfMediumCloudsCode": 3,
                 "typeOfMediumCloudsDescription": "altocumulus translucidous (mostly transparent)",
                 "typeOfHighCloudsCode": 2,
-                "typeOfHighCloudsDescription": "cirrus spissatus (dense in patches)"
+                "typeOfHighCloudsDescription": "cirrus spissatus (dense in patches)",
+                "iCAOIdentifier": "CXEA",
+                "lowCloudCoverInOcta": 2,
+                "heightOfLowCloudsInMeter": 305,
+                "directionOfFirstSwellInDegree": 50,
+                "periodOfFirstSwellInSeconds": 5,
+                "heightOfFirstSwellInMeters": 0.5,
+                "heightOfFirstSwellInFeet": 1.6,
+                "directionOfSecondSwellInDegree": 50,
+                "periodOfSecondSwellInSeconds": 5,
+                "heightOfSecondSwellInMeters": 0.5,
+                "heightOfSecondSwellInFeet": 1.6
               },
               {
                 "locatedAt": [ -2.2323, 47.4593 ],
