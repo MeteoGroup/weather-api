@@ -11,33 +11,13 @@ This document is using [API blueprint format](https://apiblueprint.org/documenta
 
 ### Authentication
 
-All endpoints are **secured** using OAuth2 authorization protocol with transmitting data over HTTPS.
-The authorization flows are described here [authorization flow](http://oauthbible.com/#oauth-2-two-legged)
+To access active-warning-service the request has to be authorised with a valid
+JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
+`https://auth.weather.mg/oauth/token`  with according client credentials. The
+required scope is `point-forecast`.
 
-#### Client Credentials
-
-Before getting an access to any endpoints, need to obtain **client id** and **client secret**.
-For achieving this, please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
-
-#### Authorization Token
-
-Once you have your client credentials (Client-ID + Password), you can request a token on
-[Authorization server](https://auth.weather.mg/oauth/token?grant_type=client_credentials with http basic auth).
-
-The token will be in the return message, encrypted with a key from the authorization service.
-
-It will contain the client-ID, scopes and expiration date.
-The token is valid only for a limited time, after this it will expired and you have to request a new token again.
-
-#### Using Authorization Token
-
-HTTP GET request to the endpoints needs to provide Authorization Token into **Authorization** HTTP Header.
-More information about JWT token might be found here: https://en.wikipedia.org/wiki/JSON_Web_Token.
-
-HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
-
-The Authorization token contains the Scopes which the client is allowed to have.
-**point-forecast** is the scope which allows to request Point Forecast Service.
+The documentation about how to authenticate against MeteoGroup Weather API with
+OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
 ### Backward compatibility
 

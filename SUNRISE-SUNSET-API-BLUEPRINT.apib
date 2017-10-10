@@ -21,8 +21,13 @@ NOTE: For locations inside polar circles service may not return all sunrise/suns
 
 ### Authentication
 
-All endpoints are **secured** with HTTP basic authorization and data are transmitted over HTTPS protocol.
-If you want to get access please use [request form](https://meteogroup.zendesk.com/hc/en-gb/requests/new?ticket_form_id=64951).
+To access active-warning-service the request has to be authorised with a valid
+JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
+`https://auth.weather.mg/oauth/token`  with according client credentials. The
+required scope is `sunrise-sunset`.
+
+The documentation about how to authenticate against MeteoGroup Weather API with
+OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
 #Sunrise and Sunset
 

@@ -3,26 +3,15 @@ HOST: https://elevation.weather.mg
 
 # Elevation Service
 
-#### Authorization
+### Authentication
 
-To access elevation-service the request has to be authorized with a valid JWT OAuth 2.0 access token,
-obtained from the MeteoGroup Authorization server https://auth.weather.mg/oauth/token with according client credentials. The required scope is elevation.
-The documentation about how to authenticate against MeteoGroup Weather API with OAuth 2.0 can be found here: https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md
+To access active-warning-service the request has to be authorised with a valid
+JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
+`https://auth.weather.mg/oauth/token`  with according client credentials. The
+required scope is `elevation`.
 
-Once you have your client credentials (Client-ID + Password), you can request a token on
-[Authorization server](https://auth.weather.mg/oauth/token?grant_type=client_credentials with http basic auth).
-
-The token will be in the return message, encrypted with a key from the authorization service.
-
-It will contain the client-ID, scopes and expiration date.
-The token is only a valid for a limited time, after this it will expired and you have to request a new token again.
-
-#### Using Authorization Token
-
-HTTP GET request to the endpoints needs to provide Authorization Token into **Authorization** HTTP Header.
-More information about JWT token might be found here: https://en.wikipedia.org/wiki/JSON_Web_Token.
-
-HTTP Header: **Authorization** : **Bearer {ENCRYPTED TOKEN HERE}**
+The documentation about how to authenticate against MeteoGroup Weather API with
+OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
 ### Get elevation for single point [GET /elevation?locatedAt={singlePoint}]
 
