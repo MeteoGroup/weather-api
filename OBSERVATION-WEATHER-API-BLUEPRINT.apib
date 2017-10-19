@@ -747,9 +747,11 @@ Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLA
           ]
         }
 
-### Retrieve weather observation by given bounding box
+### Retrieve weather observation by given bounding box and the type of searching stations either BUOY|SHIP|PLATFORM
+This endpoint allows you querying observation from moving station (BUOY|SHIP|PLATFORM) by bounding box
 
-This endpoint allow you querying observation from moving station (BUOY|SHIP|PLATFORM) by bounding box
+### Example 
+`https://point-observation.weather.mg/search?observedFrom=2017-10-19T00:00:00Z&observedUntil=2017-10-19T10:00:00Z&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=airTemperatureInCelsius,meteoGroupStationId&isType=SHIP&locationWithin=[-10,80],[10,5]`
 
 + Parameters
     + locationWithin: [-10,80],[10,5] (string, required) - bounding box [longitude_top_left, latitude_top_left],[longitude_bottom_right, latitude_bottom_right];
