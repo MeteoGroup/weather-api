@@ -13,7 +13,7 @@ required scope is `elevation`.
 The documentation about how to authenticate against MeteoGroup Weather API with
 OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
-### Get elevation for single point [GET /elevation?locatedAt={singlePoint}]
+### Get elevation for single point [GET /elevation?locatedAt={singlePoint}&elevationDataSource={dataSource}]
 
 + Request
 
@@ -23,6 +23,7 @@ OAuth 2.0 can be found here: [Weather API documentation](https://github.com/Mete
 
     + Parameters
         + locatedAt: `10.041,22.409` (string, required) - longitude,latitude;
+        + elevationDataSource: `srtm` (string, optional) - data source, where to get elevation; there can be used 'srtm' or 'gtopo'
 
 + Response 200 (application/json)
 
@@ -51,7 +52,7 @@ OAuth 2.0 can be found here: [Weather API documentation](https://github.com/Mete
             }
 
 
-### Get elevation for compressed points [GET /elevation?locatedAt={compressedPoints}]
+### Get elevation for compressed points [GET /elevation?locatedAt={compressedPoints}&elevationDataSource={dataSource}]
 
 + Request
 
@@ -61,6 +62,7 @@ OAuth 2.0 can be found here: [Weather API documentation](https://github.com/Mete
 
     + Parameters
         + locatedAt: `j-h6z-6rvBj19wwt1pwHysgn9xou4FlxjuglztmDoszr_ylwqD` (string, required) - compressed points;
+        + elevationDataSource: `srtm` (string, optional) - data source, where to get elevation; there can be used 'srtm' or 'gtopo'
 
 + Response 200 (application/json)
 
