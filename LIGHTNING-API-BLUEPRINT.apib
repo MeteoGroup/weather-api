@@ -167,7 +167,9 @@ This resource provides data from existing lightning observation providers: NOWCA
 For any request service returns a set of lightnings occurred in geographical
 bounding box locations during period of time specified in parameters.
 
-
+-##### Limitation
+ - Due to thenchnical reasons, the maximum allowed response time is 30 seconds and it is possible to process lightning events in a batch of 200 000 lightnings only.
+ 
 + Parameters
     + temporalResolution: 'PT15M, PT5M, PT1M' in minutes(string required)
          - time span interval in which lightning should be weighted
