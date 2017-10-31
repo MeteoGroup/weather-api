@@ -161,9 +161,6 @@ https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolutio
 https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]&occurredFrom=2017-01-05T12:19:14Z
 https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]
 
-##### Limitation
-Since AWS API Gatewey has maximum response time 30 seconds and a Lambda instance can allocate no more than 1.5Gb RAM it is impossible to process a really huge amount of lightning events. Therefore at most 200 000 first lightnings are being taken into account.
-
 ### Observed weighted lightning for a given boundingBox, time period, weighted by time span and spatial resolution
 
 This resource provides data from existing lightning observation providers: NOWCAST and ENGLN.
