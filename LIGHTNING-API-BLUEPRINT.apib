@@ -60,7 +60,7 @@ https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10
 https://lightning.weather.mg/search?provider=NOWCAST&locationWithin=[-10,80],[10,5]
 
 ##### Limitation
-AWS Lambda service response can have size < 6MB, it is about 30000 lightning events. If there are more than 30 000 results in storage which comply to the search criteria, they can be retrieved using pagination. 
+Due to some technical constraints, the response payload size is limited to max. 6MB - this is equivalent to ca. 30000 lightning events. If there are more than 30000 results in storage which comply to the search criteria, they can be retrieved using pagination. 
 In such case the response payload contains [HAL](http://stateless.co/hal_specification.html)-compatible  `_link` object which contains links to the next page and the response type is application/hal+json.
 If locationWithin is worldwide [-180, 90][180, -90] and occurrence ~3 days
 
@@ -161,16 +161,15 @@ https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolutio
 https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]&occurredFrom=2017-01-05T12:19:14Z
 https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolution=0.5&locationWithin=[-10,80],[10,5]
 
-##### Limitation
-Since AWS API Gatewey has maximum response time 30 seconds and a Lambda instance can allocate no more than 1.5Gb RAM it is impossible to process a really huge amount of lightning events. Therefore at most 200 000 first lightnings are being taken into account.
-
 ### Observed weighted lightning for a given boundingBox, time period, weighted by time span and spatial resolution
 
 This resource provides data from existing lightning observation providers: NOWCAST and ENGLN.
 For any request service returns a set of lightnings occurred in geographical
 bounding box locations during period of time specified in parameters.
 
-
+-##### Limitation
+ - Due to thenchnical reasons, the maximum allowed response time is 30 seconds and it is possible to process lightning events in a batch of 200 000 lightnings only.
+ 
 + Parameters
     + temporalResolution: 'PT15M, PT5M, PT1M' in minutes(string required)
          - time span interval in which lightning should be weighted
