@@ -1588,3 +1588,809 @@ The extreme values recalculating algorithm based on the following:
               }
             ]
           }
+
+### Retrieve original observations without applying "best fitting algorithm"
+
+#### Example
+https://point-observation.weather.mg/search/origin?meteoGroupStationIds=7107&observedPeriod=PT0S,PT1H,PT3H,PT6H,PT12H,PT24H&observedFrom=2017-10-28T06:00:00Z&observedUntil=2017-10-28T12:00:00Z&fields=dewPointTemperatureInCelsius,typeOfLowCloudsDescription,feelsLikeTemperatureInCelsius,periodOfFirstSwellInSeconds,totalWaveHeightInMeter,weatherCode,directionOfFirstSwellInDegree,windGustInBeaufort,maxWindGustInBeaufort,effectiveCloudCoverInOcta,highCloudCoverInOcta,typeOfHighCloudsCode,typeOfHighCloudsDescription,snowDepthInInch,freshSnowfallInCentimeter,airTemperatureInCelsius,weatherSymbolCodeDay,typeOfMediumCloudsCode,weatherSymbolCodeNight,feelsLikeTemperatureInKelvin,totalWavePeriodInSecond,pressureTendencyCode,visibilityInNauticalMile,totalCloudCoverInOcta,feelsLikeTemperatureInFahrenheit,waterTemperatureInCelsius,waterTemperatureInFahrenheit,maxWindGustInMeterPerSecond,seaHeightInMeter,precipitationAmountInMillimeter,windSpeedInKnots,windSpeedInKilometerPerHour,heightOfFirstSwellInFeet,temperatureMinInKelvin,heightOfMediumCloudsInMeter,pressureTendency,directionOfSecondSwellInDegree,windDirectionInDegree,periodOfSecondSwellInSeconds,pastWeatherDescription,iCAOIdentifier,maxWindGustInMilesPerHour,lowCloudCoverInOcta,pressureTendencyDescription,relativeHumidityInPercent,waterTemperatureInKelvin,heightOfSecondSwellInMeters,visibilityInStatuteMile,shipCallSign,maxWindGustInKnots,meteoGroupStationName,weatherCodeTraditional,windSpeedInMilesPerHour,stationTimeZoneName,heightOfHighCloudsInMeter,windGustInKilometerPerHour,temperatureMinInFahrenheit,weatherSymbolCode,heightOfSecondSwellInFeet,mediumCloudCoverInOcta,typeOfLowCloudsCode,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,airPressureInHectoPascal,visibilityInKilometer,windSpeedInMeterPerSecond,windGustInKnots,shipCourseText,precipitationAmountInInch,dewPointTemperatureInKelvin,temperatureMaxInKelvin,heightOfLowCloudsInMeter,windGustInMeterPerSecond,pastWeatherCode,freshSnowfallInInch,totalWaveHeightInFeet,sunshineDurationInMinutes,shipSpeedInKnots,stationLocation,temperatureMinInCelsius,snowDepthInCentimeter,windSpeedInBeaufort,temperatureMaxInFahrenheit,visibilityInMeter,heightOfFirstSwellInMeters,seaHeightInFeet,seaPeriodInSecond,windGustInMilesPerHour,meteoGroupStationId,typeOfMediumCloudsDescription,sunshineDurationInHours,airTemperatureInFahrenheit,temperatureMaxInCelsius,pressureChangeInHectoPascal,maxWindGustInKilometerPerHour
+
++ Request Search weather observation data for given locatedAt
+
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            x-amzn-RequestId: fbf51991-c2b2-11e6-bbb7-0153a49228b7
+
+    + Body
+
+          {
+  "observations": [
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T08:00:00+02:00",
+      "observedUntil": "2017-10-28T08:00:00+02:00",
+      "observedPeriod": "PT0S",
+      "airTemperatureInCelsius": 9.7,
+      "airTemperatureInFahrenheit": 49.46,
+      "airTemperatureInKelvin": 282.85,
+      "feelsLikeTemperatureInCelsius": 9.2,
+      "feelsLikeTemperatureInFahrenheit": 48.559998,
+      "feelsLikeTemperatureInKelvin": 282.35,
+      "airPressureInHectoPascal": 1033.5,
+      "windSpeedInMeterPerSecond": 2.1,
+      "windSpeedInKilometerPerHour": 7.5599995,
+      "windSpeedInMilesPerHour": 4.6975656,
+      "windSpeedInBeaufort": 2,
+      "windSpeedInKnots": 4.0820723,
+      "windDirectionInDegree": 260,
+      "dewPointTemperatureInCelsius": 8,
+      "dewPointTemperatureInFahrenheit": 46.4,
+      "dewPointTemperatureInKelvin": 281.15,
+      "relativeHumidityInPercent": 89,
+      "lowCloudCoverInOcta": 2,
+      "effectiveCloudCoverInOcta": 2,
+      "totalCloudCoverInOcta": 2,
+      "visibilityInMeter": 30000,
+      "visibilityInKilometer": 30,
+      "visibilityInNauticalMile": 16.199999,
+      "visibilityInStatuteMile": 18.641136,
+      "weatherCode": "0",
+      "weatherCodeTraditional": 0,
+      "heightOfLowCloudsInMeter": 610,
+      "typeOfLowCloudsCode": 5,
+      "typeOfLowCloudsDescription": "stratocumulus",
+      "typeOfMediumCloudsCode": 0,
+      "typeOfMediumCloudsDescription": "no middle clouds",
+      "typeOfHighCloudsCode": 0,
+      "typeOfHighCloudsDescription": "no high clouds"
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T07:00:00+02:00",
+      "observedUntil": "2017-10-28T08:00:00+02:00",
+      "observedPeriod": "PT1H",
+      "windGustInMeterPerSecond": 3.1,
+      "windGustInKilometerPerHour": 11.159999,
+      "windGustInMilesPerHour": 6.9345016,
+      "windGustInBeaufort": 2,
+      "windGustInKnots": 6.025916,
+      "pressureTendencyDescription": "decreasing",
+      "pressureTendency": "decreasing",
+      "pressureTendencyCode": 7,
+      "pressureChangeInHectoPascal": -0.4,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T05:00:00+02:00",
+      "observedUntil": "2017-10-28T08:00:00+02:00",
+      "observedPeriod": "PT3H",
+      "pressureTendencyDescription": "steady_or_increasing_then_decreasing",
+      "pressureTendency": "steady_or_increasing_then_decreasing",
+      "pressureTendencyCode": 8,
+      "pressureChangeInHectoPascal": -0.4
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T02:00:00+02:00",
+      "observedUntil": "2017-10-28T08:00:00+02:00",
+      "observedPeriod": "PT6H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "pastWeatherCode": 0,
+      "pastWeatherDescription": "CLOUD COVERING 1/2 OR LESS OF THE SKY THROUGHOUT THE APPROPRIATE PERIOD"
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-27T20:00:00+02:00",
+      "observedUntil": "2017-10-28T08:00:00+02:00",
+      "observedPeriod": "PT12H",
+      "temperatureMaxInCelsius": 14.3,
+      "temperatureMaxInFahrenheit": 57.739998,
+      "temperatureMaxInKelvin": 287.44998,
+      "temperatureMinInCelsius": 9.7,
+      "temperatureMinInFahrenheit": 49.46,
+      "temperatureMinInKelvin": 282.85,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-27T08:00:00+02:00",
+      "observedUntil": "2017-10-28T08:00:00+02:00",
+      "observedPeriod": "PT24H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T09:00:00+02:00",
+      "observedUntil": "2017-10-28T09:00:00+02:00",
+      "observedPeriod": "PT0S",
+      "airTemperatureInCelsius": 9,
+      "airTemperatureInFahrenheit": 48.2,
+      "airTemperatureInKelvin": 282.15,
+      "feelsLikeTemperatureInCelsius": 9,
+      "feelsLikeTemperatureInFahrenheit": 48.2,
+      "feelsLikeTemperatureInKelvin": 282.15,
+      "airPressureInHectoPascal": 1033.4,
+      "windSpeedInMeterPerSecond": 1.6,
+      "windSpeedInKilometerPerHour": 5.7599998,
+      "windSpeedInMilesPerHour": 3.5790977,
+      "windSpeedInBeaufort": 2,
+      "windSpeedInKnots": 3.1101503,
+      "windDirectionInDegree": 320,
+      "dewPointTemperatureInCelsius": 7.3,
+      "dewPointTemperatureInFahrenheit": 45.14,
+      "dewPointTemperatureInKelvin": 280.44998,
+      "relativeHumidityInPercent": 89
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T08:00:00+02:00",
+      "observedUntil": "2017-10-28T09:00:00+02:00",
+      "observedPeriod": "PT1H",
+      "windGustInMeterPerSecond": 2.9,
+      "windGustInKilometerPerHour": 10.440001,
+      "windGustInMilesPerHour": 6.487115,
+      "windGustInBeaufort": 2,
+      "windGustInKnots": 5.637148,
+      "pressureTendencyDescription": "decreasing",
+      "pressureTendency": "decreasing",
+      "pressureTendencyCode": 7,
+      "pressureChangeInHectoPascal": -0.1,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T06:00:00+02:00",
+      "observedUntil": "2017-10-28T09:00:00+02:00",
+      "observedPeriod": "PT3H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "pressureTendencyDescription": "decreasing_then_steady",
+      "pressureTendency": "decreasing_then_steady",
+      "pressureTendencyCode": 6,
+      "pressureChangeInHectoPascal": -0.7,
+      "maxWindGustInKilometerPerHour": 11.879999,
+      "maxWindGustInMilesPerHour": 7.381889,
+      "maxWindGustInBeaufort": 2,
+      "maxWindGustInKnots": 6.414685,
+      "maxWindGustInMeterPerSecond": 3.3
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T03:00:00+02:00",
+      "observedUntil": "2017-10-28T09:00:00+02:00",
+      "observedPeriod": "PT6H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-27T09:00:00+02:00",
+      "observedUntil": "2017-10-28T09:00:00+02:00",
+      "observedPeriod": "PT24H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T10:00:00+02:00",
+      "observedUntil": "2017-10-28T10:00:00+02:00",
+      "observedPeriod": "PT0S",
+      "airTemperatureInCelsius": 9.5,
+      "airTemperatureInFahrenheit": 49.1,
+      "airTemperatureInKelvin": 282.65,
+      "feelsLikeTemperatureInCelsius": 8.8,
+      "feelsLikeTemperatureInFahrenheit": 47.84,
+      "feelsLikeTemperatureInKelvin": 281.94998,
+      "airPressureInHectoPascal": 1034,
+      "windSpeedInMeterPerSecond": 2.4,
+      "windSpeedInKilometerPerHour": 8.64,
+      "windSpeedInMilesPerHour": 5.3686466,
+      "windSpeedInBeaufort": 2,
+      "windSpeedInKnots": 4.6652255,
+      "windDirectionInDegree": 230,
+      "dewPointTemperatureInCelsius": 7.9,
+      "dewPointTemperatureInFahrenheit": 46.22,
+      "dewPointTemperatureInKelvin": 281.05,
+      "relativeHumidityInPercent": 90
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T09:00:00+02:00",
+      "observedUntil": "2017-10-28T10:00:00+02:00",
+      "observedPeriod": "PT1H",
+      "windGustInMeterPerSecond": 3,
+      "windGustInKilometerPerHour": 10.799999,
+      "windGustInMilesPerHour": 6.7108083,
+      "windGustInBeaufort": 2,
+      "windGustInKnots": 5.831532,
+      "pressureTendencyDescription": "increasing",
+      "pressureTendency": "increasing",
+      "pressureTendencyCode": 2,
+      "pressureChangeInHectoPascal": 0.6,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T07:00:00+02:00",
+      "observedUntil": "2017-10-28T10:00:00+02:00",
+      "observedPeriod": "PT3H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "pressureTendencyDescription": "decreasing_or_steady_then_increasing",
+      "pressureTendency": "decreasing_or_steady_then_increasing",
+      "pressureTendencyCode": 3,
+      "pressureChangeInHectoPascal": 0.1
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T04:00:00+02:00",
+      "observedUntil": "2017-10-28T10:00:00+02:00",
+      "observedPeriod": "PT6H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-27T10:00:00+02:00",
+      "observedUntil": "2017-10-28T10:00:00+02:00",
+      "observedPeriod": "PT24H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T11:00:00+02:00",
+      "observedUntil": "2017-10-28T11:00:00+02:00",
+      "observedPeriod": "PT0S",
+      "airTemperatureInCelsius": 11.6,
+      "airTemperatureInFahrenheit": 52.88,
+      "airTemperatureInKelvin": 284.75,
+      "feelsLikeTemperatureInCelsius": 11.5,
+      "feelsLikeTemperatureInFahrenheit": 52.7,
+      "feelsLikeTemperatureInKelvin": 284.65,
+      "airPressureInHectoPascal": 1033.8,
+      "windSpeedInMeterPerSecond": 2.6,
+      "windSpeedInKilometerPerHour": 9.36,
+      "windSpeedInMilesPerHour": 5.816034,
+      "windSpeedInBeaufort": 2,
+      "windSpeedInKnots": 5.053994,
+      "windDirectionInDegree": 240,
+      "dewPointTemperatureInCelsius": 10,
+      "dewPointTemperatureInFahrenheit": 50,
+      "dewPointTemperatureInKelvin": 283.15,
+      "relativeHumidityInPercent": 90,
+      "lowCloudCoverInOcta": 7,
+      "effectiveCloudCoverInOcta": 7,
+      "totalCloudCoverInOcta": 7,
+      "visibilityInMeter": 20000,
+      "visibilityInKilometer": 20,
+      "visibilityInNauticalMile": 10.799999,
+      "visibilityInStatuteMile": 12.427424,
+      "weatherCode": "0",
+      "weatherCodeTraditional": 0,
+      "heightOfLowCloudsInMeter": 914,
+      "typeOfLowCloudsCode": 5,
+      "typeOfLowCloudsDescription": "stratocumulus"
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T10:00:00+02:00",
+      "observedUntil": "2017-10-28T11:00:00+02:00",
+      "observedPeriod": "PT1H",
+      "windGustInMeterPerSecond": 4.1,
+      "windGustInKilometerPerHour": 14.759999,
+      "windGustInMilesPerHour": 9.171438,
+      "windGustInBeaufort": 3,
+      "windGustInKnots": 7.96976,
+      "pressureTendencyDescription": "decreasing",
+      "pressureTendency": "decreasing",
+      "pressureTendencyCode": 7,
+      "pressureChangeInHectoPascal": -0.2,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T08:00:00+02:00",
+      "observedUntil": "2017-10-28T11:00:00+02:00",
+      "observedPeriod": "PT3H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "pressureTendencyDescription": "increasing_then_decreasing",
+      "pressureTendency": "increasing_then_decreasing",
+      "pressureTendencyCode": 0,
+      "pressureChangeInHectoPascal": 0.3
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T05:00:00+02:00",
+      "observedUntil": "2017-10-28T11:00:00+02:00",
+      "observedPeriod": "PT6H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "pastWeatherCode": 2,
+      "pastWeatherDescription": "CLOUD COVERING MORE THAN 1/2 OF THE SKY THROUGHOUT THE APPROPRIATE PERIOD"
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-27T11:00:00+02:00",
+      "observedUntil": "2017-10-28T11:00:00+02:00",
+      "observedPeriod": "PT24H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T12:00:00+02:00",
+      "observedUntil": "2017-10-28T12:00:00+02:00",
+      "observedPeriod": "PT0S",
+      "airTemperatureInCelsius": 13.6,
+      "airTemperatureInFahrenheit": 56.48,
+      "airTemperatureInKelvin": 286.75,
+      "feelsLikeTemperatureInCelsius": 14,
+      "feelsLikeTemperatureInFahrenheit": 57.2,
+      "feelsLikeTemperatureInKelvin": 287.15,
+      "airPressureInHectoPascal": 1033.3,
+      "windSpeedInMeterPerSecond": 2.9,
+      "windSpeedInKilometerPerHour": 10.440001,
+      "windSpeedInMilesPerHour": 6.487115,
+      "windSpeedInBeaufort": 2,
+      "windSpeedInKnots": 5.637148,
+      "windDirectionInDegree": 240,
+      "dewPointTemperatureInCelsius": 10.9,
+      "dewPointTemperatureInFahrenheit": 51.62,
+      "dewPointTemperatureInKelvin": 284.05,
+      "relativeHumidityInPercent": 84
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T11:00:00+02:00",
+      "observedUntil": "2017-10-28T12:00:00+02:00",
+      "observedPeriod": "PT1H",
+      "windGustInMeterPerSecond": 4.1,
+      "windGustInKilometerPerHour": 14.759999,
+      "windGustInMilesPerHour": 9.171438,
+      "windGustInBeaufort": 3,
+      "windGustInKnots": 7.96976,
+      "pressureTendencyDescription": "decreasing",
+      "pressureTendency": "decreasing",
+      "pressureTendencyCode": 7,
+      "pressureChangeInHectoPascal": -0.5,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T09:00:00+02:00",
+      "observedUntil": "2017-10-28T12:00:00+02:00",
+      "observedPeriod": "PT3H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "pressureTendencyDescription": "steady_or_increasing_then_decreasing",
+      "pressureTendency": "steady_or_increasing_then_decreasing",
+      "pressureTendencyCode": 8,
+      "pressureChangeInHectoPascal": -0.1,
+      "maxWindGustInKilometerPerHour": 14.759999,
+      "maxWindGustInMilesPerHour": 9.171438,
+      "maxWindGustInBeaufort": 3,
+      "maxWindGustInKnots": 7.96976,
+      "maxWindGustInMeterPerSecond": 4.1
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T06:00:00+02:00",
+      "observedUntil": "2017-10-28T12:00:00+02:00",
+      "observedPeriod": "PT6H",
+      "pressureTendencyDescription": "decreasing",
+      "pressureTendency": "decreasing",
+      "pressureTendencyCode": 7,
+      "pressureChangeInHectoPascal": -0.8,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "maxWindGustInKilometerPerHour": 14.759999,
+      "maxWindGustInMilesPerHour": 9.171438,
+      "maxWindGustInBeaufort": 3,
+      "maxWindGustInKnots": 7.96976,
+      "maxWindGustInMeterPerSecond": 4.1
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-27T12:00:00+02:00",
+      "observedUntil": "2017-10-28T12:00:00+02:00",
+      "observedPeriod": "PT24H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T13:00:00+02:00",
+      "observedUntil": "2017-10-28T13:00:00+02:00",
+      "observedPeriod": "PT0S",
+      "airTemperatureInCelsius": 13.5,
+      "airTemperatureInFahrenheit": 56.3,
+      "airTemperatureInKelvin": 286.65,
+      "feelsLikeTemperatureInCelsius": 13.6,
+      "feelsLikeTemperatureInFahrenheit": 56.48,
+      "feelsLikeTemperatureInKelvin": 286.75,
+      "airPressureInHectoPascal": 1033.2,
+      "windSpeedInMeterPerSecond": 4,
+      "windSpeedInKilometerPerHour": 14.4,
+      "windSpeedInMilesPerHour": 8.947744,
+      "windSpeedInBeaufort": 3,
+      "windSpeedInKnots": 7.775376,
+      "windDirectionInDegree": 260,
+      "dewPointTemperatureInCelsius": 11.2,
+      "dewPointTemperatureInFahrenheit": 52.16,
+      "dewPointTemperatureInKelvin": 284.35,
+      "relativeHumidityInPercent": 86
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T12:00:00+02:00",
+      "observedUntil": "2017-10-28T13:00:00+02:00",
+      "observedPeriod": "PT1H",
+      "windGustInMeterPerSecond": 6,
+      "windGustInKilometerPerHour": 21.599998,
+      "windGustInMilesPerHour": 13.421617,
+      "windGustInBeaufort": 4,
+      "windGustInKnots": 11.663064,
+      "pressureTendencyDescription": "decreasing",
+      "pressureTendency": "decreasing",
+      "pressureTendencyCode": 7,
+      "pressureChangeInHectoPascal": -0.1,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T10:00:00+02:00",
+      "observedUntil": "2017-10-28T13:00:00+02:00",
+      "observedPeriod": "PT3H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "pressureTendencyDescription": "decreasing_then_steady",
+      "pressureTendency": "decreasing_then_steady",
+      "pressureTendencyCode": 6,
+      "pressureChangeInHectoPascal": -0.8
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T07:00:00+02:00",
+      "observedUntil": "2017-10-28T13:00:00+02:00",
+      "observedPeriod": "PT6H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-27T13:00:00+02:00",
+      "observedUntil": "2017-10-28T13:00:00+02:00",
+      "observedPeriod": "PT24H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T14:00:00+02:00",
+      "observedUntil": "2017-10-28T14:00:00+02:00",
+      "observedPeriod": "PT0S",
+      "airTemperatureInCelsius": 13.8,
+      "airTemperatureInFahrenheit": 56.84,
+      "airTemperatureInKelvin": 286.94998,
+      "feelsLikeTemperatureInCelsius": 13.9,
+      "feelsLikeTemperatureInFahrenheit": 57.02,
+      "feelsLikeTemperatureInKelvin": 287.05,
+      "airPressureInHectoPascal": 1032.5,
+      "windSpeedInMeterPerSecond": 4.6,
+      "windSpeedInKilometerPerHour": 16.56,
+      "windSpeedInMilesPerHour": 10.289906,
+      "windSpeedInBeaufort": 3,
+      "windSpeedInKnots": 8.941682,
+      "windDirectionInDegree": 270,
+      "dewPointTemperatureInCelsius": 11.3,
+      "dewPointTemperatureInFahrenheit": 52.34,
+      "dewPointTemperatureInKelvin": 284.44998,
+      "relativeHumidityInPercent": 85,
+      "lowCloudCoverInOcta": 8,
+      "effectiveCloudCoverInOcta": 8,
+      "totalCloudCoverInOcta": 8,
+      "visibilityInMeter": 22000,
+      "visibilityInKilometer": 22,
+      "visibilityInNauticalMile": 11.879999,
+      "visibilityInStatuteMile": 13.670166,
+      "weatherCode": "0",
+      "weatherCodeTraditional": 0,
+      "heightOfLowCloudsInMeter": 610,
+      "typeOfLowCloudsCode": 8,
+      "typeOfLowCloudsDescription": "cumulus and stratocumulus (multilevel)"
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T13:00:00+02:00",
+      "observedUntil": "2017-10-28T14:00:00+02:00",
+      "observedPeriod": "PT1H",
+      "windGustInMeterPerSecond": 6.7,
+      "windGustInKilometerPerHour": 24.119999,
+      "windGustInMilesPerHour": 14.987472,
+      "windGustInBeaufort": 4,
+      "windGustInKnots": 13.023754,
+      "pressureTendencyDescription": "decreasing",
+      "pressureTendency": "decreasing",
+      "pressureTendencyCode": 7,
+      "pressureChangeInHectoPascal": -0.7,
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T11:00:00+02:00",
+      "observedUntil": "2017-10-28T14:00:00+02:00",
+      "observedPeriod": "PT3H",
+      "pressureTendencyDescription": "steady_or_increasing_then_decreasing",
+      "pressureTendency": "steady_or_increasing_then_decreasing",
+      "pressureTendencyCode": 8,
+      "pressureChangeInHectoPascal": -1.3
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T08:00:00+02:00",
+      "observedUntil": "2017-10-28T14:00:00+02:00",
+      "observedPeriod": "PT6H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0,
+      "pastWeatherCode": 2,
+      "pastWeatherDescription": "CLOUD COVERING MORE THAN 1/2 OF THE SKY THROUGHOUT THE APPROPRIATE PERIOD"
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-28T02:00:00+02:00",
+      "observedUntil": "2017-10-28T14:00:00+02:00",
+      "observedPeriod": "PT12H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    },
+    {
+      "meteoGroupStationId": "7107",
+      "meteoGroupStationName": "Brignogan",
+      "stationLocation": [
+        -4.3333335,
+        48.683334
+      ],
+      "stationTimeZoneName": "Europe/Paris",
+      "observedFrom": "2017-10-27T14:00:00+02:00",
+      "observedUntil": "2017-10-28T14:00:00+02:00",
+      "observedPeriod": "PT24H",
+      "precipitationAmountInMillimeter": 0,
+      "precipitationAmountInInch": 0
+    }
+  ]
+}
