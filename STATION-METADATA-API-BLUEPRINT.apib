@@ -120,6 +120,75 @@ GET /stations?accessVisibility=public&provider=WMO&hasForecastData=true&hasObser
       ]
     }
     ```
+
+````
+POST /stations
+````
+{
+    "locatedWithin": {"type":"polygon","coordinates":[[[-10,10],[10,5],[-5,-5],[-10,10]],[[-5,5],[0,5],[0,0],[-5,5]]]},
+    "accessVisibility": "public",
+    "provider": "WMO",
+    "type": "WMO",
+    "hasForecastData": "true",
+    "hasObservationData": "true",
+    "countryIsoCode": "TG"
+}
+
++ Response 200 (application/json)
+
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "accessVisibility": "public",
+                "icaoCode": "DXTA",
+                "countryIsoCode": "TG",
+                "provider": "WMO",
+                "hasForecastData": true,
+                "wmoCountryId": 221,
+                "meteoGroupStationId": 65380,
+                "name": "Tabligbo",
+                "hasObservationData": true,
+                "stationTimeZoneName": "Africa/Lome",
+                "type": "WMO"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.5,
+                    6.58333,
+                    44
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "accessVisibility": "public",
+                "icaoCode": "DXXX",
+                "countryIsoCode": "TG",
+                "provider": "WMO",
+                "hasForecastData": true,
+                "wmoCountryId": 221,
+                "meteoGroupStationId": 65387,
+                "name": "Lome",
+                "hasObservationData": true,
+                "stationTimeZoneName": "Africa/Lome",
+                "type": "WMO"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.25,
+                    6.16667,
+                    25
+                ]
+            }
+        }
+    ]
+}
     
 ### Queries by area or region (bounding box, polygone or multipolygone)
 
@@ -183,6 +252,7 @@ Returns a list containing all current known station types. This list can be exte
     "types": [
         "AIRQUALITY",
         "AVIATION",
+        "BUOY",
         "MARINE",
         "MG_NETWORK",
         "NMI_SECONDARY",
@@ -201,6 +271,9 @@ Returns a list containing all current known station types. This list can be exte
         },
         "AVIATION": {
             "href": "http://station-metadata.weather.mg/stations?type=AVIATION"
+        },
+        "BUOY": {
+            "href": "http://station-metadata.weather.mg/stations?type=BUOY"
         },
         "MARINE": {
             "href": "http://station-metadata.weather.mg/stations?type=MARINE"

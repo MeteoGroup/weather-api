@@ -86,7 +86,7 @@ bounding box locations during period of time specified in parameters.
     + occurredUntil: `2017-01-05T12:21:15Z` (end time range, optional)
         - time range period for lightning observation.
 
-    + provider: `ENGLN,NOWCAST` (string, required)
+    + provider: `ENTLN,NOWCAST` (string, required)
         - lightning providers.
 
     + startPosition: `60000` (not negative integer, optional)
@@ -115,7 +115,7 @@ bounding box locations during period of time specified in parameters.
               },
               {
                  "occurredAt":"2017-01-05T12:21:14.974Z",
-                 "provider":"ENGLN",
+                 "provider":"ENTLN",
                  "lightningType":"CLOUD_TO_GROUND",
                  "elevationInKilometers":0,
                  "currentInAmpere":4700,
@@ -140,10 +140,10 @@ bounding box locations during period of time specified in parameters.
            "lightningsInResponse": 30000,
            "_links": {
              "self": {
-               "href": "https://lightning.weather.mg/search?provider=ENGLN&startPosition=60000&locationWithin=[-180,90],[180,-90]"
+               "href": "https://lightning.weather.mg/search?provider=ENTLN&startPosition=60000&locationWithin=[-180,90],[180,-90]"
              },
              "next": {
-               "href": "https://lightning.weather.mg/search?provider=ENGLN&startPosition=90000&locationWithin=[-180,90],[180,-90]"
+               "href": "https://lightning.weather.mg/search?provider=ENTLN&startPosition=90000&locationWithin=[-180,90],[180,-90]"
              }
            }
          }
@@ -163,7 +163,7 @@ https://lightning.weather.mg/weighted?&temporalResolution=PT15M&spatialResolutio
 
 ### Observed weighted lightning for a given boundingBox, time period, weighted by time span and spatial resolution
 
-This resource provides data from existing lightning observation providers: NOWCAST and ENGLN.
+This resource provides data from existing lightning observation providers: NOWCAST and ENTLN.
 For any request service returns a set of lightnings occurred in geographical
 bounding box locations during period of time specified in parameters.
 
