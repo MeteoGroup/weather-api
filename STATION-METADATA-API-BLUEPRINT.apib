@@ -279,6 +279,29 @@ Returns a list containing all current known data providers. This list can be ext
 ```
 
 
+#### Generate ID for moving stations
+
+Query example:
+
+```
+GET /generateID?locator=anyLocator&stationType=anyStationType
+```
+
+Returns generated ID by specified locator and stationType parameters. Both of parameters are mandatory.
+
++ Response 200 (text/plain)
+```
+{
+    "meteoGroupStationId": "qnCfdt",
+    "_links": {
+        "getStationById": {
+            "href": "http://localhost:8080/stations?meteoGroupStationId=qnCfdt"
+        }
+    }
+}
+```
+
+
 ### Cache control headers:
 
 The service offer regular HTTP caching hints in the reponse header.
