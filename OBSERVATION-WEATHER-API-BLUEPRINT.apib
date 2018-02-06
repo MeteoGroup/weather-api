@@ -27,7 +27,7 @@ Clients should ignore unknown parameters, to avoid technical issues.
 
 # Group Observation
 
-## Retrieve weather observation [/search?locatedAt={locatedAt}&meteoGroupStationIds={stationIds}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}]
+## Retrieve weather observation [/search?locatedAt={locatedAt}&meteoGroupStationIds={stationIds}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}&gapFilling={gapFilling}]
 
 For any requested location a relevant station is searched.
 The searching algorithm stops at a maximum distance of 100km (between requested location and station)
@@ -86,10 +86,10 @@ Here are relationship between observation periods and fields appropriately:
                 visibilityInNauticalMile,visibilityInStatuteMile, weatherCode, weatherCodeTraditional,snowDepthInCentimeter,snowDepthInInch, waterTemperatureInCelsius, waterTemperatureInFahrenheit,
                 waterTemperatureInKelvin, totalWaveHeightInMeter, totalWaveHeightInFeet, totalWavePeriodInSecond, seaHeightInMeter, seaHeightInFeet, seaPeriodInSecond,
                 mediumCloudCoverInOcta,heightOfMediumCloudsInMeter,heightOfHighCloudsInMeter,highCloudCoverInOcta,shipCallSign,iCAOIdentifier,lowCloudCoverInOcta,heightOfLowCloudsInMeter,
-                directionOfFirstSwellInDegree,periodOfFirstSwellInSeconds,heightOfFirstSwellInMeters,heightOfFirstSwellInFeet,directionOfSecondSwellInDegree,periodOfSecondSwellInSeconds,heightOfSecondSwellInMeters,heightOfSecondSwellInFeet
+                directionOfFirstSwellInDegree,periodOfFirstSwellInSeconds,heightOfFirstSwellInMeters,heightOfFirstSwellInFeet,directionOfSecondSwellInDegree,periodOfSecondSwellInSeconds,heightOfSecondSwellInMeters,heightOfSecondSwellInFeet,gapFillingInfo
 
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
-                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode
+                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode, gapFillingInfo
 - **PT3H** -    pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
                 maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, shipCourseText, shipSpeedRangeInKnots
 - **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort,
@@ -684,6 +684,137 @@ The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past we
                 "precipitationAmountInInch": 0.004
               }
             ]
+          }
+
+### Retrieve weather observation for multiple station IDs with gap filling [GET]
+
+#### Example
+`https://point-observation.weather.mg/search?meteoGroupStationIds=2038151,95930&gapFilling=true&observedPeriod=PT1H&observedFrom=2018-02-01T00:00:00%2B02:00&observedUntil=2018-02-01T01:00:00%2B02:00&fields=dewPointTemperatureInCelsius,typeOfLowCloudsDescription,periodOfFirstSwellInSeconds,totalWaveHeightInMeter,directionOfFirstSwellInDegree,maxWindGustInBeaufort,highCloudCoverInOcta,snowDepthInInch,freshSnowfallInCentimeter,airTemperatureInCelsius,weatherSymbolCodeDay,typeOfMediumCloudsCode,totalWavePeriodInSecond,pressureTendencyCode,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,waterTemperatureInFahrenheit,maxWindGustInMeterPerSecond,seaHeightInMeter,windSpeedInKnots,windSpeedInKilometerPerHour,heightOfFirstSwellInFeet,temperatureMinInKelvin,heightOfMediumCloudsInMeter,windDirectionInDegree,pastWeatherDescription,iCAOIdentifier,lowCloudCoverInOcta,relativeHumidityInPercent,visibilityInStatuteMile,maxWindGustInKnots,meteoGroupStationName,windSpeedInMilesPerHour,heightOfHighCloudsInMeter,temperatureMinInFahrenheit,weatherSymbolCode,mediumCloudCoverInOcta,typeOfLowCloudsCode,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,visibilityInKilometer,shipCourseText,precipitationAmountInInch,heightOfLowCloudsInMeter,windGustInMeterPerSecond,airPressureAtSeaLevelInHectoPascal,sunshineDurationInMinutes,stationLocation,temperatureMinInCelsius,snowDepthInCentimeter,windSpeedInBeaufort,visibilityInMeter,seaHeightInFeet,meteoGroupStationId,sunshineDurationInHours,temperatureMaxInCelsius,maxWindGustInKilometerPerHour,feelsLikeTemperatureInCelsius,weatherCode,windGustInBeaufort,effectiveCloudCoverInOcta,typeOfHighCloudsCode,typeOfHighCloudsDescription,weatherSymbolCodeNight,feelsLikeTemperatureInKelvin,totalCloudCoverInOcta,waterTemperatureInCelsius,precipitationAmountInMillimeter,pressureTendency,shipSpeedRangeInKnots,directionOfSecondSwellInDegree,periodOfSecondSwellInSeconds,maxWindGustInMilesPerHour,pressureTendencyDescription,waterTemperatureInKelvin,heightOfSecondSwellInMeters,shipCallSign,weatherCodeTraditional,stationTimeZoneName,windGustInKilometerPerHour,heightOfSecondSwellInFeet,airPressureInHectoPascal,windSpeedInMeterPerSecond,windGustInKnots,dewPointTemperatureInKelvin,temperatureMaxInKelvin,pastWeatherCode,freshSnowfallInInch,totalWaveHeightInFeet,shipSpeedInKnots,temperatureMaxInFahrenheit,heightOfFirstSwellInMeters,seaPeriodInSecond,windGustInMilesPerHour,typeOfMediumCloudsDescription,airTemperatureInFahrenheit,pressureChangeInHectoPascal,gapFillingInfo`
+
+To get info about gap filled fields request `gapFillingInfo` in 'fields' parameter.
+
++ Request Search weather observation data for given meteoGroupStationIds with gap filling
+
+    + Headers
+
+           Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Content-Type: application/json
+            x-amzn-RequestId: fbf51991-c2b2-11e6-bbb7-0153a49228b7
+
+    + Body
+
+          {
+              "observations": [
+                  {
+                      "meteoGroupStationId": "2038151",
+                      "meteoGroupStationName": "Nukus/Karakalpakstan",
+                      "stationLocation": [
+                          59.633335,
+                          42.483334
+                      ],
+                      "stationTimeZoneName": "Asia/Samarkand",
+                      "observedFrom": "2018-02-01T02:00:00+05:00",
+                      "observedUntil": "2018-02-01T03:00:00+05:00",
+                      "observedPeriod": "PT1H",
+                      "gapFillingInfo": {
+                          "dataSource": "Forecast",
+                          "issuedAt": "2018-01-31T22:00:00.000Z",
+                          "gapFilledFields": [
+                              "precipitationAmountInInch",
+                              "precipitationAmountInMillimeter"
+                          ]
+                      },
+                      "pressureTendencyDescription": "steady",
+                      "pressureTendency": "steady",
+                      "pressureTendencyCode": 4,
+                      "pressureChangeInHectoPascal": 0,
+                      "precipitationAmountInMillimeter": 0,
+                      "precipitationAmountInInch": 0
+                  },
+                  {
+                      "meteoGroupStationId": "2038151",
+                      "meteoGroupStationName": "Nukus/Karakalpakstan",
+                      "stationLocation": [
+                          59.633335,
+                          42.483334
+                      ],
+                      "stationTimeZoneName": "Asia/Samarkand",
+                      "observedFrom": "2018-02-01T03:00:00+05:00",
+                      "observedUntil": "2018-02-01T04:00:00+05:00",
+                      "observedPeriod": "PT1H",
+                      "gapFillingInfo": {
+                          "dataSource": "Forecast",
+                          "issuedAt": "2018-01-31T23:00:00.000Z",
+                          "gapFilledFields": [
+                              "precipitationAmountInInch",
+                              "precipitationAmountInMillimeter"
+                          ]
+                      },
+                      "pressureTendencyDescription": "steady",
+                      "pressureTendency": "steady",
+                      "pressureTendencyCode": 4,
+                      "pressureChangeInHectoPascal": 0,
+                      "precipitationAmountInMillimeter": 0,
+                      "precipitationAmountInInch": 0
+                  },
+                  {
+                      "meteoGroupStationId": "95930",
+                      "meteoGroupStationName": "Merimbula/Intl",
+                      "stationLocation": [
+                          149.9,
+                          -36.9
+                      ],
+                      "stationTimeZoneName": "Australia/Sydney",
+                      "observedFrom": "2018-02-01T08:00:00+11:00",
+                      "observedUntil": "2018-02-01T09:00:00+11:00",
+                      "observedPeriod": "PT1H",
+                      "gapFillingInfo": {
+                          "dataSource": "Forecast",
+                          "issuedAt": "2018-01-31T22:00:00.000Z",
+                          "gapFilledFields": [
+                              "precipitationAmountInInch",
+                              "precipitationAmountInMillimeter"
+                          ]
+                      },
+                      "pressureTendencyDescription": "steady",
+                      "pressureTendency": "steady",
+                      "pressureTendencyCode": 4,
+                      "pressureChangeInHectoPascal": 0,
+                      "precipitationAmountInMillimeter": 0,
+                      "precipitationAmountInInch": 0
+                  },
+                  {
+                      "meteoGroupStationId": "95930",
+                      "meteoGroupStationName": "Merimbula/Intl",
+                      "stationLocation": [
+                          149.9,
+                          -36.9
+                      ],
+                      "stationTimeZoneName": "Australia/Sydney",
+                      "observedFrom": "2018-02-01T09:00:00+11:00",
+                      "observedUntil": "2018-02-01T10:00:00+11:00",
+                      "observedPeriod": "PT1H",
+                      "gapFillingInfo": {
+                          "dataSource": "Forecast",
+                          "issuedAt": "2018-01-31T23:00:00.000Z",
+                          "gapFilledFields": [
+                              "precipitationAmountInInch",
+                              "precipitationAmountInMillimeter"
+                          ]
+                      },
+                      "pressureTendencyDescription": "steady",
+                      "pressureTendency": "steady",
+                      "pressureTendencyCode": 4,
+                      "pressureChangeInHectoPascal": 0,
+                      "precipitationAmountInMillimeter": 0.02,
+                      "precipitationAmountInInch": 0.001
+                  }
+              ]
           }
 
 ### Retrieve weather observation by BUOY ID [GET]. Please be aware that querying observation by BUOY|SHIP|PLATFORM is totaly the same as querying observations by meteoGroupStationIds.
