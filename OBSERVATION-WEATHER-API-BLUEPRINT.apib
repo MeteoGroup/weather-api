@@ -89,7 +89,7 @@ Here are relationship between observation periods and fields appropriately:
                 directionOfFirstSwellInDegree,periodOfFirstSwellInSeconds,heightOfFirstSwellInMeters,heightOfFirstSwellInFeet,directionOfSecondSwellInDegree,periodOfSecondSwellInSeconds,heightOfSecondSwellInMeters,heightOfSecondSwellInFeet,gapFillingInfo
 
 - **PT1H** -    windGustInMeterPerSecond, windGustInKilometerPerHour, windGustInMilesPerHour, windGustInBeaufort, windGustInKnots, precipitationAmountInMillimeter,
-                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode, gapFillingInfo
+                precipitationAmountInInch, freshSnowfallInCentimeter, freshSnowfallInInch, pressureTendencyDescription, pressureTendencyCode
 - **PT3H** -    pressureTendencyDescription, pressureTendencyCode, pressureChangeInHectoPascal, precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour,
                 maxWindGustInMilesPerHour, maxWindGustInBeaufort, maxWindGustInKnots, shipCourseText, shipSpeedRangeInKnots
 - **PT6H** -    precipitationAmountInMillimeter,precipitationAmountInInch, maxWindGustInMeterPerSecond, maxWindGustInKilometerPerHour, maxWindGustInMilesPerHour, maxWindGustInBeaufort,
@@ -689,7 +689,7 @@ The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past we
 ### Retrieve weather observation for multiple station IDs with gap filling [GET]
 
 #### Example
-`https://point-observation.weather.mg/search?meteoGroupStationIds=2038151,95930&gapFilling=true&observedPeriod=PT1H&observedFrom=2018-02-01T00:00:00%2B02:00&observedUntil=2018-02-01T01:00:00%2B02:00&fields=dewPointTemperatureInCelsius,typeOfLowCloudsDescription,periodOfFirstSwellInSeconds,totalWaveHeightInMeter,directionOfFirstSwellInDegree,maxWindGustInBeaufort,highCloudCoverInOcta,snowDepthInInch,freshSnowfallInCentimeter,airTemperatureInCelsius,weatherSymbolCodeDay,typeOfMediumCloudsCode,totalWavePeriodInSecond,pressureTendencyCode,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,waterTemperatureInFahrenheit,maxWindGustInMeterPerSecond,seaHeightInMeter,windSpeedInKnots,windSpeedInKilometerPerHour,heightOfFirstSwellInFeet,temperatureMinInKelvin,heightOfMediumCloudsInMeter,windDirectionInDegree,pastWeatherDescription,iCAOIdentifier,lowCloudCoverInOcta,relativeHumidityInPercent,visibilityInStatuteMile,maxWindGustInKnots,meteoGroupStationName,windSpeedInMilesPerHour,heightOfHighCloudsInMeter,temperatureMinInFahrenheit,weatherSymbolCode,mediumCloudCoverInOcta,typeOfLowCloudsCode,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,visibilityInKilometer,shipCourseText,precipitationAmountInInch,heightOfLowCloudsInMeter,windGustInMeterPerSecond,airPressureAtSeaLevelInHectoPascal,sunshineDurationInMinutes,stationLocation,temperatureMinInCelsius,snowDepthInCentimeter,windSpeedInBeaufort,visibilityInMeter,seaHeightInFeet,meteoGroupStationId,sunshineDurationInHours,temperatureMaxInCelsius,maxWindGustInKilometerPerHour,feelsLikeTemperatureInCelsius,weatherCode,windGustInBeaufort,effectiveCloudCoverInOcta,typeOfHighCloudsCode,typeOfHighCloudsDescription,weatherSymbolCodeNight,feelsLikeTemperatureInKelvin,totalCloudCoverInOcta,waterTemperatureInCelsius,precipitationAmountInMillimeter,pressureTendency,shipSpeedRangeInKnots,directionOfSecondSwellInDegree,periodOfSecondSwellInSeconds,maxWindGustInMilesPerHour,pressureTendencyDescription,waterTemperatureInKelvin,heightOfSecondSwellInMeters,shipCallSign,weatherCodeTraditional,stationTimeZoneName,windGustInKilometerPerHour,heightOfSecondSwellInFeet,airPressureInHectoPascal,windSpeedInMeterPerSecond,windGustInKnots,dewPointTemperatureInKelvin,temperatureMaxInKelvin,pastWeatherCode,freshSnowfallInInch,totalWaveHeightInFeet,shipSpeedInKnots,temperatureMaxInFahrenheit,heightOfFirstSwellInMeters,seaPeriodInSecond,windGustInMilesPerHour,typeOfMediumCloudsDescription,airTemperatureInFahrenheit,pressureChangeInHectoPascal,gapFillingInfo`
+`https://point-observation.weather.mg/search?meteoGroupStationIds=2038151,95930&gapFilling=true&observedPeriod=PT0S&observedFrom=2018-02-10T10:00:00%2B02:00&observedUntil=2018-02-10T10:30:00%2B02:00&fields=dewPointTemperatureInCelsius,typeOfLowCloudsDescription,periodOfFirstSwellInSeconds,totalWaveHeightInMeter,directionOfFirstSwellInDegree,maxWindGustInBeaufort,highCloudCoverInOcta,snowDepthInInch,freshSnowfallInCentimeter,airTemperatureInCelsius,weatherSymbolCodeDay,typeOfMediumCloudsCode,totalWavePeriodInSecond,pressureTendencyCode,visibilityInNauticalMile,feelsLikeTemperatureInFahrenheit,waterTemperatureInFahrenheit,maxWindGustInMeterPerSecond,seaHeightInMeter,windSpeedInKnots,windSpeedInKilometerPerHour,heightOfFirstSwellInFeet,temperatureMinInKelvin,heightOfMediumCloudsInMeter,windDirectionInDegree,pastWeatherDescription,iCAOIdentifier,lowCloudCoverInOcta,relativeHumidityInPercent,visibilityInStatuteMile,maxWindGustInKnots,meteoGroupStationName,windSpeedInMilesPerHour,heightOfHighCloudsInMeter,temperatureMinInFahrenheit,weatherSymbolCode,mediumCloudCoverInOcta,typeOfLowCloudsCode,airTemperatureInKelvin,dewPointTemperatureInFahrenheit,visibilityInKilometer,shipCourseText,precipitationAmountInInch,heightOfLowCloudsInMeter,windGustInMeterPerSecond,airPressureAtSeaLevelInHectoPascal,sunshineDurationInMinutes,stationLocation,temperatureMinInCelsius,snowDepthInCentimeter,windSpeedInBeaufort,visibilityInMeter,seaHeightInFeet,meteoGroupStationId,sunshineDurationInHours,temperatureMaxInCelsius,maxWindGustInKilometerPerHour,feelsLikeTemperatureInCelsius,weatherCode,windGustInBeaufort,effectiveCloudCoverInOcta,typeOfHighCloudsCode,typeOfHighCloudsDescription,weatherSymbolCodeNight,feelsLikeTemperatureInKelvin,totalCloudCoverInOcta,waterTemperatureInCelsius,precipitationAmountInMillimeter,pressureTendency,shipSpeedRangeInKnots,directionOfSecondSwellInDegree,periodOfSecondSwellInSeconds,maxWindGustInMilesPerHour,pressureTendencyDescription,waterTemperatureInKelvin,heightOfSecondSwellInMeters,shipCallSign,weatherCodeTraditional,stationTimeZoneName,windGustInKilometerPerHour,heightOfSecondSwellInFeet,airPressureInHectoPascal,windSpeedInMeterPerSecond,windGustInKnots,dewPointTemperatureInKelvin,temperatureMaxInKelvin,pastWeatherCode,freshSnowfallInInch,totalWaveHeightInFeet,shipSpeedInKnots,temperatureMaxInFahrenheit,heightOfFirstSwellInMeters,seaPeriodInSecond,windGustInMilesPerHour,typeOfMediumCloudsDescription,airTemperatureInFahrenheit,pressureChangeInHectoPascal,gapFillingInfo`
 
 To get info about gap filled fields request `gapFillingInfo` in `fields` parameter.
 
@@ -718,49 +718,43 @@ To get info about gap filled fields request `gapFillingInfo` in `fields` paramet
                           42.483334
                       ],
                       "stationTimeZoneName": "Asia/Samarkand",
-                      "observedFrom": "2018-02-01T02:00:00+05:00",
-                      "observedUntil": "2018-02-01T03:00:00+05:00",
-                      "observedPeriod": "PT1H",
+                      "observedFrom": "2018-02-10T13:00:00+05:00",
+                      "observedUntil": "2018-02-10T13:00:00+05:00",
+                      "observedPeriod": "PT0S",
                       "gapFillingInfo": {
                           "dataSource": "Forecast",
-                          "issuedAt": "2018-01-31T22:00:00.000Z",
+                          "issuedAt": "2018-02-10T08:00:00.000Z",
                           "gapFilledFields": [
-                              "precipitationAmountInInch",
-                              "precipitationAmountInMillimeter"
+                              "visibilityInMeter",
+                              "totalCloudCoverInOcta",
+                              "weatherCode",
+                              "weatherCodeTraditional",
+                              "effectiveCloudCoverInOcta"
                           ]
                       },
-                      "pressureTendencyDescription": "steady",
-                      "pressureTendency": "steady",
-                      "pressureTendencyCode": 4,
-                      "pressureChangeInHectoPascal": 0,
-                      "precipitationAmountInMillimeter": 0,
-                      "precipitationAmountInInch": 0
-                  },
-                  {
-                      "meteoGroupStationId": "2038151",
-                      "meteoGroupStationName": "Nukus/Karakalpakstan",
-                      "stationLocation": [
-                          59.633335,
-                          42.483334
-                      ],
-                      "stationTimeZoneName": "Asia/Samarkand",
-                      "observedFrom": "2018-02-01T03:00:00+05:00",
-                      "observedUntil": "2018-02-01T04:00:00+05:00",
-                      "observedPeriod": "PT1H",
-                      "gapFillingInfo": {
-                          "dataSource": "Forecast",
-                          "issuedAt": "2018-01-31T23:00:00.000Z",
-                          "gapFilledFields": [
-                              "precipitationAmountInInch",
-                              "precipitationAmountInMillimeter"
-                          ]
-                      },
-                      "pressureTendencyDescription": "steady",
-                      "pressureTendency": "steady",
-                      "pressureTendencyCode": 4,
-                      "pressureChangeInHectoPascal": 0,
-                      "precipitationAmountInMillimeter": 0,
-                      "precipitationAmountInInch": 0
+                      "airTemperatureInCelsius": -4,
+                      "airTemperatureInFahrenheit": 24.8,
+                      "airTemperatureInKelvin": 269.15,
+                      "feelsLikeTemperatureInCelsius": -8.4,
+                      "feelsLikeTemperatureInFahrenheit": 16.880001,
+                      "feelsLikeTemperatureInKelvin": 264.75,
+                      "airPressureInHectoPascal": 1025,
+                      "airPressureAtSeaLevelInHectoPascal": 1025,
+                      "windSpeedInMeterPerSecond": 3.1,
+                      "windSpeedInKilometerPerHour": 11.159999,
+                      "windSpeedInMilesPerHour": 6.9345016,
+                      "windSpeedInBeaufort": 2,
+                      "windSpeedInKnots": 6.025916,
+                      "windDirectionInDegree": 350,
+                      "dewPointTemperatureInCelsius": -9,
+                      "dewPointTemperatureInFahrenheit": 15.799999,
+                      "dewPointTemperatureInKelvin": 264.15,
+                      "relativeHumidityInPercent": 68,
+                      "effectiveCloudCoverInOcta": 2,
+                      "totalCloudCoverInOcta": 2,
+                      "visibilityInMeter": 15000,
+                      "weatherCode": "2",
+                      "weatherCodeTraditional": 0
                   },
                   {
                       "meteoGroupStationId": "95930",
@@ -770,49 +764,44 @@ To get info about gap filled fields request `gapFillingInfo` in `fields` paramet
                           -36.9
                       ],
                       "stationTimeZoneName": "Australia/Sydney",
-                      "observedFrom": "2018-02-01T08:00:00+11:00",
-                      "observedUntil": "2018-02-01T09:00:00+11:00",
-                      "observedPeriod": "PT1H",
+                      "observedFrom": "2018-02-10T19:00:00+11:00",
+                      "observedUntil": "2018-02-10T19:00:00+11:00",
+                      "observedPeriod": "PT0S",
                       "gapFillingInfo": {
                           "dataSource": "Forecast",
-                          "issuedAt": "2018-01-31T22:00:00.000Z",
+                          "issuedAt": "2018-02-10T08:00:00.000Z",
                           "gapFilledFields": [
-                              "precipitationAmountInInch",
-                              "precipitationAmountInMillimeter"
+                              "visibilityInMeter",
+                              "weatherCode",
+                              "weatherCodeTraditional"
                           ]
                       },
-                      "pressureTendencyDescription": "steady",
-                      "pressureTendency": "steady",
-                      "pressureTendencyCode": 4,
-                      "pressureChangeInHectoPascal": 0,
-                      "precipitationAmountInMillimeter": 0,
-                      "precipitationAmountInInch": 0
-                  },
-                  {
-                      "meteoGroupStationId": "95930",
-                      "meteoGroupStationName": "Merimbula/Intl",
-                      "stationLocation": [
-                          149.9,
-                          -36.9
-                      ],
-                      "stationTimeZoneName": "Australia/Sydney",
-                      "observedFrom": "2018-02-01T09:00:00+11:00",
-                      "observedUntil": "2018-02-01T10:00:00+11:00",
-                      "observedPeriod": "PT1H",
-                      "gapFillingInfo": {
-                          "dataSource": "Forecast",
-                          "issuedAt": "2018-01-31T23:00:00.000Z",
-                          "gapFilledFields": [
-                              "precipitationAmountInInch",
-                              "precipitationAmountInMillimeter"
-                          ]
-                      },
-                      "pressureTendencyDescription": "steady",
-                      "pressureTendency": "steady",
-                      "pressureTendencyCode": 4,
-                      "pressureChangeInHectoPascal": 0,
-                      "precipitationAmountInMillimeter": 0.02,
-                      "precipitationAmountInInch": 0.001
+                      "airTemperatureInCelsius": 22,
+                      "airTemperatureInFahrenheit": 71.6,
+                      "airTemperatureInKelvin": 295.15,
+                      "feelsLikeTemperatureInCelsius": 28.3,
+                      "feelsLikeTemperatureInFahrenheit": 82.94,
+                      "feelsLikeTemperatureInKelvin": 301.44998,
+                      "airPressureInHectoPascal": 1007,
+                      "airPressureAtSeaLevelInHectoPascal": 1007,
+                      "windSpeedInMeterPerSecond": 2.6,
+                      "windSpeedInKilometerPerHour": 9.36,
+                      "windSpeedInMilesPerHour": 5.816034,
+                      "windSpeedInBeaufort": 2,
+                      "windSpeedInKnots": 5.053994,
+                      "windDirectionInDegree": 320,
+                      "dewPointTemperatureInCelsius": 21,
+                      "dewPointTemperatureInFahrenheit": 69.8,
+                      "dewPointTemperatureInKelvin": 294.15,
+                      "relativeHumidityInPercent": 94,
+                      "lowCloudCoverInOcta": 8,
+                      "effectiveCloudCoverInOcta": 8,
+                      "heightOfMediumCloudsInMeter": 2103,
+                      "totalCloudCoverInOcta": 8,
+                      "mediumCloudCoverInOcta": 6,
+                      "visibilityInMeter": 15000,
+                      "weatherCode": "25",
+                      "weatherCodeTraditional": 25
                   }
               ]
           }
