@@ -5,10 +5,8 @@ HOST: https://air-quality-forecast.weather.mg/
 
 ### Authentication
 
-To access active-warning-service the request has to be authorised with a valid
-JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
-`https://auth.weather.mg/oauth/token`  with according client credentials. The
-required scope is `air-quality-forecast`.
+To access active-warning-service the request has to be authorised with a valid JWT bearer token.
+The required scope (within the bearer token) is `air-quality-forecast`.
 
 The documentation about how to authenticate against MeteoGroup Weather API with
 OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
@@ -285,82 +283,3 @@ This feature collection contains list of geometry shape like as `Polygon` and `M
               ]
             }
             
-
-### Search air quality forecasts for location [GET /search?locatedAt={locatedAt}&fields={fields}]
-     _                               _           _ 
-    | |                             | |         | |
-  __| | ___ _ __  _ __ ___  ___ __ _| |_ ___  __| |
- / _` |/ _ \ '_ \| '__/ _ \/ __/ _` | __/ _ \/ _` |
-| (_| |  __/ |_) | | |  __/ (_| (_| | ||  __/ (_| |
- \__,_|\___| .__/|_|  \___|\___\__,_|\__\___|\__,_|
-           | |                                     
-           |_|                                     
-
-This /search endpoint is deprecated and will be removed in the near future.
-Please use endpoints /pollen or /pollution instead (see below)
-
-+ Request
-
-    + Headers
-
-            Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.EkN-DOsnsuRjRO6BxXemmJDm3HbxrbRzXglbN2S4sOkopdU4IsDxTI8jO19W_A4K8ZPJijNLis4EZsHeY559a4DFOd50_OqgHGuERTqYZyuhtF39yxJPAjUESwxk2J5k_4zM3O-vtd1Ghyo4IbqKKSy6J9mTniYJPenn5-HIirE
-
-    + Parameters
-        + locatedAt: `-2.2323,47.4593` (string, required) - longitude,latitude;
-        + fields: `airPollutionIndex` (string, required) - comma separated list of [airPollutionIndex,pollenIndex] or single value
-    
-+ Response 200 (application/json)
-    
-    Returns forecasts for today + 4 days.
-    
-    + Body
-        
-            {
-                "forecasts": [
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-22T06:00:00Z",
-                      "validFrom": "2017-01-22T00:00:00Z",
-                      "validUntil": "2017-01-23T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 1,
-                      "type": "pollution"
-                    },
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-23T06:00:00Z",
-                      "validFrom": "2017-01-23T00:00:00Z",
-                      "validUntil": "2017-01-24T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 2,
-                      "type": "pollution"
-                    },
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-24T06:00:00Z",
-                      "validFrom": "2017-01-24T00:00:00Z",
-                      "validUntil": "2017-01-25T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 3,
-                      "type": "pollution"
-                    },
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-25T06:00:00Z",
-                      "validFrom": "2017-01-25T00:00:00Z",
-                      "validUntil": "2017-01-26T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 4,
-                      "type": "pollution"
-                    },
-                    {
-                      "forecastLocation": [ -2.2323, 47.4593 ],
-                      "publishedAt": "2017-01-26T06:00:00Z",
-                      "validFrom": "2017-01-26T00:00:00Z",
-                      "validUntil": "2017-01-27T00:00:00Z",
-                      "period": "PT24H",
-                      "airPollutionIndex": 5,
-                      "type": "pollution"
-                    }
-                ]
-            }
