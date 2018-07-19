@@ -16,8 +16,6 @@
 ## Overview
 Every resource of the Weather API is secured via OAuth 2.0. Each request requires a valid token from our central authorisation server. These tokens have a validity period of one hour.
 
-The Required client credentials for this authentication can be requested via [mail](mailto:martin.kirst@meteogroup.com?Subject=Weather%20API%20access%20request) or through your MeteoGroup Sales Representative.
-
 ## Authorization Flow
 
 Authorisation is obtained using OAuth 2.0 client_credentials grant type (see also [RFC6749: "The OAuth 2.0 Authorization Framework" section 4.4](https://tools.ietf.org/html/rfc6749#section-4.4)).
