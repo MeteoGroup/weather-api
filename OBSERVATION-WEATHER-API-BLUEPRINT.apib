@@ -24,7 +24,6 @@ OAuth 2.0 can be found here: [Weather API documentation](https://github.com/Mete
 Every endpoint may add one or more response parameters in the future.
 Clients should ignore unknown parameters, to avoid technical issues.
 
-
 # Group Observation
 
 ## Retrieve weather observation [/search?locatedAt={locatedAt}&meteoGroupStationIds={stationIds}&fields={fields}&observedFrom={observedFrom}&observedUntil={observedUntil}&observedPeriod={observedPeriod}&gapFilling={gapFilling}]
@@ -73,6 +72,27 @@ code  description                           comment
 The 'shipCourseText' returns one of the following values: "not moving", "NE", "E", "SE", "S", "SW", "W", "NW", "N", "unknown".
 The 'shipSpeedRangeInKnots' returns one of the following values: "0", "1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "31-35", "36-40", ">40", "unknown".
 
+*Gap filling*
+
+GapFilling allows to gap fill missing observations with forecast data from MOSI for following parameters: 
++ airPressureAtSeaLevelInHectoPascal
++ airTemperatureInCelsius
++ airTemperatureInFahrenheit
++ airTemperatureInKelvin
++ dewPointTemperatureInCelsius
++ dewPointTemperatureInFahrenheit
++ dewPointTemperatureInKelvin
++ effectiveCloudCoverInOkta
++ relativeHumidityInPercent
++ totalCloudCoverInOkta
++ windDirectionInDegree
++ windSpeedInKilometerPerHour
++ windSpeedInMeterPerSecond
++ windSpeedInMilesPerHour 
+
+GapFilling is applied always when requested, regardless if any of observations are available.
+GapFilling is available only for PT0S period. 
+
 *Fields mapping*
 
 Common names of filed which can be included in all periods: meteoGroupStationId, meteoGroupStationName, stationLocation, stationTimeZoneName
@@ -114,6 +134,7 @@ The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past we
     + observedUntil: `2016-10-15T09:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
     + timeZone: `Europe/Paris` (string, optional) - Time zone refers to the IANA Time Zone Database (TZDB).
+	+ gapFilling: 'true' () (string, optional) - additional parameter, added to the request with flag true enables to gapFill missing observations with forecasts from MOSI for particular parameters.
 
 ### Search for observation data for multiple given locations [GET]
 
