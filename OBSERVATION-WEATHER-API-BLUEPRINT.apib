@@ -82,7 +82,7 @@ GapFilling allows to gap fill missing observations with forecast data from MOSI 
 + dewPointTemperatureInCelsius
 + dewPointTemperatureInFahrenheit
 + dewPointTemperatureInKelvin
-+ effectiveCloudCoverInOkta
++ effectiveCloudCoverInOkta 
 + relativeHumidityInPercent
 + totalCloudCoverInOkta
 + windDirectionInDegree
@@ -134,7 +134,7 @@ The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past we
     + observedUntil: `2016-10-15T09:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
     + timeZone: `Europe/Paris` (string, optional) - Time zone refers to the IANA Time Zone Database (TZDB).
-	+ gapFilling: 'true' () (string, optional) - additional parameter, added to the request with flag true enables to gapFill missing observations with forecasts from MOSI for particular parameters.
+    + gapFilling: `true` (string, optional) - additional parameter, added to the request with flag true enables to gapFill missing observations with forecasts from MOSI for particular parameters.
 
 ### Search for observation data for multiple given locations [GET]
 
