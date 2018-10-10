@@ -68,13 +68,13 @@ code  description                           comment
    7  decreasing                              | atmospheric pressure now lower than 3 hours ago
    8  steady_or_increasing_then_decreasing    |
   15  missing_value
-  
+
 The 'shipCourseText' returns one of the following values: "not moving", "NE", "E", "SE", "S", "SW", "W", "NW", "N", "unknown".
 The 'shipSpeedRangeInKnots' returns one of the following values: "0", "1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "31-35", "36-40", ">40", "unknown".
 
 *Gap filling*
 
-GapFilling allows to gap fill missing observations with forecast data from MOSI for following parameters: 
+GapFilling allows to gap fill missing observations with forecast data from Point Forecast service for following parameters:
 + airPressureAtSeaLevelInHectoPascal
 + airTemperatureInCelsius
 + airTemperatureInFahrenheit
@@ -82,16 +82,16 @@ GapFilling allows to gap fill missing observations with forecast data from MOSI 
 + dewPointTemperatureInCelsius
 + dewPointTemperatureInFahrenheit
 + dewPointTemperatureInKelvin
-+ effectiveCloudCoverInOkta 
++ effectiveCloudCoverInOkta
 + relativeHumidityInPercent
 + totalCloudCoverInOkta
 + windDirectionInDegree
 + windSpeedInKilometerPerHour
 + windSpeedInMeterPerSecond
-+ windSpeedInMilesPerHour 
++ windSpeedInMilesPerHour
 
 GapFilling is applied always when requested, regardless if any of observations are available.
-GapFilling is available only for PT0S period. 
+GapFilling is available only for PT0S period.
 
 *Fields mapping*
 
@@ -134,7 +134,7 @@ The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past we
     + observedUntil: `2016-10-15T09:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
     + timeZone: `Europe/Paris` (string, optional) - Time zone refers to the IANA Time Zone Database (TZDB).
-    + gapFilling: `true` (string, optional) - additional parameter, added to the request with flag true enables to gapFill missing observations with forecasts from MOSI for particular parameters.
+    + gapFilling: `true` (string, optional) - additional parameter, added to the request with flag true enables to gapFill missing observations with forecasts from Point Forecast ervice for particular parameters.
 
 ### Search for observation data for multiple given locations [GET]
 
@@ -829,7 +829,7 @@ To get info about gap filled fields request `gapFillingInfo` in `fields` paramet
 
 ### Retrieve weather observation by BUOY ID [GET]. Please be aware that querying observation by BUOY|SHIP|PLATFORM is totaly the same as querying observations by meteoGroupStationIds.
 The same endpoint as for querying observation by meteoGroupStationIds is being used. The stationId for either BUOY|SHIP|PLATFORM has to be built by the next rule: NAME + LOCATOR columns from FMDecoded file.
-Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLATFORMs. The only one way to determine the ID is to use real FMDecoded source file.
+Currently, Point Observation service doesn't provide service for returning all possible BUOY|SHIP|PLATFORMs. The only one way to determine the ID is to use real FMDecoded source file.
 
 #### Example
 `https://point-observation.weather.mg/search?meteoGroupStationIds=41044BUOY&observedPeriod=PT0S,PT12H,PT1H,PT24H,PT3H&fields=airPressureAtSeaLevelInHectoPascal,airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin,effectiveCloudCoverInOcta,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,meteoGroupStationId,meteoGroupStationName,precipitationAmountInInch,precipitationAmountInMillimeter,pressureChangeInHectoPascal,pressureTendencyDescription,relativeHumidityInPercent,stationLocation,stationTimeZoneName,sunshineDurationInHours,sunshineDurationInMinutes,temperatureMaxInCelsius,temperatureMaxInFahrenheit,temperatureMaxInKelvin,temperatureMinInCelsius,temperatureMinInFahrenheit,temperatureMinInKelvin,totalCloudCoverInOcta,visibilityInKilometer,visibilityInMeter,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,weatherCodeTraditional,windDirectionInDegree,windGustInBeaufort,windGustInKilometerPerHour,windGustInKnots,windGustInMeterPerSecond,windGustInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windSpeedInKnots,windSpeedInMeterPerSecond,windSpeedInMilesPerHour&observedFrom=2016-12-28T06:00:00.753Z&observedUntil=2016-12-28T08:00:00.753Z`
@@ -885,7 +885,7 @@ Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLA
 ### Retrieve weather observation by given bounding box and the type of searching stations either BUOY|SHIP|PLATFORM
 This endpoint allows you querying observation from moving station (BUOY|SHIP|PLATFORM) by bounding box
 
-### Example 
+### Example
 `https://point-observation.weather.mg/search?observedFrom=2017-10-19T00:00:00Z&observedUntil=2017-10-19T10:00:00Z&observedPeriod=PT0S,PT1H,PT3H,PT12H,PT24H&fields=airTemperatureInCelsius,meteoGroupStationId&isType=SHIP&locationWithin=[-10,80],[10,5]`
 
 + Parameters
@@ -1676,7 +1676,7 @@ The extreme values recalculating algorithm based on the following:
    + the highest value of all reported `maxAirTemperatureInCelsius` within that period (`PT12H`)
  + for max wind speed calculation `PT0S` period is used
  + for max wind gusts speed calculation `PT1H` period is used
- + for max sunshine duration and max precipitation amount `PT24H` period is used. The source values for calculation fetches from the next day after relevant, that's why these parameters are never present in the current day but for the previous days. 
+ + for max sunshine duration and max precipitation amount `PT24H` period is used. The source values for calculation fetches from the next day after relevant, that's why these parameters are never present in the current day but for the previous days.
 
 # Observation Statistics
 
