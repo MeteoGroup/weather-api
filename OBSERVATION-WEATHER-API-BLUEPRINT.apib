@@ -74,7 +74,7 @@ The 'shipSpeedRangeInKnots' returns one of the following values: "0", "1-5", "6-
 
 *Gap filling*
 
-GapFilling allows to gap fill missing observations with forecast data from MOSI for following parameters: 
+GapFilling allows to gap fill missing observations with forecast data from Point Forecast service for following parameters:
 + airPressureAtSeaLevelInHectoPascal
 + airTemperatureInCelsius
 + airTemperatureInFahrenheit
@@ -134,7 +134,7 @@ The "pastWeatherCode" parameter refers to the WMO code table "0 20 004 - Past we
     + observedUntil: `2016-10-15T09:00:00Z` (string, optional) - ISO8601 timestamp notation, means incl. this timestamp; always provide a time offset, e.g. 'Z' for UTC; optional: a request may provide correct offset (so that server can convert to UTC).
     + observedPeriod: `PT0S,PT1H,PT3H,PT12H,PT24H` (string, required) - comma separated list of periods to be retrieved. use ISO8601 time duration notation. PT0S refers to observations at a moment in time. PT1H applies one hour aggregation.
     + timeZone: `Europe/Paris` (string, optional) - Time zone refers to the IANA Time Zone Database (TZDB).
-    + gapFilling: `true` (string, optional) - additional parameter, added to the request with flag true enables to gapFill missing observations with forecasts from MOSI for particular parameters.
+    + gapFilling: `true` (string, optional) - additional parameter, added to the request with flag true enables to gapFill missing observations with forecasts from Point Forecast service for particular parameters.
 
 ### Search for observation data for multiple given locations [GET]
 
@@ -829,7 +829,7 @@ To get info about gap filled fields request `gapFillingInfo` in `fields` paramet
 
 ### Retrieve weather observation by BUOY ID [GET]. Please be aware that querying observation by BUOY|SHIP|PLATFORM is totaly the same as querying observations by meteoGroupStationIds.
 The same endpoint as for querying observation by meteoGroupStationIds is being used. The stationId for either BUOY|SHIP|PLATFORM has to be built by the next rule: NAME + LOCATOR columns from FMDecoded file.
-Currently, POSI doesn't provide service for returning all possible BUOY|SHIP|PLATFORMs. The only one way to determine the ID is to use real FMDecoded source file.
+Currently, Point Observation service doesn't provide service for returning all possible BUOY|SHIP|PLATFORMs. The only one way to determine the ID is to use real FMDecoded source file.
 
 #### Example
 `https://point-observation.weather.mg/search?meteoGroupStationIds=41044BUOY&observedPeriod=PT0S,PT12H,PT1H,PT24H,PT3H&fields=airPressureAtSeaLevelInHectoPascal,airTemperatureInCelsius,airTemperatureInFahrenheit,airTemperatureInKelvin,dewPointTemperatureInCelsius,dewPointTemperatureInFahrenheit,dewPointTemperatureInKelvin,effectiveCloudCoverInOcta,feelsLikeTemperatureInCelsius,feelsLikeTemperatureInFahrenheit,feelsLikeTemperatureInKelvin,meteoGroupStationId,meteoGroupStationName,precipitationAmountInInch,precipitationAmountInMillimeter,pressureChangeInHectoPascal,pressureTendencyDescription,relativeHumidityInPercent,stationLocation,stationTimeZoneName,sunshineDurationInHours,sunshineDurationInMinutes,temperatureMaxInCelsius,temperatureMaxInFahrenheit,temperatureMaxInKelvin,temperatureMinInCelsius,temperatureMinInFahrenheit,temperatureMinInKelvin,totalCloudCoverInOcta,visibilityInKilometer,visibilityInMeter,visibilityInNauticalMile,visibilityInStatuteMile,weatherCode,weatherCodeTraditional,windDirectionInDegree,windGustInBeaufort,windGustInKilometerPerHour,windGustInKnots,windGustInMeterPerSecond,windGustInMilesPerHour,windSpeedInBeaufort,windSpeedInKilometerPerHour,windSpeedInKnots,windSpeedInMeterPerSecond,windSpeedInMilesPerHour&observedFrom=2016-12-28T06:00:00.753Z&observedUntil=2016-12-28T08:00:00.753Z`
