@@ -75,6 +75,8 @@ The 'shipSpeedRangeInKnots' returns one of the following values: "0", "1-5", "6-
 *Gap filling*
 
 GapFilling allows to gap fill missing observations with forecast data from Point Forecast service for following parameters:
+
+- **PT0S** -
 + airPressureAtSeaLevelInHectoPascal
 + airTemperatureInCelsius
 + airTemperatureInFahrenheit
@@ -90,8 +92,14 @@ GapFilling allows to gap fill missing observations with forecast data from Point
 + windSpeedInMeterPerSecond
 + windSpeedInMilesPerHour 
 
+- **PT1H** -
++ globalRadiationInJoulePerSquareCentimeter
++ averageGlobalRadiationInWattPerSquareMeter
++ precipitationAmountInMillimeter
++ precipitationAmountInInch
+
 GapFilling is applied always when requested, regardless if any of observations are available.
-GapFilling is available only for PT0S period. 
+GapFilling is available for PT0S and PT1H periods.
 
 *Fields mapping*
 
