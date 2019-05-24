@@ -72,6 +72,20 @@ code  description                           comment
 The 'shipCourseText' returns one of the following values: "not moving", "NE", "E", "SE", "S", "SW", "W", "NW", "N", "unknown".
 The 'shipSpeedRangeInKnots' returns one of the following values: "0", "1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "31-35", "36-40", ">40", "unknown".
 
+It is important to use encoded timestamps when doing the requests to Point Observation Service by for example POSTMAN or browser.
+To encode properly the timestamp
+1. go to https://www.urlencoder.org/ site
+2. paste desired timestamp
+3. without changing any parameters click "> ENCODE <" button
+4. use generated encoded timestamp in the url
+
+Example:
+URL before encoding (not working):
+https://point-observation.weather.mg/observation/hourly?meteoGroupStationIds=10385&observedPeriod=PT0S&fields=meteoGroupStationId,meteoGroupStationName,airTemperatureInCelsius&observedFrom=2019-05-20T09:00:00+02:00&observedUntil=2019-05-21T09:00:00+02:00
+
+URL after encoding (working):
+https://point-observation.weather.mg/observation/hourly?meteoGroupStationIds=10385&observedPeriod=PT0S&fields=meteoGroupStationId,meteoGroupStationName,airTemperatureInCelsius&observedFrom=2019-05-20T09%3A00%3A00%2B02%3A00&observedUntil=2019-05-21T09%3A00%3A00%2B02%3A00
+
 *Gap filling*
 
 GapFilling allows to gap fill missing observations with forecast data from Point Forecast service for following parameters:
