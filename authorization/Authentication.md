@@ -183,7 +183,7 @@ var request = require('request'),
 observedFromDate.setHours(observedFromDate.getHours() - 1);
 
 request({
-    url: 'https://point-observation.weather.mg/search',
+    url: 'https://point-observation.weather.mg/observation/hourly',
     auth: {
         'bearer': 'OAuth2_token' //replace that with the token you got from the auth process
     },
@@ -248,7 +248,7 @@ params = {
     'observedPeriod': 'PT0S',
     'fields': 'airTemperatureInCelsius'
 }
-data = session.get('https://point-observation.weather.mg/search', params=params)
+data = session.get('https://point-observation.weather.mg/observation/hourly', params=params)
 
 print "RESPONSE DATA >>> " + data.text
 ```
