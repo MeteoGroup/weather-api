@@ -75,6 +75,22 @@ For multiple locations, its recommended to just use the point compression.
 The forecasts in the response collection are "flat" to allow easy streaming and filtering on client side.
 The forecasts in the response are ordered ascending by field 'validFrom'.
 
+It is important to use encoded timestamps when doing the requests to Point Forecast Service by for example POSTMAN or browser.
+
+To encode properly the timestamp:
+
+1. Go to https://www.urlencoder.org/ site.
+2. Paste desired timestamp.
+3. Without changing any parameters click "> ENCODE <" button.
+4. Use generated encoded timestamp in the url.
+
+Example:
+URL before encoding (not working):
+https://point-forecast.weather.mg/search?locatedAt=-2.44198,50.54282&validUntil=2019-05-26T00:00:00+02:00&timeZone=Europe/London&fields=maxAirTemperatureInFahrenheit,airTemperatureNearGroundInCelsius,relativeGlobalRadiationInPercent,airTemperatureInCelsius,windSpeedInKnots,windSpeedInKilometerPerHour,weatherSymbolCode,airTemperatureInKelvin,sunshineDurationInMinutes,stationLocation&validPeriod=PT1H,PT6H,PT24H
+
+URL after encoding (working):
+https://point-forecast.weather.mg/search?locatedAt=-2.44198,50.54282&validUntil=2019-05-26T00%3A00%3A00%2B02%3A00&timeZone=Europe/London&fields=maxAirTemperatureInFahrenheit,airTemperatureNearGroundInCelsius,relativeGlobalRadiationInPercent,airTemperatureInCelsius,windSpeedInKnots,windSpeedInKilometerPerHour,weatherSymbolCode,airTemperatureInKelvin,sunshineDurationInMinutes,stationLocation&validPeriod=PT1H,PT6H,PT24H
+
 *Fields mapping*
 
 Common names of filed which can be included in all periods: locatedAt,meteoGroupStationId,meteoGroupStationName,stationLocation,stationTimeZoneName,validFrom,validUntil,validPeriod,issuedAt
