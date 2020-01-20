@@ -4,7 +4,7 @@ Weather Code table
 
 Used for the parameters "mostSignificantWeatherCode" and "weatherCode" in Point Forecast Service.
 
-Code | meaning | long description MeteoGroup Multi-Model-MOS-System weather code mapping
+Code | meaning | long description DTN Multi-Model-MOS-System weather code mapping
 -|-|-
 -8	|	Thick cirrus clouds | –
 -7	|	Snow storm | –

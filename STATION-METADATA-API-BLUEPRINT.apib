@@ -5,23 +5,23 @@ Station Metadata API
 
 # General information
 
-This Service exists to provide the canonical API for querying and returning MeteoGroup stations and their capabilities.
+This Service exists to provide the canonical API for querying and returning DTN stations and their capabilities.
 The output response with requested stations is always in GEOJson format.
 
 The API supports various combinations for querying stations meta data by area/region (bounding box, polygon, multi-polygon),
-by provider or type, by stations where MeteoGroup produces forecast or has observation data available.
+by provider or type, by stations where DTN produces forecast or has observation data available.
 
 ## Authentication
 
 To access active-warning-service the request has to be authorised with a valid
-JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
+JWT OAuth 2.0 access token,  obtained from the DTN Authorisation server
 `https://auth.weather.mg/oauth/token`  with according client credentials. The
 required scope is `station-metadata`.
 
-The documentation about how to authenticate against MeteoGroup Weather API with
+The documentation about how to authenticate against DTN Weather API with
 OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
-### Querying MeteoGroup stations data
+### Querying DTN stations data
 
 Here is the information about all supported HTTP request parameters and HTTP Headers:
 
@@ -44,7 +44,7 @@ Here is the information about all supported HTTP request parameters and HTTP Hea
         + hasForecastData: `false` (boolean, optional) - station has forecast data.
         + hasObservationData: `true` (boolean, optional) - station has observation data.
         + countryIsoCode: `GB` (string, optional) - station located in this country. ISO Code refers to the [ISO 3166 alpha-2 codes](https://en.wikipedia.org/wiki/ISO_3166)
-        + meteoGroupStationId: `1004,1005` (string, optional) - filter stations by MeteoGroup station id/(comma separated ids).
+        + meteoGroupStationId: `1004,1005` (string, optional) - filter stations by DTN station id/(comma separated ids).
         + fields: accessVisibility,icaoCode,countryIsoCode,provider,type,hasForecastData,wmoCountryId,hasObservationData,countryIsoCode,
                   meteoGroupStationId,name,stationTimeZoneName - metadata fields in response, geometry is present in every success response.
                   If fields is absent all fields are returned.

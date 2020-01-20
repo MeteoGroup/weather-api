@@ -173,7 +173,7 @@ Response
 That is a sample request then for the **point observation service** for the **latest values** only
 which uses [dateformat](https://www.npmjs.com/package/dateformat) to calculate the necessary timestamp
 for the observedFrom query parameter.
-This example ask diectly for a MeteoGroup station instead of asking for a location with latitude and longitude.
+This example ask diectly for a DTN station instead of asking for a location with latitude and longitude.
 
 ```javascript
 var request = require('request'),
