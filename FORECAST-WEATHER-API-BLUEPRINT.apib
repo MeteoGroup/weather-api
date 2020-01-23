@@ -12,11 +12,11 @@ This document is using [API blueprint format](https://apiblueprint.org/documenta
 ### Authentication
 
 To access active-warning-service the request has to be authorised with a valid
-JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
+JWT OAuth 2.0 access token,  obtained from the DTN Authorisation server
 `https://auth.weather.mg/oauth/token`  with according client credentials. The
 required scope is `point-forecast`.
 
-The documentation about how to authenticate against MeteoGroup Weather API with
+The documentation about how to authenticate against DTN Weather API with
 OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
 ### Backward compatibility
@@ -41,7 +41,7 @@ The searching algorithm stops at a maximum distance of 100km (between requested 
 By default, the latest known weather forecast data from a relevant station is returned.
 If validFrom and validUntil are missing then application sets validFrom as current time and validUntil as current time plus 1 day.
 if validFrom is not missing and validUntil is missing then application sets  validUntil as current time plus 1 day.
-It's possible to search forecast data either by geographical locations (long,lat) using 'locatedAt' request parameter or by MeteoGroup station IDs using 'meteoGroupStationIds' parameter.
+It's possible to search forecast data either by geographical locations (long,lat) using 'locatedAt' request parameter or by DTN station IDs using 'meteoGroupStationIds' parameter.
 
 *Meteorological hints*
 

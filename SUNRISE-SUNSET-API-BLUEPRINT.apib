@@ -22,17 +22,17 @@ NOTE: For locations inside polar circles service may not return all sunrise/suns
 ### Authentication
 
 To access active-warning-service the request has to be authorised with a valid
-JWT OAuth 2.0 access token,  obtained from the MeteoGroup Authorisation server
+JWT OAuth 2.0 access token,  obtained from the DTN Authorisation server
 `https://auth.weather.mg/oauth/token`  with according client credentials. The
 required scope is `sunrise-sunset`.
 
-The documentation about how to authenticate against MeteoGroup Weather API with
+The documentation about how to authenticate against DTN Weather API with
 OAuth 2.0 can be found here: [Weather API documentation](https://github.com/MeteoGroup/weather-api/blob/master/authorization/Authentication.md)
 
 #Sunrise and Sunset
 
 + Parameters
-    + meteoGroupStationIds: `3007237,3007238` (string, optional) - MeteoGroup station ids; can be several stations separated by comma. Either the meteoGroupStationIds or locatedAt parameter must be specified at once;
+    + meteoGroupStationIds: `3007237,3007238` (string, optional) - DTN station ids; can be several stations separated by comma. Either the meteoGroupStationIds or locatedAt parameter must be specified at once;
     + locatedAt: `-2.2323,47.4593` (string, optional) - longitude, latitude; or `g9p734o7sC-36xi5iyD` - compressed list of locations, using Microsoft Point Compression Algorithm, is efficient for up to 400 locations;
     + validAt(deprecated): `2016-12-27` (string, optional) - ISO8601 date notation. Represents the day for which the sunrise and sunset data should be returned;
     + validFrom: `2016-12-27` (string, optional) - ISO8601 date notation. Represents the first of period, for which the sunrise and sunset data should be returned, inclusive;
